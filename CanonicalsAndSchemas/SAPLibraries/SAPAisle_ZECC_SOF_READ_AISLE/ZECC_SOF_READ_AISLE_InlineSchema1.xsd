@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="char1">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char10">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char100">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="100"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char20">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="20"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char220">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="220"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char30">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char32">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char4">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="4"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char50">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="50"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="lang">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="numeric3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+      <xsd:pattern value="\d*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="numeric6">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="6"/>
+      <xsd:pattern value="\d*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

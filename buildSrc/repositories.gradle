@@ -1,0 +1,45 @@
+// define repositories
+
+afterEvaluate {
+// define repositories to download dependencies
+	if (project.hasProperty("useMavenLocal")) {
+		println "- Defining repository Maven Local"
+		project.repositories { 
+//			mavenLocal() 
+//			mavenCentral()
+		}
+	} else {
+		project.repositories {
+			println "- Defining remote repository: $PublishBaseURL"
+			maven {
+				url PublishBaseURL
+				credentials {
+					username PublishUsername
+					password PublishPassword
+				}
+			}		
+		}
+	}
+
+	uploadArchives {
+		repositories {
+			mavenDeployer {
+				uniqueVersion = true
+				if (project.hasProperty("useMavenLocal")) {
+					repository(url: "file://$localMavenRepo")
+				} else {
+					if (project.hasProperty("PublishReleasesUrl")) {
+						repository(url: project.PublishReleasesUrl) {
+							authentication(userName: project.PublishUsername, password: project.PublishPassword)
+						}
+					} 
+                    if (project.hasProperty("PublishSnapshotsUrl")) {
+                        snapshotRepository(url: project.PublishSnapshotsUrl) {
+                            authentication(userName: project.PublishUsername, password: project.PublishPassword)
+                        }
+                    }
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+
+CREATE COMPUTE MODULE POST_JSON_Request_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		/*
+		 * Currently in CnC only one Aisle class can come as a request. But since our data service
+		   allows multiple Aisle class , here we are making the Data as array type to fit in.
+		*/
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+				
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		 
+		CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY (JSON.Array)Data;
+		
+		
+		IF(EXISTS(InputRoot.JSON.Data.Item[])) THEN
+		   SET oRef.Item[] = SELECT I FROM InputRoot.JSON.Data.Item[] AS I;
+		ELSE
+		   IF Environment.QueryString.action <> 'CREATE_AISLE' AND COALESCE(Environment.Store.aisleNumber,'')='' THEN
+		   		THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - the aisle number is missing in the URI','400');
+		   END IF;	
+		   IF Environment.QueryString.action <> 'CREATE_AISLE' AND COALESCE(Environment.Store.aisleNumber,'')<>'' AND Environment.Store.aisleNumber <> InputRoot.JSON.Data.properties.aisleNumber THEN
+		   		THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Aisle number in URI and JSON are not matching','400');
+		   END IF;	  	
+		   SET oRef.Item = InputRoot.JSON.Data;
+		END IF;
+		
+		       
+-- 		Check if the request is having multiple Aisle class
+--		IF(EXISTS(InputRoot.JSON.Data.Item[])) THEN
+--		   SET oRef.Item[] = SELECT I FROM InputRoot.JSON.Data.Item[] AS I;
+--		ELSE
+--			SET oRef.Item = InputRoot.JSON.Data;
+--		END IF;
+		RETURN TRUE;
+	END;
+
+END MODULE;

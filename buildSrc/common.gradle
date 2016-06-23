@@ -1,0 +1,345 @@
+apply plugin:'maven'
+
+//-----------------------------------------------------------------------------
+// Gradle WMB/IIB build script
+//
+// Version: 1.5
+//
+// Modification log:
+// 12/05/2015   - 1.0 - JM  - Initial script
+// 22/05/2015   - 1.1 - JM  - Added external dependencies to other WMB projects
+// 23/05/2015   - 1.2 - JM  - Added allprojects closure to customize repos
+//  4/06/2015   - 1.3 - JM  - Added transitive references support
+//  7/06/2015   - 1.4 - JM  - Added spock test support
+// 21/06/2015   - 1.5 - JM  - Added MQ & IIB configuration files
+// 26/06/2015   - 1.6 - JM  - Added support for IIB Java applications
+//-----------------------------------------------------------------------------
+
+ext {
+    ScriptVersion           = []
+    ScriptVersion           << ['common', '1.6']
+    isReleaseVersion        = false
+    localMavenRepo          = (System.properties['M2_REPO']?:new File(System.getProperty('user.home'), '.m2/repository').absolutePath).replaceAll('\\\\','/')  
+
+// MQ and IIB commands
+    runmqsc                 = 'runmqsc'
+    mqsicreatebar           = 'mqsicreatebar'
+    mqsireadbar             = 'mqsireadbar'
+    mqsiapplybaroverride    = 'mqsiapplybaroverride'
+    mqsideploy              = 'mqsideploy'
+    mqsiprofile             = 'mqsiprofile'
+    mqsistopmsgflow         = 'mqsistopmsgflow'
+    mqsistartmsgflow        = 'mqsistartmsgflow'
+    mqsilist                = 'mqsilist'
+    mqsistart               = 'mqsistart'
+    strmqm                  = 'strmqm'
+
+    MQConfigurationPropFileName  = 'configuration.properties'
+    IIBConfigurationPropFileName = 'configuration.properties'
+    projectSetupPropFileName     = System.properties['projectSetupPropFileName']?:'projectSetup.properties'
+
+// WMB 8    
+// Commented to local tests
+    ToolkitDirWin   = "C:\\\"Program Files (x86)\"\\IBM\\WMBT800\\"
+//	ToolkitDirWin   = "D:\\\"ProgramFiles\"\\IBM\\WMBT800\\"
+
+    RuntimeDirWin   = "C:\\\"Program Files\"\\IBM\\MQSI\\8.0.0.4\\bin\\"
+    ToolkitDirLinux = "/opt/IBM/WMBT800/"
+    RuntimeDirLinux = "/opt/IBM/mqsi/8.0.0.4/bin/"
+
+	
+// Configuration folder names
+    MQConfiFolderName       = 'mq'
+    IIBConfiFolderName      = 'iib'
+    OSConfiFolderName       = 'os'
+    ConfigFolderName        = 'config'
+    BARFolderName           = 'bar'
+    IARFolderName           = 'iar'
+    LIBFolderName           = 'libs'
+    UnZIPIARFolderName      = 'unzipIAR'
+    BuildFolderName         = 'build'
+    DependenciesFolderName  = 'dependencies'
+//  SourceFolderName        = 'source'
+    IIBWorkSpace            = 'iib'
+    InstallFolderName       = 'install'
+    TestFolderName          = 'test'
+    ReleaseFolderName       = 'release'
+    
+    CommonEnvironmentFolderName = 'global'
+
+// WMBT path
+//  ToolkitDir  = System.properties['ToolkitDir']?:ToolkitDirWin
+
+// WMB runtime path
+//  RuntimeDir  = System.properties['RuntimeDir']?:RuntimeDirWin
+
+// GIT Branch
+    GITBranch   = System.properties['BRANCH_NAME_TO_BUILD']?:'Local'
+
+// Build Timestamp
+    now = Calendar.instance
+    BuildTimestamp = System.properties['BUILD_TIMESTAMP']?:now.format("yyyyMMddHHmm")
+
+// Deployment environment
+    DeploymentEnvironment = System.properties['DeploymentEnvironment']?:System.properties['DeploymentEnvironmentDefault']
+
+// Allowed environments
+//  Environments = ['dev','ct','cit','pre','prod','ut']
+
+// Nexus configuration
+//  NexusConf = "KITS"
+//  NexusConf = "VM"
+    
+    NexusConf   = System.properties['NEXUS_CONF']?:"KITS"
+    
+    if (NexusConf == "KITS") {
+        NexusEndPoint       = "http://lnxs0592.uk.b-and-q.com:8088"
+        NexusUserId         = "darwin"
+        NexusPassword       = "darwin"        
+    }
+    
+    if (NexusConf == "VM") {
+        NexusEndPoint       = "http://192.168.56.101:8081"
+        NexusUserId         = "admin"
+        NexusPassword       = "admin123"
+    }
+    
+    PublishBaseURL      = "${NexusEndPoint}/nexus/content/repositories/SCI_WMB_Releases"
+    PublishReleasesUrl  = "${NexusEndPoint}/nexus/content/repositories/SCI_WMB_Releases"
+    PublishSnapshotsUrl = "${NexusEndPoint}/nexus/content/repositories/SCI_WMB_Snapshots"
+    PublishUsername     = NexusUserId
+    PublishPassword     = NexusPassword
+	
+//------------------------------------------------------------------------------
+// Source configuration
+//------------------------------------------------------------------------------
+// Config folder
+    ConfigDirName   = projectDir.getAbsolutePath() + File.separator + ConfigFolderName
+    ConfigDir       = new File(ConfigDirName)
+
+// Test folder
+    TestDirName   = projectDir.getAbsolutePath() + File.separator + TestFolderName
+    TestDir       = new File(TestDirName)
+
+// workspace folder
+//  wsDirName       = projectDir.getAbsolutePath() + File.separator + SourceFolderName + File.separator + IIBWorkSpace
+    wsDirName       = projectDir.getAbsolutePath()
+    wsDir           = new File(wsDirName)
+
+//------------------------------------------------------------------------------
+// Build configuration
+//------------------------------------------------------------------------------
+// Build directory
+    BuildDirName                = projectDir.getAbsolutePath() + File.separator + BuildFolderName
+    BuildDir                    = new File(BuildDirName)
+    project.buildDir            = BuildDir
+
+// Build source directory
+    BuildSourceDirName          = BuildDirName +  File.separator + IIBWorkSpace
+    BuildSourceDir              = new File(BuildSourceDirName)
+
+// Build out bar directory
+    BuildBARDirName             = BuildDirName +  File.separator + BARFolderName
+    BuildBARDir                 = new File(BuildBARDirName)
+
+// Build out zip directory
+    BuildIARDirName             = BuildDirName +  File.separator + IARFolderName
+    BuildIARDir                 = new File(BuildIARDirName)
+
+// Build out JARs directory
+    BuildLIBDirName             = BuildDirName +  File.separator + LIBFolderName
+    BuildLIBDir                 = new File(BuildLIBDirName)
+
+// Build dependencies directory
+    BuildDependenciesDirName    = BuildDirName +  File.separator + DependenciesFolderName
+    BuildDependenciesDir        = new File(BuildDependenciesDirName)
+
+// Build expanded dependencies directory
+    BuildExpDependenciesDirName = BuildDirName +  File.separator + UnZIPIARFolderName
+    BuildExpDependenciesDir     = new File(BuildExpDependenciesDirName)
+
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// Install configuration
+//------------------------------------------------------------------------------
+// Install directory
+    InstallDirName          = projectDir.getAbsolutePath() + File.separator + InstallFolderName
+    InstallDir              = new File(InstallDirName)
+
+// Install bar folder
+    InstallBARDirName       = project.InstallDir.getAbsolutePath() +  File.separator + BARFolderName
+    InstallBARDir           = new File(InstallBARDirName)
+
+// Install configuration folder
+    InstallConfigDirName    = project.InstallDir.getAbsolutePath() + File.separator + ConfigFolderName
+    InstallConfigDir        = new File(InstallConfigDirName)
+
+// Install IAR folder
+    InstallIARDirName       = project.InstallDir.getAbsolutePath() + File.separator + IARFolderName
+    InstallIARDir           = new File(InstallIARDirName)
+
+// Install unzip IAR folder
+    InstallUnZIPIARDirName  = project.InstallDir.getAbsolutePath() + File.separator + UnZIPIARFolderName
+    InstallUnZIPIARDir      = new File(InstallUnZIPIARDirName)
+
+//------------------------------------------------------------------------------
+}
+
+//*****************************************************************************
+// Common methods
+//
+//*****************************************************************************
+//----------------------------------------------------------------
+// printProperties
+//
+//----------------------------------------------------------------
+ext.printProperties = { ->
+    println '------------------------------------------------------------'
+    println 'ScriptVersion: \t\t\t\t\t' + ScriptVersion
+    println 'emailNotification: \t\t\t\t' + emailNotification
+    println 'Date: \t\t\t\t\t\t\t' + getDate()
+    println '------------------------------------------------------------'
+    println '-- Project properties'
+    println '------------------------------------------------------------'
+    println 'project Group: \t\t\t\t\t' + project.group
+    println 'project Name: \t\t\t\t\t' + project.name
+    println 'artifactId: \t\t\t\t\t' + project.artifactId
+    println 'project Dir: \t\t\t\t\t' + projectDir
+    println 'project BuildDir: \t\t\t\t' + project.BuildDir
+    println 'project releaseId: \t\t\t\t' + project.version
+    println ''
+    println '------------------------------------------------------------'
+    println '-- System properties'
+    println '------------------------------------------------------------'
+    println 'Toolkit dir: \t\t\t\t\t' + project.ToolkitDir
+    if (!project.hasProperty("useMavenLocal")) {
+        println 'publishBaseUrl: \t\t\t\t' + project.PublishBaseURL
+    }
+    println 'mqsicreatebar command: \t\t\t' + project.mqsicreatebar
+//  println '------------------------------------------------------------'
+//  println '-- MQ/IIB properties'
+//  println '------------------------------------------------------------'
+//  println 'QMName: \t\t\t' + project.QMName
+//  println 'BrokerName: \t\t\t' + project.BrokerName
+//  println 'IntegrationServerName: \t\t\t' + project.IntegrationServerName
+    println '------------------------------------------------------------'
+    println '-- Local properties'
+    println '------------------------------------------------------------'
+    println 'project wsDir: \t\t\t\t\t' + project.wsDir
+    println 'BuildBARDirName: \t\t\t\t' + BuildBARDirName
+    println 'BuildIARDirName: \t\t\t\t' + BuildIARDirName
+    println '------------------------------------------------------------'
+}
+
+//----------------------------------------------------------------
+// get current date format yyyyMMdd-HH:mm:ss
+//
+//----------------------------------------------------------------
+ext.getDate = { ->
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd-HH:mm:ss')
+    return formattedDate
+}
+
+//----------------------------------------------------------------
+// Identify host's OS
+//
+//----------------------------------------------------------------
+ext.checkOS = { ->
+    if (System.getProperty('os.name').toLowerCase(Locale.US).contains('windows')) {
+        return 'windows'
+    } else if (System.getProperty( "os.name" ).toLowerCase( Locale.US ).contains("linux")) {
+        return 'linux'
+    } else {
+        throw new Exception('Unknown OS')
+    }
+}
+
+//----------------------------------------------------------------
+// Runs an OS (Windows or Linux) command
+// int runCommand(commandLine) {
+//----------------------------------------------------------------
+ext.runCommand = { commandLine ->
+    println 'Executing:' + commandLine
+
+// Exec command
+    def ShellCmd = ''
+    switch(checkOS()) {
+      case 'windows':
+        commandLine = "\" " + commandLine + " \""
+        ShellCmd = 'cmd /c '
+        break
+      case 'linux':
+        // commandLine = '. ' + commandLine
+        ShellCmd = ''
+        break
+      default:
+        throw new Exception('Unknown OS')
+    }
+
+    def initialSize = 4096
+    def outStream   = new ByteArrayOutputStream(initialSize)
+    def errStream   = new ByteArrayOutputStream(initialSize)
+    def proc        = ( ShellCmd + commandLine).execute()
+    proc.waitFor()
+    proc.consumeProcessOutput(outStream, errStream)
+
+// Obtain status and output
+    println 'return code: ' + proc.exitValue()
+    println 'stdout:\n' + outStream
+    println 'stderr:\n' + errStream
+    return proc.exitValue()
+}
+//*****************************************************************************
+
+ext {
+    ToolkitDir      = (checkOS() == 'windows')? ToolkitDirWin : ToolkitDirLinux 
+    RunTimeDir      = (checkOS() == 'windows')? RuntimeDirWin : RuntimeDirLinux
+}
+
+//----------------------------------------------------------------
+// cleanBuild
+// 
+// Deletes build folder
+//----------------------------------------------------------------
+task cleanBuild() { 
+    group       = "IIB Clean"
+    description = "Deletes build folder of " + project
+
+    doLast {
+        println "- Deleting folder $BuildDir"   
+        BuildDir.deleteDir() 
+        assert !BuildDir.exists()
+    }
+}
+
+//----------------------------------------------------------------
+// cleanInstall
+// 
+// Deletes Install folder
+//----------------------------------------------------------------
+task cleanInstall() { 
+    group       = "IIB Clean"
+    description = "Deletes Install folder of " + project
+
+    doLast {
+        println "- Deleting folder $InstallDir" 
+        InstallDir.deleteDir() 
+        assert !InstallDir.exists()
+    }
+}
+
+//----------------------------------------------------------------
+// cleanAll
+// 
+// Deletes all temp folders
+//----------------------------------------------------------------
+task cleanAll {
+    dependsOn cleanBuild
+    dependsOn cleanInstall
+
+    group       = "IIB Clean"
+    description = "Deletes all folder of " + project
+    
+}

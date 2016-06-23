@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.soap.episys.com" xmlns:ax21="http://messages.episys.com/xsd" xmlns:ax22="http://messages.episys.com/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://service.soap.episys.com" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <xsd:import namespace="http://messages.episys.com/xsd" schemaLocation="RES_InlineSchema2.xsd"/>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageWEEEPRF">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:WEEEPRFItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageWEEEPRFResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithHistory">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestHistoryItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithHistoryResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="previewSignSet">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="paramPreviewSignSetItem" nillable="true" type="ax21:PreviewSignSetItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="previewSignSetResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:PreviewResults"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageAdvancedProductHierarchy">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:AdvancedProductHierarchyItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageAdvancedProductHierarchyResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:AdvancedValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductWithWorkFlow">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductWithWorkFlowResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductsWithWorkFlow">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductsWithWorkFlowResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithPricingRule">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithPricingRuleResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageEvent">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:EventItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageEventResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotion">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionV2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemV2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionV2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageComplexPromotion">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemV2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageComplexPromotionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionWithStoreGroupName">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemWithStoreGroupName"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionWithStoreGroupNameResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionForGroupOffers">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemWithStoreGroupName"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionForGroupOffersResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionForFESP">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemForFESP"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionForFESPResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteStore">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreDeletionItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteStoreResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStore">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreInfoItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStoreResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="moveProductHierarchyLevel">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductHierarchyMoveItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="moveProductHierarchyLevelResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProduct">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductHierarchy">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductHierarchyItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductHierarchyResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="addStoresToGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupAddStoreItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="addStoresToGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="createStoreGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupInfoItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="createStoreGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateStoreGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupInfoItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateStoreGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="upsertStoreGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupInfoItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="upsertStoreGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteStoreGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupDeletionItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteStoreGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteAllStoreGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteAllStoreGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="removeStoresFromGroup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreGroupDeleteStoresItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="removeStoresFromGroupResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithEvent">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithEventResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithEvent2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceWithEvent2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStockRange">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StockRangeItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStockRangeResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="adhocLabelRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:AdhocLabelRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="adhocLabelRequestResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="batchLabelRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="request" nillable="true" type="ax21:BatchLabelRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="batchLabelRequestResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageWEEECategory">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:WEEECategoryItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageWEEECategoryResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateContent">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ContentDataItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateContentResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramSULFromPlanoIdSellUnitIdFull">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSGetPlanogramSULDetailRequestItemFull"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramSULFromPlanoIdSellUnitIdFullResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramSULDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramSUL">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSManagePlanogramSULRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramSULResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramSULDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProduct_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProduct_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotion_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotion_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageRelatedArticle">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:RelatedArticleRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageRelatedArticleResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getStyleDetails">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:StyleDetailRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getStyleDetailsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:StyleDetailsResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStoreECS">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreInfoItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStoreECSResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramHdr">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSGetPlanogramHdrDetailRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramHdrResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramHdrDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramHdr">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSManagePlanogramHdrRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramHdrResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramHdrDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramDtlsFromPlanoIdAisleBay">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSGetPlanogramDtlDetailRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramDtlsFromPlanoIdAisleBayResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramDtlDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSGetPlanogramDtlDetailRequestFullItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramDtlDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramDtl">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ECSManagePlanogramDtlRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageECSPlanogramDtlResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ECSManagePlanogramDtlDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramSULFromPlanoIdSellUnitId">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ECSGetPlanogramSULDetailRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getECSPlanogramSULFromPlanoIdSellUnitIdResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ECSGetPlanogramSULDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteContent">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ContentDataItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="deleteContentResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProduct">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramProductItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProductResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getPlanogramLocationDetails">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="request" nillable="true" type="ax21:PlanogramLocationDetailsRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getPlanogramLocationDetailsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:PlanogramLocationDetailsResponse"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductsStoreContent">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="ax21:ProductStoreContentItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductsStoreContentResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="customSignBuilderService">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:CustomSignBuilderRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="customSignBuilderServiceResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:CustomSignBuilderResultItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="addPlanogramDetails">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:PlanogramLocPrdDetailsRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="addPlanogramDetailsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="alterCustomSign">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:CustomSignAlterItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="alterCustomSignResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getConfirmationPriceForStore">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="item" nillable="true" type="ax21:ConfirmationPriceForStoreRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getConfirmationPriceForStoreResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:PriceConfirmationMessage"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocation_2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramLocationItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocation_2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProduct_2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramProductItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProduct_2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice_2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice_2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotion_2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotion_2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionV2_2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PromotionItemV2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePromotionV2_2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductDetail">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductDetailItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductDetailResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStoreProductStatus">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StoreProductStatusItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStoreProductStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStockRange_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:StockRangeItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageStockRange_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateContent_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ContentDataItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="updateContent_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductHierarchy_V2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:ProductHierarchyItem_V2"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="manageProductHierarchy_V2Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProductWithUserID">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramProductItemWithUserID"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramProductWithUserIDResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocation">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramLocationItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocationResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocationWithUserId">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PlanogramLocationItemWithUserId"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePlanogramLocationWithUserIdResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getContentDetail">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="x0" nillable="true" type="ax21:ContentDetailRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="getContentDetailResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ContentDetailResultItemFinal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePrice">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:PriceChangeRequestItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="managePriceResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:ValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="findChildren">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="ax21:AdvancedProductHierarchyItem"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="findChildrenResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="return" nillable="true" type="ax21:AdvancedValidationResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="print">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="printDocuments" nillable="true" type="ax21:PrintDocument"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ibmSchExtn:docRoot="true" name="printResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:PrintDocumentResult"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>

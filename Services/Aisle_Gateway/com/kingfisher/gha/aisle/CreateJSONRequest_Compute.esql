@@ -1,0 +1,91 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+PATH com.kingfisher.gha.common;
+
+
+CREATE COMPUTE MODULE CreateJSONRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE COUNT INTEGER 1;
+		DECLARE TEMP  INTEGER 0;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+
+			CREATE FIELD OutputRoot.JSON.Data;
+			DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		 	DECLARE oRefProp REFERENCE TO oRef.properties;
+		 	DECLARE oRefStore REFERENCE TO oRefProp.storeCode;
+			SET oRef.Class = 'AisleRequest';
+			CREATE FIELD oRef.properties 	AS oRefProp;
+			CREATE FIELD oRefProp.storeCode AS oRefStore;
+			
+			SET TEMP =  PROC_SplitByDelimiter (Environment.QueryString.storeCode,',','StoreCode',Environment);
+			
+			FOR REF_StoreCode AS Environment.StoreCode.ArrayOfSubString[] DO
+
+				DECLARE oRef_Item   REFERENCE TO oRef.properties.storeCode.Item;
+				CREATE LASTCHILD OF oRefStore AS oRef_Item NAME 'Item' VALUE REF_StoreCode;
+		
+			END FOR;
+			
+			IF Environment.Store.aisleNumber <> '' THEN
+				
+				SET oRefProp.aisleNumber.Item	=	Environment.Store.aisleNumber;
+				
+			ELSE
+				
+				IF Environment.QueryString.partialAisleNumber <> '' THEN
+					DECLARE oRefpartialAisle	REFERENCE TO oRef.properties.partialAisleNumber;
+					CREATE FIELD oRef.properties.partialAisleNumber AS oRefpartialAisle;
+					SET TEMP = PROC_SplitByDelimiter (Environment.QueryString.partialAisleNumber,',','PartialAisleNumber',Environment);
+					FOR REF_PartialAisleNumber AS Environment.PartialAisleNumber.ArrayOfSubString[] DO
+		
+						DECLARE oRef_Item   REFERENCE TO oRef.properties.partialAisleNumber.Item;
+						CREATE LASTCHILD OF oRefpartialAisle AS oRef_Item NAME 'Item' VALUE REF_PartialAisleNumber;
+				
+					END FOR;
+					--SET oRefProp.partialAisleNumber	=	Environment.QueryString.partialAisleNumber;
+				ELSEIF Environment.QueryString.aisleNumber <> '' THEN
+					
+					DECLARE oRefAisle	REFERENCE TO oRef.properties.aisleNumber;
+					CREATE FIELD oRef.properties.aisleNumber AS oRefAisle;
+					SET TEMP = PROC_SplitByDelimiter(Environment.QueryString.aisleNumber,',','AisleNumber',Environment);
+			
+					FOR REF_AisleNumber AS Environment.AisleNumber.ArrayOfSubString[] DO
+		
+						DECLARE oRef_Item   REFERENCE TO oRef.properties.aisleNumber.Item;
+						CREATE LASTCHILD OF oRefAisle AS oRef_Item NAME 'Item' VALUE REF_AisleNumber;
+				
+					END FOR;
+				
+				END IF;
+				
+			END IF;
+				
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+	END;
+	
+	/*CREATE FUNCTION PROC_SplitByDelimiter(IN CH_Parameter CHARACTER, IN CH_DELIMINITER CHARACTER, IN CH_Type CHARACTER) 
+		BEGIN
+	    	DECLARE IN_Position INTEGER;
+	        DECLARE IN_Index    INTEGER 1;
+	            
+	        WHILE LENGTH(CH_Parameter) > 0 DO
+              SET IN_Position    = POSITION(CH_DELIMINITER IN CH_Parameter);
+              IF IN_Position <= 0 THEN
+                    SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(CH_Parameter);
+                    SET CH_Parameter  = NULL;
+              ELSE
+                    SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(SUBSTRING(CH_Parameter FROM 1 FOR IN_Position - 1));
+                    SET CH_Parameter  = TRIM(SUBSTRING(CH_Parameter FROM IN_Position + 1));
+                    SET IN_Index = IN_Index + 1;
+              END IF;
+	        END WHILE;
+		END;*/
+    
+END MODULE;

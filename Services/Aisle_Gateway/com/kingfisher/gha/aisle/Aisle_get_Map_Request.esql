@@ -1,0 +1,81 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+PATH com.kingfisher.gha.common;
+
+DECLARE NS_n0 NAMESPACE 'urn:sap-com:document:sap:soap:functions:mc-style';
+
+CREATE COMPUTE MODULE Aisle_get_Map_Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		-- Copy Message Properties only
+
+		SET OutputRoot.Properties 							= 	InputRoot.Properties;
+		
+		-- Apply Security 
+		SET OutputRoot.Properties.IdentityMappedType		=	'usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken 		= 	getConfigValue('SAP_ES_USERID');
+		SET OutputRoot.Properties.IdentityMappedPassword    =   getEncryptedValue('SAP_ES_PASSWORD');	
+
+		-- Store MsgID and ReplyToQ
+		
+		SET Environment.Store.MQMD = InputRoot.MQMD;
+		SET Environment.Store.MQRFH2 = InputRoot.MQRFH2;
+		
+		-- Store Message in case of error
+		
+		SET Environment.Store.Input.JSON 			= 	InputRoot.JSON;
+
+		-- Create output and declare reference
+		
+		DECLARE iRef_Prop 			REFERENCE TO InputRoot.JSON.Data.properties;		
+		DECLARE oRef_ZSofReadAisle 	REFERENCE TO OutputRoot.XMLNSC.NS_n0:ZSofReadAisle;
+		DECLARE oRef_ItAisleNum		REFERENCE TO oRef_ZSofReadAisle.ItAisleNum;
+		DECLARE oRef_ItLgnum		REFERENCE TO oRef_ZSofReadAisle.ItLgnum;
+		DECLARE oRef_ItWerks		REFERENCE TO oRef_ZSofReadAisle.ItWerks;
+		
+		CREATE FIELD OutputRoot.XMLNSC.NS_n0:ZSofReadAisle 	AS oRef_ZSofReadAisle NAMESPACE NS_n0 NAME 'ZSofReadAisle';
+		CREATE FIELD oRef_ZSofReadAisle.ItAisleNum 			AS oRef_ItAisleNum;
+		CREATE FIELD oRef_ZSofReadAisle.ItLgnum 			AS oRef_ItLgnum;
+		CREATE FIELD oRef_ZSofReadAisle.ItWerks 			AS oRef_ItWerks;
+		
+		SET oRef_ZSofReadAisle.(XMLNSC.NamespaceDecl)xmlns:n0 =  NS_n0;
+		
+		IF EXISTS(iRef_Prop.partialAisleNumber.Item[]) THEN
+			
+--			DECLARE oRef_AisleItem   REFERENCE TO oRef_ItAisleNum.item;
+--			CREATE LASTCHILD OF oRef_ItAisleNum AS oRef_AisleItem NAME 'item' VALUE iRef_Prop.partialAisleNumber;
+			FOR REF_PartialAisleNumber AS iRef_Prop.partialAisleNumber.Item[] DO 
+		
+				DECLARE oRef_partialAisleItem   REFERENCE TO oRef_ItAisleNum.item;
+				CREATE LASTCHILD OF oRef_ItAisleNum AS oRef_partialAisleItem NAME 'item';-- ALUE REF_PartialAisleNumber;
+				SET oRef_partialAisleItem	=	REF_PartialAisleNumber || '*';
+		
+			END FOR;
+			
+		ELSEIF EXISTS(iRef_Prop.aisleNumber.Item[]) THEN
+			
+			FOR REF_AisleNumber AS iRef_Prop.aisleNumber.Item[] DO 
+		
+				DECLARE oRef_AisleItem   REFERENCE TO oRef_ItAisleNum.item;
+				CREATE LASTCHILD OF oRef_ItAisleNum AS oRef_AisleItem NAME 'item' VALUE REF_AisleNumber;
+		
+			END FOR;
+		END IF;	
+		
+		FOR REF_StoreCode AS iRef_Prop.storeCode.Item[] DO 
+		
+			DECLARE oRef_LgnumItem   REFERENCE TO oRef_ItLgnum.item;
+			
+			DECLARE oRef_WerksItem   REFERENCE TO oRef_ItWerks.item;
+			
+			CREATE LASTCHILD OF oRef_ItLgnum AS oRef_LgnumItem NAME 'item' VALUE RIGHT(REF_StoreCode,3);
+			
+			CREATE LASTCHILD OF oRef_ItWerks AS oRef_WerksItem NAME 'item' VALUE REF_StoreCode;
+			
+		END FOR;	
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL  =	getConfigValue('SAP_ZECC_SOF_READ_AISLE_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout        =  getConfigValue('SAP_ES_TIMEOUT');		
+		RETURN TRUE;
+	END;
+END MODULE;

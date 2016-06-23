@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- 
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_WMF_READ_FACINGS_InlineSchema1.xsd"/>
+  <xsd:simpleType name="char3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZcoSWfmReadInput">
+    <xsd:sequence>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Sorf1" type="n0:numeric10"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Meinh" type="n0:unit3"/>
+      <xsd:element name="UomIso" type="tns:char3"/>
+      <xsd:element name="Ean11" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoSWfmReadOutput">
+    <xsd:sequence>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Sorf1" type="n0:numeric10"/>
+      <xsd:element name="Locnr" type="n0:char10"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Meinh" type="n0:unit3"/>
+      <xsd:element name="UomIso" type="tns:char3"/>
+      <xsd:element name="Ean11" type="n0:char18"/>
+      <xsd:element name="Facin" type="n0:quantum13.3"/>
+      <xsd:element name="Minstock" type="n0:quantum19.6"/>
+      <xsd:element name="Maxstock" type="n0:quantum19.6"/>
+      <xsd:element name="Targetstock" type="n0:quantum19.6"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoTtWfmReadInput">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcoSWfmReadInput"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoTtWfmReadOutput">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcoSWfmReadOutput"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCoWfmReadFacings">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItWfmReadInput" type="tns:ZcoTtWfmReadInput"/>
+        <xsd:element name="IvLocnr" type="n0:char10"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCoWfmReadFacingsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EsMessage" type="tns:Bapiret2"/>
+        <xsd:element name="EtWfmReadOutput" type="tns:ZcoTtWfmReadOutput"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   -->
+</xsd:schema>

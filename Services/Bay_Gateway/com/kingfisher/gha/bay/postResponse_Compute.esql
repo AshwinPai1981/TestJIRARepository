@@ -1,0 +1,53 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+
+
+CREATE COMPUTE MODULE postResponse_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		DECLARE iRef_Msg  REFERENCE TO InputRoot.JSON.Data;
+		DECLARE iRef_Prop REFERENCE TO iRef_Msg.properties;
+		
+		
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO oRef.properties;
+		
+		-- Map the required elements to the JSON response
+
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+        	CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 		CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+	 	
+        	CREATE FIELD oRef.properties AS oRefProp;
+        	
+        	SET oRefProp.type = iRef_Prop.type;
+		   	DECLARE oRefInfo REFERENCE TO oRefProp.info;
+          	CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+          	
+          	
+        DECLARE iRef_InfoItem REFERENCE TO iRef_Prop.info.Item;
+        
+		DECLARE arr_count INTEGER 1;
+			
+	        WHILE LASTMOVE(iRef_InfoItem) DO
+	        	
+	        	SET oRefInfo.Item[arr_count].serviceName = iRef_InfoItem.serviceName;
+           		SET oRefInfo.Item[arr_count].statusCode = iRef_InfoItem.statusCode;	
+		   		SET oRefInfo.Item[arr_count].statusMessage = iRef_InfoItem.statusMessage;
+	    
+	        	SET arr_count = arr_count + 1;
+	        	MOVE iRef_InfoItem NEXTSIBLING REPEAT TYPE NAME;
+	        	
+	        END WHILE;	
+				
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

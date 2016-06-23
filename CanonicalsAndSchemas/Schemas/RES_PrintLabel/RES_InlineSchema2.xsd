@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://messages.episys.com/xsd" xmlns:ax21="http://messages.episys.com/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://service.soap.episys.com" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <xsd:complexType name="WEEEPRFItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PRFValue" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="categoryCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ValidationResult">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="statusCode" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="statusMessage" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceChangeRequestHistoryItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="eventUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="priceItem" nillable="true" type="ax21:PriceItemWithHistory"/>
+                    <xsd:element minOccurs="0" name="priceUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="statusCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceItemWithHistory">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="price" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="priceCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="wasPrice" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="wasWasPrice" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PreviewSignSetItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="contentData" nillable="true" type="ax21:PrintAttribute"/>
+                    <xsd:element minOccurs="0" name="dpi" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="requestID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="saveContent" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="templateSetID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PrintAttribute">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="attributeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attributeValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PreviewResults">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="data" nillable="true" type="xsd:base64Binary"/>
+                    <xsd:element minOccurs="0" name="imageHeight" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="imageWidth" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="requestID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="status" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="type" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="AdvancedProductHierarchyItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="children" nillable="true" type="ax21:HierarchyObject"/>
+                    <xsd:element minOccurs="0" name="deepCopy" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="parentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="HierarchyObject">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="UID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="result" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="AdvancedValidationResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="result" nillable="true" type="ax21:HierarchyObject"/>
+                    <xsd:element minOccurs="0" name="size" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="statusCode" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="statusMessage" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="newParentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="newParentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceChangeRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="eventUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="itemTag" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerDetailExtension" nillable="true" type="ax21:OfferDetailExtension"/>
+                    <xsd:element minOccurs="0" name="priceDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceItem" nillable="true" type="ax21:PriceItem"/>
+                    <xsd:element minOccurs="0" name="priceUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="statusCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="OfferDetailExtension">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="offerDetailExtensionList" nillable="true" type="ax21:OfferDetailItem"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="OfferDetailItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="offerDetailName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerDetailValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="price" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="priceCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="wasPrice" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="wasWasPrice" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="EventItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="allowAlternateDatesFlag" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="allowPriceExtension" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventStatusCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventTagLine" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="eventTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeGroupList" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PromotionItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="itemTag" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offer" nillable="true" type="ax21:OfferType"/>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotioncode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="OfferType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="mechanic" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerTypeVariant" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="priceType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListC" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListD" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListE" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="rewardListIndicator" nillable="true" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="savingAmount" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="savingType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="thresholdTypes" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdTypesArray" nillable="true" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdValueListA" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdValueListB" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdValueListC" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdValueListD" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdValueListE" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasPriceList" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasWasPriceList" nillable="true" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PromotionItemV2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="multiTicketFlag" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="offer" nillable="true" type="ax21:OfferTypeV2"/>
+                    <xsd:element minOccurs="0" name="offerDesc" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionId" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="promotionName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionTagLine" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotioncode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="OfferTypeV2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="mechanic" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerTypeVariant" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="priceType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListC" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListD" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListE" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListC" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListD" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListE" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="savingAmount" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="savingText1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="savingText2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="savingType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="thresholdTypes" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasPriceList" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasWasPriceList" nillable="true" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PromotionItemWithStoreGroupName">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="allowDateExtensions" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="allowPriceExtensions" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="multiTicketFlag" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="offer" nillable="true" type="ax21:OfferTypeExtendedDetail"/>
+                    <xsd:element minOccurs="0" name="offerDesc" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerDetailExtension" nillable="true" type="ax21:OfferDetailExtension"/>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionId" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="promotionName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionTagLine" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotioncode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="OfferTypeExtendedDetail">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="attachedBarcode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="clearanceExcluded1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="clearanceExcluded2" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="exclusionListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="exclusionListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="exclusionListTypeA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="exclusionListTypeB" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="exclusionText1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="exclusionText2" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="inclusionListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="inclusionListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="inclusionListTypeA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="inclusionListTypeB" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="inclusionText1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="inclusionText2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="mechanic" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerType1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerType2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerTypeVariant" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="overlaySaleFlag" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="priceType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListC" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListD" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productListE" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListA" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListB" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListC" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListD" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeListE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionExcluded1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionExcluded2" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="savingAmount" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="savingText1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="savingText2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="savingType" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="savingTypes" nillable="true" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="thresholdArray" nillable="true" type="xsd:float"/>
+                    <xsd:element minOccurs="0" name="thresholdTypes" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasPriceList" nillable="true" type="xsd:float"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="wasWasPriceList" nillable="true" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PromotionItemForFESP">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="allowDateExtensions" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="allowPriceExtensions" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="multiTicketFlag" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="offer" nillable="true" type="ax21:OfferTypeExtendedDetail"/>
+                    <xsd:element minOccurs="0" name="offerDesc" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerDetailExtension" nillable="true" type="ax21:OfferDetailExtension"/>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionId" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="promotionName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionTagLine" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotioncode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreDeletionItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreInfoItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="addressLine1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="addressLine2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="cityName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="countryCode" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="nonTradingDates" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="postCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="regionCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="reportPrinterID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitCloseDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitOpenDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="signPrinterID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeGroupNames" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeHours" nillable="true" type="ax21:StoreHoursItem"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeHoursOverride" nillable="true" type="ax21:StoreHoursOverrideItem"/>
+                    <xsd:element minOccurs="0" name="storeManagerUserID" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreHoursItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="closeTime" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="dayOfWeek" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="openTime" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreHoursOverrideItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="closeTime" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="openTime" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="overrideDate" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductHierarchyMoveItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="newParentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="newParentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductHierarchyItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="parentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreGroupAddStoreItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupType" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreGroupInfoItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupType" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreGroupDeletionItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreGroupDeleteStoresItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeGroupType" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StockRangeItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="rangeEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="rangeStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ranged" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="stock" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="AdhocLabelRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="aisle" nillable="true" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="bay" nillable="true" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="quantity" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sequence" nillable="true" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="BatchLabelRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="batchName" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="ax21:BatchLabelRequestItem"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="BatchLabelRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="quantity" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="WEEECategoryItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="categoryCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDataBaseItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDataItem">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ContentDataBaseItem">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="fieldItems" nillable="true" type="ax21:ContentFieldItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ContentFieldItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="comment" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="contentApproveValue" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="contentFieldName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="contentNewValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramSULDetailRequestItemFull">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitLocC" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqA" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqB" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqC" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ValidationResultWithParam">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResult">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="validationParameter" nillable="true" type="ax21:ValidationParameter"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ValidationParameter">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="paramName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="paramValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramSULDetailResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResultWithParam">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ECSGetPlanogramSULDetailResultItem" nillable="true" type="ax21:ECSGetPlanogramSULDetailResultItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramSULDetailResultItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="action" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqA" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqB" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqC" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeLocation" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSManagePlanogramSULRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="effEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitLoc" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqA" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqB" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seqC" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="alias_1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="alias_2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_A" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_B" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_C" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="newParentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="newParentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PromotionItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="adType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="altID_A" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="altID_B" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="altID_C" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="leadPriceUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="marketCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="multiTicketFlag" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="offer" nillable="true" type="ax21:OfferTypeV2"/>
+                    <xsd:element minOccurs="0" name="offerDesc" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="offerType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionId" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="promotionName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionStatus" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotionTagLine" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promotioncode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="search3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="RelatedArticleRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="conversionFactor" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="mainArticle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="mainArticleUOM" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="relatedArticle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="relatedArticleUOM" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="relationshipSubType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="relationshipType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StyleDetailRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StyleDetailsResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResultWithParam">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="styleDetailResultItem" nillable="true" type="ax21:StyleDetailResultItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="StyleDetailResultItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="epsUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramHdrDetailRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramHdrDetailResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResultWithParam">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ECSGetPlanogramHdrDetailResultItem" nillable="true" type="ax21:ECSGetPlanogramHdrDetailResultItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramHdrDetailResultItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="action" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoType" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSManagePlanogramHdrRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="effEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramDtlDetailRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="aisle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="bay" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramDtlDetailResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResultWithParam">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ECSGetPlanogramDtlDetailResultItem" nillable="true" type="ax21:ECSGetPlanogramDtlDetailResultItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramDtlDetailResultItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="action" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="aisle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr4" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr5" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="bay" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="defaultStyle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="depth" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="facings" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="hierCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierTypeCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="homeLocation" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdHeight" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="prdTypeCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdWidth" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="shelf" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfSeq" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfType" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramDtlDetailRequestFullItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="aisle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="bay" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelf" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfSeq" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSManagePlanogramDtlRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="aisle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr4" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attr5" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="bay" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="defaultStyle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="depth" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="facings" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="hierCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierTypeCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="homeLocation" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdHeight" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="prdTypeCD" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prdWidth" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="shelf" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfSeq" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelfType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ECSManagePlanogramDtlDetailResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResult">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ECSGetPlanogramDtlDetailResultItem" nillable="true" type="ax21:ECSGetPlanogramDtlDetailResultItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="ECSGetPlanogramSULDetailRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="planoId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitId" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramProductItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="ax21:PlanogramAttributeItem"/>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="capacity" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="printQty" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sequence" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="width" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramAttributeItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="attributeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attributeValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramLocationDetailsRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="displayDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="displayTypeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="prodLocType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramLocationDetailsResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="product" nillable="true" type="ax21:PlanogramProductSubItem"/>
+                    <xsd:element minOccurs="0" name="result" nillable="true" type="ax21:ValidationResult"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramProductSubItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="attributes" nillable="true" type="ax21:PlanogramAttributeItem"/>
+                    <xsd:element minOccurs="0" name="capacity" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="printQty" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sequence" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="width" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductStoreContentItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="fieldItems" nillable="true" type="ax21:ProductStoreContentFieldItem"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="storeList" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductStoreContentFieldItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="contentField" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="contentValue" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CustomSignBuilderRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productCodes" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="productTypeCodes" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CustomSignBuilderResultItem">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResult">
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="signID" type="xsd:int"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramLocPrdDetailsRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="product" nillable="true" type="ax21:PlanogramProductSubItem"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CustomSignAlterItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="endDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="signID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="startDate" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ConfirmationPriceForStoreRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="eventTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="requestID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceConfirmationMessage">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="UID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="extractionDateTime" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceDetailItem" nillable="true" type="ax21:PriceDetailItem"/>
+                    <xsd:element minOccurs="0" name="priceUpdateUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="requestID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="result" nillable="true" type="ax21:ValidationResult"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PriceDetailItem">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:PriceItem">
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="eventTypeCode" nillable="true" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramLocationItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="defaultPrintQty" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="defaultStyleUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="displayDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="displaySubTypeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="displayTypeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierarchyCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierarchyTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="prodLocType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductDetailItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="fld_name" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="fld_value" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="seq" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StoreProductStatusItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="effEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="effStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="status" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StockRangeItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="onOrder" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="rangeEndDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="rangeStartDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ranged" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sellUnitID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="stock" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDataBaseItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="country" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="language" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDataItem_V2">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ContentDataBaseItem_V2">
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="fieldItems" nillable="true" type="ax21:ContentFieldItem"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="PriceChangeRequestItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="eventUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="itemTag" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="leadPriceUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="offerDetailExtension" nillable="true" type="ax21:OfferDetailExtension"/>
+                    <xsd:element minOccurs="0" name="priceDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="priceItem" nillable="true" type="ax21:PriceItem"/>
+                    <xsd:element minOccurs="0" name="priceUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="promoID3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="statusCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductHierarchyItem_V2">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="alias_1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="alias_2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_A" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_B" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="link_productCode_C" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="parentProductCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="sourceIPAddress" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramProductItemWithUserID">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="ax21:PlanogramProductSubItem"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userID" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PlanogramLocationItemWithUserId">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="bay" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="defaultPrintQty" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="defaultStyleUID" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="display" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="displayDescription" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="displaySubTypeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="displayTypeName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierarchyCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="hierarchyTypeCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="messageType" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="prodLocType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="shelf" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="srcSystem" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="storeID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userId" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDetailRequestItem">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productTypeCode" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ContentDetailResultItemFinal">
+                <xsd:complexContent>
+                    <xsd:extension base="ax21:ValidationResult">
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="contentDetailResultItem" nillable="true" type="xsd:anyType"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="PrintDocument">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="outputMode" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="printElements" nillable="true" type="ax21:PrintElement"/>
+                    <xsd:element minOccurs="0" name="printMode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="printerName" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PrintElement">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="printAttributes" nillable="true" type="ax21:PrintAttribute"/>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="quantity" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="requestID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="style" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="styleName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="styleSetId" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PrintDocumentResult">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="productCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="signData" nillable="true" type="xsd:base64Binary"/>
+                    <xsd:element minOccurs="0" name="statusCode" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>

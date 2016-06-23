@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <!--
+         <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_PROCESS_FIXED_BIN_InlineSchema1.xsd"/>
+         <xsd:complexType name="ZcncMlgt">
+            <xsd:sequence>
+               <xsd:element name="Matnr" type="n0:char18"/>
+               <xsd:element name="Lgnum" type="n0:char3"/>
+               <xsd:element name="Lgtyp" type="n0:char3"/>
+               <xsd:element name="Lgpla" type="n0:char10"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn1">
+            <xsd:sequence>
+               <xsd:element name="Type" type="n0:char1"/>
+               <xsd:element name="Id" type="n0:char20"/>
+               <xsd:element name="Number" type="n0:numeric3"/>
+               <xsd:element name="Message" type="n0:char220"/>
+               <xsd:element name="LogNo" type="n0:char20"/>
+               <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+               <xsd:element name="MessageV1" type="n0:char50"/>
+               <xsd:element name="MessageV2" type="n0:char50"/>
+               <xsd:element name="MessageV3" type="n0:char50"/>
+               <xsd:element name="MessageV4" type="n0:char50"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncMlgtTt">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncMlgt"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn1Tabtype">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessFixedBin2">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvArticle" type="n0:char18"/>
+                  <xsd:element name="IvFunction" type="n0:char1"/>
+                  <xsd:element name="IvSite" type="n0:char4"/>
+                  <xsd:element minOccurs="0" name="IvStorBin" type="n0:char10"/>
+                  <xsd:element minOccurs="0" name="IvStorLoc" type="n0:char4"/>
+                  <xsd:element name="IvStorType" type="n0:char3"/>
+                  <xsd:element minOccurs="0" name="IvTestMode" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessFixedBin2Response">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtDataReturn" type="tns:ZcncMlgtTt"/>
+                  <xsd:element name="EtMessageReturn" type="tns:Bapireturn1Tabtype"/>
+                  <xsd:element name="EvSuccess" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         -->
+      </xsd:schema>

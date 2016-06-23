@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://sap.com/xi/SAPGlobal20/Global" xmlns="http://sap.com/xi/SAPGlobal20/Global" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="http://sap.com/xi/SAPGlobal20/Global" xmlns:n2="http://sap.com/xi/APPL/SE/Global" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:sprx:ep:cust:ZS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xi0="http://sap.com/xi/SAPGlobal20/Global" xmlns:xi1="http://sap.com/xi/APPL/SE/Global" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://sap.com/xi/APPL/SE/Global" schemaLocation="GR_NEW_InlineSchema2.xsd"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="GoodsMovementERPWithReferenceCreateConfirmation_sync_V1" type="n2:GoodsMovementERPWithReferenceCreateConfirmationMessage_sync_V1"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="StandardMessageFault">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="standard" type="n2:ExchangeFaultData"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,314 @@
+apply plugin:'maven'
+
+//-----------------------------------------------------------------------------
+// Gradle WMB/IIB build script
+//
+// Version: 1.5
+//
+// Modification log:
+// 12/05/2015   - 1.0 - JM  - Initial script
+// 22/05/2015   - 1.1 - JM  - Added external dependencies to other WMB projects
+// 23/05/2015   - 1.2 - JM  - Added allprojects closure to customize repos
+//  4/06/2015   - 1.3 - JM  - Added transitive references support
+//  7/06/2015   - 1.4 - JM  - Added spock test support
+// 21/06/2015   - 1.5 - JM  - Added MQ & IIB configuration files
+// 29/06/2015   - 1.6 - JM  - Copying in the IAR only the artefact code and not all the dependencies code. 
+//                            Copy only the built bar file not all the bar files in the ar folder.
+//-----------------------------------------------------------------------------
+
+ext {
+    ScriptVersion           << ['ibb', '1.6']
+}
+
+//*****************************************************************************
+// Build methods and tasks
+//*****************************************************************************
+//----------------------------------------------------------------
+// buildPrepare
+//
+//----------------------------------------------------------------
+task buildPrepare() {
+    group = "IIB Build"
+    description = "Prepare build process of " + project
+
+    outputs.files([BuildSourceDir, BuildBARDir, BuildDependenciesDir, BuildExpDependenciesDir])
+
+    doLast {
+        project.printProperties();
+
+        println "- Creating folder BuildSourceDir:"
+        println "\t- $BuildSourceDir"
+        println "- Creating folder BuildBARDir:"
+        println "\t- $BuildBARDir"
+        println "- Creating folder BuildDependenciesDir:"
+        println "\t- $BuildDependenciesDir"
+        println "- Creating folder BuildExpDependenciesDir:"
+        println "\t- $BuildExpDependenciesDir"
+
+        BuildSourceDir.mkdirs()
+        BuildBARDir.mkdirs()
+        BuildDependenciesDir.mkdirs()
+        BuildExpDependenciesDir.mkdirs()
+    }
+}
+
+//-----------------------------------------------------------------------------
+// copy workspace to temporary build workspace
+//
+//-----------------------------------------------------------------------------
+task copyWorkspace(type: Copy, dependsOn: buildPrepare) {
+    group = "IIB Build"
+    description = "Copy project workspace to the temporary build workspace of " + project
+
+    from "${wsDir}"
+    into "${BuildSourceDirName}${File.separator}${project.name}"
+        exclude "**/.gradle"
+        exclude "**/.metadata"
+        exclude "**/BARfiles"
+        exclude "**/${ConfigFolderName}"
+        exclude "**/${TestFolderName}"
+        exclude "**/${InstallFolderName}"
+        exclude "**/${BuildFolderName}"
+        exclude "*.iml"
+        exclude "**/*.bar"
+        exclude "**/*.class"
+        exclude "**/*.jar"
+        exclude "build.gradle"
+        exclude "gradle.properties"    
+}
+
+//-----------------------------------------------------------------------------
+// retrieveIARDependencies
+//
+//-----------------------------------------------------------------------------
+task retrieveIARDependencies(type: Copy, dependsOn: buildPrepare) {
+    group = "IIB Build"
+    description = "Retrieve dependencies from Maven repository of " + project
+    into "${BuildDependenciesDir}"
+}
+
+//-----------------------------------------------------------------------------
+// unzipIAR
+// Unzips all the IARs files in dependencies in the unzipIAR folder
+// Used to copy dependencies source in build workspace
+//-----------------------------------------------------------------------------
+task unzipIAR(dependsOn: retrieveIARDependencies) {
+    group = "IIB Build"
+    description = "Unpack dependencies IAR files of " + project
+
+    outputs.files([BuildDependenciesDir])
+    outputs.files([BuildExpDependenciesDir])
+	outputs.upToDateWhen { false }
+
+    doLast {
+        def inputDir  = BuildDependenciesDir
+        def outputDir = BuildExpDependenciesDir
+        
+        inputDir.listFiles().each {
+            def inIARFile  = it.getAbsolutePath();
+            if (inIARFile.endsWith('iar')) {
+                println "- Unzipping $inIARFile"
+                copy {
+                    from zipTree(inIARFile)
+                    into BuildExpDependenciesDir
+                }
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------
+// move unziped source dependencies to temporary build workspace
+//
+//-----------------------------------------------------------------------------
+task moveDepToBuildWorkSpace (dependsOn: unzipIAR, type: Copy) {
+    group = "IIB Build"
+    description = "Move unpacked dependencies to temporary build workspace of " + project
+	
+	inputs.file([BuildExpDependenciesDir])
+	outputs.dir BuildDir
+	
+// Copy to BuildDir because iib folder is in the from
+    from "${BuildExpDependenciesDir}/"
+        include "${IIBWorkSpace}/**"
+    into "${BuildDir}"
+}
+
+//----------------------------------------------------------------
+// buildPrepareJavaContainers
+//
+// Changes Eclipse .classpath file changing kind="var" with
+// kind=lib and M2_REPO with M2_REPO system property
+//----------------------------------------------------------------
+task buildPrepareJavaContainers(dependsOn: ['buildPrepare', 'moveDepToBuildWorkSpace', 'copyWorkspace']) {
+    doLast {
+        BuildSourceDir.listFiles().each {
+// Search for .project and javanature
+            if (it.isDirectory()) {
+                println "- Folder: $it.name"
+                def EclipseProjectFileName = it.getAbsolutePath() + File.separator + '.project'
+                def EclipseProjectFile = new File(EclipseProjectFileName)
+                println "- Checking file: $EclipseProjectFileName"
+                if (EclipseProjectFile.isFile()) {
+                    println "\t- project folder: $it.name"
+                    def EclipseProject = EclipseProjectFile.text
+                    if (EclipseProject.contains('applicationNature')) {
+                        println "\t- IIB Application: $it.name"
+                    } else {
+                        if (EclipseProject.contains('libraryNature')) {
+                            println "\t- IIB Library: $it.name"
+                        } else {
+                            if (EclipseProject.contains('javanature')) {
+                                println "\t- IIB Java container: $it.name"
+// Check if .classpath exists
+                                def EclipseClassPathFileName = it.getAbsolutePath() + File.separator + '.classpath'
+                                def EclipseClassPathFile = new File(EclipseClassPathFileName)
+                                if (EclipseClassPathFile.isFile()) {
+                                    println "\t\t- Classpath file: $EclipseClassPathFile"
+                                    def EclipseClassPath = EclipseClassPathFile.text
+                                    println "\t\t- Classpath:\n$EclipseClassPath"
+// Find all classpathentry & var
+                                    def XMLEclipseClassPath = new XmlParser().parseText(EclipseClassPath)
+                                    def classpathentries = XMLEclipseClassPath.'*'.findAll{ node->
+                                        node.name() == 'classpathentry' && node.@kind=="var"
+                                    }
+// Change them to lib and remove M2_REPO
+                                    classpathentries.each { node->
+                                        node.@kind="lib"
+                                        node.@path=node.@path.replace("M2_REPO", localMavenRepo)
+                                    }
+// Build new classpath                                  
+                                    def NewEclipseClassPath =  groovy.xml.XmlUtil.serialize(XMLEclipseClassPath)
+                                    println "\t\t- new Classpath:\n" + NewEclipseClassPath
+// remove old classpath if exists
+                                    def OldClasspathFile = new File(it.getAbsolutePath() + File.separator + 'old.classpath')
+                                    if (OldClasspathFile.isFile()) {
+                                        OldClasspathFile.delete()
+                                    }
+// Rename previous .classpath prior to write new one
+                                    EclipseClassPathFile.renameTo(OldClasspathFile)
+                                    EclipseClassPathFile.write(NewEclipseClassPath)
+                                }
+                            } else {
+                                println "\t- IIB unknown container: $it.name"
+                            }
+                        }
+                    }
+                } else {
+                    println "\t- Normal folder: $it.name"
+                }
+            } else {
+                println "\t- File: $it.name"
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------
+// Create a bar files
+//
+//----------------------------------------------------------------
+task buildBar(dependsOn:'buildPrepareJavaContainers') {
+    group = "IIB Build"
+    description = "Build Create a bar files of " + project
+
+// define input files
+    inputs.files(BuildSourceDir)
+    outputs.files(BuildBARDir)
+
+// build bar only for applications
+    doLast {
+// Build command
+        def parmData = BuildSourceDirName
+        def parmCompType = ''
+        def parmBarName = ''
+        def commandLine = ''
+
+// Process IIB applications - TODO Read the .project to see the nature: applicationNature / libraryNature / javanature
+        applications.each { application ->
+            if (application.value == 'application' ) {
+                println "- Building bar for application: $application.key"
+                parmCompType = ' -a '
+// We are not building bar for static libraries
+                parmBarName = BuildBARDirName + File.separator + application.key + '_' + GITBranch + '_' + BuildTimestamp + '.bar'
+                commandLine = "${project.ToolkitDir}${project.mqsicreatebar} -data ${parmData} -b ${parmBarName} ${parmCompType} ${application.key} -cleanBuild -deployAsSource"
+
+                if (runCommand(commandLine) != 0) {
+                    throw new GradleException('Error running command: ' + commandLine)
+                }
+                println "- Built BAR file: $parmBarName"
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------
+// Build IAR file with the bars, environment configuration and
+// source folders, excluding .metadata folder
+//----------------------------------------------------------------
+task buildIAR(type: Zip, dependsOn:'buildBar') {
+    group = "IIB Build"
+    description = "Build IAR file of " + project
+
+    doFirst {
+        archiveName = project.artifactId + '-' + project.version + '.' + 'iar'
+    }
+    extension = 'iar'
+    destinationDir = BuildIARDir
+
+// Zip the built bars
+    from(BuildBARDir) {
+//      fileMode = 0777
+        into(BARFolderName)
+    }
+
+// Zip the config information
+    from(ConfigDir) {
+//      fileMode = 0777
+        into(ConfigFolderName)
+    }
+
+// Zip the test information
+    from(TestDir) {
+//      fileMode = 0777
+        into(TestFolderName)
+    }
+
+// Zip the project source code
+    from ("${BuildSourceDirName}${File.separator}${project.name}") {
+        into "${IIBWorkSpace}${File.separator}${project.name}"
+        exclude "**/.gradle"
+        exclude "**/.metadata"
+        exclude "**/BARfiles"
+        exclude "**/${ConfigFolderName}"
+        exclude "**/${TestFolderName}"
+        exclude "**/${InstallFolderName}"
+        exclude "**/${BuildFolderName}"
+        exclude "*.iml"
+        exclude "**/*.bar"
+        exclude "**/*.class"
+        exclude "**/*.jar"
+        exclude "build.gradle"
+        exclude "gradle.properties"    
+    }
+
+    doLast {
+        pom {
+            project {
+                groupId "${project.group}"
+                version "${project.version}"
+            }
+        }.writeTo("${BuildIARDirName}/pom.xml")
+    }
+
+}
+
+//----------------------------------------------------------------
+// publishIAR
+//
+//----------------------------------------------------------------
+task publishIAR(dependsOn:['uploadArchives']) {
+    group = "IIB Build"
+    description = "Main task to build and publish IIB artefacts of " + project
+}
+

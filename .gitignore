@@ -1,0 +1,25 @@
+# Files to ignore
+*.iml
+*.ipr
+*.iws
+*.report.txt
+*.settings
+*.bar
+*.log
+*.class
+.classpath
+
+.DS_Store
+.java-version
+
+# Directories to ignore
+.metadata/
+.gradle/
+build/
+install/
+IBMdefined/
+.idea/
+test-reports/
+
+# Do not ignore the IBMDefined folder for ErrorHandlers (it is not regenerated on import)
+!/*/ErrorHandlers/IBMdefined

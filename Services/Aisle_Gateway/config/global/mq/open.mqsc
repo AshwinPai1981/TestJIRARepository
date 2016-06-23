@@ -1,0 +1,25 @@
+**************************************************************
+**   Script	 :  open.mqsc
+**   Application :  Aisle_Gateway
+**   Created By	 :  Gareth Trott (auto)
+**   Environment :  All tiers
+**   Date	 :  06-August-2015 @ 18:18
+**************************************************************
+
+ALTER QLOCAL  ('AISLEGET.IN.INTERNAL.LOCAL') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QALIAS  ('AISLEGET.IN.INTERNAL.WMB') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QLOCAL  ('AISLEPOST.IN.INTERNAL.LOCAL') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QALIAS  ('AISLEPOST.IN.INTERNAL.WMB') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QLOCAL  ('AISLEGET.OUT.INTERNAL.LOCAL') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QALIAS  ('AISLEGET.OUT.INTERNAL.WMB') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QLOCAL  ('AISLEPOST.OUT.INTERNAL.LOCAL') PUT(ENABLED) GET(ENABLED) ;
+
+ALTER QALIAS  ('AISLEPOST.OUT.INTERNAL.WMB') PUT(ENABLED) GET(ENABLED) ;
+
+**************************EndScript***************************

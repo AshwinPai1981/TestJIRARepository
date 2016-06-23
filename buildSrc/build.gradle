@@ -1,0 +1,19 @@
+apply plugin:'maven'
+
+// apply from:"./common.gradle"
+// apply from:"./iib.gradle"
+
+//-----------------------------------------------------------------------------
+// Gradle WMB/IIB build script
+//
+// Version: 1.5
+//
+// Modification log:
+// 12/05/2015	- 1.0 -	JM	- Initial script
+// 22/05/2015	- 1.1 -	JM	- Added external dependencies to other WMB projects
+// 23/05/2015	- 1.2 -	JM	- Added allprojects closure to customize repos
+//  4/06/2015	- 1.3 -	JM	- Added transitive references support
+//  7/06/2015	- 1.4 -	JM	- Added spock test support
+// 21/06/2015	- 1.5 -	JM	- Added MQ & IIB configuration files
+// 26/06/2015	- 1.6 -	JM	- Added support for IIB Java applications
+//-----------------------------------------------------------------------------

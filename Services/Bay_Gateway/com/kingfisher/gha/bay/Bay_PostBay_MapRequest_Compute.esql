@@ -1,0 +1,75 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+path com.kingfisher.gha.common;
+DECLARE NS_urn NAMESPACE 'urn:sap-com:document:sap:soap:functions:mc-style';
+
+CREATE COMPUTE MODULE Bay_PostBay_MapRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+--        
+--        -- Apply Security - This will probably be replaced so left as hardcoded for now.
+        SET OutputRoot.Properties.IdentityMappedType     = 'usernameAndPassword';
+     	SET OutputRoot.Properties.IdentityMappedToken 	 = getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,'')) ;
+		SET OutputRoot.Properties.IdentityMappedPassword = getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));             
+
+--        -- Store MQMD and MQRFH2 headers in enviroment
+        SET Environment.Store.MQMD = InputRoot.MQMD;
+        SET Environment.Store.MQRFH2 = InputRoot.MQRFH2;
+--        -- Store Message in case of error
+        SET Environment.Store.Input.JSON = InputRoot.JSON;
+        
+		FOR entities AS InputRoot.JSON.Data.Item[1].entities.Item[] DO
+			IF entities.rel.Item[1] = 'urn:x-kingfisher:name:parentStore' AND entities.Class.Item[1] = 'FulfilmentSite' THEN 
+			SET Environment.Store.storeCode  = entities.properties.siteNumber;
+			END IF;
+		END FOR;	
+		
+		SET Environment.Store.method     = InputRoot.MQRFH2.usr.method;
+		        
+        DECLARE iRef      	REFERENCE TO InputRoot.JSON.Data;
+        DECLARE oRef      	REFERENCE TO OutputRoot.XMLNSC.NS_urn:ZSofMaintainBay;
+        DECLARE oRef_Bays 	REFERENCE TO oRef.ItBays;
+        DECLARE bay		  	CHARACTER '';
+        DECLARE aisle     	CHARACTER '';
+        DECLARE baySeq    	CHARACTER '';	
+        DECLARE action    	CHARACTER '';
+        DECLARE bayDescr    CHARACTER '';
+        
+        CREATE FIELD OutputRoot.XMLNSC.NS_urn:ZSofMaintainBay AS oRef NAMESPACE NS_urn NAME 'ZSofMaintainBay';
+        SET oRef.(XMLNSC.NamespaceDecl)xmlns:urn = NS_urn;
+        CREATE FIELD oRef.ItBays AS oRef_Bays NAME 'ItBays'; 
+      	FOR iRefJson AS iRef.Item[] DO
+      		SET bay      = iRefJson.properties.bayNumber;
+      		SET aisle    = LEFT(bay, 4);
+      		SET baySeq   = RIGHT(bay, 2);
+      		IF COALESCE(iRefJson.properties.description,'')<>'' THEN
+   				SET bayDescr = iRefJson.properties.description;
+      		END IF;	
+      		IF  Environment.Store.method = 'UPDATE_BAY' OR Environment.Store.method = 'CREATE_BAY' THEN
+      			SET action = '';
+      		ELSEIF	 Environment.Store.method = 'DELETE_BAY' THEN
+      			SET action = 'D';
+      		END IF;	
+      		CALL FUNC_CREATE_ITEM(aisle, baySeq, action, bayDescr, oRef_Bays);	 
+      	END FOR;	
+        SET oRef.IvValidateBay = 'X';
+        
+        SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = getConfigValue('SAP_ZECC_SOF_MAINTAIN_BAY_URL');
+        SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout       =  getConfigValue('SAP_ES_TIMEOUT');
+		RETURN TRUE;
+	END;
+	
+		CREATE FUNCTION FUNC_CREATE_ITEM(IN aisle CHARACTER, IN baySeq CHARACTER, IN action CHARACTER, IN bayDescr CHARACTER, IN oRef_Bays REFERENCE)
+		BEGIN
+			DECLARE oRef_item REFERENCE TO oRef_Bays.item;
+			CREATE LASTCHILD OF oRef_Bays AS oRef_item NAME 'item';
+			SET oRef_item.Werks     = Environment.Store.storeCode;
+			SET oRef_item.Lgnum     = RIGHT(Environment.Store.storeCode,3);
+			SET oRef_item.AisleNum  = aisle;
+			SET oRef_item.Bay       = baySeq;
+			IF COALESCE(bayDescr,'')<>'' THEN
+				SET oRef_item.BayDescp = bayDescr;
+			END IF;	
+			SET oRef_item.Updkz		= action;
+		END;	
+END MODULE;

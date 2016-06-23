@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <!-- 
+         <xsd:simpleType name="char16">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="16"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char2">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="2"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char25">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="25"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char3">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="3"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char4">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="4"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="decimal15.0">
+            <xsd:restriction base="xsd:decimal">
+               <xsd:totalDigits value="15"/>
+               <xsd:fractionDigits value="0"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="lang">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="1"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+          -->
+      </xsd:schema>

@@ -1,0 +1,97 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+PATH com.kingfisher.gha.common;
+
+CREATE COMPUTE MODULE Aisle_post_Map_Request
+      CREATE FUNCTION Main() RETURNS BOOLEAN
+      BEGIN
+
+		-- Copy Message Properties only
+
+		SET OutputRoot.Properties 							= 	InputRoot.Properties;
+		
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+
+		SET OutputRoot.Properties.IdentityMappedType		=	'usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken 		= 	getConfigValue('SAP_ES_USERID');
+		SET OutputRoot.Properties.IdentityMappedPassword    =   getEncryptedValue('SAP_ES_PASSWORD');		
+
+		-- Store MsgID and ReplyToQ
+		
+		SET Environment.Store.MQMD 							= 	InputRoot.MQMD;
+		SET Environment.Store.MQRFH2 						= 	InputRoot.MQRFH2;
+		
+		-- Store Message in case of error
+		
+		SET Environment.Store.Input.JSON 					= 	InputRoot.JSON;
+
+		-- Create output and declare reference
+		
+		DECLARE iRef_Aisle 				REFERENCE TO InputRoot.JSON.Data.Item;	
+		DECLARE iRef_aisleNumber		REFERENCE TO iRef_Aisle.properties.aisleNumber.Item;	
+		DECLARE oRef_ZSofMaintainAisle 	REFERENCE TO OutputRoot.XMLNSC.NS_n0:ZSofMaintainAisle;
+		DECLARE oRef_ItAisle			REFERENCE TO oRef_ZSofMaintainAisle.ItAisle;
+		DECLARE IN_count				INTEGER		1;
+		CREATE FIELD OutputRoot.XMLNSC.NS_n0:ZSofMaintainAisle 	AS oRef_ZSofMaintainAisle NAMESPACE NS_n0 NAME 'ZSofMaintainAisle';
+		CREATE FIELD oRef_ZSofMaintainAisle.ItAisle 			AS oRef_ItAisle;
+		
+		SET oRef_ZSofMaintainAisle.(XMLNSC.NamespaceDecl)xmlns:n0 =  NS_n0;
+		
+	--	IF COALESCE(iRef_Aisle.properties.action,'') <> 'delete' THEN
+		
+		IF Environment.Store.MQRFH2.usr.ReqFromURI = 'True' THEN
+			IF iRef_Aisle.properties.aisleNumber <> Environment.Store.MQRFH2.usr.aisleNumber THEN
+				THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Aisle Numbers do not match','400');
+		   		RETURN FALSE;
+			END IF;
+		END IF;
+					
+			WHILE LASTMOVE (iRef_Aisle) DO
+				
+				DECLARE iRef_entities 		REFERENCE TO iRef_Aisle.entities;
+				DECLARE oRef_AisleItem   	REFERENCE TO oRef_ItAisle.item;
+				CREATE LASTCHILD OF oRef_ItAisle AS oRef_AisleItem NAME 'item';
+				IF COALESCE(Environment.Store.MQRFH2.usr.QueryString.action,'') = 'DELETE_AISLE' THEN
+					SET oRef_AisleItem.Updkz		=	'D';
+				END IF;
+				SET oRef_AisleItem.Werks		=	THE(SELECT ITEM I.properties.siteNumber FROM iRef_entities."Item"[] AS I WHERE I.rel."Item" = 'urn:x-kingfisher:name:parentStore');
+				SET oRef_AisleItem.Lgnum		=	RIGHT(oRef_AisleItem.Werks,3);
+				SET oRef_AisleItem.AisleNum		=	iRef_Aisle.properties.aisleNumber;
+				SET oRef_AisleItem.Lgtyp		=	THE(SELECT ITEM N.SAP_KEY FROM Database.MBSAPSTRGTYPE AS N WHERE N.WMB_KEY = iRef_Aisle.properties.storageType);
+				SET oRef_AisleItem.AisleDescp	=	iRef_Aisle.properties.description;
+				
+			MOVE iRef_Aisle NEXTSIBLING REPEAT TYPE NAME;
+				
+			END WHILE;
+		
+		--ELSE
+			
+--			WHILE LASTMOVE (iRef_aisleNumber) DO
+--				
+--				DECLARE iRef_entities 		REFERENCE TO iRef_Aisle.entities;
+--				DECLARE oRef_AisleItem   	REFERENCE TO oRef_ItAisle.item;
+--				CREATE LASTCHILD OF oRef_ItAisle AS oRef_AisleItem NAME 'item';
+--				SET oRef_AisleItem.Updkz		=	'D';
+--				SET oRef_AisleItem.Werks		=	THE(SELECT ITEM I.properties.siteNumber FROM iRef_entities."Item"[] AS I WHERE I.rel."Item" = 'urn:x-kingfisher:name:parentStore');
+--				SET oRef_AisleItem.Lgnum		=	RIGHT(iRef_Aisle.properties.storeCode.Item,3);
+--				SET oRef_AisleItem.AisleNum		=	iRef_aisleNumber;
+--				SET oRef_AisleItem.Lgtyp		=	THE(SELECT ITEM N.SAP_KEY FROM Database.MBSAPSTRGTYPE AS N WHERE N.WMB_KEY = iRef_Aisle.properties.storageType.Item[IN_count]);
+--								
+--			MOVE iRef_aisleNumber NEXTSIBLING REPEAT TYPE NAME;
+--			
+--			SET IN_count = IN_count + 1;
+--				
+--			END WHILE;	
+				
+		--END IF;
+				
+		SET oRef_ItAisle.IvValidateAisle	=	'X';
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL 	=	getConfigValue('SAP_ZECC_SOF_MAINTAIN_AISLE_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout          =  getConfigValue('SAP_ES_TIMEOUT');		
+		RETURN TRUE;
+	END;
+
+
+      
+END MODULE;
+

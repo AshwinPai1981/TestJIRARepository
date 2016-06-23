@@ -1,0 +1,94 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+PATH com.kingfisher.gha.common;
+
+CREATE COMPUTE MODULE Aisle_post_Set_Error_Status
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+
+		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+	    SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+        
+		-- Declaring Refernces--
+		DECLARE REF_ExceptionList	REFERENCE TO InputExceptionList;
+		DECLARE FieldRefOfLastChild REFERENCE TO REF_ExceptionList;
+
+		DECLARE messageText        CHARACTER;	
+        DECLARE messageNumber 	   INTEGER;
+
+        DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		
+		-- Create JSON error response
+
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		--SET OutputRoot.JSON.Data.Class = 'Response';
+        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+	 	
+        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+        
+        SET oRefProp.type = 'ERROR';
+		DECLARE oRefInfo REFERENCE TO oRefProp.info;
+        CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+         
+        -- check the source of the error and create response based on that
+       
+        IF(EXISTS(InputRoot.SOAP.Body.tns:Fault[])) THEN
+            
+          	 	SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+           		SET oRefInfo.Item[1].statusCode = InputRoot.SOAP.Body.tns:Fault.faultcode;	
+		   		SET oRefInfo.Item[1].statusMessage = InputRoot.SOAP.Body.tns:Fault.faultstring;
+		   					
+		ELSEIF(EXISTS(InputExceptionList.*[])) THEN
+		        
+				CALL getLastExceptionDetail(REF_ExceptionList, messageNumber, messageText, FieldRefOfLastChild);
+			
+				SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+           		SET oRefInfo.Item[1].statusCode = messageNumber;	
+		   		SET oRefInfo.Item[1].statusMessage = messageText;
+		   		
+	   	ELSE
+			
+				SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+           		SET oRefInfo.Item[1].statusCode = '500';	
+		   		SET oRefInfo.Item[1].statusMessage = 'Internal Server Error';
+		   		
+		END IF;
+		
+	   -- Keep the message after first propagation in-order to use the message header information later
+       PROPAGATE TO TERMINAL 'out' DELETE NONE;
+      
+       /*
+	    * Sent the original input message along with exception list (if any) to error handler. In case of soap fault there will be no exceptionlist.
+	    * Depends on the point of failure , set the failure message details in MQRFH2
+	   */
+	   	   
+	   -- Capture the point of failure message to store into MQRFH2
+	   DECLARE wholeMsgBlob BLOB ASBITSTREAM(InputBody,InputRoot.Properties.Encoding,InputRoot.Properties.CodedCharSetId);
+  	   DECLARE wholeMsgChar CHAR CAST(wholeMsgBlob AS CHAR CCSID InputRoot.Properties.CodedCharSetId);
+ 	   
+ 	   SET OutputRoot.MQRFH2.usr.FailMessage = wholeMsgChar;
+ 	   
+ 	   -- Store the exceptionlist and enviroment details in MQRFH2 header.
+ 	   
+       SET OutputRoot.MQRFH2.usr.ExceptionList = InputExceptionList;
+       SET OutputRoot.MQRFH2.usr.Environment = Environment;
+       
+       -- Set the UI reply indicator to X. It denotes that the error response is already sent to UI. 
+       -- So if any failure occured later in the flow , no duplicate response will go to UI.
+       SET OutputRoot.MQRFH2.usr.UIResponseInd = 'X';
+        
+       -- Remove the existing message body and attach the original input JSON body.
+       SET OutputRoot.*[<] = NULL;
+       SET OutputRoot.JSON = Environment.Store.Input.JSON;
+      
+	   PROPAGATE TO TERMINAL 'out1'; 	   
+		
+	   RETURN FALSE;
+	END;
+
+END MODULE;

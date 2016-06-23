@@ -1,0 +1,63 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+PATH com.kingfisher.gha.common;
+
+CREATE COMPUTE MODULE PurchaseOrder_get_error_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+
+		-- Set the message ID
+		SET OutputRoot.MQMD.MsgId = COALESCE(Environment.Store.MsgID,InputRoot.MQMD.MsgId);
+	    SET OutputRoot.MQMD.ReplyToQ = Environment.Store.ReplyToQ;
+		
+		
+		CREATE NEXTSIBLING OF OutputRoot.MQMD DOMAIN 'MQRFH2' NAME 'MQRFH2' ;
+		SET OutputRoot.MQMD.Format = MQFMT_RF_HEADER_2;
+        
+        -- Retrive the metadata
+			SET OutputRoot.MQRFH2.usr.MetaData = Environment.Store.MetaData;
+			SET OutputRoot.MQRFH2.usr.ReqFromURI = Environment.Store.ReqFromURI;
+			
+		-- Declaring Refernces--
+		DECLARE REF_ExceptionList	REFERENCE TO InputExceptionList;
+		DECLARE FieldRefOfLastChild REFERENCE TO REF_ExceptionList;
+
+		DECLARE messageText        CHARACTER;	
+        DECLARE messageNumber 	   INTEGER;
+
+        DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.Properties;
+		
+		-- Map the required elements to the JSON response
+
+		CREATE FIELD OutputRoot.JSON.Data;
+		SET OutputRoot.JSON.Data.Class = 'Response';
+        CREATE FIELD OutputRoot.JSON.Data.Properties AS oRefProp;
+        
+        SET oRefProp.Type = 'ERROR';
+		DECLARE oRefInfo REFERENCE TO oRefProp.Info;
+        CREATE FIELD oRefProp.Info AS oRefInfo IDENTITY (JSON.Array)Info;
+        
+        CALL getLastExceptionDetail(REF_ExceptionList, messageNumber, messageText, FieldRefOfLastChild);
+				SET oRefInfo.Item[1].ServiceName = MessageFlowLabel;
+           		SET oRefInfo.Item[1].StatusCode = messageNumber;	
+		   		SET oRefInfo.Item[1].StatusMessage = messageText;
+		   		
+		 PROPAGATE TO TERMINAL 'out' DELETE NONE;
+	   
+	     DECLARE wholeMsgBlob BLOB ASBITSTREAM(InputBody,InputRoot.Properties.Encoding,InputRoot.Properties.CodedCharSetId);
+  	  	 DECLARE wholeMsgChar CHAR CAST(wholeMsgBlob AS CHAR CCSID InputRoot.Properties.CodedCharSetId);
+ 
+ 	     -- Remove existing message body
+ 	     SET OutputRoot.[<] = NULL;
+ 	     SET OutputRoot.XMLNSC.CandCError.(XMLNSC.CDataField)Message = wholeMsgChar;
+ 
+	   	SET OutputExceptionList = InputExceptionList;
+	   
+	   PROPAGATE TO TERMINAL 'out1';
+	      		
+		RETURN FALSE;
+	END;
+	
+END MODULE;

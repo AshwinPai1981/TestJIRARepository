@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_GET_TASK_LIST_InlineSchema1.xsd"/>
+         <xsd:simpleType name="char1">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="1"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char20">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="20"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char220">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="220"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char4">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="4"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char5">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="5"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="char50">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="50"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="numeric6">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="6"/>
+               <xsd:pattern value="\d*"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:complexType name="ZcncTasklistS">
+            <xsd:sequence>
+               <xsd:element name="Language" type="n0:lang"/>
+               <xsd:element name="Site" type="n0:char4"/>
+               <xsd:element name="Company" type="tns:char4"/>
+               <xsd:element name="TaskKey" type="n0:char10"/>
+               <xsd:element name="TaskType" type="n0:char2"/>
+               <xsd:element name="TypeDesc" type="n0:char25"/>
+               <xsd:element name="Subtype" type="n0:char2"/>
+               <xsd:element name="SubtypeDesc" type="n0:char25"/>
+               <xsd:element name="Status" type="n0:char3"/>
+               <xsd:element name="StatusDesc" type="n0:char16"/>
+               <xsd:element name="RefObject" type="n0:char18"/>
+               <xsd:element name="AppObject" type="n0:char3"/>
+               <xsd:element name="TaskText" type="n0:char40"/>
+               <xsd:element name="ObjValue" type="n0:char10"/>
+               <xsd:element name="ObjValueDesc" type="n0:char15"/>
+               <xsd:element name="AssignedTo" type="n0:char12"/>
+               <xsd:element name="CreateBy" type="n0:char12"/>
+               <xsd:element name="CreateStamp" type="n0:decimal15.0"/>
+               <xsd:element name="ExpectedStamp" type="n0:decimal15.0"/>
+               <xsd:element name="StartStamp" type="n0:decimal15.0"/>
+               <xsd:element name="CompleteStamp" type="n0:decimal15.0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn">
+            <xsd:sequence>
+               <xsd:element name="Type" type="tns:char1"/>
+               <xsd:element name="Code" type="tns:char5"/>
+               <xsd:element name="Message" type="tns:char220"/>
+               <xsd:element name="LogNo" type="tns:char20"/>
+               <xsd:element name="LogMsgNo" type="tns:numeric6"/>
+               <xsd:element name="MessageV1" type="tns:char50"/>
+               <xsd:element name="MessageV2" type="tns:char50"/>
+               <xsd:element name="MessageV3" type="tns:char50"/>
+               <xsd:element name="MessageV4" type="tns:char50"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTasklistTt">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncTasklistS"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="WrfBapireturnTty">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetTaskList">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvRefObject" type="n0:char18"/>
+                  <xsd:element name="IvSite" type="n0:char4"/>
+                  <xsd:element minOccurs="0" name="IvSubtype" type="n0:char2"/>
+                  <xsd:element minOccurs="0" name="IvTaskKey" type="n0:char10"/>
+                  <xsd:element minOccurs="0" name="IvTaskType" type="n0:char2"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetTaskListResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtReturn" type="tns:WrfBapireturnTty"/>
+                  <xsd:element name="EtTaskList" type="tns:ZcncTasklistTt"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+          <!-- adding elements from ZECC_GET_TASK_COUNT -->
+           
+         <xsd:complexType name="ZcncSTaskCount">
+            <xsd:sequence>
+               <xsd:element name="Language" type="n0:lang"/>
+               <xsd:element name="Site" type="n0:char4"/>
+               <xsd:element name="Company" type="n0:char4"/>
+               <xsd:element name="TaskType" type="n0:char2"/>
+               <xsd:element name="TypeDesc" type="n0:char25"/>
+               <xsd:element name="Subtype" type="n0:char2"/>
+               <xsd:element name="SubtypeDesc" type="n0:char25"/>
+               <xsd:element name="Status" type="n0:char3"/>
+               <xsd:element name="StatusDesc" type="n0:char16"/>
+               <xsd:element name="TaskCount" type="n0:decimal15.0"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTtTaskCount">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSTaskCount"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetTaskCount">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="IvSite" type="n0:char4"/>
+                  <xsd:element minOccurs="0" name="IvSubtype" type="n0:char2"/>
+                  <xsd:element minOccurs="0" name="IvTaskType" type="n0:char2"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetTaskCountResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtTaskCount" type="tns:ZcncTtTaskCount"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+          <!-- adding elements from ZECC_UPDATE_TASK -->
+
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncUpdateTask">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvAssignedTo" type="n0:char12"/>
+                  <xsd:element minOccurs="0" name="IvStatus" type="n0:char3"/>
+                  <xsd:element name="IvTaskKey" type="n0:char10"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncUpdateTaskResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EvMessage" type="n0:char40"/>
+                  <xsd:element name="EvSuccess" type="n0:char1"/>
+                  <xsd:element name="EvTaskKey" type="n0:char10"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:schema>

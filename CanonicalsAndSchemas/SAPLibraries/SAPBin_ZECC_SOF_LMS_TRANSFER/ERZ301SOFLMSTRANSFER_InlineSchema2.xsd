@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ERZ301SOFLMSTRANSFER_InlineSchema1.xsd"/>
+  <xsd:simpleType name="numeric1">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+      <xsd:pattern value="\d*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZsofSLmsGmItem">
+    <xsd:sequence>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="EanUpc" type="n0:char18"/>
+      <xsd:element name="Site" type="n0:char4"/>
+      <xsd:element name="StgeLoc" type="n0:char4"/>
+      <xsd:element name="EntryQnt" type="n0:quantum13.3"/>
+      <xsd:element name="EntryUomIso" type="n0:char3"/>
+      <xsd:element name="MoveMat" type="n0:char18"/>
+      <xsd:element name="MovePlant" type="n0:char4"/>
+      <xsd:element name="MoveStloc" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofSTrite">
+    <xsd:sequence>
+      <xsd:element name="Tbpos" type="n0:numeric4"/>
+      <xsd:element name="Anfme" type="n0:quantum13.3"/>
+      <xsd:element name="AltmeIso" type="n0:char3"/>
+      <xsd:element name="Nltyp" type="n0:char3"/>
+      <xsd:element name="Nlber" type="n0:char3"/>
+      <xsd:element name="Nlpla" type="n0:char10"/>
+      <xsd:element name="Vltyp" type="n0:char3"/>
+      <xsd:element name="Vlpla" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmItemCreate">
+    <xsd:sequence>
+      <xsd:element name="Material" type="n0:char18"/>
+      <xsd:element name="Plant" type="n0:char4"/>
+      <xsd:element name="StgeLoc" type="n0:char4"/>
+      <xsd:element name="Batch" type="n0:char10"/>
+      <xsd:element name="MoveType" type="n0:char3"/>
+      <xsd:element name="StckType" type="n0:char1"/>
+      <xsd:element name="SpecStock" type="n0:char1"/>
+      <xsd:element name="Vendor" type="n0:char10"/>
+      <xsd:element name="Customer" type="n0:char10"/>
+      <xsd:element name="SalesOrd" type="n0:char10"/>
+      <xsd:element name="SOrdItem" type="n0:numeric6"/>
+      <xsd:element name="SchedLine" type="n0:numeric4"/>
+      <xsd:element name="ValType" type="n0:char10"/>
+      <xsd:element name="EntryQnt" type="n0:quantum13.3"/>
+      <xsd:element name="EntryUom" type="n0:unit3"/>
+      <xsd:element name="EntryUomIso" type="n0:char3"/>
+      <xsd:element name="PoPrQnt" type="n0:quantum13.3"/>
+      <xsd:element name="OrderprUn" type="n0:unit3"/>
+      <xsd:element name="OrderprUnIso" type="n0:char3"/>
+      <xsd:element name="PoNumber" type="n0:char10"/>
+      <xsd:element name="PoItem" type="n0:numeric5"/>
+      <xsd:element name="Shipping" type="n0:char2"/>
+      <xsd:element name="CompShip" type="n0:char2"/>
+      <xsd:element name="NoMoreGr" type="n0:char1"/>
+      <xsd:element name="ItemText" type="n0:char50"/>
+      <xsd:element name="GrRcpt" type="n0:char12"/>
+      <xsd:element name="UnloadPt" type="n0:char25"/>
+      <xsd:element name="Costcenter" type="n0:char10"/>
+      <xsd:element name="Orderid" type="n0:char12"/>
+      <xsd:element name="OrderItno" type="n0:numeric4"/>
+      <xsd:element name="CalcMotive" type="n0:char2"/>
+      <xsd:element name="AssetNo" type="n0:char12"/>
+      <xsd:element name="SubNumber" type="n0:char4"/>
+      <xsd:element name="ReservNo" type="n0:numeric10"/>
+      <xsd:element name="ResItem" type="n0:numeric4"/>
+      <xsd:element name="ResType" type="n0:char1"/>
+      <xsd:element name="Withdrawn" type="n0:char1"/>
+      <xsd:element name="MoveMat" type="n0:char18"/>
+      <xsd:element name="MovePlant" type="n0:char4"/>
+      <xsd:element name="MoveStloc" type="n0:char4"/>
+      <xsd:element name="MoveBatch" type="n0:char10"/>
+      <xsd:element name="MoveValType" type="n0:char10"/>
+      <xsd:element name="MvtInd" type="n0:char1"/>
+      <xsd:element name="MoveReas" type="n0:numeric4"/>
+      <xsd:element name="RlEstKey" type="n0:char8"/>
+      <xsd:element name="RefDate" type="n0:date10"/>
+      <xsd:element name="CostObj" type="n0:char12"/>
+      <xsd:element name="ProfitSegmNo" type="n0:numeric10"/>
+      <xsd:element name="ProfitCtr" type="n0:char10"/>
+      <xsd:element name="WbsElem" type="n0:char24"/>
+      <xsd:element name="Network" type="n0:char12"/>
+      <xsd:element name="Activity" type="n0:char4"/>
+      <xsd:element name="PartAcct" type="n0:char10"/>
+      <xsd:element name="AmountLc" type="n0:decimal23.4"/>
+      <xsd:element name="AmountSv" type="n0:decimal23.4"/>
+      <xsd:element name="RefDocYr" type="n0:numeric4"/>
+      <xsd:element name="RefDoc" type="n0:char10"/>
+      <xsd:element name="RefDocIt" type="n0:numeric4"/>
+      <xsd:element name="Expirydate" type="n0:date10"/>
+      <xsd:element name="ProdDate" type="n0:date10"/>
+      <xsd:element name="Fund" type="n0:char10"/>
+      <xsd:element name="FundsCtr" type="n0:char16"/>
+      <xsd:element name="CmmtItem" type="n0:char14"/>
+      <xsd:element name="ValSalesOrd" type="n0:char10"/>
+      <xsd:element name="ValSOrdItem" type="n0:numeric6"/>
+      <xsd:element name="ValWbsElem" type="n0:char24"/>
+      <xsd:element name="GlAccount" type="n0:char10"/>
+      <xsd:element name="IndProposeQuanx" type="n0:char1"/>
+      <xsd:element name="Xstob" type="n0:char1"/>
+      <xsd:element name="EanUpc" type="n0:char18"/>
+      <xsd:element name="DelivNumbToSearch" type="n0:char10"/>
+      <xsd:element name="DelivItemToSearch" type="n0:numeric6"/>
+      <xsd:element name="SerialnoAutoNumberassignment" type="n0:char1"/>
+      <xsd:element name="Vendrbatch" type="n0:char15"/>
+      <xsd:element name="StgeType" type="n0:char3"/>
+      <xsd:element name="StgeBin" type="n0:char10"/>
+      <xsd:element name="SuPlStck1" type="n0:decimal3.0"/>
+      <xsd:element name="StUnQtyy1" type="n0:quantum13.3"/>
+      <xsd:element name="StUnQtyy1Iso" type="n0:char3"/>
+      <xsd:element name="Unittype1" type="n0:char3"/>
+      <xsd:element name="SuPlStck2" type="n0:decimal3.0"/>
+      <xsd:element name="StUnQtyy2" type="n0:quantum13.3"/>
+      <xsd:element name="StUnQtyy2Iso" type="n0:char3"/>
+      <xsd:element name="Unittype2" type="n0:char3"/>
+      <xsd:element name="StgeTypePc" type="n0:char3"/>
+      <xsd:element name="StgeBinPc" type="n0:char10"/>
+      <xsd:element name="NoPstChgnt" type="n0:char1"/>
+      <xsd:element name="GrNumber" type="n0:char10"/>
+      <xsd:element name="StgeTypeSt" type="n0:char3"/>
+      <xsd:element name="StgeBinSt" type="n0:char10"/>
+      <xsd:element name="MatdocTrCancel" type="n0:char10"/>
+      <xsd:element name="MatitemTrCancel" type="n0:numeric4"/>
+      <xsd:element name="MatyearTrCancel" type="n0:numeric4"/>
+      <xsd:element name="NoTransferReq" type="n0:char1"/>
+      <xsd:element name="CoBusproc" type="n0:char12"/>
+      <xsd:element name="Acttype" type="n0:char6"/>
+      <xsd:element name="SupplVend" type="n0:char10"/>
+      <xsd:element name="MaterialExternal" type="n0:char40"/>
+      <xsd:element name="MaterialGuid" type="n0:char32"/>
+      <xsd:element name="MaterialVersion" type="n0:char10"/>
+      <xsd:element name="MoveMatExternal" type="n0:char40"/>
+      <xsd:element name="MoveMatGuid" type="n0:char32"/>
+      <xsd:element name="MoveMatVersion" type="n0:char10"/>
+      <xsd:element name="FuncArea" type="n0:char4"/>
+      <xsd:element name="TrPartBa" type="n0:char4"/>
+      <xsd:element name="ParCompco" type="n0:char4"/>
+      <xsd:element name="DelivNumb" type="n0:char10"/>
+      <xsd:element name="DelivItem" type="n0:numeric6"/>
+      <xsd:element name="NbSlips" type="n0:numeric3"/>
+      <xsd:element name="NbSlipsx" type="n0:char1"/>
+      <xsd:element name="GrRcptx" type="n0:char1"/>
+      <xsd:element name="UnloadPtx" type="n0:char1"/>
+      <xsd:element name="SpecMvmt" type="n0:char1"/>
+      <xsd:element name="GrantNbr" type="n0:char20"/>
+      <xsd:element name="CmmtItemLong" type="n0:char24"/>
+      <xsd:element name="FuncAreaLong" type="n0:char16"/>
+      <xsd:element name="LineId" type="n0:numeric6"/>
+      <xsd:element name="ParentId" type="n0:numeric6"/>
+      <xsd:element name="LineDepth" type="n0:numeric2"/>
+      <xsd:element name="Quantity" type="n0:quantum13.3"/>
+      <xsd:element name="BaseUom" type="n0:unit3"/>
+      <xsd:element name="Longnum" type="n0:char40"/>
+      <xsd:element name="BudgetPeriod" type="n0:char10"/>
+      <xsd:element name="EarmarkedNumber" type="n0:char10"/>
+      <xsd:element name="EarmarkedItem" type="n0:numeric3"/>
+      <xsd:element name="StkSegment" type="n0:char16"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmSerialnumber">
+    <xsd:sequence>
+      <xsd:element name="MatdocItm" type="n0:numeric4"/>
+      <xsd:element name="Serialno" type="n0:char18"/>
+      <xsd:element name="Uii" type="n0:char72"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LtakVb">
+    <xsd:sequence>
+      <xsd:element name="Mandt" type="n0:clnt3"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Tanum" type="n0:numeric10"/>
+      <xsd:element name="Bwart" type="n0:char3"/>
+      <xsd:element name="Bwlvs" type="n0:numeric3"/>
+      <xsd:element name="Tbpri" type="n0:char1"/>
+      <xsd:element name="Trart" type="n0:char1"/>
+      <xsd:element name="Bdatu" type="n0:date10"/>
+      <xsd:element name="Bzeit" type="n0:time"/>
+      <xsd:element name="Bname" type="n0:char12"/>
+      <xsd:element name="Refnr" type="n0:char10"/>
+      <xsd:element name="Tbnum" type="n0:numeric10"/>
+      <xsd:element name="Ubnum" type="n0:numeric10"/>
+      <xsd:element name="Vbeln" type="n0:char10"/>
+      <xsd:element name="Kquit" type="n0:char1"/>
+      <xsd:element name="Qdatu" type="n0:date10"/>
+      <xsd:element name="Mblnr" type="n0:char10"/>
+      <xsd:element name="Mjahr" type="n0:numeric4"/>
+      <xsd:element name="Betyp" type="n0:char1"/>
+      <xsd:element name="Benum" type="n0:char10"/>
+      <xsd:element name="Drukz" type="n0:char2"/>
+      <xsd:element name="Druck" type="n0:char1"/>
+      <xsd:element name="Teilk" type="n0:char1"/>
+      <xsd:element name="Kr2so" type="n0:char1"/>
+      <xsd:element name="Kr2ku" type="n0:char1"/>
+      <xsd:element name="Kdiso" type="n0:char1"/>
+      <xsd:element name="Kzpla" type="n0:char1"/>
+      <xsd:element name="Pldat" type="n0:date10"/>
+      <xsd:element name="Rsnum" type="n0:numeric10"/>
+      <xsd:element name="Lznum" type="n0:char20"/>
+      <xsd:element name="Bdart" type="n0:char2"/>
+      <xsd:element name="Pknum" type="n0:char7"/>
+      <xsd:element name="Pkpos" type="n0:numeric3"/>
+      <xsd:element name="Kzlei" type="n0:char1"/>
+      <xsd:element name="Kistz" type="n0:char1"/>
+      <xsd:element name="Kistp" type="n0:char1"/>
+      <xsd:element name="Pernr" type="n0:numeric8"/>
+      <xsd:element name="Solwm" type="n0:quantum13.3"/>
+      <xsd:element name="Solex" type="n0:quantum13.3"/>
+      <xsd:element name="Istwm" type="n0:quantum13.3"/>
+      <xsd:element name="Zeiei" type="n0:unit3"/>
+      <xsd:element name="Hrsts" type="n0:char1"/>
+      <xsd:element name="Stdat" type="n0:date10"/>
+      <xsd:element name="Endat" type="n0:date10"/>
+      <xsd:element name="Stuzt" type="n0:time"/>
+      <xsd:element name="Enuzt" type="n0:time"/>
+      <xsd:element name="L2ska" type="n0:char1"/>
+      <xsd:element name="Minwm" type="n0:char1"/>
+      <xsd:element name="Lgtor" type="n0:char3"/>
+      <xsd:element name="Lgbzo" type="n0:char10"/>
+      <xsd:element name="Kzvep" type="n0:char1"/>
+      <xsd:element name="Swabw" type="n0:numeric4"/>
+      <xsd:element name="Ausfb" type="n0:char4"/>
+      <xsd:element name="Spezi" type="n0:char1"/>
+      <xsd:element name="Vbtyp" type="n0:char1"/>
+      <xsd:element name="Queue" type="n0:char10"/>
+      <xsd:element name="Kgvnq" type="n0:char1"/>
+      <xsd:element name="Tapri" type="n0:numeric2"/>
+      <xsd:element name="Kvqui" type="n0:char1"/>
+      <xsd:element name="Hucon" type="n0:char1"/>
+      <xsd:element name="Noitm" type="n0:numeric4"/>
+      <xsd:element name="Kztrm" type="n0:char1"/>
+      <xsd:element name="Later" type="n0:char1"/>
+      <xsd:element name="Passd" type="n0:char1"/>
+      <xsd:element name="Multl" type="n0:char1"/>
+      <xsd:element name="Cntps" type="n0:numeric4"/>
+      <xsd:element name="Nidru" type="n0:char1"/>
+      <xsd:element name="Actda" type="n0:char1"/>
+      <xsd:element name="Teil2" type="n0:char1"/>
+      <xsd:element name="Teild" type="n0:char1"/>
+      <xsd:element name="Bitem" type="n0:char1"/>
+      <xsd:element name="Komim" type="n0:char1"/>
+      <xsd:element name="Einlm" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LtapVb">
+    <xsd:sequence>
+      <xsd:element name="Mandt" type="n0:clnt3"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Tanum" type="n0:numeric10"/>
+      <xsd:element name="Tapos" type="n0:numeric4"/>
+      <xsd:element name="Tbpos" type="n0:numeric4"/>
+      <xsd:element name="Posnr" type="n0:numeric6"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Charg" type="n0:char10"/>
+      <xsd:element name="Bestq" type="n0:char1"/>
+      <xsd:element name="Sobkz" type="n0:char1"/>
+      <xsd:element name="Sonum" type="n0:char16"/>
+      <xsd:element name="Stoff" type="n0:char18"/>
+      <xsd:element name="Meins" type="n0:unit3"/>
+      <xsd:element name="Altme" type="n0:unit3"/>
+      <xsd:element name="Umrez" type="n0:decimal5.0"/>
+      <xsd:element name="Umren" type="n0:decimal5.0"/>
+      <xsd:element name="Letyp" type="n0:char3"/>
+      <xsd:element name="Kzfeh" type="n0:char1"/>
+      <xsd:element name="Lanum" type="n0:numeric3"/>
+      <xsd:element name="Kzqui" type="n0:char1"/>
+      <xsd:element name="Kznko" type="n0:char1"/>
+      <xsd:element name="Nulko" type="n0:numeric1"/>
+      <xsd:element name="Kzinv" type="n0:char2"/>
+      <xsd:element name="Ivnum" type="n0:char10"/>
+      <xsd:element name="Pquit" type="n0:char1"/>
+      <xsd:element name="Qdatu" type="n0:date10"/>
+      <xsd:element name="Qzeit" type="n0:time"/>
+      <xsd:element name="Qname" type="n0:char12"/>
+      <xsd:element name="Brgew" type="n0:decimal11.3"/>
+      <xsd:element name="Gewei" type="n0:unit3"/>
+      <xsd:element name="Mbpos" type="n0:numeric4"/>
+      <xsd:element name="Wempf" type="n0:char12"/>
+      <xsd:element name="Ablad" type="n0:char25"/>
+      <xsd:element name="Wdatu" type="n0:date10"/>
+      <xsd:element name="Wenum" type="n0:char10"/>
+      <xsd:element name="Wepos" type="n0:numeric4"/>
+      <xsd:element name="Zeugn" type="n0:char10"/>
+      <xsd:element name="Ldest" type="n0:char4"/>
+      <xsd:element name="Vorga" type="n0:char2"/>
+      <xsd:element name="Vltyp" type="n0:char3"/>
+      <xsd:element name="Vlber" type="n0:char3"/>
+      <xsd:element name="Vlpla" type="n0:char10"/>
+      <xsd:element name="Vkdyn" type="n0:char1"/>
+      <xsd:element name="Vppos" type="n0:char2"/>
+      <xsd:element name="Vanzl" type="n0:decimal9.3"/>
+      <xsd:element name="Vanbr" type="n0:char1"/>
+      <xsd:element name="Vsolm" type="n0:quantum13.3"/>
+      <xsd:element name="Vistm" type="n0:quantum13.3"/>
+      <xsd:element name="Vdifm" type="n0:quantum13.3"/>
+      <xsd:element name="Vsola" type="n0:quantum13.3"/>
+      <xsd:element name="Vista" type="n0:quantum13.3"/>
+      <xsd:element name="Vdifa" type="n0:quantum13.3"/>
+      <xsd:element name="Vlqnr" type="n0:numeric10"/>
+      <xsd:element name="Vappc" type="n0:char1"/>
+      <xsd:element name="Nltyp" type="n0:char3"/>
+      <xsd:element name="Nlber" type="n0:char3"/>
+      <xsd:element name="Nlpla" type="n0:char10"/>
+      <xsd:element name="Nkdyn" type="n0:char1"/>
+      <xsd:element name="Nppos" type="n0:char2"/>
+      <xsd:element name="Nanzl" type="n0:decimal9.3"/>
+      <xsd:element name="Nanbr" type="n0:char1"/>
+      <xsd:element name="Nsolm" type="n0:quantum13.3"/>
+      <xsd:element name="Nistm" type="n0:quantum13.3"/>
+      <xsd:element name="Ndifm" type="n0:quantum13.3"/>
+      <xsd:element name="Nsola" type="n0:quantum13.3"/>
+      <xsd:element name="Nista" type="n0:quantum13.3"/>
+      <xsd:element name="Ndifa" type="n0:quantum13.3"/>
+      <xsd:element name="Nlqnr" type="n0:numeric10"/>
+      <xsd:element name="Nappc" type="n0:char1"/>
+      <xsd:element name="Rltyp" type="n0:char3"/>
+      <xsd:element name="Rlber" type="n0:char3"/>
+      <xsd:element name="Rlpla" type="n0:char10"/>
+      <xsd:element name="Rppos" type="n0:char2"/>
+      <xsd:element name="Rsolm" type="n0:quantum13.3"/>
+      <xsd:element name="Ristm" type="n0:quantum13.3"/>
+      <xsd:element name="Rdifm" type="n0:quantum13.3"/>
+      <xsd:element name="Rsola" type="n0:quantum13.3"/>
+      <xsd:element name="Rista" type="n0:quantum13.3"/>
+      <xsd:element name="Rdifa" type="n0:quantum13.3"/>
+      <xsd:element name="Rlqnr" type="n0:numeric10"/>
+      <xsd:element name="Rappc" type="n0:char1"/>
+      <xsd:element name="Dltyp" type="n0:char3"/>
+      <xsd:element name="Dlpla" type="n0:char10"/>
+      <xsd:element name="Dlqnr" type="n0:numeric10"/>
+      <xsd:element name="Dmeng" type="n0:quantum13.3"/>
+      <xsd:element name="Dmena" type="n0:quantum13.3"/>
+      <xsd:element name="Kzdif" type="n0:char1"/>
+      <xsd:element name="Maktx" type="n0:char40"/>
+      <xsd:element name="Druck" type="n0:char1"/>
+      <xsd:element name="Vlenr" type="n0:char20"/>
+      <xsd:element name="Nlenr" type="n0:char20"/>
+      <xsd:element name="Dlenr" type="n0:char20"/>
+      <xsd:element name="Vlest" type="n0:char1"/>
+      <xsd:element name="Nlest" type="n0:char1"/>
+      <xsd:element name="Lelas" type="n0:char1"/>
+      <xsd:element name="Homve" type="n0:char1"/>
+      <xsd:element name="Posty" type="n0:char1"/>
+      <xsd:element name="Orpos" type="n0:numeric4"/>
+      <xsd:element name="Vsumm" type="n0:char1"/>
+      <xsd:element name="Vblch" type="n0:char1"/>
+      <xsd:element name="Nsumm" type="n0:char1"/>
+      <xsd:element name="Nblch" type="n0:char1"/>
+      <xsd:element name="Rspos" type="n0:numeric4"/>
+      <xsd:element name="Vfdat" type="n0:date10"/>
+      <xsd:element name="Vkapv" type="n0:decimal11.3"/>
+      <xsd:element name="Vkapa" type="n0:char1"/>
+      <xsd:element name="Nkapa" type="n0:char1"/>
+      <xsd:element name="Rkapa" type="n0:char1"/>
+      <xsd:element name="Kzsub" type="n0:char1"/>
+      <xsd:element name="Qplos" type="n0:numeric12"/>
+      <xsd:element name="Qploa" type="n0:numeric12"/>
+      <xsd:element name="Kzsti" type="n0:char1"/>
+      <xsd:element name="Rsart" type="n0:char1"/>
+      <xsd:element name="Kzech" type="n0:char1"/>
+      <xsd:element name="Kober" type="n0:char3"/>
+      <xsd:element name="Lgort" type="n0:char4"/>
+      <xsd:element name="Solpo" type="n0:quantum13.3"/>
+      <xsd:element name="Zeiei" type="n0:unit3"/>
+      <xsd:element name="L2skr" type="n0:char1"/>
+      <xsd:element name="Volum" type="n0:quantum13.3"/>
+      <xsd:element name="Voleh" type="n0:unit3"/>
+      <xsd:element name="Kzbef" type="n0:char1"/>
+      <xsd:element name="Imrel" type="n0:char1"/>
+      <xsd:element name="Nwirm" type="n0:quantum13.3"/>
+      <xsd:element name="Wirme" type="n0:unit3"/>
+      <xsd:element name="Nplei" type="n0:char1"/>
+      <xsd:element name="Kbnkz" type="n0:char1"/>
+      <xsd:element name="Stoan" type="n0:char1"/>
+      <xsd:element name="Kgvnq" type="n0:char1"/>
+      <xsd:element name="Pvqui" type="n0:char1"/>
+      <xsd:element name="Edatu" type="n0:date10"/>
+      <xsd:element name="Ezeit" type="n0:time"/>
+      <xsd:element name="Ename" type="n0:char12"/>
+      <xsd:element name="Kzfme" type="n0:char1"/>
+      <xsd:element name="Qusub" type="n0:char1"/>
+      <xsd:element name="Fhuta" type="n0:char1"/>
+      <xsd:element name="Vnest" type="n0:char1"/>
+      <xsd:element name="Vhilm" type="n0:char18"/>
+      <xsd:element name="Vdumm" type="n0:char1"/>
+      <xsd:element name="Ndumm" type="n0:char1"/>
+      <xsd:element name="Vseri" type="n0:char1"/>
+      <xsd:element name="Hupik" type="n0:char1"/>
+      <xsd:element name="Nxidv" type="n0:char20"/>
+      <xsd:element name="Nolis" type="n0:char1"/>
+      <xsd:element name="Npipo" type="n0:char1"/>
+      <xsd:element name="Pipar" type="n0:char1"/>
+      <xsd:element name="Pckpf" type="n0:char1"/>
+      <xsd:element name="Kztrm" type="n0:char1"/>
+      <xsd:element name="Passd" type="n0:char1"/>
+      <xsd:element name="Vbeln" type="n0:char10"/>
+      <xsd:element name="Kzxdk" type="n0:char1"/>
+      <xsd:element name="Kzvas" type="n0:char1"/>
+      <xsd:element name="FromInspGuid" type="n0:byte16"/>
+      <xsd:element name="ToInspGuid" type="n0:byte16"/>
+      <xsd:element name="DiffInspGuid" type="n0:byte16"/>
+      <xsd:element name="ReturnInspGuid" type="n0:byte16"/>
+      <xsd:element name="Dcnum" type="n0:numeric14"/>
+      <xsd:element name="Zrstg" type="n0:char1"/>
+      <xsd:element name="Tovas" type="n0:char1"/>
+      <xsd:element name="Kreuz" type="n0:char1"/>
+      <xsd:element name="Eidif" type="n0:char1"/>
+      <xsd:element name="Npauf" type="n0:char1"/>
+      <xsd:element name="Nmaxq" type="n0:decimal7.0"/>
+      <xsd:element name="Rpauf" type="n0:char1"/>
+      <xsd:element name="Rmaxq" type="n0:decimal7.0"/>
+      <xsd:element name="Nmaxl" type="n0:decimal5.0"/>
+      <xsd:element name="Verde" type="n0:char1"/>
+      <xsd:element name="Senau" type="n0:char1"/>
+      <xsd:element name="Xquit" type="n0:char1"/>
+      <xsd:element name="Skzvp" type="n0:char1"/>
+      <xsd:element name="Skznp" type="n0:char1"/>
+      <xsd:element name="Skzrp" type="n0:char1"/>
+      <xsd:element name="Uvtyp" type="n0:char3"/>
+      <xsd:element name="Uvpla" type="n0:char10"/>
+      <xsd:element name="Neupo" type="n0:char1"/>
+      <xsd:element name="Pquia" type="n0:char1"/>
+      <xsd:element name="Kkapv" type="n0:decimal11.3"/>
+      <xsd:element name="Dkapa" type="n0:char1"/>
+      <xsd:element name="Vptyp" type="n0:char2"/>
+      <xsd:element name="Nptyp" type="n0:char2"/>
+      <xsd:element name="Rptyp" type="n0:char2"/>
+      <xsd:element name="Stosu" type="n0:char1"/>
+      <xsd:element name="Lagkl" type="n0:char5"/>
+      <xsd:element name="Wgfkl" type="n0:numeric1"/>
+      <xsd:element name="Langu" type="n0:lang"/>
+      <xsd:element name="Wmsta" type="n0:char1"/>
+      <xsd:element name="Qstat" type="n0:char4"/>
+      <xsd:element name="Fill1" type="n0:char1"/>
+      <xsd:element name="Fill2" type="n0:char1"/>
+      <xsd:element name="Fill3" type="n0:char1"/>
+      <xsd:element name="Fill4" type="n0:char1"/>
+      <xsd:element name="Kzlei" type="n0:char1"/>
+      <xsd:element name="Splbe" type="n0:char1"/>
+      <xsd:element name="Kistz" type="n0:char1"/>
+      <xsd:element name="Kistp" type="n0:char1"/>
+      <xsd:element name="Xchar" type="n0:char1"/>
+      <xsd:element name="Xchpf" type="n0:char1"/>
+      <xsd:element name="Prlei" type="n0:char6"/>
+      <xsd:element name="Prspl" type="n0:char6"/>
+      <xsd:element name="Pooln" type="n0:char6"/>
+      <xsd:element name="Wezei" type="n0:quantum13.3"/>
+      <xsd:element name="Ruzei" type="n0:quantum13.3"/>
+      <xsd:element name="Fover" type="n0:char1"/>
+      <xsd:element name="Ochar" type="n0:char10"/>
+      <xsd:element name="Soknz" type="n0:numeric2"/>
+      <xsd:element name="Tbfor" type="n0:char1"/>
+      <xsd:element name="Spgru" type="n0:char1"/>
+      <xsd:element name="Reihf" type="n0:char6"/>
+      <xsd:element name="Lastp" type="n0:char1"/>
+      <xsd:element name="Ident" type="n0:numeric4"/>
+      <xsd:element name="Swabw" type="n0:numeric4"/>
+      <xsd:element name="Bwlvs" type="n0:numeric3"/>
+      <xsd:element name="Lgbzo" type="n0:char10"/>
+      <xsd:element name="Wezei2" type="n0:quantum13.3"/>
+      <xsd:element name="Ruzei2" type="n0:quantum13.3"/>
+      <xsd:element name="Pooln2" type="n0:char6"/>
+      <xsd:element name="Solpo2" type="n0:quantum13.3"/>
+      <xsd:element name="Zeiei2" type="n0:unit3"/>
+      <xsd:element name="Splkb" type="n0:char1"/>
+      <xsd:element name="Kznfta" type="n0:char1"/>
+      <xsd:element name="Fehlt" type="n0:char1"/>
+      <xsd:element name="Kzleq" type="n0:char1"/>
+      <xsd:element name="Nlpla2" type="n0:char10"/>
+      <xsd:element name="Nppos2" type="n0:char2"/>
+      <xsd:element name="Nlqnr2" type="n0:numeric10"/>
+      <xsd:element name="Nkdyn2" type="n0:char1"/>
+      <xsd:element name="Vkapv2" type="n0:decimal11.3"/>
+      <xsd:element name="Brgew2" type="n0:decimal11.3"/>
+      <xsd:element name="Kkapv2" type="n0:decimal11.3"/>
+      <xsd:element name="Queue" type="n0:char10"/>
+      <xsd:element name="Pvqia" type="n0:char1"/>
+      <xsd:element name="Vdifm1" type="n0:quantum13.3"/>
+      <xsd:element name="Vdifa1" type="n0:quantum13.3"/>
+      <xsd:element name="Nsolm1" type="n0:quantum13.3"/>
+      <xsd:element name="Ndifm1" type="n0:quantum13.3"/>
+      <xsd:element name="Nsola1" type="n0:quantum13.3"/>
+      <xsd:element name="Ndifa1" type="n0:quantum13.3"/>
+      <xsd:element name="Dltyp1" type="n0:char3"/>
+      <xsd:element name="Dlpla1" type="n0:char10"/>
+      <xsd:element name="Dlqnr1" type="n0:numeric10"/>
+      <xsd:element name="Dmeng1" type="n0:quantum13.3"/>
+      <xsd:element name="Dmena1" type="n0:quantum13.3"/>
+      <xsd:element name="Kzdif1" type="n0:char1"/>
+      <xsd:element name="Dlenr1" type="n0:char20"/>
+      <xsd:element name="Nwirm1" type="n0:quantum13.3"/>
+      <xsd:element name="Nlqna" type="n0:numeric10"/>
+      <xsd:element name="Magrv" type="n0:char4"/>
+      <xsd:element name="Ndnew" type="n0:char1"/>
+      <xsd:element name="Ndnoc" type="n0:char1"/>
+      <xsd:element name="Nhnew" type="n0:char1"/>
+      <xsd:element name="Nhunr" type="n0:char20"/>
+      <xsd:element name="Vhnew" type="n0:char1"/>
+      <xsd:element name="Huent" type="n0:char1"/>
+      <xsd:element name="Papos" type="n0:numeric4"/>
+      <xsd:element name="Huknn" type="n0:numeric3"/>
+      <xsd:element name="Hudum" type="n0:char20"/>
+      <xsd:element name="Brgews" type="n0:decimal11.3"/>
+      <xsd:element name="Vsolms" type="n0:quantum13.3"/>
+      <xsd:element name="Vsolas" type="n0:quantum13.3"/>
+      <xsd:element name="Vkapvs" type="n0:decimal11.3"/>
+      <xsd:element name="Solpos" type="n0:quantum13.3"/>
+      <xsd:element name="Volums" type="n0:quantum13.3"/>
+      <xsd:element name="Nsolms" type="n0:quantum13.3"/>
+      <xsd:element name="Nsolas" type="n0:quantum13.3"/>
+      <xsd:element name="Spitm" type="n0:char1"/>
+      <xsd:element name="Spiex" type="n0:char1"/>
+      <xsd:element name="Sppos" type="n0:numeric4"/>
+      <xsd:element name="Ddumm" type="n0:char1"/>
+      <xsd:element name="Lpmax" type="n0:quantum13.3"/>
+      <xsd:element name="Lpmin" type="n0:quantum13.3"/>
+      <xsd:element name="Nsmng" type="n0:quantum13.3"/>
+      <xsd:element name="Vrept" type="n0:char1"/>
+      <xsd:element name="Bwwmp" type="n0:numeric3"/>
+      <xsd:element name="Mailk" type="n0:char2"/>
+      <xsd:element name="Kzvfd" type="n0:char1"/>
+      <xsd:element name="Sptrm" type="n0:char1"/>
+      <xsd:element name="DocubatchControl" type="n0:char1"/>
+      <xsd:element name="DocubatchCharg" type="n0:char10"/>
+      <xsd:element name="DocubatchMultEntries" type="n0:char1"/>
+      <xsd:element name="DocubatchSet" type="n0:char1"/>
+      <xsd:element name="Ebeln" type="n0:char10"/>
+      <xsd:element name="Ebelp" type="n0:numeric5"/>
+      <xsd:element name="Aufnr" type="n0:char12"/>
+      <xsd:element name="Aufps" type="n0:numeric4"/>
+      <xsd:element name="ItabIndex" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapireturn">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Code" type="n0:char5"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WmgrpMsg">
+    <xsd:sequence>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Refnr" type="n0:char10"/>
+      <xsd:element name="Tbnum" type="n0:numeric10"/>
+      <xsd:element name="Tbpos" type="n0:numeric4"/>
+      <xsd:element name="Vbeln" type="n0:char10"/>
+      <xsd:element name="Posnr" type="n0:numeric6"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Msgno" type="n0:char3"/>
+      <xsd:element name="Msgid" type="n0:char20"/>
+      <xsd:element name="Msgty" type="n0:char1"/>
+      <xsd:element name="Msgtx" type="n0:char72"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmHeadRet">
+    <xsd:sequence>
+      <xsd:element name="MatDoc" type="n0:char10"/>
+      <xsd:element name="DocYear" type="n0:numeric4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsGmItem">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsGmItem"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtTrite">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSTrite"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2T">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmItemCreateT">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmItemCreate"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmSerialnumberT">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmSerialnumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PdtTLtakVb">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:LtakVb"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PdtTLtapVb">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:LtapVb"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WrfBapireturnTty">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtWmgrpMsg">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:WmgrpMsg"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofLmsTransfer">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItItem" type="tns:ZsofTtLmsGmItem"/>
+        <xsd:element minOccurs="0" name="ItTrite" type="tns:ZsofTtTrite"/>
+        <xsd:element minOccurs="0" name="IvDocDate" type="n0:date10"/>
+        <xsd:element minOccurs="0" name="IvIstwm" type="n0:quantum13.3"/>
+        <xsd:element name="IvMoveType" type="n0:char3"/>
+        <xsd:element minOccurs="0" name="IvPostngDate" type="n0:date10"/>
+        <xsd:element name="IvProcess" type="tns:numeric1"/>
+        <xsd:element minOccurs="0" name="IvRefDocNo" type="n0:char16"/>
+        <xsd:element minOccurs="0" name="IvSolex" type="n0:quantum13.3"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofLmsTransferResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtGmReturn" type="tns:Bapiret2T"/>
+        <xsd:element name="EtGoodsmvtItem" type="tns:Bapi2017GmItemCreateT"/>
+        <xsd:element name="EtGoodsmvtSerialnumber" type="tns:Bapi2017GmSerialnumberT"/>
+        <xsd:element name="EtLtak" type="tns:PdtTLtakVb"/>
+        <xsd:element name="EtLtapVb" type="tns:PdtTLtapVb"/>
+        <xsd:element name="EtReturn" type="tns:WrfBapireturnTty"/>
+        <xsd:element name="EtWmgrpMsg" type="tns:ZsofTtWmgrpMsg"/>
+        <xsd:element name="EvGoodsmvtHeadret" type="tns:Bapi2017GmHeadRet"/>
+        <xsd:element name="EvMatdocumentyear" type="n0:numeric4"/>
+        <xsd:element name="EvMaterialdocument" type="n0:char10"/>
+        <xsd:element name="EvTanum" type="n0:numeric10"/>
+        <xsd:element name="EvTeilk" type="n0:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--  Debraj Sengupta : Adding elements from ZECC_GET_ARTICLES_OF_BINS of InlineSchema2 xsd -->
+         <xsd:complexType name="ZsofSLmsBinArtExt">
+            <xsd:sequence>
+               <xsd:element name="Lgpla" type="n0:char10"/>
+               <xsd:element name="Lptyp" type="n0:char2"/>
+               <xsd:element name="Matnr" type="n0:char18"/>
+               <xsd:element name="Gesme" type="n0:quantum13.3"/>
+               <xsd:element name="UomIso" type="n0:char3"/>
+               <xsd:element name="ImWmManaged" type="n0:char2"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZsofTtLmsBinArtExt">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsBinArtExt"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetartofbin">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="IvLgnum" type="n0:char3"/>
+                  <xsd:element name="IvLgpla" type="n0:char10"/>
+                  <xsd:element name="IvWerks" type="n0:char4"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetartofbinResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EsReturn" type="tns:Bapireturn"/>
+                  <xsd:element name="EtArticles" type="tns:ZsofTtLmsBinArtExt"/>
+                  <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+<!-- Debraj Sengupta: Adding elements from SAP_ZECC_SOF_READ_BIN for InlineSchema2.xsd -->  
+<xsd:complexType name="ZsofSLmsStorageBin">
+    <xsd:sequence>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Lgpla" type="n0:char10"/>
+      <xsd:element name="Lgber" type="n0:char3"/>
+      <xsd:element name="Lptyp" type="n0:char2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsBin">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsStorageBin"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofReadBin">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="IvLgnum" type="n0:char3"/>
+        <xsd:element minOccurs="0" name="IvLgpla" type="n0:char10"/>
+        <xsd:element minOccurs="0" name="IvLgtyp" type="n0:char3"/>
+        <xsd:element minOccurs="0" name="IvLptyp" type="n0:char2"/>
+        <xsd:element minOccurs="0" name="IvValidateBin" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvWerks" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofReadBinResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtBin" type="tns:ZsofTtLmsBin"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+<!-- Debraj Sengupta: Adding elements from ZECC_LMS_ARTICLES_TO_BINS for InlineSchema2.xsd -->   
+<xsd:simpleType name="char3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+         <xsd:complexType name="ZsofSLmsArticleBinUpdExt">
+            <xsd:sequence>
+               <xsd:element name="Werks" type="n0:char4"/>
+               <xsd:element name="Lgnum" type="n0:char3"/>
+               <xsd:element name="Lgtyp" type="n0:char3"/>
+               <xsd:element name="Lgpla" type="n0:char10"/>
+               <xsd:element name="Matnr" type="n0:char18"/>
+               <xsd:element name="UomIso" type="n0:char3"/>
+               <xsd:element name="LabelType" type="n0:char2"/>
+               <xsd:element name="AssignmentType" type="n0:numeric2"/>
+               <xsd:element name="Updkz" type="n0:char1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZsofSLmsArtbinAssgnExt">
+            <xsd:sequence>
+               <xsd:element name="Werks" type="n0:char4"/>
+               <xsd:element name="Lgnum" type="n0:char3"/>
+               <xsd:element name="Lgtyp" type="n0:char3"/>
+               <xsd:element name="Lgpla" type="n0:char10"/>
+               <xsd:element name="Matnr" type="n0:char18"/>
+               <xsd:element name="UomIso" type="n0:char3"/>
+               <xsd:element name="LabelType" type="n0:char2"/>
+               <xsd:element name="AssignmentType" type="n0:numeric2"/>
+               <xsd:element name="LastModified" type="n0:decimal15.0"/>
+               <xsd:element name="LastModifiedBy" type="n0:char12"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZsofTtLmsArticleBinUpdext">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsArticleBinUpdExt"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZsofTtLmsArtbinAssgnExt">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsArtbinAssgnExt"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncArttobin">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="ItArticleBin" type="tns:ZsofTtLmsArticleBinUpdext"/>
+                  <xsd:element minOccurs="0" name="IvValidateBin" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncArttobinResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EsReturn" type="tns:Bapireturn"/>
+                  <xsd:element name="EtArticleBin" type="tns:ZsofTtLmsArtbinAssgnExt"/>
+                  <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+
+<!-- Debraj Sengupta: Adding elements from SAP_ZECC_GET_LMD_ART_BIN for InlineSchema2.xsd -->
+<xsd:complexType name="ZsofSLmsLmdArt">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="LaymodVer" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofSLmsArtLaymodQryExt">
+    <xsd:sequence>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Lgpla" type="n0:char10"/>
+      <xsd:element name="Lptyp" type="n0:char2"/>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="LaymodVer" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Gesme" type="n0:quantum13.3"/>
+      <xsd:element name="UomIso" type="n0:char3"/>
+      <xsd:element name="ImWmManaged" type="n0:char2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+   <xsd:complexType name="ZsofTtLmsLmdArt">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsLmdArt"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsArtLaymodQryExt">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsArtLaymodQryExt"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetLmdArtBin">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItLaymodArticle" type="tns:ZsofTtLmsLmdArt"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncGetLmdArtBinResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EsReturn" type="tns:Bapireturn"/>
+        <xsd:element name="EtBins" type="tns:ZsofTtLmsArtLaymodQryExt"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+<!-- Debraj Sengupta: Adding elements from SAP_ZECC_SOF_CREATE_BIN for InlineSchema2.xsd -->  
+<xsd:element ibmSchExtn:docRoot="true" name="ZSofCreateBin">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IvLgber" type="n0:char3"/>
+        <xsd:element name="IvLgnum" type="n0:char3"/>
+        <xsd:element name="IvLgpla" type="n0:char10"/>
+        <xsd:element minOccurs="0" name="IvLgplaDesc" type="n0:char50"/>
+        <xsd:element name="IvLgtyp" type="n0:char3"/>
+        <xsd:element minOccurs="0" name="IvLptyp" type="n0:char2"/>
+        <xsd:element minOccurs="0" name="IvSpras" type="n0:lang"/>
+        <xsd:element name="IvWerks" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofCreateBinResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element> 
+ <!-- Abhishek Ray: Adding elements for ZECC_LMS_LAYMODS_TO_BINS -->
+      <xsd:complexType name="ZsofSLmsLaymodBinUpd">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Lgpla" type="n0:char10"/>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="LaymodVer" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Updkz" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofSLmsLaymodBinAssgn">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Lgpla" type="n0:char10"/>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="LaymodVer" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="LastModified" type="n0:decimal15.0"/>
+      <xsd:element name="LastModifiedBy" type="n0:char12"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="ZsofTtLmsLaymodBinUpd">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsLaymodBinUpd"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsLaymodBinAssgn">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsLaymodBinAssgn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofLaymodsToBins">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItLaymodBin" type="tns:ZsofTtLmsLaymodBinUpd"/>
+        <xsd:element minOccurs="0" name="IvValidateBin" type="n0:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofLaymodsToBinsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtLaymodBin" type="tns:ZsofTtLmsLaymodBinAssgn"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- Added from ZECC_READ_BINS InlineSchema2 -->
+  <xsd:complexType name="Zws051SArticle">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char18"/>
+      <xsd:element name="High" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051SBintype">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char2"/>
+      <xsd:element name="High" type="n0:char2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051SEan">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char18"/>
+      <xsd:element name="High" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051SLmver">
+    <xsd:sequence>
+      <xsd:element name="Laymod" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Segment" type="n0:numeric10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSAssignment">
+    <xsd:sequence>
+      <xsd:element name="Warehouse" type="n0:char3"/>
+      <xsd:element name="Store" type="n0:char4"/>
+      <xsd:element name="StoreType" type="n0:char3"/>
+      <xsd:element name="Aisle" type="n0:char4"/>
+      <xsd:element name="Bay" type="n0:char2"/>
+      <xsd:element name="Bin" type="n0:char10"/>
+      <xsd:element name="BinType" type="n0:char2"/>
+      <xsd:element name="IsEmpty" type="n0:char1"/>
+      <xsd:element name="ImWmManaged" type="n0:char2"/>
+      <xsd:element name="ArticleAssgn" type="tns:ZcncTtArtAssgn"/>
+      <xsd:element name="Lmassignment" type="tns:ZCNC_TT_LM_ASSGN"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSArtAssgn">
+    <xsd:sequence>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="UomIso" type="n0:char3"/>
+      <xsd:element name="Ean" type="n0:char18"/>
+      <xsd:element name="Proddesc" type="n0:char40"/>
+      <xsd:element name="AssgnType" type="n0:numeric2"/>
+      <xsd:element name="LabelType" type="n0:char2"/>
+      <xsd:element name="Quantity" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZCNC_S_LM_ASSGN">
+    <xsd:sequence>
+      <xsd:element name="LAYMOD" type="n0:char10"/>
+      <xsd:element name="LAYMOD_VERSION" type="n0:numeric4"/>
+      <xsd:element name="SHELF" type="n0:numeric10"/>
+      <xsd:element name="LM_ARTICLE" type="tns:ZCNC_TT_LM_ARTICLE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZCNC_S_LM_ARTICLE">
+    <xsd:sequence>
+      <xsd:element name="POSITION" type="n0:numeric10"/>
+      <xsd:element name="FACING" type="n0:quantum13.3"/>
+      <xsd:element name="LABEL_TYPE" type="n0:char2"/>
+      <xsd:element name="MINIMUM" type="n0:quantum13.3"/>
+      <xsd:element name="MAXIMUM" type="n0:quantum13.3"/>
+      <xsd:element name="TARGET" type="n0:quantum13.3"/>
+      <xsd:element name="EXCLUDED" type="n0:char1"/>
+      <xsd:element name="ARTICLE" type="n0:char18"/>
+      <xsd:element name="UOM_ISO" type="n0:char3"/>
+      <xsd:element name="EAN" type="n0:char18"/>
+      <xsd:element name="PRODDESC" type="n0:char40"/>
+      <xsd:element name="ASSGN_TYPE" type="n0:numeric2"/>
+      <xsd:element name="QUANTITY" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051SLmhdr">
+    <xsd:sequence>
+      <xsd:element name="Laymod" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Description" type="n0:char40"/>
+      <xsd:element name="Dept" type="n0:char18"/>
+      <xsd:element name="SiteDateFrom" type="n0:date10"/>
+      <xsd:element name="SiteDateTo" type="n0:date10"/>
+      <xsd:element name="Type" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051TtArticle">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SArticle"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051TtBintype">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SBintype"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051TtEan">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SEan"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051TtLmver">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SLmver"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtStortypes">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtBins">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtAssignment">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSAssignment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtArtAssgn">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSArtAssgn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZCNC_TT_LM_ASSGN">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZCNC_S_LM_ASSGN"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZCNC_TT_LM_ARTICLE">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZCNC_S_LM_ARTICLE"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws051TtLmhdr">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SLmhdr"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncBinread">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="ItAislebaybin" type="tns:ZcncTtBins"/>
+        <xsd:element minOccurs="0" name="ItArticles" type="tns:Zws051TtArticle"/>
+        <xsd:element minOccurs="0" name="ItBintypes" type="tns:Zws051TtBintype"/>
+        <xsd:element minOccurs="0" name="ItEans" type="tns:Zws051TtEan"/>
+        <xsd:element minOccurs="0" name="ItLmver" type="tns:Zws051TtLmver"/>
+        <xsd:element minOccurs="0" name="ItStortypes" type="tns:ZcncTtStortypes"/>
+        <xsd:element minOccurs="0" name="IvRetassgn" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvRetlmhdr" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvRetlmseg" type="n0:char1"/>
+        <xsd:element name="IvStore" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncBinreadResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtAssignment" type="tns:ZcncTtAssignment"/>
+        <xsd:element name="EtLmhdr" type="tns:Zws051TtLmhdr"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- Added from ZECC_PROCESS_FIXED_BIN InlineSchema2 -->
+  
+         <xsd:complexType name="ZcncMlgt">
+            <xsd:sequence>
+               <xsd:element name="Matnr" type="n0:char18"/>
+               <xsd:element name="Lgnum" type="n0:char3"/>
+               <xsd:element name="Lgtyp" type="n0:char3"/>
+               <xsd:element name="Lgpla" type="n0:char10"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn1">
+            <xsd:sequence>
+               <xsd:element name="Type" type="n0:char1"/>
+               <xsd:element name="Id" type="n0:char20"/>
+               <xsd:element name="Number" type="n0:numeric3"/>
+               <xsd:element name="Message" type="n0:char220"/>
+               <xsd:element name="LogNo" type="n0:char20"/>
+               <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+               <xsd:element name="MessageV1" type="n0:char50"/>
+               <xsd:element name="MessageV2" type="n0:char50"/>
+               <xsd:element name="MessageV3" type="n0:char50"/>
+               <xsd:element name="MessageV4" type="n0:char50"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncMlgtTt">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncMlgt"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn1Tabtype">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessFixedBin2">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvArticle" type="n0:char18"/>
+                  <xsd:element name="IvFunction" type="n0:char1"/>
+                  <xsd:element name="IvSite" type="n0:char4"/>
+                  <xsd:element minOccurs="0" name="IvStorBin" type="n0:char10"/>
+                  <xsd:element minOccurs="0" name="IvStorLoc" type="n0:char4"/>
+                  <xsd:element name="IvStorType" type="n0:char3"/>
+                  <xsd:element minOccurs="0" name="IvTestMode" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessFixedBin2Response">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtDataReturn" type="tns:ZcncMlgtTt"/>
+                  <xsd:element name="EtMessageReturn" type="tns:Bapireturn1Tabtype"/>
+                  <xsd:element name="EvSuccess" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+  
+  <!-- Added from ZECC_IFORCE_CAGE_FILLUP InlineSchema2 -->
+  
+  <xsd:simpleType name="char1">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="1"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncIforceCageFillup">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="ItItem" type="tns:ZsofTtLmsGmItem"/>
+                  <xsd:element minOccurs="0" name="ItTrite" type="tns:ZsofTtTrite"/>
+                  <xsd:element minOccurs="0" name="IvDocDate" type="n0:date10"/>
+                  <xsd:element minOccurs="0" name="IvPostngDate" type="n0:date10"/>
+                  <xsd:element name="IvProcess" type="n0:numeric1"/>
+                  <xsd:element minOccurs="0" name="IvRefDocNo" type="n0:char16"/>
+                  <xsd:element minOccurs="0" name="IvSolex" type="n0:quantum13.3"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncIforceCageFillupResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtGmReturn" type="tns:Bapiret2T"/>
+                  <xsd:element name="EtGoodsmvtItem" type="tns:Bapi2017GmItemCreateT"/>
+                  <xsd:element name="EtGoodsmvtSerialnumber" type="tns:Bapi2017GmSerialnumberT"/>
+                  <xsd:element name="EtLtak" type="tns:PdtTLtakVb"/>
+                  <xsd:element name="EtLtapVb" type="tns:PdtTLtapVb"/>
+                  <xsd:element name="EtReturn" type="tns:WrfBapireturnTty"/>
+                  <xsd:element name="EtWmgrpMsg" type="tns:ZsofTtWmgrpMsg"/>
+                  <xsd:element name="EvMatdocumentyear" type="n0:numeric4"/>
+                  <xsd:element name="EvMaterialdocument" type="n0:char10"/>
+                  <xsd:element name="EvSuccess" type="tns:char1"/>
+                  <xsd:element name="EvTanum" type="n0:numeric10"/>
+                  <xsd:element name="EvTeilk" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         
+     <!-- Added from ZECC_SEND_CAGE_TO_IFORCE InlineSchema2 -->
+     
+     <xsd:complexType name="ZcncSCageId">
+    <xsd:sequence>
+      <xsd:element name="CageId" type="n0:char12"/>
+      <xsd:element name="MatDoc" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    
+  <xsd:complexType name="ZcncTtCageId">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSCageId"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="PlmtBapireturn2Tab">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncSendCageToIforce">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IvBin" type="n0:char10"/>
+        <xsd:element name="IvSite" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncSendCageToIforceResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtCageId" type="tns:ZcncTtCageId"/>
+        <xsd:element name="EtGmReturn" type="tns:Bapiret2T"/>
+        <xsd:element name="EtReturn" type="tns:PlmtBapireturn2Tab"/>
+        <xsd:element name="EtReturn1" type="tns:WrfBapireturnTty"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

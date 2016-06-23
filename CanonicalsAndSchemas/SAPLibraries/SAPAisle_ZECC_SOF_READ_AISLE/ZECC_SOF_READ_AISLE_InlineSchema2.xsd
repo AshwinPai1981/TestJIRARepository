@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_SOF_READ_AISLE_InlineSchema1.xsd"/>
+  <xsd:simpleType name="char12">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="decimal15.0">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:totalDigits value="15"/>
+      <xsd:fractionDigits value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZsofSLmsReadAisle">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="AisleNum" type="n0:char4"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Spras" type="n0:lang"/>
+      <xsd:element name="AisleDescp" type="n0:char100"/>
+      <xsd:element name="LastModified" type="tns:decimal15.0"/>
+      <xsd:element name="LastModifiedBy" type="tns:char12"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsAisleNum">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsLgnum">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MawmIntTtLgtyp">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TWerks">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsReadAisle">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsReadAisle"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2T">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofReadAisle">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="ItAisleNum" type="tns:ZsofTtLmsAisleNum"/>
+        <xsd:element minOccurs="0" name="ItLgnum" type="tns:ZsofTtLmsLgnum"/>
+        <xsd:element minOccurs="0" name="ItLgtyp" type="tns:MawmIntTtLgtyp"/>
+        <xsd:element minOccurs="0" name="ItWerks" type="tns:TWerks"/>
+        <xsd:element minOccurs="0" name="IvAisleNumCheck" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvLgnumCheck" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvLgtypCheck" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvWerksCheck" type="n0:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofReadAisleResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtAisle" type="tns:ZsofTtLmsReadAisle"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- Library Merge from ZECC_SOF_MAINTAIN_AISLE -->
+  
+  <xsd:simpleType name="char1">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZsofSLmsUpdateAisle">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+      <xsd:element name="Lgnum" type="n0:char3"/>
+      <xsd:element name="AisleNum" type="n0:char4"/>
+      <xsd:element name="Lgtyp" type="n0:char3"/>
+      <xsd:element name="Spras" type="n0:lang"/>
+      <xsd:element name="AisleDescp" type="n0:char100"/>
+      <xsd:element name="Updkz" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmsUpdateAisle">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmsUpdateAisle"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofMaintainAisle">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItAisle" type="tns:ZsofTtLmsUpdateAisle"/>
+        <xsd:element minOccurs="0" name="IvValidateAisle" type="tns:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZSofMaintainAisleResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

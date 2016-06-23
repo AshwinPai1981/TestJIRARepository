@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_PROCESS_OUTBOUND_DEL_InlineSchema1.xsd"/>
+  <xsd:simpleType name="char1">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char30">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char40">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="40"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZcncDelChange">
+    <xsd:sequence>
+      <xsd:element name="Vbeln" type="n0:char10"/>
+      <xsd:element name="Posnr" type="n0:numeric6"/>
+      <xsd:element name="Lfimg" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncLikp">
+    <xsd:sequence>
+      <xsd:element name="Delivery" type="n0:char10"/>
+      <xsd:element name="ExtDelivery" type="n0:char35"/>
+      <xsd:element name="CreateBy" type="n0:char12"/>
+      <xsd:element name="CreateDate" type="n0:date10"/>
+      <xsd:element name="CreateTime" type="n0:time"/>
+      <xsd:element name="ShipPoint" type="n0:char4"/>
+      <xsd:element name="Organisation" type="n0:char4"/>
+      <xsd:element name="ShipTo" type="n0:char10"/>
+      <xsd:element name="ShipToName" type="tns:char30"/>
+      <xsd:element name="DelType" type="n0:char4"/>
+      <xsd:element name="DelDate" type="n0:date10"/>
+      <xsd:element name="PlannedGmDate" type="n0:date10"/>
+      <xsd:element name="ActualGmDate" type="n0:date10"/>
+      <xsd:element name="Volume" type="n0:quantum15.3"/>
+      <xsd:element name="VolumeUnit" type="n0:unit3"/>
+      <xsd:element name="Weight" type="n0:quantum15.3"/>
+      <xsd:element name="WeightUnit" type="n0:unit3"/>
+      <xsd:element name="PodDate" type="n0:date10"/>
+      <xsd:element name="PosTime" type="n0:time"/>
+      <xsd:element name="RefDocument" type="n0:char10"/>
+      <xsd:element name="WmStatus" type="tns:char1"/>
+      <xsd:element name="PickStatus" type="tns:char1"/>
+      <xsd:element name="GmStatus" type="tns:char1"/>
+      <xsd:element name="ItemCount" type="n0:quantum13.3"/>
+      <xsd:element name="QtySum" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncLipsLikp">
+    <xsd:sequence>
+      <xsd:element name="Delivery" type="n0:char10"/>
+      <xsd:element name="ShipPoint" type="n0:char4"/>
+      <xsd:element name="ShipTo" type="n0:char10"/>
+      <xsd:element name="Item" type="n0:numeric6"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Ean" type="n0:char18"/>
+      <xsd:element name="Site" type="n0:char4"/>
+      <xsd:element name="StorLoc" type="n0:char4"/>
+      <xsd:element name="OrgQty" type="n0:quantum13.3"/>
+      <xsd:element name="DelQty" type="n0:quantum13.3"/>
+      <xsd:element name="BaseUnit" type="n0:unit3"/>
+      <xsd:element name="DelUnit" type="n0:unit3"/>
+      <xsd:element name="Numerator" type="n0:decimal5.0"/>
+      <xsd:element name="Volume" type="n0:quantum15.3"/>
+      <xsd:element name="VolumeUnit" type="n0:unit3"/>
+      <xsd:element name="RefDocument" type="n0:char10"/>
+      <xsd:element name="RefDocItem" type="n0:numeric6"/>
+      <xsd:element name="Description" type="tns:char40"/>
+      <xsd:element name="PickStatus" type="tns:char1"/>
+      <xsd:element name="WmStatus" type="tns:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapireturn1">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncDelChangeTt">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncDelChange"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncLikpTt">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncLikp"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncLipsLikpTt">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncLipsLikp"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapireturn1Tabtype">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessOutboundDel">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="ItDeliveryItemData" type="tns:ZcncDelChangeTt"/>
+        <xsd:element minOccurs="0" name="IvDelivery" type="n0:char10"/>
+        <xsd:element minOccurs="0" name="IvDeliveryType" type="n0:char4"/>
+        <xsd:element name="IvFunction" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvSite" type="n0:char4"/>
+        <xsd:element minOccurs="0" name="IvTestMode" type="n0:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncProcessOutboundDelResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtDeliveryHeadData" type="tns:ZcncLikpTt"/>
+        <xsd:element name="EtDeliveryItemData" type="tns:ZcncLipsLikpTt"/>
+        <xsd:element name="EtReturn" type="tns:Bapireturn1Tabtype"/>
+        <xsd:element name="EvSuccess" type="n0:char1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

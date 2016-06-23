@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="product_InlineSchema1.xsd"/>
+  <xsd:complexType name="ZcncSEanmat">
+    <xsd:sequence>
+      <xsd:element name="EanUpc" type="n0:char18"/>
+      <xsd:element name="Material" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSEanconvertOut">
+    <xsd:sequence>
+      <xsd:element name="Material" type="n0:char18"/>
+      <xsd:element name="MatlType" type="n0:char4"/>
+      <xsd:element name="IndSector" type="n0:char1"/>
+      <xsd:element name="Division" type="n0:char2"/>
+      <xsd:element name="Materialdescription" type="tns:MatBapiMaktGa"/>
+      <xsd:element name="EanData" type="tns:ZcncTtEanmatMean"/>
+      <xsd:element name="UomData" type="tns:ZcncTtEanmatMarm"/>
+      <xsd:element name="MatlGroup" type="n0:char9"/>
+      <xsd:element name="ZzColour" type="n0:char20"/>
+      <xsd:element name="ZzDisposal" type="n0:char2"/>
+      <xsd:element name="Clientdata" type="tns:MaraGa"/>
+      <xsd:element name="MaraAppend" type="tns:ZrmdSCustomMaraAppend"/>
+      <xsd:element name="Internationalartnos" type="tns:MatBapiMeanGa"/>
+      <xsd:element name="Materiallongtext" type="tns:ZcncTtBapiMltxGa"/>
+      <xsd:element name="Return" type="tns:WrfBapireturnTty"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MaktGa">
+    <xsd:sequence>
+      <xsd:element name="Langu" type="n0:lang"/>
+      <xsd:element name="LanguIso" type="n0:char2"/>
+      <xsd:element name="MatlDesc" type="n0:char40"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSMean">
+    <xsd:sequence>
+      <xsd:element name="EanUpc" type="n0:char18"/>
+      <xsd:element name="Unit" type="n0:unit3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSMarm">
+    <xsd:sequence>
+      <xsd:element name="Unit" type="n0:unit3"/>
+      <xsd:element name="Numerator" type="n0:decimal5.0"/>
+      <xsd:element name="UnitOfWt" type="n0:unit3"/>
+      <xsd:element name="GrossWt" type="n0:quantum13.3"/>
+      <xsd:element name="Volumeunit" type="n0:unit3"/>
+      <xsd:element name="Volume" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MaraGa">
+    <xsd:sequence>
+      <xsd:element name="Material" type="n0:char18"/>
+      <xsd:element name="IndSector" type="n0:char1"/>
+      <xsd:element name="MatlType" type="n0:char4"/>
+      <xsd:element name="CreatedOn" type="n0:date10"/>
+      <xsd:element name="CreatedBy" type="n0:char12"/>
+      <xsd:element name="LastChnge" type="n0:date10"/>
+      <xsd:element name="ChangedBy" type="n0:char12"/>
+      <xsd:element name="MatStatus" type="n0:char15"/>
+      <xsd:element name="MaintStat" type="n0:char15"/>
+      <xsd:element name="DelFlag" type="n0:char1"/>
+      <xsd:element name="MatlGroup" type="n0:char9"/>
+      <xsd:element name="OldMatNo" type="n0:char18"/>
+      <xsd:element name="BaseUom" type="n0:unit3"/>
+      <xsd:element name="BaseUomIso" type="n0:char3"/>
+      <xsd:element name="PoUnit" type="n0:unit3"/>
+      <xsd:element name="PoUnitIso" type="n0:char3"/>
+      <xsd:element name="Document" type="n0:char22"/>
+      <xsd:element name="DocType" type="n0:char3"/>
+      <xsd:element name="DocVers" type="n0:char2"/>
+      <xsd:element name="DocFormat" type="n0:char4"/>
+      <xsd:element name="DocChgNo" type="n0:char6"/>
+      <xsd:element name="PageNo" type="n0:char3"/>
+      <xsd:element name="NoSheets" type="n0:numeric3"/>
+      <xsd:element name="ProdMemo" type="n0:char18"/>
+      <xsd:element name="Pageformat" type="n0:char4"/>
+      <xsd:element name="SizeDim" type="n0:char32"/>
+      <xsd:element name="BasicMatl" type="n0:char48"/>
+      <xsd:element name="StdDescr" type="n0:char18"/>
+      <xsd:element name="DsnOffice" type="n0:char3"/>
+      <xsd:element name="PurValkey" type="n0:char4"/>
+      <xsd:element name="NetWeight" type="n0:quantum13.3"/>
+      <xsd:element name="UnitOfWt" type="n0:unit3"/>
+      <xsd:element name="UnitOfWtIso" type="n0:char3"/>
+      <xsd:element name="Container" type="n0:char2"/>
+      <xsd:element name="StorConds" type="n0:char2"/>
+      <xsd:element name="TempConds" type="n0:char2"/>
+      <xsd:element name="TransGrp" type="n0:char4"/>
+      <xsd:element name="HazMatNo" type="n0:char18"/>
+      <xsd:element name="Division" type="n0:char2"/>
+      <xsd:element name="Competitor" type="n0:char10"/>
+      <xsd:element name="QtyGrGi" type="n0:quantum13.3"/>
+      <xsd:element name="ProcRule" type="n0:char1"/>
+      <xsd:element name="SupSource" type="n0:char1"/>
+      <xsd:element name="Season" type="n0:char4"/>
+      <xsd:element name="LabelType" type="n0:char2"/>
+      <xsd:element name="LabelForm" type="n0:char2"/>
+      <xsd:element name="ProdHier" type="n0:char18"/>
+      <xsd:element name="CadId" type="n0:char1"/>
+      <xsd:element name="AllowedWt" type="n0:quantum13.3"/>
+      <xsd:element name="PackWtUn" type="n0:unit3"/>
+      <xsd:element name="PackWtUnIso" type="n0:char3"/>
+      <xsd:element name="AllwdVol" type="n0:quantum13.3"/>
+      <xsd:element name="PackVoUn" type="n0:unit3"/>
+      <xsd:element name="PackVoUnIso" type="n0:char3"/>
+      <xsd:element name="WtTolLt" type="n0:decimal3.1"/>
+      <xsd:element name="VolTolLt" type="n0:decimal3.1"/>
+      <xsd:element name="VarOrdUn" type="n0:char1"/>
+      <xsd:element name="Configured" type="n0:char1"/>
+      <xsd:element name="BatchMgmt" type="n0:char1"/>
+      <xsd:element name="ShMatTyp" type="n0:char4"/>
+      <xsd:element name="FillLevel" type="n0:decimal3.0"/>
+      <xsd:element name="StackFact" type="xsd:short"/>
+      <xsd:element name="MatGrpSm" type="n0:char4"/>
+      <xsd:element name="Authoritygroup" type="n0:char4"/>
+      <xsd:element name="QmProcmnt" type="n0:char1"/>
+      <xsd:element name="Catprofile" type="n0:char9"/>
+      <xsd:element name="Minremlife" type="n0:decimal4.0"/>
+      <xsd:element name="ShelfLife" type="n0:decimal4.0"/>
+      <xsd:element name="StorPct" type="n0:decimal3.0"/>
+      <xsd:element name="ConfMatl" type="n0:char18"/>
+      <xsd:element name="CoProduct" type="n0:char1"/>
+      <xsd:element name="PrRefMat" type="n0:char18"/>
+      <xsd:element name="PurStatus" type="n0:char2"/>
+      <xsd:element name="SalStatus" type="n0:char2"/>
+      <xsd:element name="Pvalidfrom" type="n0:date10"/>
+      <xsd:element name="Svalidfrom" type="n0:date10"/>
+      <xsd:element name="EnvtRlvt" type="n0:char1"/>
+      <xsd:element name="ProdAlloc" type="n0:char18"/>
+      <xsd:element name="QualDik" type="n0:char1"/>
+      <xsd:element name="ManuMat" type="n0:char40"/>
+      <xsd:element name="MfrNo" type="n0:char10"/>
+      <xsd:element name="InvMatNo" type="n0:char18"/>
+      <xsd:element name="ManufProf" type="n0:char4"/>
+      <xsd:element name="Hazmatprof" type="n0:char3"/>
+      <xsd:element name="HighVisc" type="n0:char1"/>
+      <xsd:element name="Looseorliq" type="n0:char1"/>
+      <xsd:element name="ClosedBox" type="n0:char1"/>
+      <xsd:element name="AppdBRec" type="n0:char1"/>
+      <xsd:element name="Matcmpllvl" type="n0:numeric2"/>
+      <xsd:element name="ParEff" type="n0:char1"/>
+      <xsd:element name="RoundUpRuleExpirationDate" type="n0:char1"/>
+      <xsd:element name="PeriodIndExpirationDate" type="n0:char1"/>
+      <xsd:element name="ProdCompositionOnPackaging" type="n0:char1"/>
+      <xsd:element name="ItemCat" type="n0:char4"/>
+      <xsd:element name="HazMatNoExternal" type="n0:char40"/>
+      <xsd:element name="HazMatNoGuid" type="n0:char32"/>
+      <xsd:element name="HazMatNoVersion" type="n0:char10"/>
+      <xsd:element name="InvMatNoExternal" type="n0:char40"/>
+      <xsd:element name="InvMatNoGuid" type="n0:char32"/>
+      <xsd:element name="InvMatNoVersion" type="n0:char10"/>
+      <xsd:element name="MaterialFixed" type="n0:char1"/>
+      <xsd:element name="CmRelevanceFlag" type="n0:char1"/>
+      <xsd:element name="SledBbd" type="n0:char1"/>
+      <xsd:element name="GtinVariant" type="n0:char2"/>
+      <xsd:element name="SerializationLevel" type="n0:char1"/>
+      <xsd:element name="PlRefMat" type="n0:char18"/>
+      <xsd:element name="Extmatlgrp" type="n0:char18"/>
+      <xsd:element name="Uomusage" type="n0:char1"/>
+      <xsd:element name="GdsRelevant" type="n0:char1"/>
+      <xsd:element name="MaterialExternal" type="n0:char40"/>
+      <xsd:element name="MaterialGuid" type="n0:char32"/>
+      <xsd:element name="MaterialVersion" type="n0:char10"/>
+      <xsd:element name="ConfMatlExternal" type="n0:char40"/>
+      <xsd:element name="ConfMatlGuid" type="n0:char32"/>
+      <xsd:element name="ConfMatlVersion" type="n0:char10"/>
+      <xsd:element name="PlRefMatExternal" type="n0:char40"/>
+      <xsd:element name="PlRefMatGuid" type="n0:char32"/>
+      <xsd:element name="PlRefMatVersion" type="n0:char10"/>
+      <xsd:element name="PrRefMatExternal" type="n0:char40"/>
+      <xsd:element name="PrRefMatGuid" type="n0:char32"/>
+      <xsd:element name="PrRefMatVersion" type="n0:char10"/>
+      <xsd:element name="WeOriginAcceptance" type="n0:char1"/>
+      <xsd:element name="StdHuType" type="n0:char4"/>
+      <xsd:element name="Pilferable" type="n0:char1"/>
+      <xsd:element name="WhseStorageCondition" type="n0:char2"/>
+      <xsd:element name="WhseMaterialGroup" type="n0:char4"/>
+      <xsd:element name="HandlingIndicator" type="n0:char4"/>
+      <xsd:element name="HazMatRelevant" type="n0:char1"/>
+      <xsd:element name="HuType" type="n0:char4"/>
+      <xsd:element name="VariableTareWeight" type="n0:char1"/>
+      <xsd:element name="MaxAllowedCapacity" type="n0:decimal15.3"/>
+      <xsd:element name="OvercapacityTolerance" type="n0:decimal3.1"/>
+      <xsd:element name="MaxAllowedLength" type="n0:quantum15.3"/>
+      <xsd:element name="MaxAllowedWidth" type="n0:quantum15.3"/>
+      <xsd:element name="MaxAllowedHeigth" type="n0:quantum15.3"/>
+      <xsd:element name="MaxDimensionUn" type="n0:unit3"/>
+      <xsd:element name="MaxDimensionUnIso" type="n0:char3"/>
+      <xsd:element name="Countryori" type="n0:char3"/>
+      <xsd:element name="CountryoriIso" type="n0:char2"/>
+      <xsd:element name="Matfrgtgrp" type="n0:char8"/>
+      <xsd:element name="QuarantinePeriod" type="n0:quantum3.0"/>
+      <xsd:element name="QuarantinePeriodUn" type="n0:unit3"/>
+      <xsd:element name="QuarantinePeriodUnIso" type="n0:char3"/>
+      <xsd:element name="QualityInspGrp" type="n0:char4"/>
+      <xsd:element name="SerialNumberProfile" type="n0:char4"/>
+      <xsd:element name="EwmCwRelevant" type="n0:char1"/>
+      <xsd:element name="EwmCwLogisticalUnit" type="n0:unit3"/>
+      <xsd:element name="EwmCwLogisticalUnitIso" type="n0:char3"/>
+      <xsd:element name="EwmCwToleranceGroup" type="n0:char9"/>
+      <xsd:element name="EwmCwInputControl" type="n0:char2"/>
+      <xsd:element name="Pacod" type="n0:char10"/>
+      <xsd:element name="DgPckgingStatus" type="n0:char10"/>
+      <xsd:element name="AdjustProfile" type="n0:char3"/>
+      <xsd:element name="Ipmipproduct" type="n0:char40"/>
+      <xsd:element name="Medium" type="n0:char6"/>
+      <xsd:element name="Nsnid" type="n0:char9"/>
+      <xsd:element name="PhysicalCommodity" type="n0:char18"/>
+      <xsd:element name="SegmentationStructure" type="n0:char4"/>
+      <xsd:element name="SegmentationStrategy" type="n0:char8"/>
+      <xsd:element name="SegmentationRelevance" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZrmdSCustomMaraAppend">
+    <xsd:sequence>
+      <xsd:element name="ZzColour" type="n0:char20"/>
+      <xsd:element name="ZzSize" type="n0:char20"/>
+      <xsd:element name="ZzHazmat" type="n0:char10"/>
+      <xsd:element name="ZzHandling" type="n0:char2"/>
+      <xsd:element name="ZzDisposal" type="n0:char2"/>
+      <xsd:element name="ZzQastatus" type="n0:char1"/>
+      <xsd:element name="ZzTimber" type="n0:char1"/>
+      <xsd:element name="ZzVocLevel" type="n0:char3"/>
+      <xsd:element name="ZzCoshhInd" type="n0:char1"/>
+      <xsd:element name="ZzChipsInd" type="n0:char1"/>
+      <xsd:element name="ZzEmark" type="n0:char1"/>
+      <xsd:element name="ZzInstallCert" type="n0:char1"/>
+      <xsd:element name="ZzFragileInd" type="n0:char1"/>
+      <xsd:element name="ZzDescriptCheck" type="n0:char1"/>
+      <xsd:element name="ZzBarcodeCheck" type="n0:char1"/>
+      <xsd:element name="ZzReinstate" type="n0:char1"/>
+      <xsd:element name="ZzHandlingCat" type="n0:char3"/>
+      <xsd:element name="ZzCustodyChain" type="n0:char1"/>
+      <xsd:element name="ZzCustodyCert" type="n0:char20"/>
+      <xsd:element name="ZzDealType" type="n0:char3"/>
+      <xsd:element name="ZzChnValidFrm" type="n0:date10"/>
+      <xsd:element name="ZzChnValidTo" type="n0:date10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MeanGa">
+    <xsd:sequence>
+      <xsd:element name="Unit" type="n0:unit3"/>
+      <xsd:element name="UnitIso" type="n0:char3"/>
+      <xsd:element name="EanUpc" type="n0:char18"/>
+      <xsd:element name="EanCat" type="n0:char2"/>
+      <xsd:element name="MainEan" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MltxGa">
+    <xsd:sequence>
+      <xsd:element name="Applobject" type="n0:char10"/>
+      <xsd:element name="TextName" type="n0:char70"/>
+      <xsd:element name="TextId" type="n0:char4"/>
+      <xsd:element name="Langu" type="n0:lang"/>
+      <xsd:element name="LanguIso" type="n0:char2"/>
+      <xsd:element name="FormatCol" type="n0:char2"/>
+      <xsd:element name="TextLine" type="n0:char132"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapireturn">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Code" type="n0:char5"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtEanmat">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSEanmat"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtEanmatOut">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSEanconvertOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MatBapiMaktGa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:MaktGa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtEanmatMean">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSMean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtEanmatMarm">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSMarm"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MatBapiMeanGa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:MeanGa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtBapiMltxGa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:MltxGa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WrfBapireturnTty">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncMaterialByEan">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItEanmat" type="tns:ZcncTtEanmat"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncMaterialByEanResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtMaterial" type="tns:ZcncTtEanmatOut"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- Adding elements from ZECC_INVENTORY_VISIBILITY -->
+  
+  <xsd:complexType name="ZcncSInvvisOut">
+    <xsd:sequence>
+      <xsd:element name="Client" type="n0:clnt3"/>
+      <xsd:element name="Location" type="n0:char4"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Unprsalesqty" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtInvqueryArticles">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtInvvisOut">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSInvvisOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtBapireturn">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncInventoryQuery">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="ItArticles" type="tns:ZcncTtInvqueryArticles"/>
+        <xsd:element minOccurs="0" name="IvClient" type="n0:clnt3"/>
+        <xsd:element name="IvLocation" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncInventoryQueryResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtResults" type="tns:ZcncTtInvvisOut"/>
+        <xsd:element name="EtReturn" type="tns:ZcncTtBapireturn"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element ibmSchExtn:docRoot="true" name="ZcncArticleEnquiryResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EsArtMain" type="tns:ZcncVArtMain"/>
+        <xsd:element name="EsSalesPrice" type="tns:ZcncSalesPrice"/>
+        <xsd:element name="EtArtUom" type="tns:ZcncTtMarm"/>
+        <xsd:element name="EtError" type="tns:WrfBapireturnTty"/>
+        <xsd:element name="EtInvMain" type="tns:ZcncTtInvMain"/>
+        <xsd:element name="IrStorage" type="tns:TableOfZcncRangeLgortD"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element ibmSchExtn:docRoot="true" name="ZcncArticleEnquiry">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IrStorage" type="tns:TableOfZcncRangeLgortD"/>
+        <xsd:element minOccurs="0" name="IvArticle" type="n0:char18"/>
+        <xsd:element name="IvDistch" type="n0:char2"/>
+        <xsd:element minOccurs="0" name="IvGtin" type="n0:char18"/>
+        <xsd:element minOccurs="0" name="IvInvenInd" type="n0:char1"/>
+        <xsd:element name="IvLanguage" type="n0:lang"/>
+        <xsd:element minOccurs="0" name="IvPriceInd" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvSite" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:complexType name="ZcncTtInvMain">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncInvMain"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ZcncTtMarm">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncArtUom"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+    <xsd:complexType name="TableOfZcncRangeLgortD">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncRangeLgortD"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ZcncVArtMain">
+    <xsd:sequence>
+      <xsd:element name="Mandt" type="n0:clnt3"/>
+      <xsd:element name="Gtin" type="n0:char18"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Site" type="n0:char4"/>
+      <xsd:element name="Distch" type="n0:char2"/>
+      <xsd:element name="Description" type="n0:char40"/>
+      <xsd:element name="Language" type="n0:lang"/>
+      <xsd:element name="ArtType" type="n0:char4"/>
+      <xsd:element name="BaseUnit" type="n0:unit3"/>
+      <xsd:element name="SalesUnit" type="tns:unit3"/>
+      <xsd:element name="GenOrdUnit" type="tns:unit3"/>
+      <xsd:element name="PirOrdUnit" type="n0:unit3"/>
+      <xsd:element name="ColourTxt" type="n0:char20"/>
+      <xsd:element name="SizeTxt" type="n0:char20"/>
+      <xsd:element name="Source" type="n0:char1"/>
+      <xsd:element name="PdtInt" type="n0:decimal3.0"/>
+      <xsd:element name="PdtExt" type="n0:decimal3.0"/>
+      <xsd:element name="Vendor" type="n0:char10"/>
+      <xsd:element name="VendorName" type="n0:char35"/>
+      <xsd:element name="SubRange" type="n0:char6"/>
+      <xsd:element name="ReturnInd" type="n0:char2"/>
+      <xsd:element name="Map" type="n0:curr11.2"/>
+      <xsd:element name="MapCurr" type="n0:char3"/>
+      <xsd:element name="NetCost" type="n0:curr11.2"/>
+      <xsd:element name="CostCurr" type="n0:cuky5"/>
+      <xsd:element name="OverallStatus" type="n0:char2"/>
+      <xsd:element name="DistchStatus" type="n0:char2"/>
+      <xsd:element name="SiteStatus" type="n0:char2"/>
+      <xsd:element name="FolupArticle" type="n0:char30"/>
+      <xsd:element name="FolupFrom" type="n0:date10"/>
+      <xsd:element name="FolupTo" type="n0:date10"/>
+      <xsd:element name="OriginalArticle" type="tns:char30"/>
+      <xsd:element name="OriginalFrom" type="tns:date10"/>
+      <xsd:element name="OriginalTo" type="tns:date10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ZcncInvMain">
+    <xsd:sequence>
+      <xsd:element name="Mandt" type="n0:clnt3"/>
+      <xsd:element name="Gtin" type="n0:char18"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Uom" type="n0:unit3"/>
+      <xsd:element name="Site" type="n0:char4"/>
+      <xsd:element name="StorLocation" type="n0:char4"/>
+      <xsd:element name="SlDescription" type="n0:char16"/>
+      <xsd:element name="Companycode" type="tns:char4"/>
+      <xsd:element name="Purchaseorganisationcode" type="tns:char4"/>
+      <xsd:element name="Purchasinggroupcode" type="tns:char3"/>
+      <xsd:element name="TotalQty" type="n0:quantum21.3"/>
+      <xsd:element name="TotalOwn" type="n0:quantum17.3"/>
+      <xsd:element name="TotalCons" type="n0:quantum16.3"/>
+      <xsd:element name="Unrestricted" type="n0:quantum13.3"/>
+      <xsd:element name="Quality" type="n0:quantum13.3"/>
+      <xsd:element name="Blocked" type="n0:quantum13.3"/>
+      <xsd:element name="Returns" type="n0:quantum13.3"/>
+      <xsd:element name="Restricted" type="n0:quantum13.3"/>
+      <xsd:element name="ConsUnrestricted" type="n0:quantum13.3"/>
+      <xsd:element name="ConsQuality" type="n0:quantum13.3"/>
+      <xsd:element name="ConsBlocked" type="n0:quantum13.3"/>
+      <xsd:element name="ConsRestricted" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ZcncArtUom">
+    <xsd:sequence>
+      <xsd:element name="Mandt" type="n0:clnt3"/>
+      <xsd:element name="Gtin" type="n0:char18"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Uom" type="n0:unit3"/>
+      <xsd:element name="Numerator" type="n0:decimal5.0"/>
+      <xsd:element name="Denominator" type="n0:decimal5.0"/>
+      <xsd:element name="Length" type="n0:quantum13.3"/>
+      <xsd:element name="Width" type="n0:quantum13.3"/>
+      <xsd:element name="Height" type="n0:quantum13.3"/>
+      <xsd:element name="UnitDim" type="n0:unit3"/>
+      <xsd:element name="Volume" type="n0:quantum13.3"/>
+      <xsd:element name="UnitVol" type="n0:unit3"/>
+      <xsd:element name="Weight" type="n0:quantum13.3"/>
+      <xsd:element name="UnitWei" type="n0:unit3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+    <xsd:complexType name="ZcncSalesPrice">
+    <xsd:sequence>
+      <xsd:element name="Ean11" type="n0:char18"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Werks" type="tns:Werks"/>
+      <xsd:element name="Vtweg" type="n0:char2"/>
+      <xsd:element name="Vksch" type="n0:char4"/>
+      <xsd:element name="Vbetr" type="n0:curr11.2"/>
+      <xsd:element name="Vwaer" type="n0:cuky5"/>
+      <xsd:element name="VmeinIso" type="n0:unit3"/>
+      <xsd:element name="Aksch" type="n0:char4"/>
+      <xsd:element name="Abetr" type="n0:curr11.2"/>
+      <xsd:element name="Awaer" type="n0:cuky5"/>
+      <xsd:element name="AmeinIso" type="n0:unit3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="Werks">
+    <xsd:sequence>
+      <xsd:element name="Werks" type="n0:char4"/>
+    </xsd:sequence>
+   </xsd:complexType> 
+   
+   <xsd:complexType name="ZcncRangeLgortD">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="tns:char2"/>
+      <xsd:element name="Low" type="n0:char18"/>
+      <xsd:element name="High" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+   <xsd:simpleType name="char2">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="char4">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="4"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+   <xsd:simpleType name="char30">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="date10">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10"/>
+      <xsd:pattern value="\d\d\d\d-\d\d-\d\d"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="unit3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="char3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="char18">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="18"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZcncTtInvqueryEans">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+</xsd:schema>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <!--  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_FORM_GET_PRINTERS_InlineSchema1.xsd"/>
+         <xsd:complexType name="ZcncPrinters">
+            <xsd:sequence>
+               <xsd:element name="OutputDevice" type="n0:char4"/>
+               <xsd:element name="Organisation" type="n0:char4"/>
+               <xsd:element name="Site" type="n0:char4"/>
+               <xsd:element name="PrintZone" type="n0:char2"/>
+               <xsd:element name="ZoneDescription" type="n0:char40"/>
+               <xsd:element name="DefaultDevice" type="n0:char1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncPrintersT">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncPrinters"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncFormGetPrinters">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvPrintZone" type="n0:char2"/>
+                  <xsd:element name="IvSite" type="n0:char4"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncFormGetPrintersResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtPrinters" type="tns:ZcncPrintersT"/>
+                  <xsd:element name="EvSuccess" type="n0:char1"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>-->
+      </xsd:schema>

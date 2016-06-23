@@ -1,0 +1,101 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+PATH com.kingfisher.gha.common;
+
+
+CREATE COMPUTE MODULE CreateJSONRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		DECLARE oRef 	   		 REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRef_Class 		 REFERENCE TO oRef.Class;
+		DECLARE oRef_prop 		 REFERENCE TO oRef.properties;
+		DECLARE oRef_aisleNumber REFERENCE TO oRef_prop.aisleNumber;
+		DECLARE oRef_baySeq		 REFERENCE TO oRef_prop.baySequence;
+		DECLARE aisle			 CHARACTER '';
+		DECLARE baySeq 			 CHARACTER '';
+		DECLARE aisleCount       INTEGER 1;
+		DECLARE bayCount		 INTEGER 1;
+		DECLARE TEMP             INTEGER 0; 
+			 		
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		CREATE FIELD oRef.Class AS oRef_Class IDENTITY (JSON.Array)Class;
+		CREATE FIELD oRef.properties  AS oRef_prop;
+		SET oRef_Class.Item[1] VALUE = 'BayRequest';
+		SET oRef_prop.storeCode = Environment.QueryString.storeCode;
+		
+		-- single aisle and bay
+		IF COALESCE(Environment.Store.bay,'')<>'' THEN
+			CREATE FIELD oRef_prop.aisleNumber AS oRef_aisleNumber IDENTITY (JSON.Array)aisleNumber;
+			CREATE FIELD oRef_prop.baySequence AS oRef_baySeq	IDENTITY (JSON.Array)baySequence;
+			SET aisle  = LEFT(Environment.Store.bay,4);
+			SET baySeq = RIGHT(Environment.Store.bay,2);
+			SET oRef_aisleNumber.Item[1] VALUE = aisle;
+			SET oRef_baySeq.Item[1] VALUE = baySeq;
+		END IF;	  
+			
+		IF COALESCE(Environment.QueryString.aisleNumber,'')<>'' OR COALESCE(Environment.QueryString.bayNumber,'')<>'' THEN
+			-- multiple aisles in query parameters
+			IF COALESCE(Environment.QueryString.aisleNumber,'')<>'' AND COALESCE(Environment.QueryString.bayNumber,'')= '' THEN
+				CREATE FIELD oRef_prop.aisleNumber AS oRef_aisleNumber IDENTITY (JSON.Array)aisleNumber;
+				SET TEMP = PROC_SplitByDelimiter(Environment.QueryString.aisleNumber, ',' , 'AISLE', Environment);
+				FOR aisle AS Environment.AISLE.ArrayOfSubString[] DO
+					SET oRef_aisleNumber.Item[aisleCount] VALUE = aisle;
+					SET aisleCount = aisleCount + 1;
+				END FOR;	
+				
+			END IF;
+			
+			--multiple bays in query parameters
+			IF COALESCE(Environment.QueryString.aisleNumber,'')='' AND COALESCE(Environment.QueryString.bayNumber,'')<> '' THEN
+				CREATE FIELD oRef_prop.aisleNumber AS oRef_aisleNumber IDENTITY (JSON.Array)aisleNumber;
+				CREATE FIELD oRef_prop.baySequence AS oRef_baySeq	IDENTITY (JSON.Array)baySequence;
+				SET TEMP = PROC_SplitByDelimiter(Environment.QueryString.bayNumber, ',' , 'BAY', Environment);
+				FOR bay AS Environment.BAY.ArrayOfSubString[] DO
+					SET aisle  = LEFT(bay,4);
+					SET baySeq = RIGHT(bay,2);
+					IF COALESCE(Environment.TempAisle.{aisle},'') = '' THEN
+						SET Environment.TempAisle.{aisle} = aisle;
+						SET oRef_aisleNumber.Item[aisleCount] VALUE = aisle;
+						SET aisleCount = aisleCount + 1;
+					END IF;
+					
+					IF COALESCE(Environment.TempBay.{baySeq},'') = '' THEN
+						SET Environment.TempBay.{baySeq} = baySeq;
+						SET oRef_baySeq.Item[bayCount] VALUE = baySeq;
+						SET bayCount = bayCount + 1;
+					END IF;	  
+				END FOR;
+			END IF;	
+		END IF;	
+		
+		-- deleting unused environments
+		SET Environment.TempAisle 	= NULL;
+		SET Environment.TempBay   	= NULL;
+		SET Environment.AISLE       = NULL;
+		SET Environment.BAY			= NULL;
+		
+		SET OutputLocalEnvironment 	= InputLocalEnvironment;
+		RETURN TRUE;
+	END;
+
+	/*CREATE FUNCTION PROC_SplitByDelimiter(IN CH_Parameter CHARACTER, IN CH_DELIMINITER CHARACTER, IN CH_Type CHARACTER) 
+      BEGIN
+            DECLARE IN_Position INTEGER;
+            DECLARE IN_Index    INTEGER 1;
+            
+            WHILE LENGTH(CH_Parameter) > 0 DO
+                  SET IN_Position    = POSITION(CH_DELIMINITER IN CH_Parameter);
+                  IF IN_Position <= 0 THEN
+                        SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(CH_Parameter);
+                        SET CH_Parameter  = NULL;
+                  ELSE
+                        SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(SUBSTRING(CH_Parameter FROM 1 FOR IN_Position - 1));
+                        SET CH_Parameter  = TRIM(SUBSTRING(CH_Parameter FROM IN_Position + 1));
+                        SET IN_Index = IN_Index + 1;
+                  END IF;
+            END WHILE;
+      END;*/
+END MODULE;

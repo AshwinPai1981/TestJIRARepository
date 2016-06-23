@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_GOODSMVT_GETITEMS_InlineSchema1.xsd"/> -->
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="../SAPGoodsMovement_ZECC_GOODSMVT_CREATE/ZECC_GOODSMVT_CREATE_InlineSchema1.xsd"/>
+  
+  <!-- Debraj Sengupta : Commented out the whole fields . Because same fields can not present under same schema in different xsd.  -->
+  <!-- 
+  <xsd:complexType name="Bapi2017GmBatchRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmHead02">
+    <xsd:sequence>
+      <xsd:element name="MatDoc" type="n0:char10"/>
+      <xsd:element name="DocYear" type="n0:numeric4"/>
+      <xsd:element name="TrEvType" type="n0:char2"/>
+      <xsd:element name="DocDate" type="n0:date10"/>
+      <xsd:element name="PstngDate" type="n0:date10"/>
+      <xsd:element name="EntryDate" type="n0:date10"/>
+      <xsd:element name="EntryTime" type="n0:time"/>
+      <xsd:element name="Username" type="n0:char12"/>
+      <xsd:element name="VerGrGiSlip" type="n0:char1"/>
+      <xsd:element name="ExpimpNo" type="n0:char10"/>
+      <xsd:element name="RefDocNo" type="n0:char16"/>
+      <xsd:element name="HeaderTxt" type="n0:char25"/>
+      <xsd:element name="RefDocNoLong" type="n0:char35"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmItemShow">
+    <xsd:sequence>
+      <xsd:element name="MatDoc" type="n0:char10"/>
+      <xsd:element name="DocYear" type="n0:numeric4"/>
+      <xsd:element name="MatdocItm" type="n0:numeric4"/>
+      <xsd:element name="Material" type="n0:char18"/>
+      <xsd:element name="Plant" type="n0:char4"/>
+      <xsd:element name="StgeLoc" type="n0:char4"/>
+      <xsd:element name="Batch" type="n0:char10"/>
+      <xsd:element name="MoveType" type="n0:char3"/>
+      <xsd:element name="StckType" type="n0:char1"/>
+      <xsd:element name="SpecStock" type="n0:char1"/>
+      <xsd:element name="Vendor" type="n0:char10"/>
+      <xsd:element name="Customer" type="n0:char10"/>
+      <xsd:element name="SalesOrd" type="n0:char10"/>
+      <xsd:element name="SOrdItem" type="n0:numeric6"/>
+      <xsd:element name="SchedLine" type="n0:numeric4"/>
+      <xsd:element name="ValType" type="n0:char10"/>
+      <xsd:element name="EntryQnt" type="n0:quantum13.3"/>
+      <xsd:element name="EntryUom" type="n0:unit3"/>
+      <xsd:element name="EntryUomIso" type="n0:char3"/>
+      <xsd:element name="PoPrQnt" type="n0:quantum13.3"/>
+      <xsd:element name="OrderprUn" type="n0:unit3"/>
+      <xsd:element name="OrderprUnIso" type="n0:char3"/>
+      <xsd:element name="PoNumber" type="n0:char10"/>
+      <xsd:element name="PoItem" type="n0:numeric5"/>
+      <xsd:element name="Shipping" type="n0:char2"/>
+      <xsd:element name="CompShip" type="n0:char2"/>
+      <xsd:element name="NoMoreGr" type="n0:char1"/>
+      <xsd:element name="ItemText" type="n0:char50"/>
+      <xsd:element name="GrRcpt" type="n0:char12"/>
+      <xsd:element name="UnloadPt" type="n0:char25"/>
+      <xsd:element name="Costcenter" type="n0:char10"/>
+      <xsd:element name="Orderid" type="n0:char12"/>
+      <xsd:element name="OrderItno" type="n0:numeric4"/>
+      <xsd:element name="CalcMotive" type="n0:char2"/>
+      <xsd:element name="AssetNo" type="n0:char12"/>
+      <xsd:element name="SubNumber" type="n0:char4"/>
+      <xsd:element name="ReservNo" type="n0:numeric10"/>
+      <xsd:element name="ResItem" type="n0:numeric4"/>
+      <xsd:element name="ResType" type="n0:char1"/>
+      <xsd:element name="Withdrawn" type="n0:char1"/>
+      <xsd:element name="MoveMat" type="n0:char18"/>
+      <xsd:element name="MovePlant" type="n0:char4"/>
+      <xsd:element name="MoveStloc" type="n0:char4"/>
+      <xsd:element name="MoveBatch" type="n0:char10"/>
+      <xsd:element name="MoveValType" type="n0:char10"/>
+      <xsd:element name="MvtInd" type="n0:char1"/>
+      <xsd:element name="MoveReas" type="n0:numeric4"/>
+      <xsd:element name="RlEstKey" type="n0:char8"/>
+      <xsd:element name="RefDate" type="n0:date10"/>
+      <xsd:element name="CostObj" type="n0:char12"/>
+      <xsd:element name="ProfitSegmNo" type="n0:numeric10"/>
+      <xsd:element name="ProfitCtr" type="n0:char10"/>
+      <xsd:element name="WbsElem" type="n0:char24"/>
+      <xsd:element name="Network" type="n0:char12"/>
+      <xsd:element name="Activity" type="n0:char4"/>
+      <xsd:element name="PartAcct" type="n0:char10"/>
+      <xsd:element name="AmountLc" type="n0:decimal23.4"/>
+      <xsd:element name="AmountSv" type="n0:decimal23.4"/>
+      <xsd:element name="Currency" type="n0:cuky5"/>
+      <xsd:element name="CurrencyIso" type="n0:char3"/>
+      <xsd:element name="RefDocYr" type="n0:numeric4"/>
+      <xsd:element name="RefDoc" type="n0:char10"/>
+      <xsd:element name="RefDocIt" type="n0:numeric4"/>
+      <xsd:element name="Expirydate" type="n0:date10"/>
+      <xsd:element name="ProdDate" type="n0:date10"/>
+      <xsd:element name="Fund" type="n0:char10"/>
+      <xsd:element name="FundsCtr" type="n0:char16"/>
+      <xsd:element name="CmmtItem" type="n0:char14"/>
+      <xsd:element name="ValSalesOrd" type="n0:char10"/>
+      <xsd:element name="ValSOrdItem" type="n0:numeric6"/>
+      <xsd:element name="ValWbsElem" type="n0:char24"/>
+      <xsd:element name="CoBusproc" type="n0:char12"/>
+      <xsd:element name="Acttype" type="n0:char6"/>
+      <xsd:element name="SupplVend" type="n0:char10"/>
+      <xsd:element name="XAutoCre" type="n0:char1"/>
+      <xsd:element name="MaterialExternal" type="n0:char40"/>
+      <xsd:element name="MaterialGuid" type="n0:char32"/>
+      <xsd:element name="MaterialVersion" type="n0:char10"/>
+      <xsd:element name="MoveMatExternal" type="n0:char40"/>
+      <xsd:element name="MoveMatGuid" type="n0:char32"/>
+      <xsd:element name="MoveMatVersion" type="n0:char10"/>
+      <xsd:element name="GrantNbr" type="n0:char20"/>
+      <xsd:element name="CmmtItemLong" type="n0:char24"/>
+      <xsd:element name="FuncAreaLong" type="n0:char16"/>
+      <xsd:element name="LineId" type="n0:numeric6"/>
+      <xsd:element name="ParentId" type="n0:numeric6"/>
+      <xsd:element name="LineDepth" type="n0:numeric2"/>
+      <xsd:element name="BudgetPeriod" type="n0:char10"/>
+      <xsd:element name="EarmarkedNumber" type="n0:char10"/>
+      <xsd:element name="EarmarkedItem" type="n0:numeric3"/>
+      <xsd:element name="StkSegment" type="n0:char16"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmMaterialRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char18"/>
+      <xsd:element name="High" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmMoveTypeRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char3"/>
+      <xsd:element name="High" type="n0:char3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmPlantRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char4"/>
+      <xsd:element name="High" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmPstngDateRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:date10"/>
+      <xsd:element name="High" type="n0:date10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmPurchDocRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmSpecStockRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char1"/>
+      <xsd:element name="High" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmStgeLocRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char4"/>
+      <xsd:element name="High" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmTrEvTypeRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char2"/>
+      <xsd:element name="High" type="n0:char2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmUsernameRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char12"/>
+      <xsd:element name="High" type="n0:char12"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapi2017GmVendorRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmBatchRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmBatchRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmHead02">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmHead02"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmItemShow">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmItemShow"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmMaterialRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmMaterialRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmMoveTypeRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmMoveTypeRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmPlantRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmPlantRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmPstngDateRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmPstngDateRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmPurchDocRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmPurchDocRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapiret2">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmSpecStockRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmSpecStockRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmStgeLocRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmStgeLocRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmTrEvTypeRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmTrEvTypeRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmUsernameRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmUsernameRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TableOfBapi2017GmVendorRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapi2017GmVendorRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="GoodsmvtGetitems">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="BatchRa" type="tns:TableOfBapi2017GmBatchRa"/>
+        <xsd:element name="GoodsmvtHeader" type="tns:TableOfBapi2017GmHead02"/>
+        <xsd:element name="GoodsmvtItems" type="tns:TableOfBapi2017GmItemShow"/>
+        <xsd:element minOccurs="0" name="MaterialRa" type="tns:TableOfBapi2017GmMaterialRa"/>
+        <xsd:element minOccurs="0" name="MoveTypeRa" type="tns:TableOfBapi2017GmMoveTypeRa"/>
+        <xsd:element minOccurs="0" name="PlantRa" type="tns:TableOfBapi2017GmPlantRa"/>
+        <xsd:element minOccurs="0" name="PstngDateRa" type="tns:TableOfBapi2017GmPstngDateRa"/>
+        <xsd:element minOccurs="0" name="PurchDocRa" type="tns:TableOfBapi2017GmPurchDocRa"/>
+        <xsd:element name="Return" type="tns:TableOfBapiret2"/>
+        <xsd:element minOccurs="0" name="SpecStockRa" type="tns:TableOfBapi2017GmSpecStockRa"/>
+        <xsd:element minOccurs="0" name="StgeLocRa" type="tns:TableOfBapi2017GmStgeLocRa"/>
+        <xsd:element minOccurs="0" name="TrEvTypeRa" type="tns:TableOfBapi2017GmTrEvTypeRa"/>
+        <xsd:element minOccurs="0" name="UsernameRa" type="tns:TableOfBapi2017GmUsernameRa"/>
+        <xsd:element minOccurs="0" name="VendorRa" type="tns:TableOfBapi2017GmVendorRa"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="GoodsmvtGetitemsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="BatchRa" type="tns:TableOfBapi2017GmBatchRa"/>
+        <xsd:element name="GoodsmvtHeader" type="tns:TableOfBapi2017GmHead02"/>
+        <xsd:element name="GoodsmvtItems" type="tns:TableOfBapi2017GmItemShow"/>
+        <xsd:element minOccurs="0" name="MaterialRa" type="tns:TableOfBapi2017GmMaterialRa"/>
+        <xsd:element minOccurs="0" name="MoveTypeRa" type="tns:TableOfBapi2017GmMoveTypeRa"/>
+        <xsd:element minOccurs="0" name="PlantRa" type="tns:TableOfBapi2017GmPlantRa"/>
+        <xsd:element minOccurs="0" name="PstngDateRa" type="tns:TableOfBapi2017GmPstngDateRa"/>
+        <xsd:element minOccurs="0" name="PurchDocRa" type="tns:TableOfBapi2017GmPurchDocRa"/>
+        <xsd:element name="Return" type="tns:TableOfBapiret2"/>
+        <xsd:element minOccurs="0" name="SpecStockRa" type="tns:TableOfBapi2017GmSpecStockRa"/>
+        <xsd:element minOccurs="0" name="StgeLocRa" type="tns:TableOfBapi2017GmStgeLocRa"/>
+        <xsd:element minOccurs="0" name="TrEvTypeRa" type="tns:TableOfBapi2017GmTrEvTypeRa"/>
+        <xsd:element minOccurs="0" name="UsernameRa" type="tns:TableOfBapi2017GmUsernameRa"/>
+        <xsd:element minOccurs="0" name="VendorRa" type="tns:TableOfBapi2017GmVendorRa"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   -->
+</xsd:schema>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_READ_BIN_InlineSchema1.xsd"/>
+         <!--
+         <xsd:simpleType name="char12">
+            <xsd:restriction base="xsd:string">
+               <xsd:maxLength value="12"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="decimal15.0">
+            <xsd:restriction base="xsd:decimal">
+               <xsd:totalDigits value="15"/>
+               <xsd:fractionDigits value="0"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:complexType name="Zws051SArticle">
+            <xsd:sequence>
+               <xsd:element name="Sign" type="n0:char1"/>
+               <xsd:element name="Option" type="n0:char2"/>
+               <xsd:element name="Low" type="n0:char18"/>
+               <xsd:element name="High" type="n0:char18"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051SBintype">
+            <xsd:sequence>
+               <xsd:element name="Sign" type="n0:char1"/>
+               <xsd:element name="Option" type="n0:char2"/>
+               <xsd:element name="Low" type="n0:char2"/>
+               <xsd:element name="High" type="n0:char2"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051SEan">
+            <xsd:sequence>
+               <xsd:element name="Sign" type="n0:char1"/>
+               <xsd:element name="Option" type="n0:char2"/>
+               <xsd:element name="Low" type="n0:char18"/>
+               <xsd:element name="High" type="n0:char18"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051SLmver">
+            <xsd:sequence>
+               <xsd:element name="Laymod" type="n0:char10"/>
+               <xsd:element name="Lmver" type="n0:numeric4"/>
+               <xsd:element name="Segment" type="n0:numeric10"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncSAssignment">
+            <xsd:sequence>
+               <xsd:element name="Warehouse" type="n0:char3"/>
+               <xsd:element name="Store" type="n0:char4"/>
+               <xsd:element name="StoreType" type="n0:char3"/>
+               <xsd:element name="Aisle" type="n0:char4"/>
+               <xsd:element name="Bay" type="n0:char2"/>
+               <xsd:element name="Bin" type="n0:char10"/>
+               <xsd:element name="BinType" type="n0:char2"/>
+               <xsd:element name="IsEmpty" type="n0:char1"/>
+               <xsd:element name="ImWmManaged" type="n0:char2"/>
+               <xsd:element name="ArticleAssgn" type="tns:ZcncTtArtAssgn"/>
+               <xsd:element name="Lmassignment" type="tns:ZCNC_TT_LM_ASSGN"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncSArtAssgn">
+            <xsd:sequence>
+               <xsd:element name="Article" type="n0:char18"/>
+               <xsd:element name="UomIso" type="n0:char3"/>
+               <xsd:element name="Ean" type="n0:char18"/>
+               <xsd:element name="Proddesc" type="n0:char40"/>
+               <xsd:element name="AssgnType" type="n0:numeric2"/>
+               <xsd:element name="LabelType" type="n0:char2"/>
+               <xsd:element name="Quantity" type="n0:quantum13.3"/>
+               <xsd:element name="LastModified" type="tns:decimal15.0"/>
+               <xsd:element name="LastModifiedBy" type="tns:char12"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZCNC_S_LM_ASSGN">
+            <xsd:sequence>
+               <xsd:element name="LAYMOD" type="n0:char10"/>
+               <xsd:element name="LAYMOD_VERSION" type="n0:numeric4"/>
+               <xsd:element name="SHELF" type="n0:numeric10"/>
+               <xsd:element name="LM_ARTICLE" type="tns:ZCNC_TT_LM_ARTICLE"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZCNC_S_LM_ARTICLE">
+            <xsd:sequence>
+               <xsd:element name="POSITION" type="n0:numeric10"/>
+               <xsd:element name="FACING" type="n0:quantum13.3"/>
+               <xsd:element name="LABEL_TYPE" type="n0:char2"/>
+               <xsd:element name="MINIMUM" type="n0:quantum13.3"/>
+               <xsd:element name="MAXIMUM" type="n0:quantum13.3"/>
+               <xsd:element name="TARGET" type="n0:quantum13.3"/>
+               <xsd:element name="EXCLUDED" type="n0:char1"/>
+               <xsd:element name="ARTICLE" type="n0:char18"/>
+               <xsd:element name="UOM_ISO" type="n0:char3"/>
+               <xsd:element name="EAN" type="n0:char18"/>
+               <xsd:element name="PRODDESC" type="n0:char40"/>
+               <xsd:element name="ASSGN_TYPE" type="n0:numeric2"/>
+               <xsd:element name="QUANTITY" type="n0:quantum13.3"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051SLmhdr">
+            <xsd:sequence>
+               <xsd:element name="Laymod" type="n0:char10"/>
+               <xsd:element name="Lmver" type="n0:numeric4"/>
+               <xsd:element name="Description" type="n0:char40"/>
+               <xsd:element name="Dept" type="n0:char18"/>
+               <xsd:element name="SiteDateFrom" type="n0:date10"/>
+               <xsd:element name="SiteDateTo" type="n0:date10"/>
+               <xsd:element name="Type" type="n0:char4"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051TtArticle">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SArticle"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051TtBintype">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SBintype"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051TtEan">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SEan"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051TtLmver">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SLmver"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTtStortypes">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char3"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTtBins">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="n0:char10"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTtAssignment">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSAssignment"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZcncTtArtAssgn">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSArtAssgn"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZCNC_TT_LM_ASSGN">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZCNC_S_LM_ASSGN"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZCNC_TT_LM_ARTICLE">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZCNC_S_LM_ARTICLE"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Zws051TtLmhdr">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws051SLmhdr"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncBinread">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="ItAislebaybin" type="tns:ZcncTtBins"/>
+                  <xsd:element minOccurs="0" name="ItArticles" type="tns:Zws051TtArticle"/>
+                  <xsd:element minOccurs="0" name="ItBintypes" type="tns:Zws051TtBintype"/>
+                  <xsd:element minOccurs="0" name="ItEans" type="tns:Zws051TtEan"/>
+                  <xsd:element minOccurs="0" name="ItLmver" type="tns:Zws051TtLmver"/>
+                  <xsd:element minOccurs="0" name="ItStortypes" type="tns:ZcncTtStortypes"/>
+                  <xsd:element minOccurs="0" name="IvRetassgn" type="n0:char1"/>
+                  <xsd:element minOccurs="0" name="IvRetlmhdr" type="n0:char1"/>
+                  <xsd:element minOccurs="0" name="IvRetlmseg" type="n0:char1"/>
+                  <xsd:element name="IvStore" type="n0:char4"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncBinreadResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtAssignment" type="tns:ZcncTtAssignment"/>
+                  <xsd:element name="EtLmhdr" type="tns:Zws051TtLmhdr"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         -->
+      </xsd:schema>

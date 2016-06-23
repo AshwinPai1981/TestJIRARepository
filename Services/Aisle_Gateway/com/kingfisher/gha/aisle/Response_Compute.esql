@@ -1,0 +1,137 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+
+CREATE COMPUTE MODULE Response_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE CH_ReqFromURI 		CHARACTER;
+		DECLARE iRef_Aisle 	REFERENCE TO InputRoot.JSON.Data;
+		DECLARE CH_Operation 		CHARACTER;
+		
+		SET OutputRoot.Properties 					=	InputRoot.Properties;
+		SET OutputRoot.MQMD 						=	InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 						=	InputRoot.MQRFH2;		
+		SET CH_ReqFromURI							=	InputRoot.MQRFH2.usr.ReqFromURI;
+		SET Environment.Variables.Operation			=	InputRoot.MQRFH2.usr.operation;
+						
+		-- cheking for error response
+		IF(iRef_Aisle.properties.type = 'ERROR') THEN
+		
+			SET OutputRoot.JSON 	= InputRoot.JSON;
+					
+		ELSEIF EXISTS(iRef_Aisle.Item[]) THEN
+			
+			IF CH_ReqFromURI = 'True' THEN
+				
+				DECLARE oRef 			REFERENCE TO	OutputRoot.JSON.Data;
+				DECLARE oRefProp 		REFERENCE TO 	oRef.properties;
+				DECLARE prop 			REFERENCE TO  	iRef_Aisle.Item.properties;
+				DECLARE oRef_Entities 	REFERENCE TO 	oRef.entities;
+				DECLARE iRef_Entities 	REFERENCE TO 	iRef_Aisle.Item.entities;
+				DECLARE IN_EntCount 	INTEGER 1;
+				
+				CREATE FIELD OutputRoot.JSON.Data AS oRef;
+				CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class; 		  	 
+				CREATE FIELD oRef.properties AS oRefProp;
+				
+				SET oRef.Class.Item[1] = 'Aisle';
+				
+				CALL FUNC_CnCMapping(prop, oRefProp);
+				    
+				IF EXISTS(iRef_Aisle.Item.entities.Item[]) THEN
+					
+					CREATE FIELD oRef.entities AS oRef_Entities IDENTITY (JSON.Array) entities;
+					    
+					FOR source AS iRef_Entities.Item[] DO
+						CALL FUNC_MapEntity(source,oRef_Entities,IN_EntCount);
+					    SET IN_EntCount = IN_EntCount + 1;
+					END FOR;
+					    
+				END IF; 
+				
+			ELSEIF CH_ReqFromURI = 'False' THEN
+							
+				DECLARE count INTEGER 1;
+				
+				FOR source AS iRef_Aisle.Item[] DO
+					CALL MapClassPO(source,count);
+				    SET count = count + 1;
+				END FOR;
+			END IF;
+			 			    
+		END IF;	
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+		
+	END;
+				
+	
+	CREATE PROCEDURE MapClassPO(INOUT source REFERENCE, INOUT count INTEGER )
+	BEGIN
+		DECLARE oRef 		REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp 	REFERENCE TO oRef.properties;
+		DECLARE prop 		REFERENCE TO  source.properties;
+		
+		CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY (JSON.Array)Data;
+		CREATE FIELD oRef.Item[count].Class IDENTITY (JSON.Array)Class;
+		CREATE FIELD oRef.Item[count].properties AS oRefProp; 		  	 
+		
+		SET oRef.Item[count].Class.Item[1] VALUE = 'Aisle';
+		
+		CALL FUNC_CnCMapping(prop, oRefProp);
+						    
+		IF EXISTS(source.entities.Item[]) THEN
+			DECLARE oRef_Entities REFERENCE TO oRef.entities;
+			DECLARE iRef_Entities REFERENCE TO source.entities;
+			CREATE FIELD oRef.Item[count].entities AS oRef_Entities IDENTITY (JSON.Array) entities;				    
+			DECLARE IN_EntCount INTEGER 1;
+			FOR source AS iRef_Entities.Item[] DO
+				CALL FUNC_MapEntity(source,oRef_Entities,IN_EntCount);
+				SET IN_EntCount = IN_EntCount + 1;
+			END FOR;
+		END IF;
+	END;
+	
+	
+	CREATE FUNCTION FUNC_CnCMapping(IN prop REFERENCE, INOUT oRefProp REFERENCE )
+	BEGIN
+			   
+	   	SET oRefProp.storageLocation				= 	prop.storageLocation;
+		SET oRefProp.aisleNumber	 				= 	prop.aisleNumber;
+        SET oRefProp.storageType 					= 	prop.storageType;
+        IF COALESCE(prop.description,'')<>'' THEN 
+        	SET oRefProp.description 				= 	prop.description;
+        END IF;
+        			    
+	END;	
+
+
+	CREATE FUNCTION FUNC_MapEntity (IN iRef_Entities REFERENCE,INOUT oRefEntities REFERENCE,IN arr_count INTEGER) 
+	BEGIN
+		
+		CREATE FIELD oRefEntities.Item[arr_count].Class IDENTITY (JSON.Array)Class; 				
+		SET oRefEntities.Item[arr_count].Class.Item[1] VALUE = 'FulfilmentSite';
+		
+		DECLARE oRefEntities_Sender_rel REFERENCE TO oRefEntities.Item[arr_count].rel;
+		CREATE FIELD oRefEntities.Item[arr_count].rel  AS oRefEntities_Sender_rel IDENTITY (JSON.Array) rel;
+		SET oRefEntities_Sender_rel.Item[1] VALUE = 'urn:x-kingfisher:name:parentStore';
+		DECLARE oRefEntities_Sender_Prop REFERENCE TO oRefEntities.Item[arr_count].properties;
+		CREATE FIELD oRefEntities.Item[arr_count].properties AS oRefEntities_Sender_Prop;
+		
+		SET oRefEntities_Sender_Prop.siteNumber = iRef_Entities.properties.siteNumber;
+			
+		DECLARE oRefEntities_Sender_link REFERENCE TO oRefEntities.Item[arr_count].links;
+		DECLARE iRefEntities_Sender_link REFERENCE TO iRef_Entities.links;
+		CREATE FIELD oRefEntities.Item[arr_count].links AS oRefEntities_Sender_link  IDENTITY (JSON.Array)links;
+		DECLARE oRefEntities_Sender_link_rel REFERENCE TO oRefEntities_Sender_link.Item.rel;
+		CREATE FIELD oRefEntities_Sender_link.Item[1].rel AS oRefEntities_Sender_link_rel IDENTITY (JSON.Array)rel;
+		SET oRefEntities_Sender_link_rel.Item[1] VALUE = 'self';
+		SET oRefEntities_Sender_link.Item[1].href = iRefEntities_Sender_link.Item[1].href;
+			
+	END;
+	
+
+END MODULE;

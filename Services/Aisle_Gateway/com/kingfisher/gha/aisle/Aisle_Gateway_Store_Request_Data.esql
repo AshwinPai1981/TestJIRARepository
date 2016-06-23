@@ -1,0 +1,21 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+
+DECLARE ns5 NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+DECLARE glob1 NAMESPACE 'http://sap.com/xi/SAPGlobal20/Global';
+
+CREATE COMPUTE MODULE PurchaseOrder_Gateway_Store_Request_Data
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Copy Message Properties only
+
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Put required data into store queue message body
+		SET OutputRoot.JSON.Data.Store =  Environment.Store;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

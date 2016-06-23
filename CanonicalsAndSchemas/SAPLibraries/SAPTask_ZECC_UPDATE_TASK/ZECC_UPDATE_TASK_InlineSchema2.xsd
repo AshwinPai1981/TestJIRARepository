@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <!-- 
+         <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_UPDATE_TASK_InlineSchema1.xsd"/>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncUpdateTask">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvAssignedTo" type="n0:char12"/>
+                  <xsd:element minOccurs="0" name="IvStatus" type="n0:char3"/>
+                  <xsd:element name="IvTaskKey" type="n0:char10"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZCncUpdateTaskResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EvMessage" type="n0:char40"/>
+                  <xsd:element name="EvSuccess" type="n0:char1"/>
+                  <xsd:element name="EvTaskKey" type="n0:char10"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         -->
+      </xsd:schema>
+       

@@ -1,0 +1,115 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+PATH com.kingfisher.gha.common;
+
+--DECLARE BrokerURL EXTERNAL NAME 'http://unxs0384.ghanp.kfplc.com:8070';
+
+CREATE COMPUTE MODULE Aisle_get_Map_Response
+	
+	DECLARE CH_BrokerURL CHARACTER getConfigValue('BROKER_URL');
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		-- Copy Message Properties only
+		SET OutputRoot.Properties 				= 	InputRoot.Properties;
+		
+		 -- Restore the Msg ID, reply queue, metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+				
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+		SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+		
+		   
+		-- Create outpur and declare references
+			
+		DECLARE iRef 				REFERENCE TO InputRoot.XMLNSC.NS_n0:ZSofReadAisleResponse;
+		DECLARE iRef_item 			REFERENCE TO InputRoot.XMLNSC.NS_n0:ZSofReadAisleResponse.EtAisle.item;
+		DECLARE oRef 				REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE count 				INTEGER 1;
+		DECLARE productCount 		INTEGER 0;  
+		DECLARE noResponseIndicator BOOLEAN TRUE; 
+			
+		WHILE LASTMOVE(iRef_item) DO 		
+	  	 	CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY(JSON.Array)Data;
+			CREATE FIELD oRef.Item[count].Class IDENTITY (JSON.Array)Class; 		  	 
+			SET oRef.Item[count].Class.Item[1] VALUE = 'Aisle';
+	        DECLARE oRefProp REFERENCE TO oRef.properties;
+	        CREATE FIELD oRef.Item[count].properties AS oRefProp;
+	        CALL FUNC_CanonicalMapping(iRef_item, oRefProp);
+	        
+	        DECLARE oRef_Entities REFERENCE TO oRef.entities;
+		  	CREATE FIELD oRef.Item[count].entities AS oRef_Entities IDENTITY (JSON.Array) entities;
+		  	CALL FUNC_MapEntity(iRef_item,oRef_Entities,count);
+	        
+	  	    SET noResponseIndicator = FALSE;  
+	  	    SET count = count +1;          
+		  MOVE iRef_item NEXTSIBLING REPEAT TYPE NAME;
+		  
+		END WHILE;
+			
+		-- If no information returned from SAP for any of the Product Numbers
+		IF (noResponseIndicator) THEN
+			
+			SET OutputRoot.JSON.Data = NULL;
+			DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+			DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		
+			-- Map the required elements to the JSON response
+	
+			CREATE FIELD OutputRoot.JSON.Data;
+			CREATE FIELD OutputRoot.JSON.Data.Class IDENTITY (JSON.Array)Class;
+			SET OutputRoot.JSON.Data.Class.Item[1] VALUE = 'Response';
+	        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+	        
+	        SET oRefProp.type = 'ERROR';
+			DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	        CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	        
+	        SET oRefInfo.Item[1].serviceName 	=	MessageFlowLabel;
+	        SET oRefInfo.Item[1].statusCode 	=	'404';	
+			SET oRefInfo.Item[1].statusMessage 	=	iRef.EtReturn.item.Message;
+			   		
+		END IF;	
+	END;
+			
+	CREATE FUNCTION FUNC_CanonicalMapping(IN iRef_item REFERENCE, IN oRefProp REFERENCE)
+	BEGIN
+		
+		SET oRefProp.storageLocation				= 	iRef_item.Lgnum;
+		SET oRefProp.aisleNumber	 				= 	iRef_item.AisleNum;
+        SET oRefProp.storageType 					= 	THE(SELECT ITEM N.WMB_KEY FROM Database.MBSAPSTRGTYPE AS N WHERE N.SAP_KEY = iRef_item.Lgtyp);
+        IF COALESCE(iRef_item.AisleDescp,'')<>'' THEN
+        	SET oRefProp.description				= 	iRef_item.AisleDescp;
+        END IF;
+        
+	END;	
+
+        CREATE FUNCTION FUNC_MapEntity(IN iRef_item REFERENCE, INOUT oRef_Entities REFERENCE,IN entityCount INTEGER) 
+		BEGIN
+			
+			DECLARE supplierClass REFERENCE TO oRef_Entities.Item.Class;
+			
+			CREATE FIELD oRef_Entities.Item.Class AS supplierClass IDENTITY (JSON.Array)Class;
+			
+			SET supplierClass.Item[1] VALUE = 'FulfilmentSite';
+			
+			DECLARE oRef_Entities_Rel REFERENCE TO oRef_Entities.Item.rel;
+			CREATE FIELD oRef_Entities.Item.rel AS oRef_Entities_Rel IDENTITY (JSON.Array)rel;
+			SET oRef_Entities_Rel.Item[1] VALUE = 'urn:x-kingfisher:name:parentStore';
+			
+			DECLARE oRef_Entities_Prop REFERENCE TO oRef_Entities.Item.properties;
+			CREATE FIELD oRef_Entities.Item.properties AS oRef_Entities_Prop;
+			
+			SET oRef_Entities_Prop.siteNumber 			=  	iRef_item.Werks;
+			      		
+			DECLARE oRef_Entities_link REFERENCE TO oRef_Entities.Item.links;
+			CREATE FIELD oRef_Entities.Item.links AS oRef_Entities_link  IDENTITY (JSON.Array)links;
+			
+			DECLARE relArray REFERENCE TO oRef_Entities_link.Item.rel;
+			CREATE FIELD oRef_Entities_link.Item[1].rel AS relArray IDENTITY (JSON.Array) rel;
+			SET relArray.Item[1] VALUE  = 'self';
+			
+			SET oRef_Entities_link.Item[1].href = CH_BrokerURL ||'/FulfilmentSite/'||iRef_item.Werks;
+			
+		END;	
+			
+END MODULE;

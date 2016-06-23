@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_MATPHYSINV_GETITEMS_InlineSchema1.xsd"/>
+  <xsd:complexType name="PhysinvAdjustStRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char1"/>
+      <xsd:element name="High" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvBatchRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvCountStRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char1"/>
+      <xsd:element name="High" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvYearRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:numeric4"/>
+      <xsd:element name="High" type="n0:numeric4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvGroupCritRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvMaterialRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char18"/>
+      <xsd:element name="High" type="n0:char18"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvDocRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char10"/>
+      <xsd:element name="High" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvPhInvNoLongRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char35"/>
+      <xsd:element name="High" type="n0:char35"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvPhInvNoRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char16"/>
+      <xsd:element name="High" type="n0:char16"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvPlantRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char4"/>
+      <xsd:element name="High" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvPlanDateRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:date10"/>
+      <xsd:element name="High" type="n0:date10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvStgeLocRa">
+    <xsd:sequence>
+      <xsd:element name="Sign" type="n0:char1"/>
+      <xsd:element name="Option" type="n0:char2"/>
+      <xsd:element name="Low" type="n0:char4"/>
+      <xsd:element name="High" type="n0:char4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysinvHead">
+    <xsd:sequence>
+      <xsd:element name="Physinventory" type="n0:char10"/>
+      <xsd:element name="Fiscalyear" type="n0:numeric4"/>
+      <xsd:element name="EventType" type="n0:char2"/>
+      <xsd:element name="Plant" type="n0:char4"/>
+      <xsd:element name="StgeLoc" type="n0:char4"/>
+      <xsd:element name="SpecStock" type="n0:char1"/>
+      <xsd:element name="DocDate" type="n0:date10"/>
+      <xsd:element name="PlanDate" type="n0:date10"/>
+      <xsd:element name="CountDate" type="n0:date10"/>
+      <xsd:element name="PstngDate" type="n0:date10"/>
+      <xsd:element name="FisPeriod" type="n0:numeric2"/>
+      <xsd:element name="Username" type="n0:char12"/>
+      <xsd:element name="PostBlock" type="n0:char1"/>
+      <xsd:element name="CountStatus" type="n0:char1"/>
+      <xsd:element name="AdjustStatus" type="n0:char1"/>
+      <xsd:element name="PhysInvRef" type="n0:char16"/>
+      <xsd:element name="DeleteStatus" type="n0:char1"/>
+      <xsd:element name="Freezebookinv" type="n0:char1"/>
+      <xsd:element name="GroupingType" type="n0:char2"/>
+      <xsd:element name="GroupingCrit" type="n0:char10"/>
+      <xsd:element name="PhysInvNo" type="n0:char16"/>
+      <xsd:element name="PhysInvNoLong" type="n0:char35"/>
+      <xsd:element name="PhysInvRefLong" type="n0:char35"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncSPhysinvItem">
+    <xsd:sequence>
+      <xsd:element name="Physinventory" type="n0:char10"/>
+      <xsd:element name="Fiscalyear" type="n0:numeric4"/>
+      <xsd:element name="Item" type="n0:numeric3"/>
+      <xsd:element name="Material" type="n0:char18"/>
+      <xsd:element name="Plant" type="n0:char4"/>
+      <xsd:element name="StgeLoc" type="n0:char4"/>
+      <xsd:element name="Batch" type="n0:char10"/>
+      <xsd:element name="SpecStock" type="n0:char1"/>
+      <xsd:element name="StockType" type="n0:char1"/>
+      <xsd:element name="SalesOrd" type="n0:char10"/>
+      <xsd:element name="SOrdItem" type="n0:numeric6"/>
+      <xsd:element name="SchedLine" type="n0:numeric4"/>
+      <xsd:element name="Vendor" type="n0:char10"/>
+      <xsd:element name="Customer" type="n0:char10"/>
+      <xsd:element name="Prodbinloc" type="n0:char10"/>
+      <xsd:element name="ChangeUser" type="n0:char12"/>
+      <xsd:element name="ChangeDate" type="n0:date10"/>
+      <xsd:element name="CountUser" type="n0:char12"/>
+      <xsd:element name="CountDate" type="n0:date10"/>
+      <xsd:element name="PstngName" type="n0:char12"/>
+      <xsd:element name="PstngDate" type="n0:date10"/>
+      <xsd:element name="PhInvRef" type="n0:char16"/>
+      <xsd:element name="Counted" type="n0:char1"/>
+      <xsd:element name="DiffPosted" type="n0:char1"/>
+      <xsd:element name="Recount" type="n0:char1"/>
+      <xsd:element name="DeleteInd" type="n0:char1"/>
+      <xsd:element name="AltUnit" type="n0:char1"/>
+      <xsd:element name="BookQty" type="n0:quantum13.3"/>
+      <xsd:element name="ZeroCount" type="n0:char1"/>
+      <xsd:element name="Quantity" type="n0:quantum13.3"/>
+      <xsd:element name="BaseUom" type="n0:unit3"/>
+      <xsd:element name="BaseUomIso" type="n0:char3"/>
+      <xsd:element name="EntryQnt" type="n0:quantum13.3"/>
+      <xsd:element name="EntryUom" type="n0:unit3"/>
+      <xsd:element name="EntryUomIso" type="n0:char3"/>
+      <xsd:element name="MatDoc" type="n0:char10"/>
+      <xsd:element name="DocYear" type="n0:numeric4"/>
+      <xsd:element name="MatdocItm" type="n0:numeric4"/>
+      <xsd:element name="Recountdoc" type="n0:char10"/>
+      <xsd:element name="Difference" type="n0:decimal23.4"/>
+      <xsd:element name="Currency" type="n0:cuky5"/>
+      <xsd:element name="CurrencyIso" type="n0:char3"/>
+      <xsd:element name="CcPhInv" type="n0:char1"/>
+      <xsd:element name="WbsElement" type="n0:char24"/>
+      <xsd:element name="SvIncVat" type="n0:decimal23.4"/>
+      <xsd:element name="SalesVal" type="n0:decimal23.4"/>
+      <xsd:element name="BookValue" type="n0:decimal23.4"/>
+      <xsd:element name="VoMat" type="n0:char1"/>
+      <xsd:element name="SvWOVat" type="n0:decimal23.4"/>
+      <xsd:element name="Diffsalcntvat" type="n0:decimal23.4"/>
+      <xsd:element name="Diffsalcnt" type="n0:decimal23.4"/>
+      <xsd:element name="Valcountqnt" type="n0:decimal23.4"/>
+      <xsd:element name="Valbookamt" type="n0:decimal23.4"/>
+      <xsd:element name="DiffValue" type="n0:decimal23.4"/>
+      <xsd:element name="Reason" type="n0:numeric4"/>
+      <xsd:element name="MaterialExternal" type="n0:char40"/>
+      <xsd:element name="MaterialGuid" type="n0:char32"/>
+      <xsd:element name="MaterialVersion" type="n0:char10"/>
+      <xsd:element name="PhInvRefLong" type="n0:char35"/>
+      <xsd:element name="StkSegment" type="n0:char16"/>
+      <xsd:element name="WstiCountdate" type="n0:date10"/>
+      <xsd:element name="WstiCounttime" type="n0:time"/>
+      <xsd:element name="WstiFreezedate" type="n0:date10"/>
+      <xsd:element name="WstiFreezetime" type="n0:time"/>
+      <xsd:element name="WstiPosm" type="n0:quantum13.3"/>
+      <xsd:element name="WstiPosw" type="n0:curr13.2"/>
+      <xsd:element name="WstiXcalc" type="n0:char1"/>
+      <xsd:element name="WstiEnterdate" type="n0:date10"/>
+      <xsd:element name="WstiEntertime" type="n0:time"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WstiTtDstatRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvAdjustStRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WstiTtChargRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvBatchRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WstiTtDzstatRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvCountStRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvYearRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvYearRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtGroupCritRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvGroupCritRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtMaterialRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvMaterialRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvDocRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvDocRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhInvNoLongRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvPhInvNoLongRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhInvNoRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvPhInvNoRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvPlantRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvPlantRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvPlanDateRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvPlanDateRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvStgeLocRa">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvStgeLocRa"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvHead">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:PhysinvHead"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcncTtPhysinvItem">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcncSPhysinvItem"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2T">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncMatphysinvGetitems">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="CtHeaders" type="tns:ZcncTtPhysinvHead"/>
+        <xsd:element name="CtItems" type="tns:ZcncTtPhysinvItem"/>
+        <xsd:element minOccurs="0" name="ItAdjustStatusRa" type="tns:WstiTtDstatRa"/>
+        <xsd:element minOccurs="0" name="ItBatchRa" type="tns:WstiTtChargRa"/>
+        <xsd:element minOccurs="0" name="ItCountStatusRa" type="tns:WstiTtDzstatRa"/>
+        <xsd:element minOccurs="0" name="ItFiscalyearRa" type="tns:ZcncTtPhysinvYearRa"/>
+        <xsd:element minOccurs="0" name="ItGroupingCritRa" type="tns:ZcncTtGroupCritRa"/>
+        <xsd:element minOccurs="0" name="ItMaterialRa" type="tns:ZcncTtMaterialRa"/>
+        <xsd:element minOccurs="0" name="ItPhysInvNoLongRa" type="tns:ZcncTtPhInvNoLongRa"/>
+        <xsd:element minOccurs="0" name="ItPhysInvNoRa" type="tns:ZcncTtPhInvNoRa"/>
+        <xsd:element minOccurs="0" name="ItPhysinventoryRa" type="tns:ZcncTtPhysinvDocRa"/>
+        <xsd:element minOccurs="0" name="ItPlanDateRa" type="tns:ZcncTtPhysinvPlanDateRa"/>
+        <xsd:element minOccurs="0" name="ItPlantRa" type="tns:ZcncTtPhysinvPlantRa"/>
+        <xsd:element minOccurs="0" name="ItStgeLocRa" type="tns:ZcncTtPhysinvStgeLocRa"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncMatphysinvGetitemsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="CtHeaders" type="tns:ZcncTtPhysinvHead"/>
+        <xsd:element name="CtItems" type="tns:ZcncTtPhysinvItem"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!-- Debraj : Adding elements for ZECC_SOF_STK_COUNT_QM inlineschema2 -->
+  <xsd:complexType name="Bapireturn1">
+            <xsd:sequence>
+               <xsd:element name="Type" type="n0:char1"/>
+               <xsd:element name="Id" type="n0:char20"/>
+               <xsd:element name="Number" type="n0:numeric3"/>
+               <xsd:element name="Message" type="n0:char220"/>
+               <xsd:element name="LogNo" type="n0:char20"/>
+               <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+               <xsd:element name="MessageV1" type="n0:char50"/>
+               <xsd:element name="MessageV2" type="n0:char50"/>
+               <xsd:element name="MessageV3" type="n0:char50"/>
+               <xsd:element name="MessageV4" type="n0:char50"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Bapireturn1Tabtype">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapireturn1"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZSofAdhocStckCntQm">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="IvBinnum" type="n0:char10"/>
+                  <xsd:element minOccurs="0" name="IvEan" type="n0:char18"/>
+                  <xsd:element minOccurs="0" name="IvQty" type="n0:quantum13.3"/>
+                  <xsd:element minOccurs="0" name="IvStore" type="n0:char4"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element ibmSchExtn:docRoot="true" name="ZSofAdhocStckCntQmResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="EtReturn" type="tns:Bapireturn1Tabtype"/>
+                  <xsd:element name="EvMblnr" type="n0:char10"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+</xsd:schema>

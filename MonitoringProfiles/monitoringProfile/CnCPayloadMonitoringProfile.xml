@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile:monitoringProfile xmlns:profile="http://www.ibm.com/xmlns/prod/websphere/messagebroker/6.1.0.3/monitoring/profile" profile:version="2.0">
+   <profile:eventSource profile:eventSourceAddress="HTTP Input.transaction.Start" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Input.TransactionStart" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Request-Id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Global-Id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="none" profile:encoding="none" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Input.transaction.End" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Input.TransactionEnd" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Request-Id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Global-Id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="none" profile:encoding="none" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Input.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Input.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Request-Id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Global-Id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Input.terminal.catch" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Input.CatchTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Request-Id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Global-Id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Input.terminal.failure" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Input.FailureTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Request-Id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPInputHeader/Kits-Global-Id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="com/kingfisher/ukbq/errorhandlers/HTTPFaultHandler.HTTP Reply.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Reply.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="Response.HTTP Reply.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Reply.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPReplyHeader/kits-request-id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPReplyHeader/kits-global-id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="Response.HTTP Reply.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Reply.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Root/HTTPReplyHeader/kits-request-id" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Root/HTTPReplyHeader/kits-global-id" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request.terminal.failure" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request.FailureTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request.terminal.fault" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request.FaultTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request1.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request1.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request1.terminal.failure" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request1.FailureTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request1.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request1.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request1.terminal.fault" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request1.FaultTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request2.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request2.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request2.terminal.failure" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request2.FailureTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request2.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request2.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="SOAP Request2.terminal.fault" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="SOAP Request2.FaultTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+      <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Request.terminal.in" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Request.InTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+	  <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Request.terminal.out" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Request.OutTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+	  <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Request.terminal.failure" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Request.FailureTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+	  <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+   <profile:eventSource profile:eventSourceAddress="HTTP Request.terminal.error" profile:enabled="true">
+      <profile:eventPointDataQuery>
+         <profile:eventIdentity>
+            <profile:eventName profile:literal="HTTP Request.ErrorTerminal" />
+         </profile:eventIdentity>
+         <profile:eventCorrelation>
+            <profile:localTransactionId profile:sourceOfId="automatic" />
+            <profile:parentTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" profile:sourceOfId="query" />
+            <profile:globalTransactionId profile:queryText="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" profile:sourceOfId="query" />
+         </profile:eventCorrelation>
+         <profile:eventFilter profile:queryText="true()" />
+         <profile:eventUOW profile:unitOfWork="messageFlow" />
+      </profile:eventPointDataQuery>
+      <profile:applicationDataQuery />
+	  <profile:bitstreamDataQuery profile:bitstreamContent="all" profile:encoding="base64Binary" />
+   </profile:eventSource>
+</profile:monitoringProfile>

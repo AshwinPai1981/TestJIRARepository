@@ -1,0 +1,2744 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://service.soap.episys.com" xmlns:ax21="http://messages.episys.com/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://service.soap.episys.com" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <wsdl:documentation>EpisysWS<wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="RES_InlineSchema1.xsd"/>
+        <generatedXSD location="RES_InlineSchema2.xsd"/>
+        <binding hasEncoding="false" imported="true" name="EpisysWSSoap12Binding" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="true" name="EpisysWSSoap11Binding" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="false" name="EpisysWSHttpBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.soap.episys.com" xmlns:ax22="http://messages.episys.com/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://messages.episys.com/xsd" schemaLocation="RES_InlineSchema2.xsd"/>
+<xsd:include schemaLocation="RES_InlineSchema1.xsd"/>
+    </xsd:schema>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://messages.episys.com/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="RES_InlineSchema2.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="manageStoreECSRequest">
+        <wsdl:part element="ns:manageStoreECS" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStoreECSResponse">
+        <wsdl:part element="ns:manageStoreECSResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramSULRequest">
+        <wsdl:part element="ns:manageECSPlanogramSUL" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramSULResponse">
+        <wsdl:part element="ns:manageECSPlanogramSULResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithPricingRuleRequest">
+        <wsdl:part element="ns:managePriceWithPricingRule" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithPricingRuleResponse">
+        <wsdl:part element="ns:managePriceWithPricingRuleResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="findChildrenRequest">
+        <wsdl:part element="ns:findChildren" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="findChildrenResponse">
+        <wsdl:part element="ns:findChildrenResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteStoreRequest">
+        <wsdl:part element="ns:deleteStore" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteStoreResponse">
+        <wsdl:part element="ns:deleteStoreResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="printRequest">
+        <wsdl:part element="ns:print" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="printResponse">
+        <wsdl:part element="ns:printResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getConfirmationPriceForStoreRequest">
+        <wsdl:part element="ns:getConfirmationPriceForStore" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getConfirmationPriceForStoreResponse">
+        <wsdl:part element="ns:getConfirmationPriceForStoreResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductRequest">
+        <wsdl:part element="ns:manageProduct" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductResponse">
+        <wsdl:part element="ns:manageProductResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="previewSignSetRequest">
+        <wsdl:part element="ns:previewSignSet" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="previewSignSetResponse">
+        <wsdl:part element="ns:previewSignSetResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProduct_V2Request">
+        <wsdl:part element="ns:manageProduct_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProduct_V2Response">
+        <wsdl:part element="ns:manageProduct_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocationWithUserIdRequest">
+        <wsdl:part element="ns:managePlanogramLocationWithUserId" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocationWithUserIdResponse">
+        <wsdl:part element="ns:managePlanogramLocationWithUserIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="alterCustomSignRequest">
+        <wsdl:part element="ns:alterCustomSign" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="alterCustomSignResponse">
+        <wsdl:part element="ns:alterCustomSignResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceRequest">
+        <wsdl:part element="ns:managePrice" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceResponse">
+        <wsdl:part element="ns:managePriceResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="removeStoresFromGroupRequest">
+        <wsdl:part element="ns:removeStoresFromGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="removeStoresFromGroupResponse">
+        <wsdl:part element="ns:removeStoresFromGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithEventRequest">
+        <wsdl:part element="ns:managePriceWithEvent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithEventResponse">
+        <wsdl:part element="ns:managePriceWithEventResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProductRequest">
+        <wsdl:part element="ns:managePlanogramProduct" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProductResponse">
+        <wsdl:part element="ns:managePlanogramProductResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice2Request">
+        <wsdl:part element="ns:managePrice2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice2Response">
+        <wsdl:part element="ns:managePrice2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithEvent2Request">
+        <wsdl:part element="ns:managePriceWithEvent2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithEvent2Response">
+        <wsdl:part element="ns:managePriceWithEvent2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageComplexPromotionRequest">
+        <wsdl:part element="ns:manageComplexPromotion" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageComplexPromotionResponse">
+        <wsdl:part element="ns:manageComplexPromotionResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionV2_2Request">
+        <wsdl:part element="ns:managePromotionV2_2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionV2_2Response">
+        <wsdl:part element="ns:managePromotionV2_2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProductWithUserIDRequest">
+        <wsdl:part element="ns:managePlanogramProductWithUserID" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProductWithUserIDResponse">
+        <wsdl:part element="ns:managePlanogramProductWithUserIDResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotion_2Request">
+        <wsdl:part element="ns:managePromotion_2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotion_2Response">
+        <wsdl:part element="ns:managePromotion_2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageWEEEPRFRequest">
+        <wsdl:part element="ns:manageWEEEPRF" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageWEEEPRFResponse">
+        <wsdl:part element="ns:manageWEEEPRFResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionV2Request">
+        <wsdl:part element="ns:managePromotionV2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionV2Response">
+        <wsdl:part element="ns:managePromotionV2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionForFESPRequest">
+        <wsdl:part element="ns:managePromotionForFESP" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionForFESPResponse">
+        <wsdl:part element="ns:managePromotionForFESPResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStoreProductStatusRequest">
+        <wsdl:part element="ns:manageStoreProductStatus" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStoreProductStatusResponse">
+        <wsdl:part element="ns:manageStoreProductStatusResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="upsertStoreGroupRequest">
+        <wsdl:part element="ns:upsertStoreGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="upsertStoreGroupResponse">
+        <wsdl:part element="ns:upsertStoreGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createStoreGroupRequest">
+        <wsdl:part element="ns:createStoreGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createStoreGroupResponse">
+        <wsdl:part element="ns:createStoreGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductsWithWorkFlowRequest">
+        <wsdl:part element="ns:manageProductsWithWorkFlow" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductsWithWorkFlowResponse">
+        <wsdl:part element="ns:manageProductsWithWorkFlowResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getContentDetailRequest">
+        <wsdl:part element="ns:getContentDetail" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getContentDetailResponse">
+        <wsdl:part element="ns:getContentDetailResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductDetailRequest">
+        <wsdl:part element="ns:manageProductDetail" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductDetailResponse">
+        <wsdl:part element="ns:manageProductDetailResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="moveProductHierarchyLevelRequest">
+        <wsdl:part element="ns:moveProductHierarchyLevel" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="moveProductHierarchyLevelResponse">
+        <wsdl:part element="ns:moveProductHierarchyLevelResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice_2Request">
+        <wsdl:part element="ns:managePrice_2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice_2Response">
+        <wsdl:part element="ns:managePrice_2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice_V2Request">
+        <wsdl:part element="ns:managePrice_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePrice_V2Response">
+        <wsdl:part element="ns:managePrice_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProduct_2Request">
+        <wsdl:part element="ns:managePlanogramProduct_2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramProduct_2Response">
+        <wsdl:part element="ns:managePlanogramProduct_2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageRelatedArticleRequest">
+        <wsdl:part element="ns:manageRelatedArticle" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageRelatedArticleResponse">
+        <wsdl:part element="ns:manageRelatedArticleResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageWEEECategoryRequest">
+        <wsdl:part element="ns:manageWEEECategory" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageWEEECategoryResponse">
+        <wsdl:part element="ns:manageWEEECategoryResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqRequest">
+        <wsdl:part element="ns:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqResponse">
+        <wsdl:part element="ns:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionForGroupOffersRequest">
+        <wsdl:part element="ns:managePromotionForGroupOffers" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionForGroupOffersResponse">
+        <wsdl:part element="ns:managePromotionForGroupOffersResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="addStoresToGroupRequest">
+        <wsdl:part element="ns:addStoresToGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="addStoresToGroupResponse">
+        <wsdl:part element="ns:addStoresToGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteContentRequest">
+        <wsdl:part element="ns:deleteContent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteContentResponse">
+        <wsdl:part element="ns:deleteContentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductHierarchy_V2Request">
+        <wsdl:part element="ns:manageProductHierarchy_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductHierarchy_V2Response">
+        <wsdl:part element="ns:manageProductHierarchy_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStockRangeRequest">
+        <wsdl:part element="ns:manageStockRange" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStockRangeResponse">
+        <wsdl:part element="ns:manageStockRangeResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteStoreGroupRequest">
+        <wsdl:part element="ns:deleteStoreGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteStoreGroupResponse">
+        <wsdl:part element="ns:deleteStoreGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="batchLabelRequestRequest">
+        <wsdl:part element="ns:batchLabelRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="batchLabelRequestResponse">
+        <wsdl:part element="ns:batchLabelRequestResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="addPlanogramDetailsRequest">
+        <wsdl:part element="ns:addPlanogramDetails" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="addPlanogramDetailsResponse">
+        <wsdl:part element="ns:addPlanogramDetailsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteAllStoreGroupRequest">
+        <wsdl:part element="ns:deleteAllStoreGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="deleteAllStoreGroupResponse">
+        <wsdl:part element="ns:deleteAllStoreGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithHistoryRequest">
+        <wsdl:part element="ns:managePriceWithHistory" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePriceWithHistoryResponse">
+        <wsdl:part element="ns:managePriceWithHistoryResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getStyleDetailsRequest">
+        <wsdl:part element="ns:getStyleDetails" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getStyleDetailsResponse">
+        <wsdl:part element="ns:getStyleDetailsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateContent_V2Request">
+        <wsdl:part element="ns:updateContent_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateContent_V2Response">
+        <wsdl:part element="ns:updateContent_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateContentRequest">
+        <wsdl:part element="ns:updateContent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateContentResponse">
+        <wsdl:part element="ns:updateContentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramDtlRequest">
+        <wsdl:part element="ns:manageECSPlanogramDtl" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramDtlResponse">
+        <wsdl:part element="ns:manageECSPlanogramDtlResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramHdrRequest">
+        <wsdl:part element="ns:manageECSPlanogramHdr" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageECSPlanogramHdrResponse">
+        <wsdl:part element="ns:manageECSPlanogramHdrResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductWithWorkFlowRequest">
+        <wsdl:part element="ns:manageProductWithWorkFlow" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductWithWorkFlowResponse">
+        <wsdl:part element="ns:manageProductWithWorkFlowResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateStoreGroupRequest">
+        <wsdl:part element="ns:updateStoreGroup" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateStoreGroupResponse">
+        <wsdl:part element="ns:updateStoreGroupResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionWithStoreGroupNameRequest">
+        <wsdl:part element="ns:managePromotionWithStoreGroupName" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionWithStoreGroupNameResponse">
+        <wsdl:part element="ns:managePromotionWithStoreGroupNameResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="adhocLabelRequestRequest">
+        <wsdl:part element="ns:adhocLabelRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="adhocLabelRequestResponse">
+        <wsdl:part element="ns:adhocLabelRequestResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductHierarchyRequest">
+        <wsdl:part element="ns:manageProductHierarchy" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductHierarchyResponse">
+        <wsdl:part element="ns:manageProductHierarchyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramHdrRequest">
+        <wsdl:part element="ns:getECSPlanogramHdr" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramHdrResponse">
+        <wsdl:part element="ns:getECSPlanogramHdrResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocation_2Request">
+        <wsdl:part element="ns:managePlanogramLocation_2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocation_2Response">
+        <wsdl:part element="ns:managePlanogramLocation_2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageAdvancedProductHierarchyRequest">
+        <wsdl:part element="ns:manageAdvancedProductHierarchy" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageAdvancedProductHierarchyResponse">
+        <wsdl:part element="ns:manageAdvancedProductHierarchyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="customSignBuilderServiceRequest">
+        <wsdl:part element="ns:customSignBuilderService" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="customSignBuilderServiceResponse">
+        <wsdl:part element="ns:customSignBuilderServiceResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocationRequest">
+        <wsdl:part element="ns:managePlanogramLocation" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePlanogramLocationResponse">
+        <wsdl:part element="ns:managePlanogramLocationResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStockRange_V2Request">
+        <wsdl:part element="ns:manageStockRange_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStockRange_V2Response">
+        <wsdl:part element="ns:manageStockRange_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramSULFromPlanoIdSellUnitIdRequest">
+        <wsdl:part element="ns:getECSPlanogramSULFromPlanoIdSellUnitId" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramSULFromPlanoIdSellUnitIdResponse">
+        <wsdl:part element="ns:getECSPlanogramSULFromPlanoIdSellUnitIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductsStoreContentRequest">
+        <wsdl:part element="ns:manageProductsStoreContent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageProductsStoreContentResponse">
+        <wsdl:part element="ns:manageProductsStoreContentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageEventRequest">
+        <wsdl:part element="ns:manageEvent" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageEventResponse">
+        <wsdl:part element="ns:manageEventResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStoreRequest">
+        <wsdl:part element="ns:manageStore" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="manageStoreResponse">
+        <wsdl:part element="ns:manageStoreResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionRequest">
+        <wsdl:part element="ns:managePromotion" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotionResponse">
+        <wsdl:part element="ns:managePromotionResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotion_V2Request">
+        <wsdl:part element="ns:managePromotion_V2" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="managePromotion_V2Response">
+        <wsdl:part element="ns:managePromotion_V2Response" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getPlanogramLocationDetailsRequest">
+        <wsdl:part element="ns:getPlanogramLocationDetails" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getPlanogramLocationDetailsResponse">
+        <wsdl:part element="ns:getPlanogramLocationDetailsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramSULFromPlanoIdSellUnitIdFullRequest">
+        <wsdl:part element="ns:getECSPlanogramSULFromPlanoIdSellUnitIdFull" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramSULFromPlanoIdSellUnitIdFullResponse">
+        <wsdl:part element="ns:getECSPlanogramSULFromPlanoIdSellUnitIdFullResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramDtlsFromPlanoIdAisleBayRequest">
+        <wsdl:part element="ns:getECSPlanogramDtlsFromPlanoIdAisleBay" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getECSPlanogramDtlsFromPlanoIdAisleBayResponse">
+        <wsdl:part element="ns:getECSPlanogramDtlsFromPlanoIdAisleBayResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="EpisysWSPortType">
+        <wsdl:operation name="manageStoreECS">
+            <wsdl:input message="ns:manageStoreECSRequest" wsaw:Action="urn:manageStoreECS"/>
+            <wsdl:output message="ns:manageStoreECSResponse" wsaw:Action="urn:manageStoreECSResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramSUL">
+            <wsdl:input message="ns:manageECSPlanogramSULRequest" wsaw:Action="urn:manageECSPlanogramSUL"/>
+            <wsdl:output message="ns:manageECSPlanogramSULResponse" wsaw:Action="urn:manageECSPlanogramSULResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithPricingRule">
+            <wsdl:input message="ns:managePriceWithPricingRuleRequest" wsaw:Action="urn:managePriceWithPricingRule"/>
+            <wsdl:output message="ns:managePriceWithPricingRuleResponse" wsaw:Action="urn:managePriceWithPricingRuleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="findChildren">
+            <wsdl:input message="ns:findChildrenRequest" wsaw:Action="urn:findChildren"/>
+            <wsdl:output message="ns:findChildrenResponse" wsaw:Action="urn:findChildrenResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStore">
+            <wsdl:input message="ns:deleteStoreRequest" wsaw:Action="urn:deleteStore"/>
+            <wsdl:output message="ns:deleteStoreResponse" wsaw:Action="urn:deleteStoreResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="print">
+            <wsdl:input message="ns:printRequest" wsaw:Action="urn:print"/>
+            <wsdl:output message="ns:printResponse" wsaw:Action="urn:printResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getConfirmationPriceForStore">
+            <wsdl:input message="ns:getConfirmationPriceForStoreRequest" wsaw:Action="urn:getConfirmationPriceForStore"/>
+            <wsdl:output message="ns:getConfirmationPriceForStoreResponse" wsaw:Action="urn:getConfirmationPriceForStoreResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct">
+            <wsdl:input message="ns:manageProductRequest" wsaw:Action="urn:manageProduct"/>
+            <wsdl:output message="ns:manageProductResponse" wsaw:Action="urn:manageProductResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="previewSignSet">
+            <wsdl:input message="ns:previewSignSetRequest" wsaw:Action="urn:previewSignSet"/>
+            <wsdl:output message="ns:previewSignSetResponse" wsaw:Action="urn:previewSignSetResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct_V2">
+            <wsdl:input message="ns:manageProduct_V2Request" wsaw:Action="urn:manageProduct_V2"/>
+            <wsdl:output message="ns:manageProduct_V2Response" wsaw:Action="urn:manageProduct_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocationWithUserId">
+            <wsdl:input message="ns:managePlanogramLocationWithUserIdRequest" wsaw:Action="urn:managePlanogramLocationWithUserId"/>
+            <wsdl:output message="ns:managePlanogramLocationWithUserIdResponse" wsaw:Action="urn:managePlanogramLocationWithUserIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="alterCustomSign">
+            <wsdl:input message="ns:alterCustomSignRequest" wsaw:Action="urn:alterCustomSign"/>
+            <wsdl:output message="ns:alterCustomSignResponse" wsaw:Action="urn:alterCustomSignResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice">
+            <wsdl:input message="ns:managePriceRequest" wsaw:Action="urn:managePrice"/>
+            <wsdl:output message="ns:managePriceResponse" wsaw:Action="urn:managePriceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="removeStoresFromGroup">
+            <wsdl:input message="ns:removeStoresFromGroupRequest" wsaw:Action="urn:removeStoresFromGroup"/>
+            <wsdl:output message="ns:removeStoresFromGroupResponse" wsaw:Action="urn:removeStoresFromGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent">
+            <wsdl:input message="ns:managePriceWithEventRequest" wsaw:Action="urn:managePriceWithEvent"/>
+            <wsdl:output message="ns:managePriceWithEventResponse" wsaw:Action="urn:managePriceWithEventResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct">
+            <wsdl:input message="ns:managePlanogramProductRequest" wsaw:Action="urn:managePlanogramProduct"/>
+            <wsdl:output message="ns:managePlanogramProductResponse" wsaw:Action="urn:managePlanogramProductResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice2">
+            <wsdl:input message="ns:managePrice2Request" wsaw:Action="urn:managePrice2"/>
+            <wsdl:output message="ns:managePrice2Response" wsaw:Action="urn:managePrice2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent2">
+            <wsdl:input message="ns:managePriceWithEvent2Request" wsaw:Action="urn:managePriceWithEvent2"/>
+            <wsdl:output message="ns:managePriceWithEvent2Response" wsaw:Action="urn:managePriceWithEvent2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageComplexPromotion">
+            <wsdl:input message="ns:manageComplexPromotionRequest" wsaw:Action="urn:manageComplexPromotion"/>
+            <wsdl:output message="ns:manageComplexPromotionResponse" wsaw:Action="urn:manageComplexPromotionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2_2">
+            <wsdl:input message="ns:managePromotionV2_2Request" wsaw:Action="urn:managePromotionV2_2"/>
+            <wsdl:output message="ns:managePromotionV2_2Response" wsaw:Action="urn:managePromotionV2_2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProductWithUserID">
+            <wsdl:input message="ns:managePlanogramProductWithUserIDRequest" wsaw:Action="urn:managePlanogramProductWithUserID"/>
+            <wsdl:output message="ns:managePlanogramProductWithUserIDResponse" wsaw:Action="urn:managePlanogramProductWithUserIDResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_2">
+            <wsdl:input message="ns:managePromotion_2Request" wsaw:Action="urn:managePromotion_2"/>
+            <wsdl:output message="ns:managePromotion_2Response" wsaw:Action="urn:managePromotion_2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEEPRF">
+            <wsdl:input message="ns:manageWEEEPRFRequest" wsaw:Action="urn:manageWEEEPRF"/>
+            <wsdl:output message="ns:manageWEEEPRFResponse" wsaw:Action="urn:manageWEEEPRFResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2">
+            <wsdl:input message="ns:managePromotionV2Request" wsaw:Action="urn:managePromotionV2"/>
+            <wsdl:output message="ns:managePromotionV2Response" wsaw:Action="urn:managePromotionV2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForFESP">
+            <wsdl:input message="ns:managePromotionForFESPRequest" wsaw:Action="urn:managePromotionForFESP"/>
+            <wsdl:output message="ns:managePromotionForFESPResponse" wsaw:Action="urn:managePromotionForFESPResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreProductStatus">
+            <wsdl:input message="ns:manageStoreProductStatusRequest" wsaw:Action="urn:manageStoreProductStatus"/>
+            <wsdl:output message="ns:manageStoreProductStatusResponse" wsaw:Action="urn:manageStoreProductStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="upsertStoreGroup">
+            <wsdl:input message="ns:upsertStoreGroupRequest" wsaw:Action="urn:upsertStoreGroup"/>
+            <wsdl:output message="ns:upsertStoreGroupResponse" wsaw:Action="urn:upsertStoreGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createStoreGroup">
+            <wsdl:input message="ns:createStoreGroupRequest" wsaw:Action="urn:createStoreGroup"/>
+            <wsdl:output message="ns:createStoreGroupResponse" wsaw:Action="urn:createStoreGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsWithWorkFlow">
+            <wsdl:input message="ns:manageProductsWithWorkFlowRequest" wsaw:Action="urn:manageProductsWithWorkFlow"/>
+            <wsdl:output message="ns:manageProductsWithWorkFlowResponse" wsaw:Action="urn:manageProductsWithWorkFlowResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getContentDetail">
+            <wsdl:input message="ns:getContentDetailRequest" wsaw:Action="urn:getContentDetail"/>
+            <wsdl:output message="ns:getContentDetailResponse" wsaw:Action="urn:getContentDetailResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductDetail">
+            <wsdl:input message="ns:manageProductDetailRequest" wsaw:Action="urn:manageProductDetail"/>
+            <wsdl:output message="ns:manageProductDetailResponse" wsaw:Action="urn:manageProductDetailResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="moveProductHierarchyLevel">
+            <wsdl:input message="ns:moveProductHierarchyLevelRequest" wsaw:Action="urn:moveProductHierarchyLevel"/>
+            <wsdl:output message="ns:moveProductHierarchyLevelResponse" wsaw:Action="urn:moveProductHierarchyLevelResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_2">
+            <wsdl:input message="ns:managePrice_2Request" wsaw:Action="urn:managePrice_2"/>
+            <wsdl:output message="ns:managePrice_2Response" wsaw:Action="urn:managePrice_2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_V2">
+            <wsdl:input message="ns:managePrice_V2Request" wsaw:Action="urn:managePrice_V2"/>
+            <wsdl:output message="ns:managePrice_V2Response" wsaw:Action="urn:managePrice_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct_2">
+            <wsdl:input message="ns:managePlanogramProduct_2Request" wsaw:Action="urn:managePlanogramProduct_2"/>
+            <wsdl:output message="ns:managePlanogramProduct_2Response" wsaw:Action="urn:managePlanogramProduct_2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageRelatedArticle">
+            <wsdl:input message="ns:manageRelatedArticleRequest" wsaw:Action="urn:manageRelatedArticle"/>
+            <wsdl:output message="ns:manageRelatedArticleResponse" wsaw:Action="urn:manageRelatedArticleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEECategory">
+            <wsdl:input message="ns:manageWEEECategoryRequest" wsaw:Action="urn:manageWEEECategory"/>
+            <wsdl:output message="ns:manageWEEECategoryResponse" wsaw:Action="urn:manageWEEECategoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq">
+            <wsdl:input message="ns:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqRequest" wsaw:Action="urn:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq"/>
+            <wsdl:output message="ns:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqResponse" wsaw:Action="urn:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeqResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForGroupOffers">
+            <wsdl:input message="ns:managePromotionForGroupOffersRequest" wsaw:Action="urn:managePromotionForGroupOffers"/>
+            <wsdl:output message="ns:managePromotionForGroupOffersResponse" wsaw:Action="urn:managePromotionForGroupOffersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addStoresToGroup">
+            <wsdl:input message="ns:addStoresToGroupRequest" wsaw:Action="urn:addStoresToGroup"/>
+            <wsdl:output message="ns:addStoresToGroupResponse" wsaw:Action="urn:addStoresToGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContent">
+            <wsdl:input message="ns:deleteContentRequest" wsaw:Action="urn:deleteContent"/>
+            <wsdl:output message="ns:deleteContentResponse" wsaw:Action="urn:deleteContentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy_V2">
+            <wsdl:input message="ns:manageProductHierarchy_V2Request" wsaw:Action="urn:manageProductHierarchy_V2"/>
+            <wsdl:output message="ns:manageProductHierarchy_V2Response" wsaw:Action="urn:manageProductHierarchy_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange">
+            <wsdl:input message="ns:manageStockRangeRequest" wsaw:Action="urn:manageStockRange"/>
+            <wsdl:output message="ns:manageStockRangeResponse" wsaw:Action="urn:manageStockRangeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStoreGroup">
+            <wsdl:input message="ns:deleteStoreGroupRequest" wsaw:Action="urn:deleteStoreGroup"/>
+            <wsdl:output message="ns:deleteStoreGroupResponse" wsaw:Action="urn:deleteStoreGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="batchLabelRequest">
+            <wsdl:input message="ns:batchLabelRequestRequest" wsaw:Action="urn:batchLabelRequest"/>
+            <wsdl:output message="ns:batchLabelRequestResponse" wsaw:Action="urn:batchLabelRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addPlanogramDetails">
+            <wsdl:input message="ns:addPlanogramDetailsRequest" wsaw:Action="urn:addPlanogramDetails"/>
+            <wsdl:output message="ns:addPlanogramDetailsResponse" wsaw:Action="urn:addPlanogramDetailsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAllStoreGroup">
+            <wsdl:input message="ns:deleteAllStoreGroupRequest" wsaw:Action="urn:deleteAllStoreGroup"/>
+            <wsdl:output message="ns:deleteAllStoreGroupResponse" wsaw:Action="urn:deleteAllStoreGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithHistory">
+            <wsdl:input message="ns:managePriceWithHistoryRequest" wsaw:Action="urn:managePriceWithHistory"/>
+            <wsdl:output message="ns:managePriceWithHistoryResponse" wsaw:Action="urn:managePriceWithHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getStyleDetails">
+            <wsdl:input message="ns:getStyleDetailsRequest" wsaw:Action="urn:getStyleDetails"/>
+            <wsdl:output message="ns:getStyleDetailsResponse" wsaw:Action="urn:getStyleDetailsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent_V2">
+            <wsdl:input message="ns:updateContent_V2Request" wsaw:Action="urn:updateContent_V2"/>
+            <wsdl:output message="ns:updateContent_V2Response" wsaw:Action="urn:updateContent_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent">
+            <wsdl:input message="ns:updateContentRequest" wsaw:Action="urn:updateContent"/>
+            <wsdl:output message="ns:updateContentResponse" wsaw:Action="urn:updateContentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramDtl">
+            <wsdl:input message="ns:manageECSPlanogramDtlRequest" wsaw:Action="urn:manageECSPlanogramDtl"/>
+            <wsdl:output message="ns:manageECSPlanogramDtlResponse" wsaw:Action="urn:manageECSPlanogramDtlResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramHdr">
+            <wsdl:input message="ns:manageECSPlanogramHdrRequest" wsaw:Action="urn:manageECSPlanogramHdr"/>
+            <wsdl:output message="ns:manageECSPlanogramHdrResponse" wsaw:Action="urn:manageECSPlanogramHdrResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductWithWorkFlow">
+            <wsdl:input message="ns:manageProductWithWorkFlowRequest" wsaw:Action="urn:manageProductWithWorkFlow"/>
+            <wsdl:output message="ns:manageProductWithWorkFlowResponse" wsaw:Action="urn:manageProductWithWorkFlowResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateStoreGroup">
+            <wsdl:input message="ns:updateStoreGroupRequest" wsaw:Action="urn:updateStoreGroup"/>
+            <wsdl:output message="ns:updateStoreGroupResponse" wsaw:Action="urn:updateStoreGroupResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionWithStoreGroupName">
+            <wsdl:input message="ns:managePromotionWithStoreGroupNameRequest" wsaw:Action="urn:managePromotionWithStoreGroupName"/>
+            <wsdl:output message="ns:managePromotionWithStoreGroupNameResponse" wsaw:Action="urn:managePromotionWithStoreGroupNameResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="adhocLabelRequest">
+            <wsdl:input message="ns:adhocLabelRequestRequest" wsaw:Action="urn:adhocLabelRequest"/>
+            <wsdl:output message="ns:adhocLabelRequestResponse" wsaw:Action="urn:adhocLabelRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy">
+            <wsdl:input message="ns:manageProductHierarchyRequest" wsaw:Action="urn:manageProductHierarchy"/>
+            <wsdl:output message="ns:manageProductHierarchyResponse" wsaw:Action="urn:manageProductHierarchyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramHdr">
+            <wsdl:input message="ns:getECSPlanogramHdrRequest" wsaw:Action="urn:getECSPlanogramHdr"/>
+            <wsdl:output message="ns:getECSPlanogramHdrResponse" wsaw:Action="urn:getECSPlanogramHdrResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation_2">
+            <wsdl:input message="ns:managePlanogramLocation_2Request" wsaw:Action="urn:managePlanogramLocation_2"/>
+            <wsdl:output message="ns:managePlanogramLocation_2Response" wsaw:Action="urn:managePlanogramLocation_2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageAdvancedProductHierarchy">
+            <wsdl:input message="ns:manageAdvancedProductHierarchyRequest" wsaw:Action="urn:manageAdvancedProductHierarchy"/>
+            <wsdl:output message="ns:manageAdvancedProductHierarchyResponse" wsaw:Action="urn:manageAdvancedProductHierarchyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="customSignBuilderService">
+            <wsdl:input message="ns:customSignBuilderServiceRequest" wsaw:Action="urn:customSignBuilderService"/>
+            <wsdl:output message="ns:customSignBuilderServiceResponse" wsaw:Action="urn:customSignBuilderServiceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation">
+            <wsdl:input message="ns:managePlanogramLocationRequest" wsaw:Action="urn:managePlanogramLocation"/>
+            <wsdl:output message="ns:managePlanogramLocationResponse" wsaw:Action="urn:managePlanogramLocationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange_V2">
+            <wsdl:input message="ns:manageStockRange_V2Request" wsaw:Action="urn:manageStockRange_V2"/>
+            <wsdl:output message="ns:manageStockRange_V2Response" wsaw:Action="urn:manageStockRange_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitId">
+            <wsdl:input message="ns:getECSPlanogramSULFromPlanoIdSellUnitIdRequest" wsaw:Action="urn:getECSPlanogramSULFromPlanoIdSellUnitId"/>
+            <wsdl:output message="ns:getECSPlanogramSULFromPlanoIdSellUnitIdResponse" wsaw:Action="urn:getECSPlanogramSULFromPlanoIdSellUnitIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsStoreContent">
+            <wsdl:input message="ns:manageProductsStoreContentRequest" wsaw:Action="urn:manageProductsStoreContent"/>
+            <wsdl:output message="ns:manageProductsStoreContentResponse" wsaw:Action="urn:manageProductsStoreContentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageEvent">
+            <wsdl:input message="ns:manageEventRequest" wsaw:Action="urn:manageEvent"/>
+            <wsdl:output message="ns:manageEventResponse" wsaw:Action="urn:manageEventResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manageStore">
+            <wsdl:input message="ns:manageStoreRequest" wsaw:Action="urn:manageStore"/>
+            <wsdl:output message="ns:manageStoreResponse" wsaw:Action="urn:manageStoreResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion">
+            <wsdl:input message="ns:managePromotionRequest" wsaw:Action="urn:managePromotion"/>
+            <wsdl:output message="ns:managePromotionResponse" wsaw:Action="urn:managePromotionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_V2">
+            <wsdl:input message="ns:managePromotion_V2Request" wsaw:Action="urn:managePromotion_V2"/>
+            <wsdl:output message="ns:managePromotion_V2Response" wsaw:Action="urn:managePromotion_V2Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPlanogramLocationDetails">
+            <wsdl:input message="ns:getPlanogramLocationDetailsRequest" wsaw:Action="urn:getPlanogramLocationDetails"/>
+            <wsdl:output message="ns:getPlanogramLocationDetailsResponse" wsaw:Action="urn:getPlanogramLocationDetailsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitIdFull">
+            <wsdl:input message="ns:getECSPlanogramSULFromPlanoIdSellUnitIdFullRequest" wsaw:Action="urn:getECSPlanogramSULFromPlanoIdSellUnitIdFull"/>
+            <wsdl:output message="ns:getECSPlanogramSULFromPlanoIdSellUnitIdFullResponse" wsaw:Action="urn:getECSPlanogramSULFromPlanoIdSellUnitIdFullResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBay">
+            <wsdl:input message="ns:getECSPlanogramDtlsFromPlanoIdAisleBayRequest" wsaw:Action="urn:getECSPlanogramDtlsFromPlanoIdAisleBay"/>
+            <wsdl:output message="ns:getECSPlanogramDtlsFromPlanoIdAisleBayResponse" wsaw:Action="urn:getECSPlanogramDtlsFromPlanoIdAisleBayResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EpisysWSSoap11Binding" type="ns:EpisysWSPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="manageECSPlanogramSUL">
+            <soap:operation soapAction="urn:manageECSPlanogramSUL" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreECS">
+            <soap:operation soapAction="urn:manageStoreECS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithPricingRule">
+            <soap:operation soapAction="urn:managePriceWithPricingRule" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStore">
+            <soap:operation soapAction="urn:deleteStore" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findChildren">
+            <soap:operation soapAction="urn:findChildren" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="print">
+            <soap:operation soapAction="urn:print" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getConfirmationPriceForStore">
+            <soap:operation soapAction="urn:getConfirmationPriceForStore" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct">
+            <soap:operation soapAction="urn:manageProduct" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="previewSignSet">
+            <soap:operation soapAction="urn:previewSignSet" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct_V2">
+            <soap:operation soapAction="urn:manageProduct_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocationWithUserId">
+            <soap:operation soapAction="urn:managePlanogramLocationWithUserId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="alterCustomSign">
+            <soap:operation soapAction="urn:alterCustomSign" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="removeStoresFromGroup">
+            <soap:operation soapAction="urn:removeStoresFromGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice">
+            <soap:operation soapAction="urn:managePrice" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent">
+            <soap:operation soapAction="urn:managePriceWithEvent" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct">
+            <soap:operation soapAction="urn:managePlanogramProduct" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice2">
+            <soap:operation soapAction="urn:managePrice2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent2">
+            <soap:operation soapAction="urn:managePriceWithEvent2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageComplexPromotion">
+            <soap:operation soapAction="urn:manageComplexPromotion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2_2">
+            <soap:operation soapAction="urn:managePromotionV2_2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProductWithUserID">
+            <soap:operation soapAction="urn:managePlanogramProductWithUserID" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_2">
+            <soap:operation soapAction="urn:managePromotion_2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEEPRF">
+            <soap:operation soapAction="urn:manageWEEEPRF" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2">
+            <soap:operation soapAction="urn:managePromotionV2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForFESP">
+            <soap:operation soapAction="urn:managePromotionForFESP" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreProductStatus">
+            <soap:operation soapAction="urn:manageStoreProductStatus" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createStoreGroup">
+            <soap:operation soapAction="urn:createStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="upsertStoreGroup">
+            <soap:operation soapAction="urn:upsertStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsWithWorkFlow">
+            <soap:operation soapAction="urn:manageProductsWithWorkFlow" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductDetail">
+            <soap:operation soapAction="urn:manageProductDetail" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getContentDetail">
+            <soap:operation soapAction="urn:getContentDetail" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moveProductHierarchyLevel">
+            <soap:operation soapAction="urn:moveProductHierarchyLevel" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_2">
+            <soap:operation soapAction="urn:managePrice_2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageRelatedArticle">
+            <soap:operation soapAction="urn:manageRelatedArticle" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct_2">
+            <soap:operation soapAction="urn:managePlanogramProduct_2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_V2">
+            <soap:operation soapAction="urn:managePrice_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEECategory">
+            <soap:operation soapAction="urn:manageWEEECategory" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForGroupOffers">
+            <soap:operation soapAction="urn:managePromotionForGroupOffers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq">
+            <soap:operation soapAction="urn:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addStoresToGroup">
+            <soap:operation soapAction="urn:addStoresToGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContent">
+            <soap:operation soapAction="urn:deleteContent" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange">
+            <soap:operation soapAction="urn:manageStockRange" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy_V2">
+            <soap:operation soapAction="urn:manageProductHierarchy_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStoreGroup">
+            <soap:operation soapAction="urn:deleteStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="batchLabelRequest">
+            <soap:operation soapAction="urn:batchLabelRequest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addPlanogramDetails">
+            <soap:operation soapAction="urn:addPlanogramDetails" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithHistory">
+            <soap:operation soapAction="urn:managePriceWithHistory" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAllStoreGroup">
+            <soap:operation soapAction="urn:deleteAllStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStyleDetails">
+            <soap:operation soapAction="urn:getStyleDetails" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent_V2">
+            <soap:operation soapAction="urn:updateContent_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent">
+            <soap:operation soapAction="urn:updateContent" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductWithWorkFlow">
+            <soap:operation soapAction="urn:manageProductWithWorkFlow" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramHdr">
+            <soap:operation soapAction="urn:manageECSPlanogramHdr" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramDtl">
+            <soap:operation soapAction="urn:manageECSPlanogramDtl" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateStoreGroup">
+            <soap:operation soapAction="urn:updateStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionWithStoreGroupName">
+            <soap:operation soapAction="urn:managePromotionWithStoreGroupName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="adhocLabelRequest">
+            <soap:operation soapAction="urn:adhocLabelRequest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy">
+            <soap:operation soapAction="urn:manageProductHierarchy" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramHdr">
+            <soap:operation soapAction="urn:getECSPlanogramHdr" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageAdvancedProductHierarchy">
+            <soap:operation soapAction="urn:manageAdvancedProductHierarchy" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation_2">
+            <soap:operation soapAction="urn:managePlanogramLocation_2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customSignBuilderService">
+            <soap:operation soapAction="urn:customSignBuilderService" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation">
+            <soap:operation soapAction="urn:managePlanogramLocation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange_V2">
+            <soap:operation soapAction="urn:manageStockRange_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitId">
+            <soap:operation soapAction="urn:getECSPlanogramSULFromPlanoIdSellUnitId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsStoreContent">
+            <soap:operation soapAction="urn:manageProductsStoreContent" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageEvent">
+            <soap:operation soapAction="urn:manageEvent" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStore">
+            <soap:operation soapAction="urn:manageStore" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion">
+            <soap:operation soapAction="urn:managePromotion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_V2">
+            <soap:operation soapAction="urn:managePromotion_V2" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitIdFull">
+            <soap:operation soapAction="urn:getECSPlanogramSULFromPlanoIdSellUnitIdFull" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPlanogramLocationDetails">
+            <soap:operation soapAction="urn:getPlanogramLocationDetails" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBay">
+            <soap:operation soapAction="urn:getECSPlanogramDtlsFromPlanoIdAisleBay" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="EpisysWSSoap12Binding" type="ns:EpisysWSPortType">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="manageECSPlanogramSUL">
+            <soap12:operation soapAction="urn:manageECSPlanogramSUL" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreECS">
+            <soap12:operation soapAction="urn:manageStoreECS" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithPricingRule">
+            <soap12:operation soapAction="urn:managePriceWithPricingRule" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStore">
+            <soap12:operation soapAction="urn:deleteStore" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findChildren">
+            <soap12:operation soapAction="urn:findChildren" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="print">
+            <soap12:operation soapAction="urn:print" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getConfirmationPriceForStore">
+            <soap12:operation soapAction="urn:getConfirmationPriceForStore" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct">
+            <soap12:operation soapAction="urn:manageProduct" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="previewSignSet">
+            <soap12:operation soapAction="urn:previewSignSet" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct_V2">
+            <soap12:operation soapAction="urn:manageProduct_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocationWithUserId">
+            <soap12:operation soapAction="urn:managePlanogramLocationWithUserId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="alterCustomSign">
+            <soap12:operation soapAction="urn:alterCustomSign" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="removeStoresFromGroup">
+            <soap12:operation soapAction="urn:removeStoresFromGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice">
+            <soap12:operation soapAction="urn:managePrice" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent">
+            <soap12:operation soapAction="urn:managePriceWithEvent" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct">
+            <soap12:operation soapAction="urn:managePlanogramProduct" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice2">
+            <soap12:operation soapAction="urn:managePrice2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent2">
+            <soap12:operation soapAction="urn:managePriceWithEvent2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageComplexPromotion">
+            <soap12:operation soapAction="urn:manageComplexPromotion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2_2">
+            <soap12:operation soapAction="urn:managePromotionV2_2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProductWithUserID">
+            <soap12:operation soapAction="urn:managePlanogramProductWithUserID" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_2">
+            <soap12:operation soapAction="urn:managePromotion_2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEEPRF">
+            <soap12:operation soapAction="urn:manageWEEEPRF" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2">
+            <soap12:operation soapAction="urn:managePromotionV2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForFESP">
+            <soap12:operation soapAction="urn:managePromotionForFESP" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreProductStatus">
+            <soap12:operation soapAction="urn:manageStoreProductStatus" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createStoreGroup">
+            <soap12:operation soapAction="urn:createStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="upsertStoreGroup">
+            <soap12:operation soapAction="urn:upsertStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsWithWorkFlow">
+            <soap12:operation soapAction="urn:manageProductsWithWorkFlow" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductDetail">
+            <soap12:operation soapAction="urn:manageProductDetail" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getContentDetail">
+            <soap12:operation soapAction="urn:getContentDetail" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moveProductHierarchyLevel">
+            <soap12:operation soapAction="urn:moveProductHierarchyLevel" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_2">
+            <soap12:operation soapAction="urn:managePrice_2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageRelatedArticle">
+            <soap12:operation soapAction="urn:manageRelatedArticle" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct_2">
+            <soap12:operation soapAction="urn:managePlanogramProduct_2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_V2">
+            <soap12:operation soapAction="urn:managePrice_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEECategory">
+            <soap12:operation soapAction="urn:manageWEEECategory" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForGroupOffers">
+            <soap12:operation soapAction="urn:managePromotionForGroupOffers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq">
+            <soap12:operation soapAction="urn:getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addStoresToGroup">
+            <soap12:operation soapAction="urn:addStoresToGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContent">
+            <soap12:operation soapAction="urn:deleteContent" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange">
+            <soap12:operation soapAction="urn:manageStockRange" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy_V2">
+            <soap12:operation soapAction="urn:manageProductHierarchy_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStoreGroup">
+            <soap12:operation soapAction="urn:deleteStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="batchLabelRequest">
+            <soap12:operation soapAction="urn:batchLabelRequest" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addPlanogramDetails">
+            <soap12:operation soapAction="urn:addPlanogramDetails" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithHistory">
+            <soap12:operation soapAction="urn:managePriceWithHistory" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAllStoreGroup">
+            <soap12:operation soapAction="urn:deleteAllStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStyleDetails">
+            <soap12:operation soapAction="urn:getStyleDetails" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent_V2">
+            <soap12:operation soapAction="urn:updateContent_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent">
+            <soap12:operation soapAction="urn:updateContent" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductWithWorkFlow">
+            <soap12:operation soapAction="urn:manageProductWithWorkFlow" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramHdr">
+            <soap12:operation soapAction="urn:manageECSPlanogramHdr" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramDtl">
+            <soap12:operation soapAction="urn:manageECSPlanogramDtl" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateStoreGroup">
+            <soap12:operation soapAction="urn:updateStoreGroup" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionWithStoreGroupName">
+            <soap12:operation soapAction="urn:managePromotionWithStoreGroupName" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="adhocLabelRequest">
+            <soap12:operation soapAction="urn:adhocLabelRequest" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy">
+            <soap12:operation soapAction="urn:manageProductHierarchy" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramHdr">
+            <soap12:operation soapAction="urn:getECSPlanogramHdr" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageAdvancedProductHierarchy">
+            <soap12:operation soapAction="urn:manageAdvancedProductHierarchy" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation_2">
+            <soap12:operation soapAction="urn:managePlanogramLocation_2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customSignBuilderService">
+            <soap12:operation soapAction="urn:customSignBuilderService" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation">
+            <soap12:operation soapAction="urn:managePlanogramLocation" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange_V2">
+            <soap12:operation soapAction="urn:manageStockRange_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitId">
+            <soap12:operation soapAction="urn:getECSPlanogramSULFromPlanoIdSellUnitId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsStoreContent">
+            <soap12:operation soapAction="urn:manageProductsStoreContent" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageEvent">
+            <soap12:operation soapAction="urn:manageEvent" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStore">
+            <soap12:operation soapAction="urn:manageStore" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion">
+            <soap12:operation soapAction="urn:managePromotion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_V2">
+            <soap12:operation soapAction="urn:managePromotion_V2" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitIdFull">
+            <soap12:operation soapAction="urn:getECSPlanogramSULFromPlanoIdSellUnitIdFull" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPlanogramLocationDetails">
+            <soap12:operation soapAction="urn:getPlanogramLocationDetails" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBay">
+            <soap12:operation soapAction="urn:getECSPlanogramDtlsFromPlanoIdAisleBay" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="EpisysWSHttpBinding" type="ns:EpisysWSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="manageECSPlanogramSUL">
+            <http:operation location="EpisysWS/manageECSPlanogramSUL"/>
+            <wsdl:input>
+                <mime:content part="manageECSPlanogramSUL" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageECSPlanogramSUL" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreECS">
+            <http:operation location="EpisysWS/manageStoreECS"/>
+            <wsdl:input>
+                <mime:content part="manageStoreECS" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageStoreECS" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithPricingRule">
+            <http:operation location="EpisysWS/managePriceWithPricingRule"/>
+            <wsdl:input>
+                <mime:content part="managePriceWithPricingRule" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePriceWithPricingRule" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStore">
+            <http:operation location="EpisysWS/deleteStore"/>
+            <wsdl:input>
+                <mime:content part="deleteStore" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="deleteStore" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findChildren">
+            <http:operation location="EpisysWS/findChildren"/>
+            <wsdl:input>
+                <mime:content part="findChildren" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="findChildren" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="print">
+            <http:operation location="EpisysWS/print"/>
+            <wsdl:input>
+                <mime:content part="print" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="print" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getConfirmationPriceForStore">
+            <http:operation location="EpisysWS/getConfirmationPriceForStore"/>
+            <wsdl:input>
+                <mime:content part="getConfirmationPriceForStore" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getConfirmationPriceForStore" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct">
+            <http:operation location="EpisysWS/manageProduct"/>
+            <wsdl:input>
+                <mime:content part="manageProduct" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProduct" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="previewSignSet">
+            <http:operation location="EpisysWS/previewSignSet"/>
+            <wsdl:input>
+                <mime:content part="previewSignSet" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="previewSignSet" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProduct_V2">
+            <http:operation location="EpisysWS/manageProduct_V2"/>
+            <wsdl:input>
+                <mime:content part="manageProduct_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProduct_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocationWithUserId">
+            <http:operation location="EpisysWS/managePlanogramLocationWithUserId"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramLocationWithUserId" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramLocationWithUserId" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="alterCustomSign">
+            <http:operation location="EpisysWS/alterCustomSign"/>
+            <wsdl:input>
+                <mime:content part="alterCustomSign" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="alterCustomSign" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="removeStoresFromGroup">
+            <http:operation location="EpisysWS/removeStoresFromGroup"/>
+            <wsdl:input>
+                <mime:content part="removeStoresFromGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="removeStoresFromGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice">
+            <http:operation location="EpisysWS/managePrice"/>
+            <wsdl:input>
+                <mime:content part="managePrice" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePrice" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent">
+            <http:operation location="EpisysWS/managePriceWithEvent"/>
+            <wsdl:input>
+                <mime:content part="managePriceWithEvent" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePriceWithEvent" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct">
+            <http:operation location="EpisysWS/managePlanogramProduct"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramProduct" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramProduct" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice2">
+            <http:operation location="EpisysWS/managePrice2"/>
+            <wsdl:input>
+                <mime:content part="managePrice2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePrice2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithEvent2">
+            <http:operation location="EpisysWS/managePriceWithEvent2"/>
+            <wsdl:input>
+                <mime:content part="managePriceWithEvent2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePriceWithEvent2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageComplexPromotion">
+            <http:operation location="EpisysWS/manageComplexPromotion"/>
+            <wsdl:input>
+                <mime:content part="manageComplexPromotion" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageComplexPromotion" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2_2">
+            <http:operation location="EpisysWS/managePromotionV2_2"/>
+            <wsdl:input>
+                <mime:content part="managePromotionV2_2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotionV2_2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProductWithUserID">
+            <http:operation location="EpisysWS/managePlanogramProductWithUserID"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramProductWithUserID" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramProductWithUserID" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_2">
+            <http:operation location="EpisysWS/managePromotion_2"/>
+            <wsdl:input>
+                <mime:content part="managePromotion_2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotion_2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEEPRF">
+            <http:operation location="EpisysWS/manageWEEEPRF"/>
+            <wsdl:input>
+                <mime:content part="manageWEEEPRF" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageWEEEPRF" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionV2">
+            <http:operation location="EpisysWS/managePromotionV2"/>
+            <wsdl:input>
+                <mime:content part="managePromotionV2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotionV2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForFESP">
+            <http:operation location="EpisysWS/managePromotionForFESP"/>
+            <wsdl:input>
+                <mime:content part="managePromotionForFESP" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotionForFESP" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStoreProductStatus">
+            <http:operation location="EpisysWS/manageStoreProductStatus"/>
+            <wsdl:input>
+                <mime:content part="manageStoreProductStatus" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageStoreProductStatus" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createStoreGroup">
+            <http:operation location="EpisysWS/createStoreGroup"/>
+            <wsdl:input>
+                <mime:content part="createStoreGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="createStoreGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="upsertStoreGroup">
+            <http:operation location="EpisysWS/upsertStoreGroup"/>
+            <wsdl:input>
+                <mime:content part="upsertStoreGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="upsertStoreGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsWithWorkFlow">
+            <http:operation location="EpisysWS/manageProductsWithWorkFlow"/>
+            <wsdl:input>
+                <mime:content part="manageProductsWithWorkFlow" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductsWithWorkFlow" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductDetail">
+            <http:operation location="EpisysWS/manageProductDetail"/>
+            <wsdl:input>
+                <mime:content part="manageProductDetail" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductDetail" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getContentDetail">
+            <http:operation location="EpisysWS/getContentDetail"/>
+            <wsdl:input>
+                <mime:content part="getContentDetail" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getContentDetail" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moveProductHierarchyLevel">
+            <http:operation location="EpisysWS/moveProductHierarchyLevel"/>
+            <wsdl:input>
+                <mime:content part="moveProductHierarchyLevel" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="moveProductHierarchyLevel" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_2">
+            <http:operation location="EpisysWS/managePrice_2"/>
+            <wsdl:input>
+                <mime:content part="managePrice_2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePrice_2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageRelatedArticle">
+            <http:operation location="EpisysWS/manageRelatedArticle"/>
+            <wsdl:input>
+                <mime:content part="manageRelatedArticle" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageRelatedArticle" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramProduct_2">
+            <http:operation location="EpisysWS/managePlanogramProduct_2"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramProduct_2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramProduct_2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePrice_V2">
+            <http:operation location="EpisysWS/managePrice_V2"/>
+            <wsdl:input>
+                <mime:content part="managePrice_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePrice_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageWEEECategory">
+            <http:operation location="EpisysWS/manageWEEECategory"/>
+            <wsdl:input>
+                <mime:content part="manageWEEECategory" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageWEEECategory" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionForGroupOffers">
+            <http:operation location="EpisysWS/managePromotionForGroupOffers"/>
+            <wsdl:input>
+                <mime:content part="managePromotionForGroupOffers" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotionForGroupOffers" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq">
+            <http:operation location="EpisysWS/getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq"/>
+            <wsdl:input>
+                <mime:content part="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getECSPlanogramDtlsFromPlanoIdAisleBayShelfTypeShelfShelfSeq" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addStoresToGroup">
+            <http:operation location="EpisysWS/addStoresToGroup"/>
+            <wsdl:input>
+                <mime:content part="addStoresToGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="addStoresToGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteContent">
+            <http:operation location="EpisysWS/deleteContent"/>
+            <wsdl:input>
+                <mime:content part="deleteContent" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="deleteContent" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange">
+            <http:operation location="EpisysWS/manageStockRange"/>
+            <wsdl:input>
+                <mime:content part="manageStockRange" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageStockRange" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy_V2">
+            <http:operation location="EpisysWS/manageProductHierarchy_V2"/>
+            <wsdl:input>
+                <mime:content part="manageProductHierarchy_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductHierarchy_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteStoreGroup">
+            <http:operation location="EpisysWS/deleteStoreGroup"/>
+            <wsdl:input>
+                <mime:content part="deleteStoreGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="deleteStoreGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="batchLabelRequest">
+            <http:operation location="EpisysWS/batchLabelRequest"/>
+            <wsdl:input>
+                <mime:content part="batchLabelRequest" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="batchLabelRequest" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addPlanogramDetails">
+            <http:operation location="EpisysWS/addPlanogramDetails"/>
+            <wsdl:input>
+                <mime:content part="addPlanogramDetails" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="addPlanogramDetails" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePriceWithHistory">
+            <http:operation location="EpisysWS/managePriceWithHistory"/>
+            <wsdl:input>
+                <mime:content part="managePriceWithHistory" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePriceWithHistory" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAllStoreGroup">
+            <http:operation location="EpisysWS/deleteAllStoreGroup"/>
+            <wsdl:input>
+                <mime:content part="deleteAllStoreGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="deleteAllStoreGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStyleDetails">
+            <http:operation location="EpisysWS/getStyleDetails"/>
+            <wsdl:input>
+                <mime:content part="getStyleDetails" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getStyleDetails" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent_V2">
+            <http:operation location="EpisysWS/updateContent_V2"/>
+            <wsdl:input>
+                <mime:content part="updateContent_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="updateContent_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateContent">
+            <http:operation location="EpisysWS/updateContent"/>
+            <wsdl:input>
+                <mime:content part="updateContent" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="updateContent" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductWithWorkFlow">
+            <http:operation location="EpisysWS/manageProductWithWorkFlow"/>
+            <wsdl:input>
+                <mime:content part="manageProductWithWorkFlow" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductWithWorkFlow" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramHdr">
+            <http:operation location="EpisysWS/manageECSPlanogramHdr"/>
+            <wsdl:input>
+                <mime:content part="manageECSPlanogramHdr" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageECSPlanogramHdr" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageECSPlanogramDtl">
+            <http:operation location="EpisysWS/manageECSPlanogramDtl"/>
+            <wsdl:input>
+                <mime:content part="manageECSPlanogramDtl" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageECSPlanogramDtl" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateStoreGroup">
+            <http:operation location="EpisysWS/updateStoreGroup"/>
+            <wsdl:input>
+                <mime:content part="updateStoreGroup" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="updateStoreGroup" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotionWithStoreGroupName">
+            <http:operation location="EpisysWS/managePromotionWithStoreGroupName"/>
+            <wsdl:input>
+                <mime:content part="managePromotionWithStoreGroupName" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotionWithStoreGroupName" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="adhocLabelRequest">
+            <http:operation location="EpisysWS/adhocLabelRequest"/>
+            <wsdl:input>
+                <mime:content part="adhocLabelRequest" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="adhocLabelRequest" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductHierarchy">
+            <http:operation location="EpisysWS/manageProductHierarchy"/>
+            <wsdl:input>
+                <mime:content part="manageProductHierarchy" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductHierarchy" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramHdr">
+            <http:operation location="EpisysWS/getECSPlanogramHdr"/>
+            <wsdl:input>
+                <mime:content part="getECSPlanogramHdr" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getECSPlanogramHdr" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageAdvancedProductHierarchy">
+            <http:operation location="EpisysWS/manageAdvancedProductHierarchy"/>
+            <wsdl:input>
+                <mime:content part="manageAdvancedProductHierarchy" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageAdvancedProductHierarchy" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation_2">
+            <http:operation location="EpisysWS/managePlanogramLocation_2"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramLocation_2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramLocation_2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customSignBuilderService">
+            <http:operation location="EpisysWS/customSignBuilderService"/>
+            <wsdl:input>
+                <mime:content part="customSignBuilderService" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="customSignBuilderService" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePlanogramLocation">
+            <http:operation location="EpisysWS/managePlanogramLocation"/>
+            <wsdl:input>
+                <mime:content part="managePlanogramLocation" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePlanogramLocation" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStockRange_V2">
+            <http:operation location="EpisysWS/manageStockRange_V2"/>
+            <wsdl:input>
+                <mime:content part="manageStockRange_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageStockRange_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitId">
+            <http:operation location="EpisysWS/getECSPlanogramSULFromPlanoIdSellUnitId"/>
+            <wsdl:input>
+                <mime:content part="getECSPlanogramSULFromPlanoIdSellUnitId" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getECSPlanogramSULFromPlanoIdSellUnitId" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageProductsStoreContent">
+            <http:operation location="EpisysWS/manageProductsStoreContent"/>
+            <wsdl:input>
+                <mime:content part="manageProductsStoreContent" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageProductsStoreContent" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageEvent">
+            <http:operation location="EpisysWS/manageEvent"/>
+            <wsdl:input>
+                <mime:content part="manageEvent" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageEvent" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manageStore">
+            <http:operation location="EpisysWS/manageStore"/>
+            <wsdl:input>
+                <mime:content part="manageStore" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="manageStore" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion">
+            <http:operation location="EpisysWS/managePromotion"/>
+            <wsdl:input>
+                <mime:content part="managePromotion" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotion" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="managePromotion_V2">
+            <http:operation location="EpisysWS/managePromotion_V2"/>
+            <wsdl:input>
+                <mime:content part="managePromotion_V2" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="managePromotion_V2" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramSULFromPlanoIdSellUnitIdFull">
+            <http:operation location="EpisysWS/getECSPlanogramSULFromPlanoIdSellUnitIdFull"/>
+            <wsdl:input>
+                <mime:content part="getECSPlanogramSULFromPlanoIdSellUnitIdFull" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getECSPlanogramSULFromPlanoIdSellUnitIdFull" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPlanogramLocationDetails">
+            <http:operation location="EpisysWS/getPlanogramLocationDetails"/>
+            <wsdl:input>
+                <mime:content part="getPlanogramLocationDetails" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getPlanogramLocationDetails" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getECSPlanogramDtlsFromPlanoIdAisleBay">
+            <http:operation location="EpisysWS/getECSPlanogramDtlsFromPlanoIdAisleBay"/>
+            <wsdl:input>
+                <mime:content part="getECSPlanogramDtlsFromPlanoIdAisleBay" type="text/xml"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content part="getECSPlanogramDtlsFromPlanoIdAisleBay" type="text/xml"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EpisysWS">
+        <wsdl:port binding="ns:EpisysWSSoap11Binding" name="EpisysWSHttpSoap11Endpoint">
+            <soap:address location="http://lnxs0678.uk.b-and-q.com:8080/WebServicesFramework/services/EpisysWS.EpisysWSHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port binding="ns:EpisysWSSoap12Binding" name="EpisysWSHttpSoap12Endpoint">
+            <soap12:address location="http://lnxs0678.uk.b-and-q.com:8080/WebServicesFramework/services/EpisysWS.EpisysWSHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port binding="ns:EpisysWSHttpBinding" name="EpisysWSHttpEndpoint">
+            <http:address location="http://lnxs0678.uk.b-and-q.com:8080/WebServicesFramework/services/EpisysWS.EpisysWSHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

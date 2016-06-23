@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <!-- 
+        <generatedXSD location="ZECC_TO_ITEM_CONFIRMATION_InlineSchema1.xsd"/>
+        <generatedXSD location="ZECC_TO_ITEM_CONFIRMATION_InlineSchema2.xsd"/>
+        -->
+        
+        <generatedXSD location="../SAPTransferOrder_ZECC_GET_TO_DETAILS/ZECC_GET_TO_DETAILS_InlineSchema2.xsd"/>
+        <generatedXSD location="../SAPTransferOrder_ZECC_GET_TO_DETAILS/ZECC_GET_TO_DETAILS_InlineSchema1.xsd"/>
+        
+        <binding hasEncoding="false" imported="true" name="ZECC_TO_ITEM_CONFIRMATION_soap12" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="true" name="ZECC_TO_ITEM_CONFIRMATION" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="BN__ZECC_TO_ITEM_CONFIRMATION">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ZECC_TO_ITEM_CONFIRMATION_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__ZECC_TO_ITEM_CONFIRMATION">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+          <sapsession:enableSession>false</sapsession:enableSession>
+        </sapsession:Session>
+        <sapcentraladmin:CentralAdministration wsp:Optional="true" xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/">
+          <sapcentraladmin:BusinessApplicationID>005056964BA01EE488C2857DAA3D8510</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZCncToItemConfirmation">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:n0="urn:sap-com:document:sap:rfc:functions">
+<!-- 
+<xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_TO_ITEM_CONFIRMATION_InlineSchema1.xsd"/>
+<xsd:include schemaLocation="ZECC_TO_ITEM_CONFIRMATION_InlineSchema2.xsd"/>
+ -->
+ <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="../SAPTransferOrder_ZECC_GET_TO_DETAILS/ZECC_GET_TO_DETAILS_InlineSchema1.xsd"/>
+<xsd:include schemaLocation="../SAPTransferOrder_ZECC_GET_TO_DETAILS/ZECC_GET_TO_DETAILS_InlineSchema2.xsd"/>
+ 
+    </xsd:schema>
+        <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+<!--  <xsd:include schemaLocation="ZECC_TO_ITEM_CONFIRMATION_InlineSchema1.xsd"/> -->
+<xsd:include schemaLocation="../SAPTransferOrder_ZECC_GET_TO_DETAILS/ZECC_GET_TO_DETAILS_InlineSchema1.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZCncToItemConfirmation">
+    <wsdl:part element="tns:ZCncToItemConfirmation" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ZCncToItemConfirmationResponse">
+    <wsdl:part element="tns:ZCncToItemConfirmationResponse" name="parameter"/>
+  </wsdl:message>
+  <wsdl:portType name="ZECC_TO_ITEM_CONFIRMATION">
+    <wsdl:documentation>
+      <sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+        <sapdoc:docitem docURL="https://rdlecc.b-and-q.com/sap/bc/esdt/docu/sd_text?sap-client=301&amp;sd_name=ZECC_TO_ITEM_CONFIRMATION"/>
+      </sapdoc:sapdoc>
+    </wsdl:documentation>
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__ZECC_TO_ITEM_CONFIRMATION"/>
+    </wsp:Policy>
+    <wsdl:operation name="ZCncToItemConfirmation">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZCncToItemConfirmation"/>
+      </wsp:Policy>
+      <wsdl:input message="tns:ZCncToItemConfirmation"/>
+      <wsdl:output message="tns:ZCncToItemConfirmationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZECC_TO_ITEM_CONFIRMATION" type="tns:ZECC_TO_ITEM_CONFIRMATION">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZECC_TO_ITEM_CONFIRMATION"/>
+    </wsp:Policy>
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ZCncToItemConfirmation">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZECC_TO_ITEM_CONFIRMATION:ZCncToItemConfirmationRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZECC_TO_ITEM_CONFIRMATION_soap12" type="tns:ZECC_TO_ITEM_CONFIRMATION">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZECC_TO_ITEM_CONFIRMATION_soap12"/>
+    </wsp:Policy>
+    <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ZCncToItemConfirmation">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZECC_TO_ITEM_CONFIRMATION:ZCncToItemConfirmationRequest" style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZECC_TO_ITEM_CONFIRMATION">
+    <wsdl:port binding="tns:ZECC_TO_ITEM_CONFIRMATION" name="ZECC_TO_ITEM_CONFIRMATION">
+      <soap:address location="https://rdlecc.b-and-q.com/sap/bc/srt/rfc/sap/zecc_to_item_confirmation/301/zecc_to_item_confirmation/zecc_to_item_confirmation"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:ZECC_TO_ITEM_CONFIRMATION_soap12" name="ZECC_TO_ITEM_CONFIRMATION_soap12">
+      <wsoap12:address location="https://rdlecc.b-and-q.com/sap/bc/srt/rfc/sap/zecc_to_item_confirmation/301/zecc_to_item_confirmation/zecc_to_item_confirmation"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

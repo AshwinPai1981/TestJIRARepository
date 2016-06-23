@@ -1,0 +1,41 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+
+CREATE COMPUTE MODULE RouteToMethod_CreateRequestJSON
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+        -- setting the service specific reply to queue based on REST Method
+		CASE(Environment.Store.method) 
+			WHEN 'GET' THEN
+				SET OutputRoot.MQMD.ReplyToQ 					= 	'AISLEGET.OUT.INTERNAL.WMB';
+			WHEN 'POST' THEN
+				SET OutputRoot.MQMD.ReplyToQ 					= 	'AISLEPOST.OUT.INTERNAL.WMB';
+			WHEN 'PUT' THEN
+				SET OutputRoot.MQMD.ReplyToQ 					= 	'AISLEPOST.OUT.INTERNAL.WMB';
+			WHEN 'DELETE' THEN
+				SET OutputRoot.MQMD.ReplyToQ 					= 	'AISLEPOST.OUT.INTERNAL.WMB';
+		END CASE;
+		
+		-- setting the MQRFH2 header for storing the metadata information
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Version 			= 	2;
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Format 				= 	'MQSTR';
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)NameValueCCSID 		= 	1208;
+		
+		SET OutputRoot.MQRFH2.usr.MetaData 						= 	Environment.MetaData; 
+		SET OutputRoot.MQRFH2.usr.ReqFromURI 					= 	Environment.ReqFromURI;		
+		SET OutputRoot.MQRFH2.usr.storeCode 					= 	Environment.QueryString.storeCode;
+		SET OutputRoot.MQRFH2.usr.requestID 					= 	Environment.Store.requestID;
+		SET OutputRoot.MQRFH2.usr.aisleNumber					= 	Environment.Store.aisleNumber;
+		SET OutputRoot.MQRFH2.usr.QueryString					= 	Environment.QueryString;
+				
+		SET OutputRoot.BLOB.BLOB 								= 	InputRoot.BLOB.BLOB;
+		SET OutputLocalEnvironment 								= 	InputLocalEnvironment;
+		
+		RETURN TRUE;
+	END;
+
+      
+END MODULE;

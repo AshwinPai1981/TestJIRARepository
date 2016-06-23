@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://sap.com/xi/APPL/SE/Global" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="http://kfplc.com/ws/ERP" xmlns:n2="http://sap.com/xi/SAPGlobal20/Global" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sap.com/xi/APPL/SE/Global" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema1.xsd"/>
+        <generatedXSD location="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema2.xsd"/>
+        <generatedXSD location="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema3.xsd"/>
+        <binding hasEncoding="false" imported="true" name="ERZ301PHYINVCTCHGRC" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="true" name="ERZ301PHYINVCTCHGRC_soap12" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="BN__ERZ301PHYINVCTCHGRC">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ERZ301PHYINVCTCHGRC_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__PhysicalInventoryCountERPChangeRequestConfirmation_In">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapcentraladmin:CentralAdministration wsp:Optional="true" xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/">
+          <sapcentraladmin:BusinessApplicationID>005056964BA01EE488C2857DAA3D8510</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__PhysicalInventoryCountERPChangeRequestConfirmation_In">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://sap.com/xi/APPL/SE/Global" xmlns="http://sap.com/xi/APPL/SE/Global" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:xi0="http://kfplc.com/ws/ERP" xmlns:xi1="http://sap.com/xi/SAPGlobal20/Global">
+      <xsd:import namespace="http://kfplc.com/ws/ERP" schemaLocation="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema2.xsd"/>
+      <xsd:include schemaLocation="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema1.xsd"/>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://kfplc.com/ws/ERP" xmlns="http://kfplc.com/ws/ERP" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:xi0="http://kfplc.com/ws/ERP" xmlns:xi1="http://sap.com/xi/SAPGlobal20/Global">
+      <xsd:include schemaLocation="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema2.xsd"/>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://sap.com/xi/SAPGlobal20/Global" xmlns="http://sap.com/xi/SAPGlobal20/Global" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:xi0="http://kfplc.com/ws/ERP" xmlns:xi1="http://sap.com/xi/SAPGlobal20/Global">
+      <xsd:import namespace="http://sap.com/xi/APPL/SE/Global" schemaLocation="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema1.xsd"/>
+      <xsd:include schemaLocation="../SAPPhysicalInventory_ECC_PHYINVCTCRTRC/ECC_PHYINVCTCRTRC_InlineSchema3.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PhysicalInventoryCountERPChangeRequest_sync">
+    <wsdl:part element="tns:PhysicalInventoryCountERPChangeRequest_sync" name="PhysicalInventoryCountERPChangeRequest_sync"/>
+  </wsdl:message>
+  <wsdl:message name="PhysicalInventoryCountERPChangeConfirmation_sync">
+    <wsdl:part element="tns:PhysicalInventoryCountERPChangeConfirmation_sync" name="PhysicalInventoryCountERPChangeConfirmation_sync"/>
+  </wsdl:message>
+  <wsdl:message name="StandardMessageFault">
+    <wsdl:part element="n2:StandardMessageFault" name="StandardMessageFault"/>
+  </wsdl:message>
+  <wsdl:portType name="PhysicalInventoryCountERPChangeRequestConfirmation_In">
+    <wsdl:documentation>
+      <sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+        <sapdoc:docitem applicationComponent="MM-IM"/>
+      </sapdoc:sapdoc>
+    </wsdl:documentation>
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__PhysicalInventoryCountERPChangeRequestConfirmation_In"/>
+    </wsp:Policy>
+    <wsdl:operation name="PhysicalInventoryCountERPChangeRequestConfirmation_In">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__PhysicalInventoryCountERPChangeRequestConfirmation_In"/>
+      </wsp:Policy>
+      <wsdl:input message="tns:PhysicalInventoryCountERPChangeRequest_sync"/>
+      <wsdl:output message="tns:PhysicalInventoryCountERPChangeConfirmation_sync"/>
+      <wsdl:fault message="tns:StandardMessageFault" name="StandardMessageFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ERZ301PHYINVCTCHGRC" type="tns:PhysicalInventoryCountERPChangeRequestConfirmation_In">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ERZ301PHYINVCTCHGRC"/>
+    </wsp:Policy>
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="PhysicalInventoryCountERPChangeRequestConfirmation_In">
+      <soap:operation soapAction="http://sap.com/xi/APPL/SE/Global/PhysicalInventoryCountERPChangeRequestConfirmation_In/PhysicalInventoryCountERPChangeRequestConfirmation_InRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="StandardMessageFault">
+        <soap:fault name="StandardMessageFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ERZ301PHYINVCTCHGRC_soap12" type="tns:PhysicalInventoryCountERPChangeRequestConfirmation_In">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ERZ301PHYINVCTCHGRC_soap12"/>
+    </wsp:Policy>
+    <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="PhysicalInventoryCountERPChangeRequestConfirmation_In">
+      <wsoap12:operation soapAction="http://sap.com/xi/APPL/SE/Global/PhysicalInventoryCountERPChangeRequestConfirmation_In/PhysicalInventoryCountERPChangeRequestConfirmation_InRequest" style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="StandardMessageFault">
+        <wsoap12:fault name="StandardMessageFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ECC_PHYINVCTCHGRC_301">
+    <wsdl:port binding="tns:ERZ301PHYINVCTCHGRC" name="ERZ301PHYINVCTCHGRC">
+      <soap:address location="http://vhkfrerzci.rot.hec.ghanp.kfplc.com:8000/sap/bc/srt/xip/sap/ecc_phyinvctchgrc/301/ecc_phyinvctchgrc_301/erz301phyinvctchgrc"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:ERZ301PHYINVCTCHGRC_soap12" name="ERZ301PHYINVCTCHGRC_soap12">
+      <wsoap12:address location="http://vhkfrerzci.rot.hec.ghanp.kfplc.com:8000/sap/bc/srt/xip/sap/ecc_phyinvctchgrc/301/ecc_phyinvctchgrc_301/erz301phyinvctchgrc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- 
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="erz301lmquery_InlineSchema1.xsd"/>
+  <xsd:complexType name="Zws052SLaymod">
+    <xsd:sequence>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Segment" type="n0:numeric10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofSLmvChangesReadOutput">
+    <xsd:sequence>
+      <xsd:element name="LayoutModule" type="n0:char10"/>
+      <xsd:element name="LayoutVersion" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Uom" type="n0:unit3"/>
+      <xsd:element name="UomIso" type="n0:char3"/>
+      <xsd:element name="Ean11" type="n0:char18"/>
+      <xsd:element name="Description" type="n0:char40"/>
+      <xsd:element name="PriorVersion" type="n0:numeric4"/>
+      <xsd:element name="PriorShelf" type="n0:numeric10"/>
+      <xsd:element name="PriorPosition" type="n0:numeric10"/>
+      <xsd:element name="PriorFacing" type="n0:quantum13.3"/>
+      <xsd:element name="PriorLabelType" type="n0:char2"/>
+      <xsd:element name="Position" type="n0:numeric10"/>
+      <xsd:element name="Facing" type="n0:quantum13.3"/>
+      <xsd:element name="LabelType" type="n0:char2"/>
+      <xsd:element name="ChangeType" type="n0:char40"/>
+      <xsd:element name="Exflg" type="n0:char1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofSWfmLmvArticleSummary">
+    <xsd:sequence>
+      <xsd:element name="LayoutModule" type="n0:char10"/>
+      <xsd:element name="OldVersion" type="n0:numeric4"/>
+      <xsd:element name="NewVersion" type="n0:numeric4"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="NoOfArticles" type="xsd:int"/>
+      <xsd:element name="NoOfPositionChg" type="xsd:int"/>
+      <xsd:element name="NoOfFacingChg" type="xsd:int"/>
+      <xsd:element name="NoOfArticleAdd" type="xsd:int"/>
+      <xsd:element name="NoOfArticleRemove" type="xsd:int"/>
+      <xsd:element name="SuggestedLocation" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SResult">
+    <xsd:sequence>
+      <xsd:element name="Laymod" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Lmdesc" type="n0:char40"/>
+      <xsd:element name="Lmsegdata" type="tns:Zws052TtSegdata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SSegdata">
+    <xsd:sequence>
+      <xsd:element name="Segment" type="n0:numeric10"/>
+      <xsd:element name="PositionData" type="tns:Zws052TtSegposition"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SSegposition">
+    <xsd:sequence>
+      <xsd:element name="Product" type="n0:char18"/>
+      <xsd:element name="Uom" type="n0:char3"/>
+      <xsd:element name="Ean" type="n0:char18"/>
+      <xsd:element name="ProductDesc" type="n0:char40"/>
+      <xsd:element name="Position" type="n0:numeric10"/>
+      <xsd:element name="Facing" type="n0:quantum13.3"/>
+      <xsd:element name="LabelType" type="n0:char2"/>
+      <xsd:element name="Minimum" type="n0:quantum13.3"/>
+      <xsd:element name="Maximum" type="n0:quantum13.3"/>
+      <xsd:element name="Target" type="n0:quantum13.3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="n0:char1"/>
+      <xsd:element name="Id" type="n0:char20"/>
+      <xsd:element name="Number" type="n0:numeric3"/>
+      <xsd:element name="Message" type="n0:char220"/>
+      <xsd:element name="LogNo" type="n0:char20"/>
+      <xsd:element name="LogMsgNo" type="n0:numeric6"/>
+      <xsd:element name="MessageV1" type="n0:char50"/>
+      <xsd:element name="MessageV2" type="n0:char50"/>
+      <xsd:element name="MessageV3" type="n0:char50"/>
+      <xsd:element name="MessageV4" type="n0:char50"/>
+      <xsd:element name="Parameter" type="n0:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="n0:char30"/>
+      <xsd:element name="System" type="n0:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SStoredata">
+    <xsd:sequence>
+      <xsd:element name="Store" type="n0:char4"/>
+      <xsd:element name="Laymod" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Lmfromdate" type="n0:date10"/>
+      <xsd:element name="Lmtodate" type="n0:date10"/>
+      <xsd:element name="RelStatus" type="n0:char2"/>
+      <xsd:element name="LocData" type="tns:Zws052TtLocdata"/>
+      <xsd:element name="FacData" type="tns:Zws052TtFacdata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SLocdata">
+    <xsd:sequence>
+      <xsd:element name="Segment" type="n0:numeric10"/>
+      <xsd:element name="LocBin" type="n0:char10"/>
+      <xsd:element name="LocBinType" type="n0:char2"/>
+      <xsd:element name="LocStorType" type="n0:char3"/>
+      <xsd:element name="SuggBin" type="n0:char10"/>
+      <xsd:element name="SuggBinType" type="n0:char2"/>
+      <xsd:element name="SuggStorType" type="n0:char3"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052SFacdata">
+    <xsd:sequence>
+      <xsd:element name="Article" type="n0:char18"/>
+      <xsd:element name="Segment" type="n0:numeric10"/>
+      <xsd:element name="Shelfpos" type="n0:numeric10"/>
+      <xsd:element name="Facing" type="n0:quantum13.3"/>
+      <xsd:element name="Minimum" type="n0:quantum19.6"/>
+      <xsd:element name="Maximum" type="n0:quantum19.6"/>
+      <xsd:element name="Target" type="n0:quantum19.6"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtLaymod">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SLaymod"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtLmvChangeReadOutput">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSLmvChangesReadOutput"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZsofTtWfmLmvArticleSumary">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZsofSWfmLmvArticleSummary"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtResult">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SResult"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtSegdata">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SSegdata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtSegposition">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SSegposition"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2T">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Bapiret2"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtStoredata">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SStoredata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtLocdata">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SLocdata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Zws052TtFacdata">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Zws052SFacdata"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncLmread">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItLaymod" type="tns:Zws052TtLaymod"/>
+        <xsd:element minOccurs="0" name="IvFetchfac" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvFetchlmchg" type="n0:char1"/>
+        <xsd:element minOccurs="0" name="IvFetchloc" type="n0:char1"/>
+        <xsd:element name="IvStore" type="n0:char4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCncLmreadResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EtArticleChanges" type="tns:ZsofTtLmvChangeReadOutput"/>
+        <xsd:element name="EtArticleSummary" type="tns:ZsofTtWfmLmvArticleSumary"/>
+        <xsd:element name="EtLaymoddata" type="tns:Zws052TtResult"/>
+        <xsd:element name="EtReturn" type="tns:Bapiret2T"/>
+        <xsd:element name="EtStoredata" type="tns:Zws052TtStoredata"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   -->
+</xsd:schema>

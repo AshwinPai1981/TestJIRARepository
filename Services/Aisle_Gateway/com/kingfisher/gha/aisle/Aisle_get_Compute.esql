@@ -1,0 +1,64 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+DECLARE NS_glob NAMESPACE 'http://sap.com/xi/SAPGlobal20/Global';
+
+CREATE COMPUTE MODULE PurchaseOrder_get_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Copy Message Properties only
+
+		SET OutputRoot.Properties = InputRoot.Properties;
+
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+
+		SET OutputRoot.Properties.IdentityMappedType='usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken = 'CNCTEST';
+		SET OutputRoot.Properties.IdentityMappedPassword = 'Int3gr4t10n!';		
+		--AR: Included for error handling
+		SET OutputRoot.MQMD.MsgId = COALESCE(Environment.Store.MsgID,InputRoot.MQMD.MsgId);
+		CREATE NEXTSIBLING OF OutputRoot.MQMD DOMAIN 'MQRFH2' NAME 'MQRFH2';
+		-- Store MsgID
+		
+		--SET Environment.Store.MsgID = InputRoot.MQMD.MsgId;
+		
+		-- Store Message in case of error
+		
+		SET Environment.Store.Input.XMLNSC = InputRoot.XMLNSC;
+
+		-- Create output and declare reference (TEMPORARILY MOVED BELOW BY AR)
+		
+--		DECLARE oRef_Material REFERENCE TO OutputRoot.XMLNSC.NS_glob:MaterialBasicDataByIDQuery_sync;
+--		
+--		CREATE FIELD OutputRoot.XMLNSC.NS_glob:MaterialBasicDataByIDQuery_sync AS oRef_Material NAMESPACE NS_glob NAME 'MaterialBasicDataByIDQuery_sync';
+--		SET oRef_Material.(XMLNSC.NamespaceDecl)xmlns:glob =  NS_glob;
+
+		-- Retrieve the query string
+        DECLARE article_number CHARACTER;
+        
+		SET article_number = InputRoot.XMLNSC.NS_n0:ZCncMatEanConvertResponse.EvMaterial;
+		
+		--AR: Invalid EAN check
+		IF COALESCE(article_number,'')= '' THEN
+--			THROW USER EXCEPTION VALUES('404 - Not Found');
+			SET OutputRoot.MQRFH2.usr.errorText = '404 - Not Found';
+			SET OutputRoot.MQRFH2.usr.errorCode = '404';
+			PROPAGATE TO TERMINAL 'out1';
+			RETURN FALSE;
+		END IF;
+		
+--		TEMPORARY by AR
+		DECLARE oRef_Material REFERENCE TO OutputRoot.XMLNSC.NS_glob:MaterialBasicDataByIDQuery_sync;
+		
+		CREATE FIELD OutputRoot.XMLNSC.NS_glob:MaterialBasicDataByIDQuery_sync AS oRef_Material NAMESPACE NS_glob NAME 'MaterialBasicDataByIDQuery_sync';
+		SET oRef_Material.(XMLNSC.NamespaceDecl)xmlns:glob =  NS_glob;
+		
+		-- Build Request
+
+		SET oRef_Material.MaterialBasicDataSelectionByID.MaterialInternalID	= article_number;
+		
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

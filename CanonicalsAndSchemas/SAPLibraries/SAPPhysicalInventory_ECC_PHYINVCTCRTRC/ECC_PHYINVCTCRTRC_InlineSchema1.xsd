@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://sap.com/xi/APPL/SE/Global" xmlns="http://sap.com/xi/APPL/SE/Global" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n1="http://kfplc.com/ws/ERP" xmlns:n2="http://sap.com/xi/SAPGlobal20/Global" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:tns="http://sap.com/xi/APPL/SE/Global" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xi0="http://kfplc.com/ws/ERP" xmlns:xi1="http://sap.com/xi/SAPGlobal20/Global" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://kfplc.com/ws/ERP" schemaLocation="ECC_PHYINVCTCRTRC_InlineSchema2.xsd"/>
+  <xsd:annotation>
+    <xsd:documentation>
+      <sprx:documentation baseURL="http://vhkfrerzci.rot.hec.ghanp.kfplc.com:8000/sap/bc/esdt/docu/xsd_type?sap-client=301" version="1"/>
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:element ibmSchExtn:docRoot="true" name="PhysicalInventoryCountERPCreateConfirmation_sync" type="PhysInvtryCtERPCrteConfMsg_s"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="PhysicalInventoryCountERPCreateRequest_sync" type="PhysInvtryCtERPCrteReqMsg_s"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="PhysicalInventoryCountERPChangeConfirmation_sync" type="PhysInvtryCtERPCrteConfMsg_s"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="PhysicalInventoryCountERPChangeRequest_sync" type="PhysInvtryCtERPCrteReqMsg_s"/>
+  <xsd:simpleType name="ATTRIBUTEINDEPENDENT_UUID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:length value="36"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="AgencyIdentificationCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="3"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Date">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Date</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:date">
+      <xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ExchangeFaultData">
+    <xsd:sequence>
+      <xsd:element name="faultText" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="faultUrl" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="faultDetail" type="ExchangeLogData"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ExchangeLogData">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="severity" type="xsd:string"/>
+      <xsd:element name="text" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="url" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="id" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="FiscalYearID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:length value="4"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Indicator">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Indicator</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  <xsd:simpleType name="InventorySpecialStockTypeCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:length value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="InventoryUsabilityCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="2"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="LanguageCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:language">
+      <xsd:maxLength value="9"/>
+      <xsd:minLength value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="LogItemNote">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Note</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="200"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="LogItemSeverityCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="1"/>
+      <xsd:enumeration value="2"/>
+      <xsd:enumeration value="3"/>
+      <xsd:enumeration value="4"/>
+      <xsd:length value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="LogItemTypeID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="40"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="MEDIUM_Description">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Description</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="MEDIUM_Description.Content">
+        <xsd:attribute name="languageCode" type="LanguageCode"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="MEDIUM_Description.Content">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="80"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="NOSC_BasicBusinessDocumentMessageHeader">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ID" type="NOSC_BusinessDocumentMessageID"/>
+      <xsd:element minOccurs="0" name="UUID" type="ATTRIBUTEINDEPENDENT_UUID"/>
+      <xsd:element minOccurs="0" name="ReferenceID" type="NOSC_BusinessDocumentMessageID"/>
+      <xsd:element minOccurs="0" name="ReferenceUUID" type="ATTRIBUTEINDEPENDENT_UUID"/>
+      <xsd:group ref="n1:zcnc_inv_phyinvctcrtc"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="NOSC_BatchID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="20"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_BusinessDocumentMessageID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="35"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_BusinessTransactionDocumentID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="35"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_CustomerID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="16"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_LocationInternalID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="20"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="NOSC_Log">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="BusinessDocumentProcessingResultCode" type="ProcessingResultCode"/>
+      <xsd:element minOccurs="0" name="MaximumLogItemSeverityCode" type="LogItemSeverityCode"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Item" type="NOSC_LogItem"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NOSC_LogItem">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TypeID" type="LogItemTypeID"/>
+      <xsd:element minOccurs="0" name="CategoryCode" type="NOSC_LogItemCategoryCode"/>
+      <xsd:element minOccurs="0" name="SeverityCode" type="LogItemSeverityCode"/>
+      <xsd:element name="Note" type="LogItemNote"/>
+      <xsd:element minOccurs="0" name="WebURI" type="WebURI"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="NOSC_LogItemCategoryCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="15"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_PlantID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="4"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_ProductInternalID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="60"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_ProjectWorkBreakdownStructureElementID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="32"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_SalesOrderID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="10"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NOSC_SupplierID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="16"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="OperationTypeCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OperationTypeCode.Content">
+        <xsd:attribute name="listAgencyID" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="60"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listVersionID" use="required">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="15"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencySchemeID">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="60"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencySchemeAgencyID" type="AgencyIdentificationCode"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="OperationTypeCode.Content">
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="4"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PhysInvtryCtERPCrteConfMsg_s">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="MessageHeader" type="NOSC_BasicBusinessDocumentMessageHeader"/>
+      <xsd:element minOccurs="0" name="PhysicalInventoryCount" type="PhysInvtryCtERPCrteConf_sPhysInvtryCt"/>
+      <xsd:element name="Log" type="NOSC_Log"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteConf_sPhysInvtryCt">
+    <xsd:sequence>
+      <xsd:element name="ID" type="NOSC_BusinessTransactionDocumentID"/>
+      <xsd:element name="FiscalYearID" type="FiscalYearID"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReqMsg_s">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="MessageHeader" type="NOSC_BasicBusinessDocumentMessageHeader"/>
+      <xsd:element name="PhysicalInventoryCount" type="PhysInvtryCtERPCrteReq_sPhysInvtryCt"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCt">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ID" type="NOSC_BusinessTransactionDocumentID"/>
+      <xsd:element name="Keydate" type="Date"/>
+      <xsd:element minOccurs="0" name="ReferencePhysicalInventoryCountID" type="NOSC_BusinessTransactionDocumentID"/>
+      <xsd:element name="DeletedBatchIncludeIndicator" type="Indicator"/>
+      <xsd:element minOccurs="0" name="PhysicalInventoryCountItemGroupingCriterionCode" type="PhysicalInventoryCountItemGroupingCriterionCode"/>
+      <xsd:element name="PlantID" type="NOSC_PlantID"/>
+      <xsd:element minOccurs="0" name="Description" type="PhysInvtryCtERPCrteReq_sPhysInvtryCtDesc"/>
+      <xsd:element name="Operation" type="PhysInvtryCtERPCrteReq_sPhysInvtryCtOp"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCtDesc">
+    <xsd:sequence>
+      <xsd:element name="Description" type="MEDIUM_Description"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCtOp">
+    <xsd:sequence>
+      <xsd:element name="TypeCode" type="OperationTypeCode"/>
+      <xsd:element name="PlannedDate" type="Date"/>
+      <xsd:element name="Activity" type="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActy"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActy">
+    <xsd:sequence>
+      <xsd:element name="Inventory" type="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActyInvtry"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActyInvtry">
+    <xsd:sequence>
+      <xsd:element name="InventoryManagedLocationInternalID" type="NOSC_LocationInternalID"/>
+      <xsd:element name="GoodsMovementBlockedIndicator" type="Indicator"/>
+      <xsd:element maxOccurs="unbounded" name="Item" type="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActyInvtryItm"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysInvtryCtERPCrteReq_sPhysInvtryCtOpActyInvtryItm">
+    <xsd:sequence>
+      <xsd:element name="MaterialInternalID" type="NOSC_ProductInternalID"/>
+      <xsd:element minOccurs="0" name="InventoryUsabilityCode" type="InventoryUsabilityCode"/>
+      <xsd:element minOccurs="0" name="SupplierID" type="NOSC_SupplierID"/>
+      <xsd:element minOccurs="0" name="SalesOrderID" type="NOSC_SalesOrderID"/>
+      <xsd:element minOccurs="0" name="SalesOrderItemID" type="SalesOrderItemID"/>
+      <xsd:element minOccurs="0" name="CustomerID" type="NOSC_CustomerID"/>
+      <xsd:element minOccurs="0" name="ProjectWorkBreakdownStructureElementID" type="NOSC_ProjectWorkBreakdownStructureElementID"/>
+      <xsd:element minOccurs="0" name="InventorySpecialStockTypeCode" type="InventorySpecialStockTypeCode"/>
+      <xsd:element minOccurs="0" name="BatchID" type="NOSC_BatchID"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhysicalInventoryCountItemGroupingCriterionCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="PhysicalInventoryCountItemGroupingCriterionCode.Content">
+        <xsd:attribute name="listID">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="60"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listVersionID">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="15"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="listAgencyID">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:token">
+              <xsd:maxLength value="60"/>
+              <xsd:minLength value="1"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="PhysicalInventoryCountItemGroupingCriterionCode.Content">
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="2"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ProcessingResultCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="2"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SalesOrderItemID">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:maxLength value="6"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="WebURI">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="EN">
+        <ccts:RepresentationTerm>URI</ccts:RepresentationTerm>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:anyURI"/>
+  </xsd:simpleType>
+</xsd:schema>

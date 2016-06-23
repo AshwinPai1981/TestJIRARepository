@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n0="urn:sap-com:document:sap:rfc:functions" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- 
+  <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" schemaLocation="ZECC_OVERPOST_READ_InlineSchema1.xsd"/>
+  <xsd:simpleType name="char1">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char10">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char20">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="20"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char220">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="220"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char30">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char32">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="char50">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="50"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="numeric3">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+      <xsd:pattern value="\d*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="numeric6">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="6"/>
+      <xsd:pattern value="\d*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ZcoSLmvChangesInput">
+    <xsd:sequence>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoSLmvChangesOutput">
+    <xsd:sequence>
+      <xsd:element name="Laygr" type="n0:char10"/>
+      <xsd:element name="Lmver" type="n0:numeric4"/>
+      <xsd:element name="Locnr" type="n0:char10"/>
+      <xsd:element name="Matnr" type="n0:char18"/>
+      <xsd:element name="Meinh" type="n0:unit3"/>
+      <xsd:element name="UomIso" type="tns:char3"/>
+      <xsd:element name="Ean11" type="n0:char18"/>
+      <xsd:element name="Fname" type="n0:char30"/>
+      <xsd:element name="ValueOld" type="n0:char254"/>
+      <xsd:element name="ValueNew" type="n0:char254"/>
+      <xsd:element name="Shelf" type="n0:numeric10"/>
+      <xsd:element name="Sorf1" type="n0:numeric10"/>
+      <xsd:element name="Facin" type="n0:quantum13.3"/>
+      <xsd:element name="LabelTypeCode" type="n0:char2"/>
+      <xsd:element name="OldShelf" type="n0:numeric10"/>
+      <xsd:element name="OldSorf1" type="n0:numeric10"/>
+      <xsd:element name="OldFacin" type="n0:quantum13.3"/>
+      <xsd:element name="OldLabelTypeCode" type="n0:char2"/>
+      <xsd:element name="ChangeStatus" type="n0:char32"/>
+      <xsd:element name="ChangeDate" type="n0:date10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Bapiret2">
+    <xsd:sequence>
+      <xsd:element name="Type" type="tns:char1"/>
+      <xsd:element name="Id" type="tns:char20"/>
+      <xsd:element name="Number" type="tns:numeric3"/>
+      <xsd:element name="Message" type="tns:char220"/>
+      <xsd:element name="LogNo" type="tns:char20"/>
+      <xsd:element name="LogMsgNo" type="tns:numeric6"/>
+      <xsd:element name="MessageV1" type="tns:char50"/>
+      <xsd:element name="MessageV2" type="tns:char50"/>
+      <xsd:element name="MessageV3" type="tns:char50"/>
+      <xsd:element name="MessageV4" type="tns:char50"/>
+      <xsd:element name="Parameter" type="tns:char32"/>
+      <xsd:element name="Row" type="xsd:int"/>
+      <xsd:element name="Field" type="tns:char30"/>
+      <xsd:element name="System" type="tns:char10"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoTtLmvChangesInput">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcoSLmvChangesInput"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ZcoTtLmvChangesOutput">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ZcoSLmvChangesOutput"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCoLmvOverpostRead">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ItLmvChangesInput" type="tns:ZcoTtLmvChangesInput"/>
+        <xsd:element name="IvDaysPast" type="n0:numeric2"/>
+        <xsd:element name="IvLocnr" type="n0:char10"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="ZCoLmvOverpostReadResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="EsMessage" type="tns:Bapiret2"/>
+        <xsd:element name="EtLmvChangesOutput" type="tns:ZcoTtLmvChangesOutput"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   -->
+</xsd:schema>

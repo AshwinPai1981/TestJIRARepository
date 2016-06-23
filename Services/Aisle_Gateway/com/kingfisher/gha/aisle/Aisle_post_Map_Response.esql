@@ -1,0 +1,70 @@
+BROKER SCHEMA com.kingfisher.gha.aisle
+
+
+CREATE COMPUTE MODULE Aisle_post_Map_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+		SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+		
+		DECLARE iRef 			REFERENCE TO InputRoot.XMLNSC.NS_n0:ZSofMaintainAisleResponse;
+		DECLARE iRef_LogItem 	REFERENCE TO iRef.EtReturn.item;
+					
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+							
+		-- Map the required elements to the JSON response
+
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		--SET OutputRoot.JSON.Data.Class = 'Response';
+        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+        
+        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+	    
+	    -- Map for Success response	if the PO no is generated in the SAP response		
+			IF iRef_LogItem.Type = 'S' THEN
+			   
+			   SET oRefProp.type = 'SUCCESS';
+			   DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	           CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	           
+	           DECLARE arr_count INTEGER 1;
+	           
+	           WHILE LASTMOVE(iRef_LogItem) DO
+		        	
+		        	SET oRefInfo.Item[arr_count].serviceName = MessageFlowLabel;
+	           		SET oRefInfo.Item[arr_count].statusCode = '0';	
+			   		SET oRefInfo.Item[arr_count].statusMessage = iRef_LogItem.Message;
+		        
+		        	SET arr_count = arr_count + 1;
+		        	MOVE iRef_LogItem NEXTSIBLING REPEAT TYPE NAME;
+		        	
+		        END WHILE;
+			
+			ELSEIF iRef_LogItem.Type = 'E' THEN
+			   -- Error response	
+				SET oRefProp.type = 'ERROR';
+			    DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	            CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+				DECLARE arr_count INTEGER 1;
+				
+		        WHILE LASTMOVE(iRef_LogItem) DO
+		        	
+		        	SET oRefInfo.Item[arr_count].serviceName = MessageFlowLabel;
+	           		SET oRefInfo.Item[arr_count].statusCode = iRef_LogItem.Number;	
+			   		SET oRefInfo.Item[arr_count].statusMessage = iRef_LogItem.Message;
+		        
+		        	SET arr_count = arr_count + 1;
+		        	MOVE iRef_LogItem NEXTSIBLING REPEAT TYPE NAME;
+		        	
+		        END WHILE;	
+			
+	        END IF;     
+		RETURN TRUE;
+	END;
+
+END MODULE;

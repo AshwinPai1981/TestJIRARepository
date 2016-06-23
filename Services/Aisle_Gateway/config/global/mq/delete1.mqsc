@@ -1,0 +1,25 @@
+**************************************************************
+**   Script	 :  delete1.mqsc
+**   Application :  Aisle_Gateway
+**   Created By	 :  Gareth Trott (auto)
+**   Environment :  All tiers
+**   Date	 :  06-August-2015 @ 18:18
+**************************************************************
+
+DELETE QLOCAL  ('AISLEGET.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('AISLEGET.IN.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('AISLEPOST.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('AISLEPOST.IN.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('AISLEGET.OUT.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('AISLEGET.OUT.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('AISLEPOST.OUT.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('AISLEPOST.OUT.INTERNAL.WMB') ;
+
+**************************EndScript***************************

@@ -1,0 +1,86 @@
+apply plugin:'maven'
+
+apply from:"../../../buildSrc/common.gradle"
+apply from:"../../../buildSrc/repositories.gradle"
+apply from:"../../../buildSrc/iib.gradle"
+
+//-----------------------------------------------------------------------------
+// Gradle WMB/IIB build script
+//
+// Version: 1.0
+//
+// Modification log:
+// 12/05/2015	- 1.0 -	JM	- Initial script
+// 22/05/2015	- 1.1 -	JM	- Added external dependencies to other WMB projects
+// 23/05/2015	- 1.2 -	JM	- Added allprojects closure to customize repos
+// 27/01/2016	- 1.3 -	JM	- Simplify and reference to common and repositories scripts
+//-----------------------------------------------------------------------------
+
+//*****************************************************************************
+// Definitions
+//*****************************************************************************
+group = 'com.kfplc.candc.wmb.lib.SAPLibraries'
+
+ext {
+	applications = [SAPBin_ZECC_SOF_LMS_TRANSFER: 'library']
+	artifactId = 'SAPBin_ZECC_SOF_LMS_TRANSFER'
+	RELEASE_ID = System.properties['RELEASE_ID']?:'1.0-SNAPSHOT' // This could come from Jenkins or set locally
+	ScriptVersion = '1.3'
+}
+
+//-----------------------------------------------------------------------------
+// configurations
+//
+//-----------------------------------------------------------------------------
+configurations {
+	compileBar
+}
+
+//-----------------------------------------------------------------------------
+// dependencies
+//
+//-----------------------------------------------------------------------------
+dependencies {
+// IIB source dependencies
+}
+//*****************************************************************************
+
+//--------------------------------------------------------------------------
+// Trick to apply the repository to the publishing early in the process
+// so we can customize it.
+// Only use Nexus if Maven local is not used, this may change when
+// releases and snapshot Nexus repos are in use to upload and local and nexus
+// are used to download
+//--------------------------------------------------------------------------
+// allprojects {
+
+afterEvaluate {
+//-----------------------------------------------------------------------------
+// Done this way to receive the release id from Jenkins	
+	project.version  = project.RELEASE_ID
+	isReleaseVersion = project.RELEASE_ID.endsWith('RELEASE')
+	
+// Add compileBar dependency
+	project.conf2ScopeMappings.addMapping(300, configurations.compileBar, 'COMPILEBAR')	
+
+//-----------------------------------------------------------------------------
+// Configure build task
+//
+//-----------------------------------------------------------------------------
+	if (hasProperty('build')) {
+		build {
+			dependsOn 'buildIAR'
+			println 'build in progress'
+		}
+	}
+	
+	artifacts {
+		compileBar buildIAR
+	}
+										
+//-----------------------------------------------------------------------------
+// Configure retrieveIARDependencies task
+// Ensure retrieving the dependencies after the compileBar configuration is ready
+//-----------------------------------------------------------------------------	
+	retrieveIARDependencies { from configurations.compileBar }
+}
