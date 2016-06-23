@@ -15,10 +15,11 @@
 	<profiles> 
 		<profile> 
 			<id>Aisle_Gateway</id> 
-			<activation> 
-				<file> 
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Aisle_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Aisle_Gateway/test</module> 
@@ -26,10 +27,11 @@
 		</profile> 
 		<profile> 
 			<id>Bay_Gateway</id> 
-			<activation> 
-				<file> 
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Bay_Gateway/test/pom.xml</exists>
-				</file> 
+				</file>--> 
 			</activation> 
 			<modules> 
 				<module>Services/Bay_Gateway/test</module> 
@@ -38,9 +40,10 @@
 		<profile> 
 			<id>Bin_Gateway_V1</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Bin_Gateway_V1/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Bin_Gateway_V1/test</module> 
@@ -49,9 +52,10 @@
 		<profile> 
 			<id>Bin_Gateway_V2</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Bin_Gateway_V2/test/pom.xml</exists>
-				</file> 
+				</file>--> 
 			</activation> 
 			<modules> 
 				<module>Services/Bin_Gateway_V2/test</module> 
@@ -60,9 +64,10 @@
 		<profile> 
 			<id>ConfigDetails_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/ConfigDetails_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/ConfigDetails_Gateway/test</module> 
@@ -71,9 +76,10 @@
 		<profile> 
 			<id>FulfilmentRoute_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/FulfilmentRoute_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/FulfilmentRoute_Gateway/test</module> 
@@ -82,9 +88,10 @@
 		<profile> 
 			<id>FulfilmentSite_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/FulfilmentSite_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/FulfilmentSite_Gateway/test</module> 
@@ -93,9 +100,10 @@
 		<profile> 
 			<id>GoodsMovement_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/GoodsMovement_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/GoodsMovement_Gateway/test</module> 
@@ -104,9 +112,10 @@
 		<profile> 
 			<id>GoodsReceipt_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/GoodsReceipt_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/GoodsReceipt_Gateway/test</module> 
@@ -115,9 +124,10 @@
 		<profile> 
 			<id>InboundDelivery_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/InboundDelivery_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/InboundDelivery_Gateway/test</module> 
@@ -126,9 +136,10 @@
 		<profile> 
 			<id>LayoutModule_Gateway_V1</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/LayoutModule_Gateway_V1/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/LayoutModule_Gateway_V1/test</module> 
@@ -137,9 +148,10 @@
 		<profile> 
 			<id>LayoutModule_Gateway_V2</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/LayoutModule_Gateway_V2/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/LayoutModule_Gateway_V2/test</module> 
@@ -148,9 +160,10 @@
 		<profile> 
 			<id>OutboundDelivery_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/OutboundDelivery_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/OutboundDelivery_Gateway/test</module> 
@@ -159,9 +172,10 @@
 		<profile> 
 			<id>Personnel_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Personnel_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Personnel_Gateway/test</module> 
@@ -170,9 +184,10 @@
 		<profile> 
 			<id>PhysicalInventory_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/PhysicalInventory_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/PhysicalInventory_Gateway/test</module> 
@@ -181,9 +196,10 @@
 		<profile> 
 			<id>Price_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Price_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Services/Price_Gateway/test</module> 
@@ -192,9 +208,10 @@
 		<profile> 
 			<id>ProductReplacement_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/ProductReplacement_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Services/ProductReplacement_Gateway/test</module> 
@@ -203,9 +220,10 @@
 		<profile> 
 			<id>ProductSupplier_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/ProductSupplier_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/ProductSupplier_Gateway/test</module> 
@@ -214,9 +232,10 @@
 		<profile> 
 			<id>Product_Gateway_V1</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Product_Gateway_V1/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Product_Gateway_V1/test</module> 
@@ -225,9 +244,10 @@
 		<profile> 
 			<id>Product_Gateway_V2</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Product_Gateway_V2/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Product_Gateway_V2/test</module> 
@@ -236,9 +256,10 @@
 		<profile> 
 			<id>PurchaseOrder_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/PurchaseOrder_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/PurchaseOrder_Gateway/test</module> 
@@ -247,9 +268,10 @@
 		<profile> 
 			<id>ShelfLabelProducts_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/ShelfLabelProducts_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/ShelfLabelProducts_Gateway/test</module> 
@@ -258,9 +280,10 @@
 		<profile> 
 			<id>Supplier_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Supplier_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Supplier_Gateway/test</module> 
@@ -269,9 +292,10 @@
 		<profile> 
 			<id>Task_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Task_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Task_Gateway/test</module> 
@@ -280,9 +304,10 @@
 		<profile> 
 			<id>TransferOrder_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/TransferOrder_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/TransferOrder_Gateway/test</module> 
@@ -291,9 +316,10 @@
 		<profile> 
 			<id>Printer_Gateway</id> 
 			<activation> 
-				<file> 
+				<activeByDefault>false</activeByDefault>
+				<!--<file> 
 					<exists>Services/Printer_Gateway/test/pom.xml</exists>
-				</file> 
+				</file> -->
 			</activation> 
 			<modules> 
 				<module>Services/Printer_Gateway/test</module> 
