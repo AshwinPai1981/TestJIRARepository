@@ -9,7 +9,7 @@ CREATE COMPUTE MODULE BayGateway_Initialise
 		-- Store the HTTP RequestIdentifier
 		SET Environment.Store.requestID = InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
 
-		-- Store the method
+		-- Store the method FEATURE2
 		SET Environment.Store.method = InputLocalEnvironment.HTTP.Input.RequestLine.Method;
 		
 		DECLARE targObj CHARACTER;
