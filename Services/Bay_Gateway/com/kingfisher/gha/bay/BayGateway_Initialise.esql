@@ -6,7 +6,7 @@ CREATE COMPUTE MODULE BayGateway_Initialise
 	BEGIN
 		SET OutputRoot.Properties = InputRoot.Properties;
 
-		-- Store the HTTP RequestIdentifier
+		-- Store the HTTP RequestIdentifier FEATURE3
 		SET Environment.Store.requestID = InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
 
 		-- Store the method FEATURE2
