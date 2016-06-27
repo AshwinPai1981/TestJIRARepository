@@ -4,7 +4,7 @@ BROKER SCHEMA com.kingfisher.gha.bay
 CREATE COMPUTE MODULE RouteToMethod_Compute
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		-- CALL CopyMessageHeaders();
+		-- CALL CopyMessageHeaders(); -- FEATURE3
 		-- CALL CopyEntireMessage();
 		RETURN TRUE;
 	END;
