@@ -15,7 +15,7 @@ CREATE COMPUTE MODULE Response_Compute
 		SET CH_ReqFromURI							=	InputRoot.MQRFH2.usr.ReqFromURI;
 		SET Environment.Variables.Operation			=	InputRoot.MQRFH2.usr.operation;
 						
-		-- cheking for error response
+		-- cheking for error response FEATURE 3 Aisle changes
 		IF(iRef_Aisle.properties.type = 'ERROR') THEN
 		
 			SET OutputRoot.JSON 	= InputRoot.JSON;
