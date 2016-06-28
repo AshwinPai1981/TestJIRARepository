@@ -15,7 +15,7 @@ CREATE COMPUTE MODULE postResponse_Compute
 		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
 		DECLARE oRefProp REFERENCE TO oRef.properties;
 		
-		-- Map the required elements to the JSON response
+		-- Map the required elements to the JSON response FEATURE 3 changes
 
 			CREATE FIELD OutputRoot.JSON.Data AS oRef;
         	CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
