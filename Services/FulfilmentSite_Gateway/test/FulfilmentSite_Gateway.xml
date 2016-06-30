@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3420e100-7816-4f91-b811-465446840102" activeEnvironment="Default" name="FulfilmentSite_Gateway" resourceRoot="" soapui-version="5.1.3" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d439a7f4-14da-425a-a20d-f8a1e6498140" wadlVersion="http://wadl.dev.java.net/2009/02" name="FulfilmentSite" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#Project#serviceEndpoint</con:endpoint><con:endpoint>${#Project#serviceEndpoint}</con:endpoint></con:endpoints><con:resource name="FulfilmentSite" path="/FulfilmentSite" id="0d1b7489-7f94-45e6-94be-3a26e9a176b0"><con:settings/><con:parameters/><con:resource name="1115" path="1115" id="afdd9996-e43b-44c5-b5a7-6b0be0631c69"><con:settings/><con:parameters/><con:method name="GET" id="9d1f81af-697d-4114-97b3-4b5f81418e77" method="GET"><con:settings/><con:parameters/><con:request name="TC1 - Get Fulfilment Site Details by ID" id="d3090d2e-908a-4ba5-8d48-ae6dd9dde4c7" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#serviceEndpoint</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="9999" path="9999" id="795f0a04-4bd3-47c0-96ed-f7decf85f862"><con:settings/><con:parameters/><con:method name="GET" id="4a124bf9-3ff4-4a26-9954-122cf85de88f" method="GET"><con:settings/><con:parameters/><con:request name="TC2 - Not Site Details found" id="1cf50d60-4851-49af-bab5-ca1d69cb26e3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#serviceEndpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ERZ301ZECCPLANTERPBYIDQR" type="wsdl" bindingName="{http://sap.com/xi/APPL/SE/Global}ERZ301ZECCPLANTERPBYIDQR" soapVersion="1_1" anonymous="optional" definition="http://localhost:2081/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr?sap-client=301" id="dbc0f4cf-5fb0-4a95-acf8-8a2f3d5806b2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:2081/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr?sap-client=301"><con:part><con:url>http://localhost:2081/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr?sap-client=301</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://sap.com/xi/APPL/SE/Global" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sap.com/xi/APPL/SE/Global" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:n1="http://sap.com/xi/SAPGlobal20/Global">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="BN__ERZ301ZECCPLANTERPBYIDQR">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ERZ301ZECCPLANTERPBYIDQR_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        <wsp:All>
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication/>
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15/>
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict/>
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__PlantERPByIDQueryResponse_In">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapcentraladmin:CentralAdministration wsp:Optional="true" xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/">
+          <sapcentraladmin:InterfaceCheckSum>1F204BEF26687596259BB6464AF1D1E9215E17E1</sapcentraladmin:InterfaceCheckSum>
+        </sapcentraladmin:CentralAdministration>
+        <sapcentraladmin:CentralAdministration wsp:Optional="true" xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/">
+          <sapcentraladmin:BusinessApplicationID>005056964BA01EE488C2857DAA3D8510</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__PlantERPByIDQueryResponse_In">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://sap.com/xi/APPL/SE/Global" xmlns="http://sap.com/xi/APPL/SE/Global" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:xi0="http://sap.com/xi/SAPGlobal20/Global">
+      <xsd:annotation>
+        <xsd:documentation>
+          <sprx:documentation version="1" baseURL="https://rdlecc.b-and-q.com/sap/bc/esdt/docu/xsd_type?sap-client=301"/>
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="PlantERPByIDQuery_sync" type="PlntERPByIDQuMsg_s"/>
+      <xsd:element name="PlantERPByIDResponse_sync" type="PlntERPByIDRpMsg_s"/>
+      <xsd:simpleType name="AddressID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="40"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="BuildingID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CountryCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="3"/>
+          <xsd:minLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CountryDiallingCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Description">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Description</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute name="languageCode" type="LanguageCode"/>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="ExchangeFaultData">
+        <xsd:sequence>
+          <xsd:element name="faultText" type="xsd:string"/>
+          <xsd:element name="faultUrl" minOccurs="0" type="xsd:string"/>
+          <xsd:element name="faultDetail" minOccurs="0" maxOccurs="unbounded" type="ExchangeLogData"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ExchangeLogData">
+        <xsd:sequence>
+          <xsd:element name="severity" minOccurs="0" type="xsd:string"/>
+          <xsd:element name="text" type="xsd:string"/>
+          <xsd:element name="url" minOccurs="0" type="xsd:string"/>
+          <xsd:element name="id" minOccurs="0" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="FloorID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="HouseID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Indicator">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Indicator</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:boolean"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="LANGUAGEINDEPENDENT_MEDIUM_Name">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Name</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LanguageCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:language">
+          <xsd:maxLength value="9"/>
+          <xsd:minLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemNote">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Note</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="200"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemSeverityCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="1"/>
+          <xsd:enumeration value="2"/>
+          <xsd:enumeration value="3"/>
+          <xsd:enumeration value="4"/>
+          <xsd:length value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemTypeID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="40"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="MEDIUM_Name">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Name</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="MEDIUM_Name.Content">
+            <xsd:attribute name="languageCode" type="LanguageCode"/>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="MEDIUM_Name.Content">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NOSC_EmailURI">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>URI</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:anyURI"/>
+      </xsd:simpleType>
+      <xsd:complexType name="NOSC_FormOfAddress">
+        <xsd:sequence>
+          <xsd:element name="Code" minOccurs="0" type="NOSC_FormOfAddressCode"/>
+          <xsd:element name="Name" minOccurs="0" type="MEDIUM_Name"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="NOSC_FormOfAddressCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="4"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="NOSC_Log">
+        <xsd:sequence>
+          <xsd:element name="BusinessDocumentProcessingResultCode" minOccurs="0" type="ProcessingResultCode"/>
+          <xsd:element name="MaximumLogItemSeverityCode" minOccurs="0" type="LogItemSeverityCode"/>
+          <xsd:element name="Item" minOccurs="0" maxOccurs="unbounded" type="NOSC_LogItem"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NOSC_LogItem">
+        <xsd:sequence>
+          <xsd:element name="TypeID" minOccurs="0" type="LogItemTypeID"/>
+          <xsd:element name="CategoryCode" minOccurs="0" type="NOSC_LogItemCategoryCode"/>
+          <xsd:element name="SeverityCode" minOccurs="0" type="LogItemSeverityCode"/>
+          <xsd:element name="Note" type="LogItemNote"/>
+          <xsd:element name="WebURI" minOccurs="0" type="WebURI"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="NOSC_LogItemCategoryCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="15"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NOSC_PlantID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="4"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NOSC_RegionCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="6"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NOSC_TaxJurisdictionCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="15"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="POBoxID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="PhoneNumber">
+        <xsd:sequence>
+          <xsd:element name="AreaID" minOccurs="0" type="PhoneNumberAreaID"/>
+          <xsd:element name="SubscriberID" minOccurs="0" type="PhoneNumberSubscriberID"/>
+          <xsd:element name="ExtensionID" minOccurs="0" type="PhoneNumberExtensionID"/>
+          <xsd:element name="CountryCode" minOccurs="0" type="CountryCode"/>
+          <xsd:element name="CountryDiallingCode" minOccurs="0" type="CountryDiallingCode"/>
+          <xsd:element name="CountryName" minOccurs="0" type="MEDIUM_Name"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="PhoneNumberAreaID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PhoneNumberExtensionID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PhoneNumberSubscriberID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="30"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="PlntERPByIDQuMsg_s">
+        <xsd:sequence>
+          <xsd:element name="PlantSelectionByID" type="PlntERPByIDQu_sSel"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDQu_sSel">
+        <xsd:sequence>
+          <xsd:element name="PlantID" type="NOSC_PlantID"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRpMsg_s">
+        <xsd:sequence>
+          <xsd:element name="Plant" minOccurs="0" type="PlntERPByIDRp_sPlnt"/>
+          <xsd:element name="Log" type="NOSC_Log"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sAddr">
+        <xsd:sequence>
+          <xsd:element name="OrganisationFormOfAddress" minOccurs="0" type="NOSC_FormOfAddress"/>
+          <xsd:element name="OrganisationFormattedName" minOccurs="0" maxOccurs="4" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="PhysicalAddress" minOccurs="0" type="PlntERPByIDRp_sPhysAddr"/>
+          <xsd:element name="TaxJurisdictionCode" minOccurs="0" type="NOSC_TaxJurisdictionCode"/>
+          <xsd:element name="Communication" minOccurs="0" type="PlntERPByIDRp_sComm"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sAddrInfo">
+        <xsd:sequence>
+          <xsd:element name="AddressID" type="AddressID"/>
+          <xsd:element name="Address" minOccurs="0" type="PlntERPByIDRp_sAddr"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sComm">
+        <xsd:sequence>
+          <xsd:element name="CorrespondenceLanguageCode" minOccurs="0" type="LanguageCode"/>
+          <xsd:element name="CorrespondenceLanguageName" minOccurs="0" type="MEDIUM_Name"/>
+          <xsd:element name="Telephone" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sCommTel"/>
+          <xsd:element name="MobilePhone" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sCommMob"/>
+          <xsd:element name="Facsimile" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sCommFax"/>
+          <xsd:element name="Email" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sCommEml"/>
+          <xsd:element name="Web" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sCommWeb"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sCommEml">
+        <xsd:sequence>
+          <xsd:element name="URI" type="NOSC_EmailURI"/>
+          <xsd:element name="URIDefaultIndicator" type="Indicator"/>
+          <xsd:element name="URIDescription" minOccurs="0" type="Description"/>
+          <xsd:element name="URIUsageDenialIndicator" type="Indicator"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sCommFax">
+        <xsd:sequence>
+          <xsd:element name="Number" type="PhoneNumber"/>
+          <xsd:element name="NumberDefaultIndicator" type="Indicator"/>
+          <xsd:element name="NumberDescription" minOccurs="0" type="Description"/>
+          <xsd:element name="NumberUsageDenialIndicator" type="Indicator"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sCommMob">
+        <xsd:sequence>
+          <xsd:element name="Number" type="PhoneNumber"/>
+          <xsd:element name="SMSEnabledIndicator" minOccurs="0" type="Indicator"/>
+          <xsd:element name="NumberDefaultIndicator" type="Indicator"/>
+          <xsd:element name="NumberDescription" minOccurs="0" type="Description"/>
+          <xsd:element name="NumberUsageDenialIndicator" type="Indicator"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sCommTel">
+        <xsd:sequence>
+          <xsd:element name="Number" type="PhoneNumber"/>
+          <xsd:element name="SMSEnabledIndicator" minOccurs="0" type="Indicator"/>
+          <xsd:element name="NumberDefaultIndicator" type="Indicator"/>
+          <xsd:element name="NumberDescription" minOccurs="0" type="Description"/>
+          <xsd:element name="NumberUsageDenialIndicator" type="Indicator"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sCommWeb">
+        <xsd:sequence>
+          <xsd:element name="URI" type="WebURI"/>
+          <xsd:element name="URIDefaultIndicator" type="Indicator"/>
+          <xsd:element name="URIDescription" minOccurs="0" type="Description"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sPhysAddr">
+        <xsd:sequence>
+          <xsd:element name="CountryCode" minOccurs="0" type="CountryCode"/>
+          <xsd:element name="CountryName" minOccurs="0" type="MEDIUM_Name"/>
+          <xsd:element name="RegionCode" minOccurs="0" type="NOSC_RegionCode"/>
+          <xsd:element name="RegionName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="StreetPostalCode" minOccurs="0" type="PostalCode"/>
+          <xsd:element name="POBoxPostalCode" minOccurs="0" type="PostalCode"/>
+          <xsd:element name="CompanyPostalCode" minOccurs="0" type="PostalCode"/>
+          <xsd:element name="CityName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="AdditionalCityName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="DistrictName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="POBoxID" minOccurs="0" type="POBoxID"/>
+          <xsd:element name="POBoxIndicator" minOccurs="0" type="Indicator"/>
+          <xsd:element name="POBoxCountryCode" minOccurs="0" type="CountryCode"/>
+          <xsd:element name="POBoxCountryName" minOccurs="0" type="MEDIUM_Name"/>
+          <xsd:element name="POBoxRegionCode" minOccurs="0" type="NOSC_RegionCode"/>
+          <xsd:element name="POBoxRegionName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="POBoxCityName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="StreetName" minOccurs="0" type="StreetName"/>
+          <xsd:element name="HouseID" minOccurs="0" type="HouseID"/>
+          <xsd:element name="AdditionalHouseID" minOccurs="0" type="HouseID"/>
+          <xsd:element name="BuildingID" minOccurs="0" type="BuildingID"/>
+          <xsd:element name="FloorID" minOccurs="0" type="FloorID"/>
+          <xsd:element name="RoomID" minOccurs="0" type="RoomID"/>
+          <xsd:element name="CareOfName" minOccurs="0" type="LANGUAGEINDEPENDENT_MEDIUM_Name"/>
+          <xsd:element name="Description" minOccurs="0" type="Description"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PlntERPByIDRp_sPlnt">
+        <xsd:sequence>
+          <xsd:element name="ID" type="NOSC_PlantID"/>
+          <xsd:element name="AddressInformation" minOccurs="0" maxOccurs="unbounded" type="PlntERPByIDRp_sAddrInfo"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="PostalCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ProcessingResultCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="2"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="RoomID">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="10"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StreetName">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>Name</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="60"/>
+          <xsd:minLength value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="WebURI">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">
+            <ccts:RepresentationTerm>URI</ccts:RepresentationTerm>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:anyURI"/>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://sap.com/xi/SAPGlobal20/Global" xmlns="http://sap.com/xi/SAPGlobal20/Global" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:3.0" xmlns:sprx="urn:sap.com:abap:proxy" xmlns:xi0="http://sap.com/xi/SAPGlobal20/Global">
+      <xsd:import namespace="http://sap.com/xi/APPL/SE/Global"/>
+      <xsd:annotation>
+        <xsd:documentation>
+          <sprx:documentation version="1" baseURL="https://rdlecc.b-and-q.com/sap/bc/esdt/docu/xsd_type?sap-client=301"/>
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="StandardMessageFault">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="standard" type="tns:ExchangeFaultData"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PlantERPByIDQuery_sync">
+    <wsdl:part name="PlantERPByIDQuery_sync" element="tns:PlantERPByIDQuery_sync"/>
+  </wsdl:message>
+  <wsdl:message name="PlantERPByIDResponse_sync">
+    <wsdl:part name="PlantERPByIDResponse_sync" element="tns:PlantERPByIDResponse_sync"/>
+  </wsdl:message>
+  <wsdl:message name="StandardMessageFault">
+    <wsdl:part name="StandardMessageFault" element="n1:StandardMessageFault"/>
+  </wsdl:message>
+  <wsdl:portType name="PlantERPByIDQueryResponse_In">
+    <wsdl:documentation>
+      <sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+        <sapdoc:docitem applicationComponent="LO"/>
+      </sapdoc:sapdoc>
+    </wsdl:documentation>
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__PlantERPByIDQueryResponse_In"/>
+    </wsp:Policy>
+    <wsdl:operation name="PlantERPByIDQueryResponse_In">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__PlantERPByIDQueryResponse_In"/>
+      </wsp:Policy>
+      <wsdl:input message="tns:PlantERPByIDQuery_sync"/>
+      <wsdl:output message="tns:PlantERPByIDResponse_sync"/>
+      <wsdl:fault name="StandardMessageFault" message="tns:StandardMessageFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ERZ301ZECCPLANTERPBYIDQR" type="tns:PlantERPByIDQueryResponse_In">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ERZ301ZECCPLANTERPBYIDQR"/>
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="PlantERPByIDQueryResponse_In">
+      <soap:operation soapAction="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="StandardMessageFault">
+        <soap:fault name="StandardMessageFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ERZ301ZECCPLANTERPBYIDQR_soap12" type="tns:PlantERPByIDQueryResponse_In">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ERZ301ZECCPLANTERPBYIDQR_soap12"/>
+    </wsp:Policy>
+    <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="PlantERPByIDQueryResponse_In">
+      <wsoap12:operation soapAction="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest" style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="StandardMessageFault">
+        <wsoap12:fault name="StandardMessageFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZECC_PLANTERPBYIDQR">
+    <wsdl:port name="ERZ301ZECCPLANTERPBYIDQR" binding="tns:ERZ301ZECCPLANTERPBYIDQR">
+      <soap:address location="https://rdlecc.b-and-q.com/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr"/>
+    </wsdl:port>
+    <wsdl:port name="ERZ301ZECCPLANTERPBYIDQR_soap12" binding="tns:ERZ301ZECCPLANTERPBYIDQR_soap12">
+      <wsoap12:address location="https://rdlecc.b-and-q.com/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://GBKTBQH001L1697:8088/mockERZ301ZECCPLANTERPBYIDQR</con:endpoint><con:endpoint>https://ppdECC.b-and-q.com/sap/bc/srt/xip/sap/ecc_planterpbyidqr/201/ecc_planterpbyidqr/ecc_planterpbyidqr</con:endpoint><con:endpoint>https://rdlecc.b-and-q.com/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/zecc_planterpbyidqr/erz301zeccplanterpbyidqr</con:endpoint><con:endpoint>https://rqaecc.b-and-q.com/sap/bc/srt/xip/sap/ecc_planterpbyidqr/301/ecc_planterpbyidqr/ecc_planterpbyidqr</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest" name="PlantERPByIDQueryResponse_In" bindingOperationName="PlantERPByIDQueryResponse_In" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="1b96ed1b-8aa7-4740-8499-343db5657e3b"><con:settings/><con:call name="TC1 - Get Fulfilment Site Details by ID" id="72daba35-d454-4679-8aec-f4fedfdba473"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://GBKTBQH001L1697:8088/mockERZ301ZECCPLANTERPBYIDQR</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><glob:PlantERPByIDQuery_sync xmlns:glob="http://sap.com/xi/APPL/SE/Global"><PlantSelectionByID><PlantID>1115</PlantID></PlantSelectionByID></glob:PlantERPByIDQuery_sync></soapenv:Body></soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="2f95d939-0357-499b-a3c3-d67ec9452eeb" name="TC2 - Store Details Not Found"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://GBKTBQH001L1697:8088/mockERZ301ZECCPLANTERPBYIDQR</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><glob:PlantERPByIDQuery_sync xmlns:glob="http://sap.com/xi/APPL/SE/Global"><PlantSelectionByID><PlantID>9999</PlantID></PlantSelectionByID></glob:PlantERPByIDQuery_sync></soapenv:Body></soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="1abb2a7b-7af4-433c-bf49-8ed91a4364d2" name="FulfilmentSite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a04c25d4-a443-4b81-8470-b570b2d8b24e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC1 - Get Fulfilment Site Details by ID" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Generate Request ID" id="c7c9c7a4-3de7-42f5-a589-824c1c635949"><con:settings/><con:config><script>def requestUUId = java.util.UUID.randomUUID().toString()
+//requestUUId = "12346"
+testRunner.testCase.setPropertyValue("requestUUId",requestUUId)
+log.debug("Generated Request ID: "+requestUUId)</script></con:config></con:testStep><con:testStep type="properties" name="SetExpectedResponse" id="67ab3cc9-95fd-4cd5-965f-2c7af0c7335b"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>expectedResponse</con:name><con:value>{"Class":["FulfilmentSite"],"properties":{"siteNumber":"1115","name":"NAAS MW","address":[{"addressLine1":"NEWHALL RETAIL PARK","city":"NAAS","regionName":"Kildare","regionCode":"KE","countryCode":"IE","countryName":"Ireland"}],"contact":[{"fax":"+35345906310","phone1":"+35345906399"}]}}</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="GET - TC1 - Get Fulfilment Site Details by ID" id="49f1cd5a-025e-4c45-8cb2-bef6f685cba7"><con:settings/><con:config service="FulfilmentSite" resourcePath="/FulfilmentSite/1115" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GET - TC1 - Get Fulfilment Site Details by ID" id="d3090d2e-908a-4ba5-8d48-ae6dd9dde4c7" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#serviceEndpoint}</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" id="beeb9ef1-7dfd-4196-964c-7746f4b47783" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="727baa2a-0a38-4bcb-bbd9-b4b6ac866f11" name="Script Assertion"><con:configuration><scriptText>import com.kingfisher.wmb.ci.test.assertion.*;
+
+def expectedJSON = context.expand('${SetExpectedResponse#expectedResponse}')
+assert GenericScriptAssertionHelper.assertResponseJson(log,context,messageExchange,expectedJSON)</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>requestUUId</con:name><con:value>908bbf2a-8d03-4269-b009-2835170f37cf</con:value></con:property></con:properties></con:testCase><con:testCase id="31153ee6-2cd8-423a-a3c7-7c3fc13d6644" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC2 - Store Details Not Found" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Generate Request ID" id="d17cec11-e96b-42cc-b991-4b97d844bd91"><con:settings/><con:config><script>def requestUUId = java.util.UUID.randomUUID().toString()
+//requestUUId = "12346"
+testRunner.testCase.setPropertyValue("requestUUId",requestUUId)
+log.debug("Generated Request ID: "+requestUUId)</script></con:config></con:testStep><con:testStep type="properties" name="SetExpectedResponse" id="e4ea6b2b-925d-4543-83e1-609133465ab0"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>expectedResponse</con:name><con:value>{"Class":["Response"],"properties":{"type":"ERROR","info":[{"serviceName":"com.kingfisher.gha.fulfilmentsite.FulfilmentSite_Get","statusCode":"404","statusMessage":"Site 9999 does not exist"}]}}</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="GET - TC2 - Store Details Not Found" id="b9081d08-5fa5-4d08-b071-b5aaf97d70db"><con:settings/><con:config service="FulfilmentSite" resourcePath="/FulfilmentSite/9999" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GET - TC2 - Store Details Not Found" id="1cf50d60-4851-49af-bab5-ca1d69cb26e3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#serviceEndpoint}</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" id="d5f29afb-c1c0-4ad6-8c76-f336102fc2d5" name="Valid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="36efd441-3f97-4412-a742-33c90d798f72" name="Script Assertion"><con:configuration><scriptText>import com.kingfisher.wmb.ci.test.assertion.*;
+
+def expectedJSON = context.expand('${SetExpectedResponse#expectedResponse}')
+assert GenericScriptAssertionHelper.assertResponseJson(log,context,messageExchange,expectedJSON)</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>requestUUId</con:name><con:value>908bbf2a-8d03-4269-b009-2835170f37cf</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>port1</con:name><con:value>8000</con:value></con:property><con:property><con:name>port2</con:name><con:value>8001</con:value></con:property></con:properties><con:setupScript>import com.kingfisher.wmb.ci.test.testsuite.*;
+
+GenericTestSuiteStartupScript.setupTestSuite(log,runner,context,testSuite);
+</con:setupScript><con:tearDownScript>import com.kingfisher.wmb.ci.test.testsuite.*;
+
+GenericTestSuiteTearDownScript.tearDownTestSuite(log,runner,context,testSuite);</con:tearDownScript></con:testSuite><con:mockService port="8088" path="/mockERZ301ZECCPLANTERPBYIDQR" host="GBKTBQH001L1697" name="ERZ301ZECCPLANTERPBYIDQR_MockService" id="4948c7a8-3b95-499e-8984-e64435dfffda"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="PlantERPByIDQueryResponse_In" id="17f75904-dc40-4efe-ae5b-5f3282ce2c4d" interface="ERZ301ZECCPLANTERPBYIDQR" operation="PlantERPByIDQueryResponse_In"><con:settings/><con:defaultResponse>Default</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>import com.kingfisher.wmb.ci.test.soap.mockservice.mockoperation.*
+
+return MockResponseDespatchHelper.getMockResponse(log,context,mockRequest,mockOperation)</con:dispatchPath><con:response name="Default" id="aa4eaae7-68c8-44c7-addc-e4de53145689" httpResponseStatus="500" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:glob="http://sap.com/xi/SAPGlobal20/Global">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode>${faultCode}</faultcode>
+      <faultstring xml:lang="E">${faultString}</faultstring>
+      <!--Optional:-->
+      <faultactor></faultactor>
+      <!--Optional:-->
+      <detail>
+        <glob:StandardMessageFault>
+          <standard>
+            <faultText>${faultText}</faultText>
+          </standard>
+        </glob:StandardMessageFault>
+        <!--You may enter ANY elements at this point-->
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest"/></con:response><con:response name="TC1 - Get Fulfilment Site Details by ID" id="5d56ed29-74e2-436a-995b-c270731858bc" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style"><soapenv:Header/><soapenv:Body><n0:PlantERPByIDResponse_sync xmlns:n0="http://sap.com/xi/APPL/SE/Global" xmlns:prx="urn:sap.com:proxy:ERZ:/1SAI/TASC365A816AE298558C8D2:740"><Plant><ID>1115</ID><AddressInformation><AddressID>26952</AddressID><Address><OrganisationFormOfAddress><Code>0003</Code><Name languageCode="en">Company</Name></OrganisationFormOfAddress><OrganisationFormattedName>NAAS MW</OrganisationFormattedName><OrganisationFormattedName>MW</OrganisationFormattedName><PhysicalAddress><CountryCode>IE</CountryCode><CountryName languageCode="en">Ireland</CountryName><RegionCode>KE</RegionCode><RegionName>Kildare</RegionName><CityName>NAAS</CityName><StreetName>NEWHALL RETAIL PARK</StreetName></PhysicalAddress><Communication><CorrespondenceLanguageCode>EN</CorrespondenceLanguageCode><CorrespondenceLanguageName languageCode="en">English</CorrespondenceLanguageName><Telephone><Number><SubscriberID>+35345906399</SubscriberID><CountryCode>IE</CountryCode><CountryName languageCode="en">Ireland</CountryName></Number><SMSEnabledIndicator>false</SMSEnabledIndicator><NumberDefaultIndicator>true</NumberDefaultIndicator><NumberUsageDenialIndicator>false</NumberUsageDenialIndicator></Telephone><MobilePhone><Number><SubscriberID>+35345906311</SubscriberID><CountryCode>IE</CountryCode><CountryName languageCode="en">Ireland</CountryName></Number><SMSEnabledIndicator>true</SMSEnabledIndicator><NumberDefaultIndicator>true</NumberDefaultIndicator><NumberUsageDenialIndicator>false</NumberUsageDenialIndicator></MobilePhone><Facsimile><Number><SubscriberID>+35345906310</SubscriberID><CountryCode>IE</CountryCode><CountryName languageCode="en">Ireland</CountryName></Number><NumberDefaultIndicator>true</NumberDefaultIndicator><NumberUsageDenialIndicator>false</NumberUsageDenialIndicator></Facsimile></Communication></Address></AddressInformation></Plant><Log/></n0:PlantERPByIDResponse_sync></soapenv:Body></soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest"/></con:response><con:response name="TC2 - Store Details Not Found" id="668b22c9-16c4-4c82-8444-cda89017b473" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style"><soapenv:Header/><soapenv:Body><n0:PlantERPByIDResponse_sync xmlns:n0="http://sap.com/xi/APPL/SE/Global" xmlns:prx="urn:sap.com:proxy:ERZ:/1SAI/TASC365A816AE298558C8D2:740"><Log><MaximumLogItemSeverityCode>3</MaximumLogItemSeverityCode><Item><TypeID>003(SAPLWOSK)</TypeID><SeverityCode>3</SeverityCode><Note>Site 9999 does not exist</Note></Item></Log></n0:PlantERPByIDResponse_sync></soapenv:Body></soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/APPL/SE/Global/PlantERPByIDQueryResponse_In/PlantERPByIDQueryResponse_InRequest"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties><con:property><con:name>currentDate</con:name><con:value>2016-02-22</con:value></con:property><con:property><con:name>storeCode</con:name><con:value>1115</con:value></con:property><con:property><con:name>serviceEndpoint</con:name><con:value>http://unxs0384.ghanp.kfplc.com:8072</con:value></con:property><con:property><con:name>MOCK_SAP_HOST</con:name><con:value>localhost</con:value></con:property><con:property><con:name>MOCK_SAP_PORT</con:name><con:value>8000</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

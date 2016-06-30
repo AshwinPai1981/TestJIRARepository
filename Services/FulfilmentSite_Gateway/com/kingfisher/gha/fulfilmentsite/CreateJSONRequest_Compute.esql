@@ -1,0 +1,27 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+
+
+
+CREATE COMPUTE MODULE CreateJSONRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+	 	DECLARE oRefProp REFERENCE TO oRef.properties;
+	 	DECLARE REF_Class REFERENCE TO oRef.Class;
+	 	
+	 	CREATE FIELD oRef.Class AS REF_Class IDENTITY (JSON.Array)Class;
+		SET REF_Class.Item[1] VALUE = 'FulfilmentSiteRequest';
+		CREATE FIELD oRef.properties AS oRefProp;
+		SET oRefProp.siteNumber = Environment.siteNumber;
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		RETURN TRUE;
+	END;
+END MODULE;

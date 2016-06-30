@@ -1,0 +1,96 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+
+
+
+CREATE COMPUTE MODULE FulfilmentSite_Gateway_Response_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		
+		DECLARE iRef_Site REFERENCE TO InputRoot.JSON.Data;
+		DECLARE oRef 	  REFERENCE TO OutputRoot.JSON.Data;
+		
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class; 
+		
+		IF(iRef_Site.properties.type = 'ERROR') THEN
+				
+				SET oRef.Class.Item[1] VALUE = 'Response';
+				
+				DECLARE oRefProp REFERENCE TO oRef.properties;
+				DECLARE iRefProp REFERENCE TO iRef_Site.properties;
+				
+				CREATE FIELD oRef.properties AS oRefProp;				
+				SET oRefProp.type = 'ERROR';
+				
+				DECLARE oRefInfo REFERENCE TO oRefProp.info;
+				DECLARE iRefInfo REFERENCE TO iRefProp.info;
+	       		
+	       		CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	       		SET oRefInfo.Item[1].serviceName = iRefInfo.Item[1].serviceName;
+	           	SET oRefInfo.Item[1].statusCode = iRefInfo.Item[1].statusCode;	
+			   	SET oRefInfo.Item[1].statusMessage = iRefInfo.Item[1].statusMessage;		
+		ELSE
+				DECLARE iRef_SiteProp REFERENCE TO iRef_Site.properties;
+				SET oRef.Class.Item[1] VALUE = 'FulfilmentSite';
+				
+				DECLARE oRefProp REFERENCE TO oRef.properties;
+				
+				CREATE FIELD oRef.properties AS oRefProp;
+				SET oRefProp.siteNumber = iRef_SiteProp.siteNumber;
+				SET oRefProp.name = iRef_SiteProp.name;
+				
+				IF EXISTS(iRef_SiteProp.address[]) THEN
+					DECLARE IN_ADDRESS_COUNT INTEGER 1;
+					DECLARE oRef_Address REFERENCE TO oRefProp.address;
+		 		    CREATE FIELD oRefProp.address AS oRef_Address IDENTITY (JSON.Array) address;
+		 		    FOR source_Address AS iRef_SiteProp.address.Item[] DO
+		 		    	IF COALESCE(source_Address.addressLine1,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].addressLine1 = source_Address.addressLine1;
+				    	END IF;
+				    	IF COALESCE(source_Address.city,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].city = source_Address.city;
+				    	END IF;		
+				    	IF COALESCE(source_Address.postCode,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].postCode = source_Address.postCode;
+				    	END IF;	
+				    	IF COALESCE(source_Address.regionName,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].regionName = source_Address.regionName;
+				    	END IF;
+		 		    	IF COALESCE(source_Address.regionCode,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].regionCode = source_Address.regionCode;
+				    	END IF;
+				    	IF COALESCE(source_Address.countryCode,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].countryCode = source_Address.countryCode;
+				    	END IF;
+		 		    	IF COALESCE(source_Address.countryName,'')<>'' THEN
+				    		SET oRef_Address.Item[IN_ADDRESS_COUNT].countryName = source_Address.countryName;
+				    	END IF;	
+		 		    	SET IN_ADDRESS_COUNT = IN_ADDRESS_COUNT + 1;
+		 		    END FOR;
+				END IF;
+				
+				IF EXISTS(iRef_SiteProp.contact[]) THEN
+					
+					DECLARE IN_CONTACT_COUNT INTEGER 1;
+					DECLARE oRef_Contact REFERENCE TO oRefProp.contact;
+		   			CREATE FIELD oRefProp.contact AS oRef_Contact IDENTITY (JSON.Array) contact;
+		   			
+		   			FOR source_Contact AS iRef_SiteProp.contact.Item[] DO
+				    	IF COALESCE(source_Contact.fax,'')<>'' THEN	
+				    		SET oRef_Contact.Item[1].fax = source_Contact.fax;
+				    	END IF;
+				    	IF COALESCE(source_Contact.phone1,'')<>'' THEN	
+				    		SET oRef_Contact.Item[1].phone1 = source_Contact.phone1;
+				    	END IF;
+				    	SET IN_CONTACT_COUNT = IN_CONTACT_COUNT + 1;
+		   			END FOR;	
+				END IF;	
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

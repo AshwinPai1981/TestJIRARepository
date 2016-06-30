@@ -1,0 +1,113 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+
+
+
+CREATE COMPUTE MODULE ResponseMapping_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Copy Message Properties only
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+		/*
+		SET OutputRoot.MQMD.MsgId = Environment.Store.MsgID;
+        SET OutputRoot.MQMD.ReplyToQ = Environment.Store.ReplyToQ; 
+	    SET OutputRoot.MQRFH2.usr.MetaData = Environment.Store.MetaData;
+	    SET OutputRoot.MQRFH2.usr.ReqFromURI = Environment.Store.ReqFromURI;
+	    SET OutputRoot.MQRFH2.usr.requestID = Environment.Store.requestID;
+	    */
+	    
+	    SET OutputRoot.MQMD = Environment.Store.MQMD;
+	    SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+	    
+	   	-- Create JSON output response
+	    
+	    DECLARE iRef 					REFERENCE TO InputRoot.XMLNSC.NS_n0:PlantERPByIDResponse_sync;
+	    DECLARE iRef_Plant  			REFERENCE TO iRef.Plant;
+	    DECLARE iRef_AddressInformation	REFERENCE TO iRef_Plant.AddressInformation;
+	    
+	    DECLARE CH_ResultCode CHARACTER;
+	    
+	    SET CH_ResultCode = iRef.Log.MaximumLogItemSeverityCode;
+	    
+	   	IF (EXISTS(iRef.Log.Item[])) THEN
+	    		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+				DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		
+				-- Map the required elements to the JSON response
+
+				CREATE FIELD OutputRoot.JSON.Data AS oRef;
+				CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+				SET oRef.Class.Item[1] VALUE = 'Response';
+        		
+        		CREATE FIELD oRef.properties AS oRefProp;
+            	SET oRefProp.type = 'ERROR';
+		   		
+		   		DECLARE oRefInfo REFERENCE TO oRefProp.info;
+          		CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+           	
+           		SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+           		SET oRefInfo.Item[1].statusCode = '404';	
+		   		--SET oRefInfo.Item[1].statusMessage = 'No site found for site Id:'|| Environment.Store.siteId;
+		   		SET oRefInfo.Item[1].statusMessage = iRef.Log.Item[1].Note;
+	   ELSE
+	    	DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		    DECLARE oRef_Prop REFERENCE TO oRef.properties;
+		    DECLARE oRef_Class REFERENCE TO oRef.Class;
+		    
+		    CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		    CREATE FIELD oRef.Class AS oRef_Class IDENTITY (JSON.Array)Class;
+		    SET  oRef_Class.Item[1] VALUE = 'FulfilmentSite';
+		   	
+		   	CREATE FIELD oRef.properties AS oRef_Prop;
+		    SET oRef_Prop.siteNumber = iRef_Plant.ID;
+		    SET oRef_Prop.name		 = iRef_Plant.AddressInformation.Address.OrganisationFormattedName;
+		    
+		  	DECLARE IN_ADDRESS_COUNT INTEGER 1;
+		    DECLARE oRef_Address REFERENCE TO oRef_Prop.address;
+		    CREATE FIELD oRef_Prop.address AS oRef_Address IDENTITY (JSON.Array) address;
+		    
+		    FOR source_Address AS iRef_Plant.AddressInformation[] DO
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.StreetName,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].addressLine1 = source_Address.Address.PhysicalAddress.StreetName;
+		    	END IF;
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.CityName,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].city = source_Address.Address.PhysicalAddress.CityName;
+		    	END IF;		
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.StreetPostalCode,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].postCode = source_Address.Address.PhysicalAddress.StreetPostalCode;
+		    	END IF;	
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.RegionName,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].regionName = source_Address.Address.PhysicalAddress.RegionName;
+		    	END IF;	
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.RegionCode,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].regionCode = source_Address.Address.PhysicalAddress.RegionCode;
+		    	END IF;	
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.CountryCode,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].countryCode = source_Address.Address.PhysicalAddress.CountryCode;
+		    	END IF;	
+		    	IF COALESCE(source_Address.Address.PhysicalAddress.CountryName,'')<>'' THEN
+		    		SET oRef_Address.Item[IN_ADDRESS_COUNT].countryName = source_Address.Address.PhysicalAddress.CountryName;
+		    	END IF;	
+		    	SET IN_ADDRESS_COUNT = IN_ADDRESS_COUNT + 1;
+		    END FOR;
+		    
+		    DECLARE IN_CONTACT_COUNT INTEGER 1;
+		    DECLARE oRef_Contact REFERENCE TO oRef_Prop.contact;
+		    CREATE FIELD oRef_Prop.contact AS oRef_Contact IDENTITY (JSON.Array) contact;
+		    
+		    FOR source_Contact AS iRef_Plant.AddressInformation[] DO
+		    	IF COALESCE(source_Contact.Address.Communication.Facsimile.Number.SubscriberID,'')<>''  THEN	
+		    		SET oRef_Contact.Item[IN_CONTACT_COUNT].fax = source_Contact.Address.Communication.Facsimile.Number.SubscriberID;
+		    	END IF;
+		    	IF COALESCE(source_Contact.Address.Communication.Telephone.Number.SubscriberID,'')<>'' THEN	
+		    		SET oRef_Contact.Item[IN_CONTACT_COUNT].phone1 = source_Contact.Address.Communication.Telephone.Number.SubscriberID;
+		    	END IF;
+		    	SET IN_CONTACT_COUNT = IN_CONTACT_COUNT + 1;
+		    END FOR;
+	    END IF;
+		RETURN TRUE;
+	END;
+
+END MODULE;

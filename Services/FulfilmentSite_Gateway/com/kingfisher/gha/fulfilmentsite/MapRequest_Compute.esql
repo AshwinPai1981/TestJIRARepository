@@ -1,0 +1,52 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+PATH com.kingfisher.gha.common;
+DECLARE NS_n0 NAMESPACE 'http://sap.com/xi/APPL/SE/Global';
+
+CREATE COMPUTE MODULE MapRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Copy Message Properties only
+
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+
+		SET OutputRoot.Properties.IdentityMappedType='usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken = getConfigValue('SAP_ES_USERID');
+		SET OutputRoot.Properties.IdentityMappedPassword = getEncryptedValue('SAP_ES_PASSWORD');		
+
+		-- Store MsgID, Reply queue, metadata, request identifier etc.
+		/*
+		SET Environment.Store.MsgID = InputRoot.MQMD.MsgId;
+		SET Environment.Store.ReplyToQ = InputRoot.MQMD.ReplyToQ;
+		SET Environment.Store.MetaData = InputRoot.MQRFH2.usr.MetaData;
+		SET Environment.Store.requestID  = InputRoot.MQRFH2.usr.requestID;
+		*/
+		
+		SET Environment.Store.MQMD = InputRoot.MQMD;
+		SET Environment.Store.MQRFH2  = InputRoot.MQRFH2;
+		
+		-- Store Input Message 
+		SET Environment.Store.Input.JSON = InputRoot.JSON;
+		
+		DECLARE iRef_Prop REFERENCE TO InputRoot.JSON.Data.properties;
+		SET Environment.Store.siteId = iRef_Prop.siteNumber;
+		
+		-- Create request structure for SAP enterprise service call
+		
+		DECLARE oRefSite REFERENCE TO OutputRoot.XMLNSC.NS_n0:PlantERPByIDQuery_sync;
+		DECLARE oRefSite_Selection REFERENCE TO oRefSite.PlantSelectionByID;
+		DECLARE oRef_SiteId REFERENCE TO oRefSite_Selection.PlantID;
+		CREATE FIELD OutputRoot.XMLNSC.NS_n0:PlantERPByIDQuery_sync AS oRefSite NAMESPACE NS_n0 NAME 'PlantERPByIDQuery_sync';
+		SET oRefSite.(XMLNSC.NamespaceDecl)xmlns:glob =  NS_n0;
+		
+		CREATE FIELD oRefSite.PlantSelectionByID AS oRefSite_Selection NAME 'PlantSelectionByID';
+		SET oRefSite_Selection.PlantID = Environment.Store.siteId;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = getConfigValue('SAP_ECC_PLANTERPBYIDQR_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout = getConfigValue('SAP_ES_TIMEOUT');
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

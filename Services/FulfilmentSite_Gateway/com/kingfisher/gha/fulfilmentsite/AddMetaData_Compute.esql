@@ -1,0 +1,31 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+
+
+
+CREATE COMPUTE MODULE AddMetaData_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- setting the service specific reply to queue based on the REST method
+		CASE(Environment.Store.method) 
+		
+		WHEN 'GET' THEN
+			SET OutputRoot.MQMD.ReplyToQ = 'FULFILMENTSITEGET.OUT.INTERNAL.WMB';
+		END CASE;
+		
+		-- setting the MQRFH2 header for storing the metadata information		
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Version = 2;
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Format = 'MQSTR';
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)NameValueCCSID = 1208;
+		
+		SET OutputRoot.MQRFH2.usr.MetaData = Environment.MetaData;
+		SET OutputRoot.MQRFH2.usr.requestID = Environment.Store.requestID;
+		
+		SET OutputRoot.BLOB.BLOB = InputRoot.BLOB.BLOB;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		RETURN TRUE;
+	END;
+
+
+END MODULE;
