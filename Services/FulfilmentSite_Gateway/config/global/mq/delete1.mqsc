@@ -1,0 +1,17 @@
+**************************************************************
+**   Script	 :  delete1.mqsc
+**   Application :  FulfilmentSite_Gateway
+**   Created By	 :  Gareth Trott (auto)
+**   Environment :  All tiers
+**   Date	 :  06-August-2015 @ 18:18
+**************************************************************
+
+DELETE QLOCAL  ('FULFILMENTSITEGET.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('FULFILMENTSITEGET.IN.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('FULFILMENTSITEGET.OUT.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('FULFILMENTSITEGET.OUT.INTERNAL.WMB') ;
+
+**************************EndScript***************************

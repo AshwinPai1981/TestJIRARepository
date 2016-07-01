@@ -1,0 +1,94 @@
+BROKER SCHEMA com.kingfisher.gha.fulfilmentsite
+
+
+
+CREATE COMPUTE MODULE FulfilmentSite_Gateway_Initialize_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		-- Store the HTTP RequestIdentifier 
+		SET Environment.Store.requestID = InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+		-- Store the method
+		SET Environment.Store.method = InputLocalEnvironment.HTTP.Input.RequestLine.Method;
+		
+		-- For REST the last section of the URI should name the target object this action is to be performed on
+		DECLARE targObj CHARACTER;
+		SET targObj = SUBSTRING(InputLocalEnvironment.HTTP.Input.RequestLine.RequestURI After '/');
+		SET targObj = SUBSTRING(targObj After '/');
+		
+		-- Tidy and save the title in the URL.
+		SET targObj = REPLACE(targObj,'%20',' ');
+		
+		IF COALESCE(targObj,'')='' THEN
+			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Site number missing','400');
+		   	RETURN FALSE;
+		END IF;
+		
+		SET Environment.Store.target = targObj;
+		
+		IF COALESCE(targObj,'')<>'' THEN
+			SET Environment.siteNumber = targObj;
+		END IF;
+		
+		 /*
+		 * Retrive the MetaData information from HTTPHeader.
+		 * Pass the MetaData information to data service flow 
+		*/
+		
+		-- Map the metadata field elements to the JSON message
+		
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+	
+		CREATE FIELD OutputRoot.JSON.Data;
+		CREATE FIELD OutputRoot.JSON.Data.Class IDENTITY (JSON.Array)Class; 
+		SET OutputRoot.JSON.Data.Class.Item[1] VALUE = 'Metadata';
+        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+        
+        /*SET oRefProp.opco = InputRoot.HTTPInputHeader.Opco;
+        SET oRefProp.fullStoreCode = InputRoot.HTTPInputHeader.Fullstorecode;
+        SET oRefProp.userId = InputRoot.HTTPInputHeader.Userid;
+        SET oRefProp.deviceId = InputRoot.HTTPInputHeader.Deviceid;
+        SET oRefProp.deviceType = InputRoot.HTTPInputHeader.Devicetype;
+        SET oRefProp.clientIpAddress = InputRoot.HTTPInputHeader.Clientipaddress;
+        SET oRefProp.processName = InputRoot.HTTPInputHeader.Processname;
+        SET oRefProp.interfaceName = InputRoot.HTTPInputHeader.Interfacename;
+        SET oRefProp.sourceApplication = InputRoot.HTTPInputHeader.Sourceapplication;
+        SET oRefProp.requestDateTime = InputRoot.HTTPInputHeader.Requestdatetime;
+        SET oRefProp.messageKey = InputRoot.HTTPInputHeader.Messagekey;
+        SET oRefProp.requestUuid = InputRoot.HTTPInputHeader.Requestuuid;*/
+        
+           SET oRefProp."opco" 					= InputRoot.HTTPInputHeader."Kits-Opco";
+        SET oRefProp."fullStoreCode"			= InputRoot.HTTPInputHeader."Kits-Store-Code";
+        SET oRefProp."userId"					= InputRoot.HTTPInputHeader."Kits-User-Id";
+        SET oRefProp."deviceId"				    = InputRoot.HTTPInputHeader."Kits-Device-Id";
+        SET oRefProp."deviceType"				= InputRoot.HTTPInputHeader."Kits-Device-Type";
+        SET oRefProp."clientIpAddress"		    = InputRoot.HTTPInputHeader."Kits-Client-Ip-Address";
+        SET oRefProp."processName" 			    = InputRoot.HTTPInputHeader."Kits-Process-Name";
+        SET oRefProp."interfaceName" 			= 'FulfilmentSite';
+        SET oRefProp."sourceApplication" 		= InputRoot.HTTPInputHeader."Kits-Application-Name";
+        SET oRefProp."requestDateTime" 		    = InputRoot.HTTPInputHeader."Kits-Request-Date-Time";
+        SET oRefProp."messageKey"				= InputRoot.HTTPInputHeader."Kits-Message-Key";
+        SET oRefProp."requestUuid" 				= InputRoot.HTTPInputHeader."Kits-Request-Id";
+        SET oRefProp."globalTransactionId" 		= InputRoot.HTTPInputHeader."Kits-Global-Id";
+        
+		SET Environment.MetaData = OutputRoot.JSON.Data;
+		
+		
+		-- Removing the metadata json message
+		SET OutputRoot.JSON = NULL;
+		
+		IF(COALESCE(Environment.Store.method) <> '' AND (UPPER(Environment.Store.method) = 'POST' OR UPPER(Environment.Store.method) = 'GET' OR UPPER(Environment.Store.method) = 'PUT' OR UPPER(Environment.Store.method) = 'DELETE')) THEN
+		IF(UPPER(Environment.Store.method) <> 'GET') THEN
+				THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Method Not Allowed','405');
+		   		RETURN FALSE;
+		END IF;
+		ELSE
+	        	THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Not Implemented','501');
+		   		RETURN FALSE;
+		END IF;	
+		SET OutputRoot.BLOB.BLOB = InputRoot.BLOB.BLOB;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
