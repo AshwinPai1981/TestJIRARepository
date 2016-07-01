@@ -1,0 +1,77 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+PATH com.kingfisher.gha.common;
+
+CREATE COMPUTE MODULE CreateDeleteRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		DECLARE oRef 	   		 REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRef_Class 		 REFERENCE TO oRef.Class;
+		DECLARE oRef_prop 		 REFERENCE TO oRef.properties;
+		DECLARE oRef_ent		 REFERENCE TO oRef.entities;	
+		DECLARE bayNum			 CHARACTER '';
+		DECLARE bayClassCount	 INTEGER 1;
+		DECLARE storeCode 		 CHARACTER Environment.QueryString.storeCode;	
+		DECLARE TEMP 			 INTEGER 0;
+		
+		CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY (JSON.Array)Data;
+		IF COALESCE(Environment.Store.bay,'') = '' AND POSITION(',' IN Environment.QueryString.bayNumber)>1 THEN
+			SET TEMP = PROC_SplitByDelimiter(Environment.QueryString.bayNumber, ',' , 'BAY_TO_DELETE', Environment);
+			FOR bayToDelete AS Environment.BAY_TO_DELETE.ArrayOfSubString[] DO
+				CREATE FIELD oRef.Item[bayClassCount].Class AS oRef_Class IDENTITY (JSON.Array)Class;
+				SET oRef_Class.Item[1] VALUE = 'Bay';
+				CREATE FIELD oRef.Item[bayClassCount].properties AS oRef_prop;
+				SET oRef_prop.bayNumber = FIELDVALUE(bayToDelete);
+				CREATE FIELD oRef.Item[bayClassCount].entities AS oRef_ent IDENTITY (JSON.Array)entities;
+				CREATE FIELD oRef_ent.Item[1].Class IDENTITY (JSON.Array)Class;
+				SET oRef_ent.Item[1].Class.Item[1] VALUE = 'FulfilmentSite';
+				CREATE FIELD oRef_ent.Item[1].rel IDENTITY (JSON.Array)rel;
+				SET oRef_ent.Item[1].rel.Item[1] VALUE = 'urn:x-kingfisher:name:parentStore';
+				SET oRef_ent.Item[1].properties.siteNumber = storeCode;
+				
+				SET bayClassCount = bayClassCount + 1;
+			END FOR;
+		ELSE	
+				IF COALESCE(Environment.Store.bay,'')<>'' THEN 
+					SET bayNum =  Environment.Store.bay;
+				ELSE
+					SET bayNum =  Environment.QueryString.bayNumber;
+				END IF;		
+						 
+				CREATE FIELD oRef.Item[1].Class AS oRef_Class IDENTITY (JSON.Array)Class;
+				SET oRef_Class.Item[1] VALUE = 'Bay';
+				CREATE FIELD oRef.Item[1].properties AS oRef_prop;
+				SET oRef_prop.bayNumber = bayNum;
+				CREATE FIELD oRef.Item[1].entities AS oRef_ent IDENTITY (JSON.Array)entities;
+				CREATE FIELD oRef_ent.Item[1].Class IDENTITY (JSON.Array)Class;
+				SET oRef_ent.Item[1].Class.Item[1] VALUE = 'FulfilmentSite';
+				CREATE FIELD oRef_ent.Item[1].rel IDENTITY (JSON.Array)rel;
+				SET oRef_ent.Item[1].rel.Item[1] VALUE = 'urn:x-kingfisher:name:parentStore';
+				SET oRef_ent.Item[1].properties.siteNumber = storeCode;
+		END IF;	
+		SET Environment.BAY_TO_DELETE = NULL;
+		SET OutputLocalEnvironment 	= InputLocalEnvironment;
+		RETURN TRUE;
+	END;
+
+	/*CREATE FUNCTION PROC_SplitByDelimiter(IN CH_Parameter CHARACTER, IN CH_DELIMINITER CHARACTER, IN CH_Type CHARACTER) 
+      BEGIN
+            DECLARE IN_Position INTEGER;
+            DECLARE IN_Index    INTEGER 1;
+            
+            WHILE LENGTH(CH_Parameter) > 0 DO
+                  SET IN_Position    = POSITION(CH_DELIMINITER IN CH_Parameter);
+                  IF IN_Position <= 0 THEN
+                        SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(CH_Parameter);
+                        SET CH_Parameter  = NULL;
+                  ELSE
+                        SET Environment.{CH_Type}.ArrayOfSubString[IN_Index] = TRIM(SUBSTRING(CH_Parameter FROM 1 FOR IN_Position - 1));
+                        SET CH_Parameter  = TRIM(SUBSTRING(CH_Parameter FROM IN_Position + 1));
+                        SET IN_Index = IN_Index + 1;
+                  END IF;
+            END WHILE;
+      END;*/
+      END MODULE;
