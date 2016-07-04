@@ -6,7 +6,7 @@ CREATE COMPUTE MODULE ResponseMapping_Compute
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		
-		-- Copy Message Properties only
+		-- Copy Message Properties only -- FEATURE3
 		SET OutputRoot.Properties = InputRoot.Properties;
 		
 		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.

@@ -1,0 +1,69 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+path com.kingfisher.gha.common;
+
+CREATE COMPUTE MODULE Bay_GetBay_MapRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+        
+        -- Apply Security - This will probably be replaced so left as hardcoded for now.
+        SET OutputRoot.Properties.IdentityMappedType	 = 'usernameAndPassword';
+       	SET OutputRoot.Properties.IdentityMappedToken 	 = getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,'')) ;
+		SET OutputRoot.Properties.IdentityMappedPassword = getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));          
+
+        -- Store MQMD and MQRFH2 headers in enviroment
+        SET Environment.Store.MQMD = InputRoot.MQMD;
+        SET Environment.Store.MQRFH2 = InputRoot.MQRFH2;
+        
+        -- Store Message in case of error
+        SET Environment.Store.Input.JSON = InputRoot.JSON;
+        SET Environment.Store.storeCode  = InputRoot.JSON.Data.properties.storeCode;
+        SET Environment.Store.bayFromURI = InputRoot.MQRFH2.usr.bayFromURI;
+        SET Environment.Store.bayFilter  = InputRoot.MQRFH2.usr.bayFilter;
+        
+        DECLARE oRef 				 REFERENCE TO OutputRoot.XMLNSC.NS_urn:ZSofReadBay;
+        DECLARE oRef_Aisle			 REFERENCE TO oRef.ItAisleNum;
+        DECLARE oRef_Bay     		 REFERENCE TO oRef.ItBays;
+        DECLARE oRef_LgNum   		 REFERENCE TO oRef.ItLgnum;
+        DECLARE oRef_ItWerks 		 REFERENCE TO oRef.ItWerks;
+        DECLARE oRef_IvAisleNumCheck REFERENCE TO oRef.IvAisleNumCheck;
+        DECLARE oRef_IvBayCheck 	 REFERENCE TO oRef.IvBayCheck;
+        DECLARE oRef_IvLgnumCheck    REFERENCE TO oRef.IvLgnumCheck;
+        DECLARE oRef_IvWerksCheck    REFERENCE TO oRef.IvWerksCheck;
+        DECLARE iRef                 REFERENCE TO InputRoot.JSON.Data;
+        
+        
+        CREATE FIELD OutputRoot.XMLNSC.NS_urn:ZSofReadBay AS oRef NAMESPACE NS_urn NAME 'ZSofReadBay';
+        SET oRef.(XMLNSC.NamespaceDecl)xmlns:urn =  NS_urn;
+        
+        IF EXISTS(iRef.properties.aisleNumber.Item[]) THEN
+        	DECLARE oRefAisleItem REFERENCE TO oRef_Aisle.item;
+	        CREATE FIELD oRef.ItAisleNum AS oRef_Aisle 	NAME 'ItAisleNum';
+	        FOR aisle AS iRef.properties.aisleNumber.Item[] DO
+	        	CREATE LASTCHILD OF oRef_Aisle AS oRefAisleItem NAME 'item' VALUE FIELDVALUE(aisle);
+	        END FOR;	
+        END IF;
+        IF EXISTS(iRef.properties.baySequence.Item[]) THEN
+        	DECLARE oRefBayItem REFERENCE TO oRef_Bay.item;
+	        CREATE FIELD oRef.ItBays    AS oRef_Bay   NAME 'ItBays';
+	        FOR bay AS iRef.properties.baySequence.Item[] DO
+	        	CREATE LASTCHILD OF oRef_Bay AS oRefBayItem NAME 'item' VALUE FIELDVALUE(bay);
+	        END FOR;	
+        END IF;    
+        CREATE FIELD oRef.ItLgnum	 AS oRef_LgNum 		NAME 'ItLgnum';
+        SET oRef_LgNum.item   = RIGHT(iRef.properties.storeCode,3);
+        CREATE FIELD oRef.ItWerks    AS oRef_ItWerks	NAME 'ItWerks';
+        SET oRef_ItWerks.item = iRef.properties.storeCode;
+        
+        
+        CREATE LASTCHILD OF oRef AS oRef_IvAisleNumCheck NAME 'IvAisleNumCheck' VALUE 'X';
+        CREATE LASTCHILD OF oRef AS oRef_IvBayCheck      NAME 'IvBayCheck' 		VALUE 'X';
+        CREATE LASTCHILD OF oRef AS oRef_IvLgnumCheck    NAME 'IvLgnumCheck' 	VALUE 'X';
+        CREATE LASTCHILD OF oRef AS oRef_IvWerksCheck    NAME 'IvWerksCheck' 	VALUE 'X';
+        
+        SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = getConfigValue('SAP_ZECC_SOF_READ_BAY_URL');
+        SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout       =  getConfigValue('SAP_ES_TIMEOUT');
+        
+		RETURN TRUE;
+	END;
+END MODULE;

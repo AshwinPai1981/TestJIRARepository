@@ -1,0 +1,53 @@
+BROKER SCHEMA com.kingfisher.gha.bay
+
+
+CREATE COMPUTE MODULE Bay_PostBay_MapRespose_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Copy Message Properties only
+		SET OutputRoot.Properties = InputRoot.Properties;
+				
+		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+	    SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+	    
+	    DECLARE oRef 	  REFERENCE TO OutputRoot.JSON.Data;
+	    DECLARE oRefClass REFERENCE TO oRef.Class;
+	    DECLARE oRefProp  REFERENCE TO oRef.properties;
+	    DECLARE iRef 	  REFERENCE TO InputRoot.XMLNSC.NS_urn:ZSofMaintainBayResponse;
+	    DECLARE iRef_Ret  REFERENCE TO iRef.EtReturn;
+	    DECLARE errorFlag BOOLEAN FALSE;
+	    
+	    CREATE FIELD OutputRoot.JSON.Data AS oRef;
+	    CREATE FIELD oRef.Class AS oRefClass IDENTITY (JSON.Array)Class;
+	    SET oRefClass.Item[1] VALUE = 'Response';
+	    CREATE FIELD oRef.properties AS oRefProp;
+	    
+	    IF EXISTS(iRef_Ret.item[]) THEN
+	    	FOR ret AS iRef_Ret.item[] DO
+	    		IF ret.Type = 'E' THEN
+	    			SET errorFlag = TRUE;
+	    		END IF;	
+	    	END FOR;
+	    	
+	    	IF errorFlag THEN
+	    		SET oRefProp.type = 'ERROR';
+	    	ELSE	
+	    		SET oRefProp.type = 'SUCCESS';
+	    	END IF;
+	    	
+	    	DECLARE infoCount INTEGER 1;	
+	    	CREATE FIELD oRefProp.info IDENTITY (JSON.Array)info;
+	    	FOR ret AS iRef_Ret.item[] DO
+	    		SET oRefProp.info.Item[infoCount].serviceName  = MessageFlowLabel;
+	    		SET oRefProp.info.Item[infoCount].statusCode   = ret.Number;
+	    		SET oRefProp.info.Item[infoCount].statusMessage= ret.Message;	
+	    		
+	    		SET infoCount = infoCount + 1;
+	    	END FOR; 	
+	    	
+	    END IF;	
+		RETURN TRUE;
+	END;
+
+END MODULE;
