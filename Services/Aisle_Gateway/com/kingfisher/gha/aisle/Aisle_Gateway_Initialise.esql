@@ -9,7 +9,7 @@ CREATE COMPUTE MODULE Aisle_Gateway_Initialise
 		
 		SET OutputRoot.Properties 		= 	InputRoot.Properties;
 
-		-- Store the HTTP RequestIdentifier -- Added by Ashwin
+		-- Store the HTTP RequestIdentifier -- Added by Ashwin Commit 1
 		SET Environment.Store.requestID = 	InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
 
 		-- Store the method
