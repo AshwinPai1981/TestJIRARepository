@@ -6,7 +6,7 @@ CREATE COMPUTE MODULE Bay_GetBay_MapRequest_Compute
 	BEGIN
 		SET OutputRoot.Properties = InputRoot.Properties;
         
-        -- Apply Security - This will probably be replaced so left as hardcoded for now.
+        -- Commit 2 Apply Security - This will probably be replaced so left as hardcoded for now.
         SET OutputRoot.Properties.IdentityMappedType	 = 'usernameAndPassword';
        	SET OutputRoot.Properties.IdentityMappedToken 	 = getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,'')) ;
 		SET OutputRoot.Properties.IdentityMappedPassword = getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));          
