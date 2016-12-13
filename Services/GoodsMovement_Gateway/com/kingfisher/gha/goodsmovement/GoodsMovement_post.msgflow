@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmMQReply.msgnode="ComIbmMQReply.msgnode" xmlns:ComIbmSOAPEnvelope.msgnode="ComIbmSOAPEnvelope.msgnode" xmlns:ComIbmSOAPExtract.msgnode="ComIbmSOAPExtract.msgnode" xmlns:ComIbmSOAPRequest.msgnode="ComIbmSOAPRequest.msgnode" xmlns:com_kingfisher_gha_common_ErrorResponse.subflow="com/kingfisher/gha/common/ErrorResponse.subflow"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="com/kingfisher/gha/goodsmovement/GoodsMovement_post.msgflow"
+    nsPrefix="com_kingfisher_gha_goodsmovement_GoodsMovement_post.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="GoodsMovement_post" bundleName="com/kingfisher/gha/goodsmovement/GoodsMovement_post" pluginId="GoodsMovement_Gateway"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/GoodsMovement_Gateway/icons/full/obj16/GoodsMovement_post.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/GoodsMovement_Gateway/icons/full/obj30/GoodsMovement_post.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="898,501" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#GoodsMovement_post_Map_Response.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="541,497" wsdlFileName="GoodsMovement.wsdl" selectedPortType="GoodsMovementERPCreateRequestConfirmation_In_V1" selectedBinding="ERZ301GMCRTRC1" selectedOperation="GoodsMovementERPCreateRequestConfirmation_In_V1" selectedPort="ERZ301GMCRTRC1" targetNamespace="http://sap.com/xi/APPL/Global2" useHTTPTransport="true" webServiceURL="http://dummyurl.com" sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false"
+          validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Request"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="SOAP Request.terminal.in" eventIdentity="SOAP Request.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="SOAP Request.terminal.failure" eventIdentity="SOAP Request.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="SOAP Request.terminal.out" eventIdentity="SOAP Request.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Fault terminal" eventSourceName="SOAP Request.terminal.fault" eventIdentity="SOAP Request.FaultTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request.FaultTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="0,492" queueName="GOODSMOVEMENTPOST.IN.INTERNAL.WMB" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="GOODSMOVEMENTPOST.IN.INTERNAL.WMB"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.transaction.Start" eventIdentity="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Transaction end" eventSourceName="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.transaction.End" eventIdentity="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionEnd">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionEnd"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.terminal.failure" eventIdentity="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Transaction rollback" eventSourceName="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.transaction.Rollback" eventIdentity="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionRollback">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent" eventUOW="independent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTPOST.IN.INTERNAL.WMB.TransactionRollback"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="263,492" dataSource="MBREPOS" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#GoodsMovement_post_Map_Request.Main" computeMode="all">
+        <translation xmi:type="utility:ConstantString" string="Map Request"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="710,497">
+        <translation xmi:type="utility:ConstantString" string="SOAP Extract"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPEnvelope.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="378,493" createEnvelope="true">
+        <translation xmi:type="utility:ConstantString" string="SOAP Envelope"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="679,298" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#GoodsMovement_post_Set_Error_Status.Main" computeMode="all">
+        <translation xmi:type="utility:ConstantString" string="Set Error Status"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="1228,502">
+        <translation xmi:type="utility:ConstantString" string="MQ Reply"/>
+      </nodes>
+      <nodes xmi:type="com_kingfisher_gha_common_ErrorResponse.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="1040,300">
+        <translation xmi:type="utility:ConstantString" string="ErrorResponse"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="1143,252" queueName="ERRORS.CNC.OUT.WMB" transactionMode="no" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Error_MQOutput_SourceMsg"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="539,586" wsdlFileName="ZECC_GOODSMVT_CREATE.wsdl" selectedPortType="zecc_goodsmvt_create" selectedBinding="ERZ301GOODMVTCREATE" selectedOperation="ZCncGoodsmvtCreate" selectedPort="ERZ301GOODMVTCREATE" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" useHTTPTransport="true" webServiceURL="http://dummyurl.com" sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Request1"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="SOAP Request1.terminal.in" eventIdentity="SOAP Request1.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request1.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="SOAP Request1.terminal.failure" eventIdentity="SOAP Request1.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request1.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="SOAP Request1.terminal.out" eventIdentity="SOAP Request1.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request1.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Fault terminal" eventSourceName="SOAP Request1.terminal.fault" eventIdentity="SOAP Request1.FaultTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request1.FaultTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPEnvelope.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="385,582" createEnvelope="true">
+        <translation xmi:type="utility:ConstantString" string="SOAP Envelope1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="710,586">
+        <translation xmi:type="utility:ConstantString" string="SOAP Extract1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="547,685" wsdlFileName="GoodsReceipt.wsdl" selectedPortType="GoodsMovementERPWithReferenceCreateRequestConfirmation_In_V1" selectedBinding="ERZ301GMCWRRC1" selectedOperation="GoodsMovementERPWithReferenceCreateRequestConfirmation_In_V1" selectedPort="ERZ301GMCWRRC1" targetNamespace="http://sap.com/xi/APPL/SE/Global" useHTTPTransport="true" webServiceURL="http://vhkfrerzci.rot.hec.ghanp.kfplc.com:8080/sap/bc/srt/xip/sap/ecc_goodsmovementcwrrc1/301/ecc_goodsmovementcwrrc1_301/erz301gmcwrrc1"
+          sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Request2"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="SOAP Request2.terminal.in" eventIdentity="SOAP Request2.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request2.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="SOAP Request2.terminal.failure" eventIdentity="SOAP Request2.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request2.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="SOAP Request2.terminal.out" eventIdentity="SOAP Request2.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request2.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Fault terminal" eventSourceName="SOAP Request2.terminal.fault" eventIdentity="SOAP Request2.FaultTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Environment/Store/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="SOAP Request2.FaultTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPEnvelope.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="386,679" createEnvelope="true">
+        <translation xmi:type="utility:ConstantString" string="SOAP Envelope2"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="712,683">
+        <translation xmi:type="utility:ConstantString" string="SOAP Extract2"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out3" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_27" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard>
+      <stickyNote location="48,46">
+        <body xmi:type="utility:ConstantString" string=" &#xA;Name           : GoodsMovement_post &#xA;Author         : Debraj Sengupta&#xA;Date             : December 2014&#xA;&#xA;Description  : 1. Accept JSON structured message from Service Gateway.&#xA;                        2. Map the message to the required SAP webservice SOAP structure.&#xA;                        3. Invoke the SAP service . &#xA;                        4. Map the SAP response to the JSON output structure.&#xA;                        5. Return the response to the gateway via MQ.&#xA;                        6. Capture all errors and return to gateway for processing. Pass the input message along with exception list to the Error handler."/>
+      </stickyNote>
+    </stickyBoard>
+  </eClassifiers>
+</ecore:EPackage>

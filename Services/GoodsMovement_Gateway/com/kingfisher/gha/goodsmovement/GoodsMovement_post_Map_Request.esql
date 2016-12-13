@@ -1,0 +1,242 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+PATH com.kingfisher.gha.common;
+
+DECLARE NS_glob NAMESPACE 'http://sap.com/xi/SAPGlobal20/Global';
+-- Code added as part of CSA-290 & 291 changes
+DECLARE NS_SE_glob NAMESPACE 'http://sap.com/xi/APPL/SE/Global';
+-- End of code added as part of CSA-290 & 291 changes
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Map Request											 				*
+* Interface Id 				: 234.6																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_post													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept the 	*
+							  JSON canonical request from the gateway flow, create SOAP request for	* 
+							  SAP service call, receive the SAP response back, and send it back to	* 
+							  Gateway flow in a JSON structured way. 								*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_post_Map_Request		*
+* Description 				: The module creates the SOAP request message for invoking the SAP 		*
+							  service from the input JSON canonical message.						*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_post_Map_Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+
+		SET OutputRoot.Properties.IdentityMappedType		=	'usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken 		= 	getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));
+		SET OutputRoot.Properties.IdentityMappedPassword 	= 	getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));				
+
+		-- Store MsgID,Reply queue, metadata, request identifier etc.
+		SET Environment.Store.MQMD = InputRoot.MQMD;
+		SET Environment.Store.MQRFH2  = InputRoot.MQRFH2;
+		
+		SET Environment.Store.MsgID = InputRoot.MQMD.MsgId;
+		SET Environment.Store.ReplyToQ    = InputRoot.MQMD.ReplyToQ;		
+		SET Environment.Store.MetaData = InputRoot.MQRFH2.usr.MetaData;
+	    SET Environment.Store.requestID = InputRoot.MQRFH2.usr.requestID;
+		SET Environment.Store.OriginalReplyQueue = InputRoot.MQRFH2.usr.OriginalReplyQueue;
+		SET Environment.Store.UserInput = InputRoot.MQRFH2.usr.Input.JSON;
+		
+		
+		-- Store Input Message 		
+		SET Environment.Store.Input.JSON = InputRoot.JSON;
+        
+        DECLARE iRef_prop REFERENCE TO InputRoot.JSON.Data.properties;
+		--DECLARE iRef_proditem REFERENCE TO iRef_prop.product.Item;
+		DECLARE iRef_proditem REFERENCE TO iRef_prop.movementItem.Item;
+		DECLARE CH_MvtType CHARACTER;
+		
+		/*
+		   * Lookup for the SAP movement type. Based on the value create the corresponding SOAP message and call the respective SAP enterprise service
+		   * MovementType = 3 denotes stock received
+		   * MovementType = 4 denotes stock transfered 
+		*/
+		
+		SET Environment.Store.MvtType = THE(SELECT ITEM M.CATEGORY FROM Database.MBSAPSTKMVMT AS M WHERE M.MOVEMENT_KEY = iRef_proditem.typeCode);
+		IF(Environment.Store.MvtType = '3') THEN   
+		
+				-- Create output and declare reference
+				
+				DECLARE oRef_GoodsMovementRef   REFERENCE TO OutputRoot.XMLNSC.NS_glob:GoodsMovementERPCreateRequest_sync_V1;
+				DECLARE oRef_GoodsMovement      REFERENCE TO oRef_GoodsMovementRef.GoodsMovement;
+				
+				CREATE FIELD OutputRoot.XMLNSC.NS_glob:GoodsMovementERPCreateRequest_sync_V1 AS oRef_GoodsMovementRef NAMESPACE NS_glob NAME 'GoodsMovementERPCreateRequest_sync_V1';
+				SET oRef_GoodsMovementRef.(XMLNSC.NamespaceDecl)xmlns:n0 =  NS_glob;
+		
+		        CREATE FIELD  oRef_GoodsMovementRef.GoodsMovement AS oRef_GoodsMovement NAME 'GoodsMovement';
+										
+				DECLARE IN_Count INTEGER 1;
+				DECLARE ROW_Records ROW;
+				
+				-- Build Request
+		        
+				SET oRef_GoodsMovement.PostingDate	= iRef_prop.postingDate;
+				SET oRef_GoodsMovement.DocumentCreationDate	= iRef_prop.postingDate;
+				SET oRef_GoodsMovement.Description	= iRef_prop.description;
+				
+				-- Initialize GM category code to blank first. Update it after DB lookup.
+				SET oRef_GoodsMovement.GoodsMovementCategoryCode  = '';
+					    		        
+				WHILE LASTMOVE(iRef_proditem) DO
+					    	
+					-- DB Lookup
+					SET ROW_Records.Data[] = SELECT M.CATEGORY,M.MOVEMENT_TYPE,M.REASON_CODE,M.FROM_STORAGE_LOCATION, M.TO_STORAGE_LOCATION FROM Database.MBSAPSTKMVMT AS M WHERE M.MOVEMENT_KEY = iRef_proditem.typeCode;	
+							-- Do a check if the Movement TypeCode is found in DB or not. If not throw an Bad Request exception.
+							IF (COALESCE(ROW_Records.Data[1].MOVEMENT_TYPE,'#') = '#') THEN
+				    			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('No SAP MovementType is found');
+				   			RETURN FALSE;	
+							END IF;
+							
+					SET oRef_GoodsMovement.Item[IN_Count].GoodsMovementTypeCode = ROW_Records.Data[1].MOVEMENT_TYPE;			
+					SET oRef_GoodsMovement.Item[IN_Count].InventoryUsabilityCode = '';			
+					SET oRef_GoodsMovement.Item[IN_Count].GoodsMovementReasonCode = ROW_Records.Data[1].REASON_CODE;
+					SET oRef_GoodsMovement.Item[IN_Count].PlantID = iRef_prop.storeCode;
+					SET oRef_GoodsMovement.Item[IN_Count].Description = iRef_proditem.movementDescription;			
+					SET oRef_GoodsMovement.Item[IN_Count].InventoryManagedLocation.InternalID = ROW_Records.Data[1].FROM_STORAGE_LOCATION;
+					SET oRef_GoodsMovement.Item[IN_Count].Material.InternalID	= iRef_proditem.productNumber;
+				    SET oRef_GoodsMovement.Item[IN_Count].Quantity.EntryQuantity = CAST(iRef_proditem.quantity AS DECIMAL);
+				    SET oRef_GoodsMovement.Item[IN_Count].Quantity.EntryQuantity.(XMLNSC.Attribute)unitCode	= iRef_proditem.quantityUomCode;	
+				    		    
+				    -- GoodsMovement from RCC/DC use CostCenterID. For other movement types use store code as CostCenter ID.
+					SET oRef_GoodsMovement.Item[IN_Count].AccountingCodingBlockDistribution.AccountingCodingBlockAssignment.CostCentreID	= COALESCE(iRef_proditem.costCenterId,iRef_prop.storeCode);
+					
+					SET IN_Count = IN_Count + 1;
+					MOVE iRef_proditem NEXTSIBLING REPEAT TYPE NAME;
+		       END WHILE;			    
+					   
+					 SET oRef_GoodsMovement.GoodsMovementCategoryCode = ROW_Records.Data[1].CATEGORY;
+					 SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = getConfigValue('SAP_ECC_GOODSMOVEMENTCRTRC1_URL');
+					 PROPAGATE TO TERMINAL 'out1'; 
+					 
+		ELSEIF(Environment.Store.MvtType = '4') THEN
+		      
+		      -- Create output and declare reference
+				
+				DECLARE from_Store 	CHARACTER;
+				DECLARE to_Store 	CHARACTER;
+				DECLARE oRef_GoodsMovementRef   REFERENCE TO OutputRoot.XMLNSC.NS_urn:ZCncGoodsmvtCreate;
+				DECLARE oRef_GoodsMovement      REFERENCE TO oRef_GoodsMovementRef.CtGoodsmvtItem;
+				
+				CREATE FIELD OutputRoot.XMLNSC.NS_urn:ZCncGoodsmvtCreate AS oRef_GoodsMovementRef NAMESPACE NS_urn NAME 'ZCncGoodsmvtCreate';
+				SET oRef_GoodsMovementRef.(XMLNSC.NamespaceDecl)xmlns:urn =  NS_urn;
+		
+		        CREATE FIELD  oRef_GoodsMovementRef.CtGoodsmvtItem AS oRef_GoodsMovement NAME 'CtGoodsmvtItem';
+										
+				DECLARE IN_Count INTEGER 1;
+				DECLARE ROW_Records ROW;
+				
+				-- Build Request
+		        					    		        
+				WHILE LASTMOVE(iRef_proditem) DO
+					    	
+					-- DB Lookup
+					SET ROW_Records.Data[] = SELECT M.CATEGORY,M.MOVEMENT_TYPE,M.REASON_CODE,M.FROM_STORAGE_LOCATION, M.TO_STORAGE_LOCATION FROM Database.MBSAPSTKMVMT AS M WHERE M.MOVEMENT_KEY = iRef_proditem.typeCode;	
+							-- Do a check if the Movement TypeCode is found in DB or not. If not throw an Bad Request exception.
+							IF (COALESCE(ROW_Records.Data[1].MOVEMENT_TYPE,'#') = '#') THEN
+				    			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('No SAP MovementType is found');
+				   			RETURN FALSE;	
+							END IF;
+					
+					SET oRef_GoodsMovement.item[IN_Count].Material	= iRef_proditem.productNumber;
+					SET oRef_GoodsMovement.item[IN_Count].Plant = iRef_prop.storeCode;
+					SET oRef_GoodsMovement.item[IN_Count].StgeLoc = ROW_Records.Data[1].FROM_STORAGE_LOCATION;							
+					SET oRef_GoodsMovement.item[IN_Count].MoveType = ROW_Records.Data[1].MOVEMENT_TYPE;
+					IF COALESCE(iRef_proditem.supplierNumber,'')<>'' THEN
+						SET oRef_GoodsMovement.item[IN_Count].Vendor = iRef_proditem.supplierNumber;
+					END IF;	
+					SET oRef_GoodsMovement.item[IN_Count].EntryQnt = CAST(iRef_proditem.quantity AS DECIMAL);
+				    SET oRef_GoodsMovement.item[IN_Count].EntryUomIso	= iRef_proditem.quantityUomCode;
+				    IF COALESCE(iRef_proditem.toStoreCode,'')<>'' THEN	
+				   		SET oRef_GoodsMovement.item[IN_Count].MovePlant	= iRef_proditem.toStoreCode;
+				    END IF;
+				    IF COALESCE(ROW_Records.Data[1].TO_STORAGE_LOCATION,'')<>'' THEN
+				    	SET oRef_GoodsMovement.item[IN_Count].MoveStloc = ROW_Records.Data[1].TO_STORAGE_LOCATION;
+				    END IF;		
+				    SET IN_Count = IN_Count + 1;
+					MOVE iRef_proditem NEXTSIBLING REPEAT TYPE NAME;
+		       END WHILE;			    
+					  
+					 SET oRef_GoodsMovementRef.IsGoodsmvtCode.GmCode = ROW_Records.Data[1].CATEGORY;
+					 
+					 SET oRef_GoodsMovementRef.IsGoodsmvtHeader.PstngDate = iRef_prop.postingDate;
+					 SET oRef_GoodsMovementRef.IsGoodsmvtHeader.DocDate = iRef_prop.postingDate;
+					 IF COALESCE(iRef_prop.referenceDocumentNumber,'')<> '' THEN
+					 	SET oRef_GoodsMovementRef.IsGoodsmvtHeader.RefDocNo = iRef_prop.referenceDocumentNumber;
+					 END IF;	
+					 SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL 	= getConfigValue('SAP_ECC_GOODSMVT_CREATE_URL');
+					 SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout 		= getConfigValue('SAP_ES_TIMEOUT');
+					 PROPAGATE TO TERMINAL 'out2'; 
+					 
+		-- Code added as part of CSA-290 & 291 changes
+		ELSEIF EXISTS(iRef_prop.referenceDocumentNumber[]) THEN
+			
+			-- Create a flag for mapping the response message
+			SET Environment.Store.isRefDocNumPresent = true;
+			
+			-- Map SOAP Request for Goods Issue an Return PO
+			DECLARE oRef_GoodsMovementRef   REFERENCE TO OutputRoot.XMLNSC.NS_SE_glob:GoodsMovementERPCreateRequest_sync_V1;
+			DECLARE oRef_GoodsMovement      REFERENCE TO oRef_GoodsMovementRef.GoodsMovement;
+			CREATE FIELD OutputRoot.XMLNSC.NS_SE_glob:GoodsMovementERPWithReferenceCreateRequest_sync_V1 AS oRef_GoodsMovementRef NAMESPACE NS_SE_glob NAME 'GoodsMovementERPWithReferenceCreateRequest_sync_V1';
+			
+			SET oRef_GoodsMovementRef.(XMLNSC.NamespaceDecl)xmlns:n0 			=  NS_SE_glob;
+	
+	        CREATE FIELD oRef_GoodsMovementRef.GoodsMovement AS oRef_GoodsMovement NAME 'GoodsMovement';
+
+			-- DB Lookup to fetch Movement_Type and Document_Type_Code from MBSAPSTKMVMT table
+			DECLARE ROW_Records ROW;
+			SET ROW_Records.Data[] = SELECT M.MOVEMENT_TYPE, M.DOCUMENT_TYPE_CODE FROM Database.MBSAPSTKMVMT AS M WHERE M.MOVEMENT_KEY = iRef_proditem.typeCode;	
+			-- Throw User Exception if no rows are returned from the DB look-up
+			IF (COALESCE(ROW_Records.Data[1].MOVEMENT_TYPE,'#') = '#') THEN
+    			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('No SAP MovementType is found');
+   			END IF;
+			
+			-- Build SOAP Request Message
+	        SET oRef_GoodsMovement.BaseBusinessTransactionDocumentTypeCode		= ROW_Records.Data[1].DOCUMENT_TYPE_CODE;
+			SET oRef_GoodsMovement.PostingDate									= COALESCE(iRef_prop.postingDate, CAST(CURRENT_DATE AS CHARACTER FORMAT 'yyyy-MM-dd'));
+			SET oRef_GoodsMovement.PostingTime 									= COALESCE(iRef_prop.postingTime, CAST(CURRENT_TIME AS CHARACTER FORMAT 'hh:mm:ss'));
+			
+			DECLARE IN_Count INTEGER 1;
+			
+			WHILE LASTMOVE(iRef_proditem) DO
+				
+				SET oRef_GoodsMovement.Item[IN_Count].BaseBusinessTransactionDocumentID 					= iRef_prop.referenceDocumentNumber;			
+				SET oRef_GoodsMovement.Item[IN_Count].BaseBusinessTransactionDocumentItemID 				= iRef_proditem.lineItemId;			
+				SET oRef_GoodsMovement.Item[IN_Count].GoodsMovementTypeCode 								= ROW_Records.Data[1].MOVEMENT_TYPE;
+				SET oRef_GoodsMovement.Item[IN_Count].GoodsReceiptCompletedIndicator 						= 'true';
+				SET oRef_GoodsMovement.Item[IN_Count].Quantity.EntryQuantity 								= iRef_proditem.quantity;
+				SET oRef_GoodsMovement.Item[IN_Count].Quantity.EntryQuantity.(XMLNSC.Attribute)unitCode 	= iRef_proditem.quantityUomCode;
+				
+				SET IN_Count = IN_Count + 1;
+				MOVE iRef_proditem NEXTSIBLING REPEAT TYPE NAME;
+	       	END WHILE;			    
+				   
+			SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = getConfigValue('SAP_ECC_GOODSMOVEMENTCWRRC1_STD_URL');
+			SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout = getConfigValue('SAP_ES_TIMEOUT');
+			
+			PROPAGATE TO TERMINAL 'out3';
+		-- End of code added as part of CSA-290 & 291 changes
+					
+		ELSE
+			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Unable to process the request.No SAP MovementCategory is found');	
+		END IF;
+						    	
+		RETURN FALSE;
+	END;
+
+END MODULE;

@@ -1,0 +1,80 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: CnC_postOutputMapping									 				*
+* Interface Id 				: 234.2																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_postResponse_Compute	*
+* Description 				: The module creates the JSON response message for the POST operation	*
+							  which is sent back to UI.												*
+*							  																		*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014 	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_postResponse_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		DECLARE iRef_Msg  REFERENCE TO InputRoot.JSON.Data;
+		DECLARE iRef_Prop REFERENCE TO iRef_Msg.properties;
+		
+		
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO oRef.properties;
+		
+		-- Map the required elements to the JSON response
+
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+			--SET oRef.Class = 'Response';
+        	CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 		CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+	 	
+        	CREATE FIELD oRef.properties AS oRefProp;
+        	
+        	SET oRefProp.type = iRef_Prop.type;
+		   	DECLARE oRefInfo REFERENCE TO oRefProp.info;
+          	CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+          	
+          	
+        DECLARE iRef_InfoItem REFERENCE TO iRef_Prop.info.Item;
+        
+		DECLARE arr_count INTEGER 1;
+			
+	        WHILE LASTMOVE(iRef_InfoItem) DO
+	        	
+	        	SET oRefInfo.Item[arr_count].serviceName = iRef_InfoItem.serviceName;
+           		SET oRefInfo.Item[arr_count].statusCode = iRef_InfoItem.statusCode;	
+		   		SET oRefInfo.Item[arr_count].statusMessage = iRef_InfoItem.statusMessage;
+	    
+	        	SET arr_count = arr_count + 1;
+	        	MOVE iRef_InfoItem NEXTSIBLING REPEAT TYPE NAME;
+	        	
+	        END WHILE;	
+		
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

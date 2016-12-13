@@ -1,0 +1,188 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+DECLARE NS_n0 NAMESPACE 'http://sap.com/xi/SAPGlobal20/Global';
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Map Response											 				*
+* Interface Id 				: 234.6																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_post													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept the 	*
+							  JSON canonical request from the gateway flow, create SOAP request for	* 
+							  SAP service call, receive the SAP response back, and send it back to	* 
+							  Gateway flow in a JSON structured way. 								*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_post_Map_Response		*
+* Description 				: The module creates the JSON response message from the SAP service		*
+							  response and sends it back to the gateway flow.						*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_post_Map_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+		SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+
+		SET OutputRoot.MQMD.MsgId = Environment.Store.MsgID;
+		SET OutputRoot.MQMD.ReplyToQ = Environment.Store.ReplyToQ;
+	    SET OutputRoot.MQRFH2.usr.MetaData = Environment.Store.MetaData;
+	    SET OutputRoot.MQRFH2.usr.requestID = Environment.Store.requestID;
+		SET OutputRoot.MQRFH2.usr.OriginalReplyQueue = Environment.Store.OriginalReplyQueue;
+		SET OutputRoot.MQRFH2.usr.Input.JSON = Environment.Store.UserInput;
+	
+		-- Create JSON response message
+		IF(Environment.Store.MvtType = '3') THEN
+		     
+			DECLARE iRef REFERENCE TO InputRoot.XMLNSC.NS_n0:GoodsMovementERPCreateConfirmation_sync_V1;
+			DECLARE iRef_LogItem REFERENCE TO iRef.Log.Item;
+						
+			DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+			DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+								
+			-- Map the required elements to the JSON response
+	
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+			--SET OutputRoot.JSON.Data.Class = 'Response';
+	        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+		 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+	        
+	        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+	        
+			-- Map for Success response	if the GoodsMovement ID is generated in the SAP response		
+			IF (EXISTS(iRef.GoodsMovement.ID[])) THEN
+			   
+			   SET oRefProp.type = 'SUCCESS';
+			   DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	           CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	           
+	           SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+	           SET oRefInfo.Item[1].statusCode = '0';	
+			   SET oRefInfo.Item[1].statusMessage = iRef.GoodsMovement.ID;
+			
+			ELSE
+			   -- Error response	
+				SET oRefProp.type = 'ERROR';
+			    DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	            CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+				DECLARE arr_count INTEGER 1;
+				
+		        WHILE LASTMOVE(iRef_LogItem) DO
+		        	
+		        	SET oRefInfo.Item[arr_count].serviceName = MessageFlowLabel;
+	           		SET oRefInfo.Item[arr_count].statusCode = iRef.Log.BusinessDocumentProcessingResultCode;	
+			   		SET oRefInfo.Item[arr_count].statusMessage = iRef_LogItem.Note;
+		        
+		        	SET arr_count = arr_count + 1;
+		        	MOVE iRef_LogItem NEXTSIBLING REPEAT TYPE NAME;
+		        	
+		        END WHILE;	
+			
+	        END IF;
+	
+	ELSEIF(Environment.Store.MvtType = '4') THEN
+	
+			DECLARE iRef REFERENCE TO InputRoot.XMLNSC.NS_urn:ZCncGoodsmvtCreateResponse;
+			DECLARE iRef_LogItem REFERENCE TO iRef.EtReturn.item;
+						
+			DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+			DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+								
+			-- Map the required elements to the JSON response
+	
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+			--SET OutputRoot.JSON.Data.Class = 'Response';
+	        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+		 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+	        
+	        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+	        
+			-- Map for Success response	if the GoodsMovement ID is generated in the SAP response		
+			IF (EXISTS(iRef.EtReturn.item[])) THEN
+			   
+			   -- Error response	
+				SET oRefProp.type = 'ERROR';
+			    DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	            CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+				DECLARE arr_count INTEGER 1;
+				
+		        WHILE LASTMOVE(iRef_LogItem) DO
+		        	
+		        	SET oRefInfo.Item[arr_count].serviceName = MessageFlowLabel;
+	           		SET oRefInfo.Item[arr_count].statusCode = iRef_LogItem.Number;	
+			   		SET oRefInfo.Item[arr_count].statusMessage = iRef_LogItem.Message;
+		        
+		        	SET arr_count = arr_count + 1;
+		        	MOVE iRef_LogItem NEXTSIBLING REPEAT TYPE NAME;
+		        	
+		        END WHILE;	
+			  			
+			ELSE
+			   
+			   SET oRefProp.type = 'SUCCESS';
+			   DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	           CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	           
+	           SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+	           SET oRefInfo.Item[1].statusCode = '0';	
+			   SET oRefInfo.Item[1].statusMessage = iRef.EvMaterialdocument;
+			
+	        END IF;
+	-- Code added for CSA-290 & 291 changes
+	-- If referenceDocumentNumber exists (Goods Issue an Return PO)
+	ELSEIF Environment.Store.isRefDocNumPresent THEN
+		
+		DECLARE iRef REFERENCE TO InputRoot.XMLNSC.*:GoodsMovementERPWithReferenceCreateConfirmation_sync_V1;
+		DECLARE iRef_LogItem REFERENCE TO iRef.Log.Item;
+		
+		-- Map the required elements to the JSON response
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		
+		CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+		CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+		CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+        
+		-- Success response			
+		IF (EXISTS(iRef.GoodsMovement.ID[])) THEN
+		   SET oRefProp.type = 'SUCCESS';
+		   DECLARE oRefInfo REFERENCE TO oRefProp.info;
+           CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+           SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+           SET oRefInfo.Item[1].statusCode = '0';	
+		   SET oRefInfo.Item[1].statusMessage = iRef.GoodsMovement.ID;
+		ELSE
+		-- Error response
+			SET oRefProp.type = 'ERROR';
+		    DECLARE oRefInfo REFERENCE TO oRefProp.info;
+            CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+			DECLARE arr_count INTEGER 1;
+			
+	        WHILE LASTMOVE(iRef_LogItem) DO
+	        	SET oRefInfo.Item[arr_count].serviceName = MessageFlowLabel;
+           		SET oRefInfo.Item[arr_count].statusCode = iRef.Log.BusinessDocumentProcessingResultCode;	
+		   		SET oRefInfo.Item[arr_count].statusMessage = iRef_LogItem.Note;
+	        	SET arr_count = arr_count + 1;
+	        	MOVE iRef_LogItem NEXTSIBLING REPEAT TYPE NAME;
+	        END WHILE;	
+		END IF;
+	-- End of code added for CSA-290 & 291 changes
+	END IF;	
+	
+	END;
+
+END MODULE;
+

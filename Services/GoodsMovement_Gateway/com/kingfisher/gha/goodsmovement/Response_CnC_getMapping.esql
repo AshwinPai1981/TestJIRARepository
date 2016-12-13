@@ -1,0 +1,235 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+PATH com.kingfisher.gha.common;
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: CnC_getOutputMapping									 				*
+* Interface Id 				: 234.2																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.Response_CnC_getMapping				*
+* Description 				: The module creates the JSON response message for the GET operation	*
+							  which is sent back to UI.												*
+*							  																		*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014 	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE Response_CnC_getMapping
+	
+	-- Load the broker URL from cache
+	DECLARE CH_BrokerURL CHARACTER getConfigValue('BROKER_URL');
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+		
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		SET Environment.Store.RequestDoc = InputRoot.MQRFH2.usr.RequestDoc;
+		-- Create the CnC specific JSON response
+			
+		DECLARE iRef	  REFERENCE TO InputRoot.JSON.Data;
+		DECLARE iRef_prop REFERENCE TO iRef.properties;
+		
+		IF(iRef_prop.type = 'ERROR') THEN
+		    
+			DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+			DECLARE oRef_Class REFERENCE TO oRef.Class;			
+			DECLARE oRef_prop REFERENCE TO oRef.properties;
+				
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+			--SET oRef.Class = 'Response';
+        	CREATE FIELD oRef.Class AS oRef_Class IDENTITY (JSON.Array)Class;
+        	CREATE LASTCHILD OF oRef_Class TYPE NameValue NAME 'Item' VALUE 'Response';
+        	
+        	CREATE FIELD oRef.properties AS oRef_prop;
+        	
+        	SET oRef_prop.type = iRef_prop.type;
+		   	DECLARE oRef_info REFERENCE TO oRef_prop.info;
+          	CREATE FIELD oRef_prop.info AS oRef_info IDENTITY (JSON.Array)info;
+          	
+          	
+        	DECLARE iRef_infoItem REFERENCE TO iRef_prop.info.Item;
+        
+			DECLARE arr_count INTEGER 1;
+			
+	        WHILE LASTMOVE(iRef_infoItem) DO
+	        	
+	        	SET oRef_info.Item[arr_count].serviceName = iRef_infoItem.serviceName;
+           		SET oRef_info.Item[arr_count].statusCode = iRef_infoItem.statusCode;	
+		   		SET oRef_info.Item[arr_count].statusMessage = iRef_infoItem.statusMessage;
+	    
+	        	SET arr_count = arr_count + 1;
+	        	MOVE iRef_infoItem NEXTSIBLING REPEAT TYPE NAME;
+	        	
+	        END WHILE;	
+	        
+	     ELSE
+	        IF Environment.Store.RequestDoc = true THEN -- Response for get by document number
+	        	DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+	        	DECLARE oRefClass REFERENCE TO oRef.Class;
+	        	DECLARE iRef REFERENCE TO InputRoot.JSON.Data;
+	        	DECLARE oRefProp REFERENCE TO oRef.properties;
+	        	DECLARE oRefItems REFERENCE TO oRefProp.movementItem;
+	        	DECLARE oRefEntities REFERENCE TO oRef.entities;
+	        	DECLARE iRefProp REFERENCE TO iRef.properties;
+	        	DECLARE iRefItems REFERENCE TO iRefProp.movementItem;
+	        	DECLARE CH_FromStoreCode CHARACTER;
+	        	DECLARE CH_ToStoreCode CHARACTER;
+	        	
+	        	SET CH_FromStoreCode = iRefProp.storeCode;
+	        	SET CH_ToStoreCode 	 = iRefProp.movementItem.Item[1].toStoreCode; 
+	        	
+	        	CREATE FIELD OutputRoot.JSON.Data AS oRef;
+	        	CREATE FIELD oRef.Class AS oRefClass IDENTITY(JSON.Array)Class;
+	        	SET oRefClass.Item[1] VALUE = 'GoodsMovement';
+	        	CREATE FIELD oRef.properties AS oRefProp;
+	        	SET oRefProp.typeCode = THE(SELECT ITEM T.CNC_MOVEMENT_KEY FROM Database.mbcncstkmvmt AS T WHERE T.MOVEMENT_KEY = iRefProp.movementItem.Item[1].typeCode);
+	        	SET oRefProp.postingDate = iRefProp.postingDate;
+	        	SET oRefProp.documentNumber = iRefProp.documentNumber;
+	        	
+	        	CREATE FIELD oRefProp.movementItems AS oRefItems IDENTITY (JSON.Array)movementItem;
+				DECLARE IN_COUNT INTEGER 1;
+				FOR source AS iRefProp.movementItem.Item[] DO
+					SET oRefItems.Item[IN_COUNT].productNumber = source.productNumber;
+	        		SET oRefItems.Item[IN_COUNT].quantity =source.quantity;
+	        		SET oRefItems.Item[IN_COUNT].quantityUomCode = source.quantityUomCode;
+	        		
+	        		SET IN_COUNT = IN_COUNT + 1;
+				END FOR;
+				
+				CREATE FIELD oRef.entities AS oRefEntities IDENTITY (JSON.Array)entities;
+				DECLARE entityToClass REFERENCE TO oRefEntities.Item[1].Class; 	
+				CREATE FIELD oRefEntities.Item[1].Class AS entityToClass IDENTITY (JSON.Array)Class;
+				SET entityToClass.Item[1] VALUE = 'FulfilmentSite';
+				
+				DECLARE relToArray REFERENCE TO oRefEntities.Item[1].rel;
+				CREATE FIELD oRefEntities.Item[1].rel AS relToArray IDENTITY (JSON.Array)rel;
+				SET relToArray.Item[1] VALUE = 'urn:x-kingfisher:name:to';
+				
+				CREATE FIELD oRefEntities.Item[1].properties.siteNumber; 
+				SET oRefEntities.Item[1].properties.siteNumber = CH_ToStoreCode;
+				DECLARE linkToArray REFERENCE TO oRefEntities.Item[1].links;
+				CREATE FIELD oRefEntities.Item[1].links AS linkToArray IDENTITY (JSON.Array)links;
+				DECLARE relLinkToArray REFERENCE TO linkToArray.Item.rel;
+                CREATE FIELD linkToArray.Item[1].rel AS relLinkToArray IDENTITY (JSON.Array) rel;
+                SET relLinkToArray.Item[1] VALUE  = 'self';
+                SET linkToArray.Item[1].href = CH_BrokerURL ||'/FulfilmentSite/'||CH_ToStoreCode;
+				
+				
+				DECLARE entityFromClass REFERENCE TO oRefEntities.Item[2].Class; 	
+				CREATE FIELD oRefEntities.Item[2].Class AS entityFromClass IDENTITY (JSON.Array)Class;
+				SET entityFromClass.Item[1] VALUE = 'FulfilmentSite';
+				
+				DECLARE relFromArray REFERENCE TO oRefEntities.Item[2].rel;
+				CREATE FIELD oRefEntities.Item[2].rel AS relFromArray IDENTITY (JSON.Array)rel;
+				SET relFromArray.Item[1] VALUE = 'urn:x-kingfisher:name:from';
+				
+				CREATE FIELD oRefEntities.Item[2].properties.siteNumber; 
+				SET oRefEntities.Item[2].properties.siteNumber = CH_FromStoreCode;
+				DECLARE linkArray REFERENCE TO oRefEntities.Item[2].links;
+				CREATE FIELD oRefEntities.Item[2].links AS linkArray IDENTITY (JSON.Array)links;
+				DECLARE relArray REFERENCE TO linkArray.Item.rel;
+                CREATE FIELD linkArray.Item[1].rel AS relArray IDENTITY (JSON.Array) rel;
+                SET relArray.Item[1] VALUE  = 'self';
+                SET linkArray.Item[1].href = CH_BrokerURL ||'/FulfilmentSite/'||CH_FromStoreCode;
+				
+	        ELSE	-- for get by product number in a date range 
+		        DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+				CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY(JSON.Array)Data;
+				
+				DECLARE count INTEGER 1;
+				
+				FOR source AS iRef.Item[] DO
+				
+					CREATE FIELD oRef.Item[count].Class IDENTITY (JSON.Array)Class;
+				 	CREATE LASTCHILD OF oRef.Item[count].Class TYPE NameValue NAME 'Item' VALUE 'GoodsMovement';
+					
+					DECLARE oRefProp REFERENCE TO oRef.properties;
+					CREATE FIELD oRef.Item[count].properties AS oRefProp;
+					
+					SET oRefProp.typeCode    = THE (SELECT ITEM  M.CNC_MOVEMENT_KEY FROM Database.MBCNCSTKMVMT AS M WHERE M.MOVEMENT_KEY = source.properties.movementItem.Item[1].typeCode);    
+					SET oRefProp.postingDate = source.properties.postingDate;    
+				    SET oRefProp.documentNumber = source.properties.documentNumber; 
+					--SET oRefProp.storeCode = source.properties.storeCode; --commneted according to new structure
+					
+					DECLARE oRefMovementItems REFERENCE TO oRef.movementItem;
+					CREATE FIELD oRefProp.movementItem AS oRefMovementItems IDENTITY (JSON.Array)movementItem;
+					
+					SET oRefMovementItems.Item[1].productNumber = source.properties.movementItem.Item[1].productNumber;
+--					SET oRefMovementItems.storageLocationId = source.properties.product.Item[1].storageLocationId; --commneted according to new structure
+					SET oRefMovementItems.Item[1].quantity = source.properties.movementItem.Item[1].quantity;
+			    	SET oRefMovementItems.Item[1].quantityUomCode = source.properties.movementItem.Item[1].quantityUomCode;
+			    	
+			    	
+			    	DECLARE oRefEntities REFERENCE TO oRef.Entities;
+			    	CREATE FIELD oRef.Item[count].entities AS oRefEntities IDENTITY (JSON.Array)entities;
+			    	DECLARE oRefEntitiesClass REFERENCE TO oRefEntities.Item[1].Class; 	
+			    	CREATE FIELD oRefEntities.Item[1].Class AS oRefEntitiesClass IDENTITY (JSON.Array)Class;
+			    	SET oRefEntitiesClass.Item[1] VALUE = 'FulfilmentSite';
+			    	DECLARE relToArray REFERENCE TO oRefEntities.Item[1].rel;
+					CREATE FIELD oRefEntities.Item[1].rel AS relToArray IDENTITY (JSON.Array)rel;
+					SET relToArray.Item[1] VALUE = 'urn:x-kingfisher:name:from';
+				
+					CREATE FIELD oRefEntities.Item[1].properties.siteNumber; 
+					SET oRefEntities.Item[1].properties.siteNumber = source.properties.storeCode;
+					
+					DECLARE linkArray REFERENCE TO oRefEntities.Item[1].links;
+					CREATE FIELD oRefEntities.Item[1].links AS linkArray IDENTITY (JSON.Array)links;
+					DECLARE relArray REFERENCE TO linkArray.Item.rel;
+                 	CREATE FIELD linkArray.Item[1].rel AS relArray IDENTITY (JSON.Array) rel;
+                  	SET relArray.Item[1] VALUE  = 'self';
+                  	SET linkArray.Item[1].href = CH_BrokerURL ||'/FulfilmentSite/'||source.properties.storeCode;
+					
+					
+			    	
+			    	
+			    	
+			    	
+			    	SET count = count + 1; 				
+				    	
+				END FOR;
+	        END IF;
+	     END IF;
+	         	
+		RETURN TRUE;
+	END;
+	
+	CREATE FUNCTION FUNC_getTypeCode(IN refItem REFERENCE) RETURNS CHARACTER
+	BEGIN
+		DECLARE CH_TypeCode CHARACTER;		
+		X: WHILE LASTMOVE (refItem) DO
+			SET CH_TypeCode = refItem.typeCode;
+			LEAVE X;
+			MOVE refItem NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;	
+		RETURN CH_TypeCode;
+	END;
+		
+	CREATE FUNCTION FUNC_getStoreCode(IN refItem REFERENCE) RETURNS CHARACTER
+	BEGIN
+		DECLARE CH_StoreCode CHARACTER;		
+		X: WHILE LASTMOVE (refItem) DO
+			SET CH_StoreCode = refItem.toStoreCode;
+			LEAVE X;
+			MOVE refItem NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;	
+		RETURN CH_StoreCode;
+	END;
+
+END MODULE;

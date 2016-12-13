@@ -1,0 +1,102 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+PATH com.kingfisher.gha.common;
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Map Request										 					*
+* Interface Id 				: 234.3																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_get														*
+* Message Flow Description 	: The primary function of this message flow/service is to accept the 	*
+							  JSON canonical request from the gateway flow, create SOAP request for	* 
+							  SAP service call, receive the SAP response back, and send it back to	* 
+							  Gateway flow in a JSON structured way. 								*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_get_Map_Request		*
+* Description 				: The module creates the SOAP request message for invoking the SAP 		*
+							  service from the input JSON canonical message.						*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014 	Debraj Sengupta		The initial version. 								*
+* 1.01		10-Feb-2016 	Debashish Das		Changes made to the root tag of request message and *
+												CANVAL value for the Web Service URL due to change  *
+												in the SAP service for this operation. (CSA-1211)  	*							*
+****************************************************************************************************/
+
+DECLARE NS_urn NAMESPACE 'urn:sap-com:document:sap:soap:functions:mc-style';
+
+CREATE COMPUTE MODULE GoodsMovement_get_Map_Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		SET OutputRoot.Properties 							= 	InputRoot.Properties;
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+		SET OutputRoot.Properties.IdentityMappedType		=	'usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken 		= 	getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));
+		SET OutputRoot.Properties.IdentityMappedPassword 	= 	getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));
+		
+		-- Store MsgID, Reply queue, metadata, request identifier etc.
+		SET Environment.Store.MQMD = InputRoot.MQMD;
+		SET Environment.Store.MQRFH2  = InputRoot.MQRFH2;
+		
+		SET Environment.Store.MsgID 						= 	InputRoot.MQMD.MsgId;
+		SET Environment.Store.ReplyToQ 						= 	InputRoot.MQMD.ReplyToQ;
+		SET Environment.Store.MetaData 						= 	InputRoot.MQRFH2.usr.MetaData;
+		SET Environment.Store.requestID 					= 	InputRoot.MQRFH2.usr.requestID;
+		
+		-- Store Input Message
+		SET Environment.Store.Input.JSON = InputRoot.JSON;
+		-- Create request structure for SAP enterprise service call to get the stock count report
+
+		DECLARE iRef_Prop REFERENCE TO InputRoot.JSON.Data.properties;
+		DECLARE oRef_Goodsmvn REFERENCE TO OutputRoot.XMLNSC.NS_urn:ZbapiGoodsmvtGetitems;
+
+		DECLARE oRef_Goodsmvn_MaterialRa  REFERENCE TO oRef_Goodsmvn.MaterialRa;
+		DECLARE oRef_Goodsmvn_MoveTypeRa  REFERENCE TO oRef_Goodsmvn.MoveTypeRa;
+		DECLARE oRef_Goodsmvn_PlantRa     REFERENCE TO oRef_Goodsmvn.PlantRa;
+		DECLARE oRef_Goodsmvn_PstngDateRa REFERENCE TO oRef_Goodsmvn.PstngDateRa;
+		DECLARE oRef_Goodsmvn_Return      REFERENCE TO oRef_Goodsmvn.Return;            
+
+
+		CREATE FIELD OutputRoot.XMLNSC.NS_urn:ZbapiGoodsmvtGetitems AS oRef_Goodsmvn NAMESPACE NS_urn NAME 'ZbapiGoodsmvtGetitems';
+		SET oRef_Goodsmvn.(XMLNSC.NamespaceDecl)xmlns:urn = NS_urn;
+
+		CREATE LASTCHILD OF oRef_Goodsmvn NAME 'GoodsmvtHeader';
+		CREATE LASTCHILD OF oRef_Goodsmvn NAME 'GoodsmvtItems';
+
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvn_MaterialRa NAME 'MaterialRa';
+		SET oRef_Goodsmvn_MaterialRa.item.Sign = 'I';
+		SET oRef_Goodsmvn_MaterialRa.item.Option = 'EQ';
+		SET oRef_Goodsmvn_MaterialRa.item.Low = iRef_Prop.productNumber;
+
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvn_MoveTypeRa NAME 'MoveTypeRa';
+		SET oRef_Goodsmvn_MoveTypeRa.item.Sign = 'I';
+		SET oRef_Goodsmvn_MoveTypeRa.item.Option = 'EQ';
+		SET oRef_Goodsmvn_MoveTypeRa.item.Low = '101';
+
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvn_PlantRa NAME 'PlantRa';
+		SET oRef_Goodsmvn_PlantRa.item.Sign = 'I';
+		SET oRef_Goodsmvn_PlantRa.item.Option = 'EQ';
+		SET oRef_Goodsmvn_PlantRa.item.Low = iRef_Prop.storeCode;
+
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvn_PstngDateRa NAME 'PstngDateRa';
+		SET oRef_Goodsmvn_PstngDateRa.item.Sign = 'I';
+		SET oRef_Goodsmvn_PstngDateRa.item.Option = 'BT';
+		SET oRef_Goodsmvn_PstngDateRa.item.Low = iRef_Prop.startDate;
+		SET oRef_Goodsmvn_PstngDateRa.item.High = iRef_Prop.endDate;
+
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvn_Return NAME 'Return';
+		SET oRef_Goodsmvn_Return.item = '';
+		
+		--SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL 	= getConfigValue('SAP_ECC_GOODSMVT_GETITEMS_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL 	= getConfigValue('SAP_ZECC_GOODSMVT_GETITEMS_NONZSTP_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout 			= getConfigValue('SAP_ES_TIMEOUT');
+		RETURN TRUE;
+	END;
+
+END MODULE;

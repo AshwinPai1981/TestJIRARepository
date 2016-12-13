@@ -1,0 +1,29 @@
+**************************************************************
+**   Script	 :  delete1.mqsc
+**   Application :  GoodsMovement_Gateway
+**   Created By	 :  Gareth Trott (auto)
+**   Environment :  All tiers
+**   Date	 :  06-August-2015 @ 18:18
+**************************************************************
+
+DELETE QLOCAL  ('GOODSMOVEMENTGET.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('GOODSMOVEMENTGET.IN.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('GOODSMOVEMENTGET.OUT.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('GOODSMOVEMENTGET.OUT.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('GOODSMOVEMENTPOST.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('GOODSMOVEMENTPOST.IN.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('GOODSMOVEMENTPOST.OUT.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('GOODSMOVEMENTPOST.OUT.INTERNAL.WMB') ;
+
+DELETE QLOCAL  ('GOODSMOVEMENTGETBYDOC.IN.INTERNAL.LOCAL') ;
+
+DELETE QALIAS  ('GOODSMOVEMENTGETBYDOC.IN.INTERNAL.WMB') ;
+
+**************************EndScript***************************

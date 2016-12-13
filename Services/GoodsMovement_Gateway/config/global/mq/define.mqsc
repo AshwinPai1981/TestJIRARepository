@@ -1,0 +1,54 @@
+**************************************************************
+**   Script	 :  define.mqsc
+**   Application :  GoodsMovement_Gateway
+**   Created By	 :  Gareth Trott (auto)
+**   Environment :  All tiers
+**   Date	 :  06-August-2015 @ 18:18
+**************************************************************
+
+DEFINE QLOCAL ('GOODSMOVEMENTGET.IN.INTERNAL.LOCAL') +
+DESCR('Local queue for GET input goodsmovement messages') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QALIAS ('GOODSMOVEMENTGET.IN.INTERNAL.WMB') +
+DESCR('Alias queue for GET input goodsmovement messages') +
+TARGQ ('GOODSMOVEMENTGET.IN.INTERNAL.LOCAL') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QLOCAL ('GOODSMOVEMENTGET.OUT.INTERNAL.LOCAL') +
+DESCR('Local queue for GET output goodsmovement messages') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QALIAS ('GOODSMOVEMENTGET.OUT.INTERNAL.WMB') +
+DESCR('Alias queue for GET output goodsmovement messages') +
+TARGQ ('GOODSMOVEMENTGET.OUT.INTERNAL.LOCAL') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QLOCAL ('GOODSMOVEMENTPOST.IN.INTERNAL.LOCAL') +
+DESCR('Local queue for POST input goodsmovement messages') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QALIAS ('GOODSMOVEMENTPOST.IN.INTERNAL.WMB') +
+DESCR('Alias queue for POST input goodsmovement messages') +
+TARGQ ('GOODSMOVEMENTPOST.IN.INTERNAL.LOCAL') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QLOCAL ('GOODSMOVEMENTPOST.OUT.INTERNAL.LOCAL') +
+DESCR('Local queue for POST output goodsmovement messages') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QALIAS ('GOODSMOVEMENTPOST.OUT.INTERNAL.WMB') +
+DESCR('Alias queue for POST output goodsmovement messages') +
+TARGQ ('GOODSMOVEMENTPOST.OUT.INTERNAL.LOCAL') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QLOCAL ('GOODSMOVEMENTGETBYDOC.IN.INTERNAL.LOCAL') +
+DESCR('Local queue for GET input goodsmovement messages by doc num') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+DEFINE QALIAS ('GOODSMOVEMENTGETBYDOC.IN.INTERNAL.WMB') +
+DESCR('Alias queue for GET input goodsmovement messages by doc num') +
+TARGQ ('GOODSMOVEMENTGETBYDOC.IN.INTERNAL.LOCAL') +
+PUT(DISABLED) GET(DISABLED) REPLACE ;
+
+**************************EndScript***************************

@@ -1,0 +1,155 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Initialize											 				*
+* Interface Id 				: 234.1																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_Gateway_Initialise		*
+* Description 				: The module extracts the input parameters from the request message 	*
+							  sent by UI.															*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_Gateway_Initialise
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+
+		-- Store the HTTP RequestIdentifier 
+
+		SET Environment.Store.requestID = InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+
+		-- Store the method
+		
+		SET Environment.Store.method = InputLocalEnvironment.HTTP.Input.RequestLine.Method;
+		
+		-- For REST the last section of the URI should name the target object this action is to be performed on
+
+		DECLARE targObj CHARACTER;
+		DECLARE CH_ReqFromURI BOOLEAN false;
+		
+		SET targObj = SUBSTRING(InputLocalEnvironment.HTTP.Input.RequestLine.RequestURI After '/');
+		SET targObj = SUBSTRING(targObj After '/');
+
+		-- Tidy and save the title in the URL.
+		
+		--To check if the reference document number is sent or not
+		SET targObj = REPLACE(targObj,'%20',' ');
+		
+		IF COALESCE(targObj,'')<>'' THEN
+			SET targObj = targObj;
+			SET CH_ReqFromURI = true;
+		ELSE 	
+			SET targObj = '';
+			SET CH_ReqFromURI = false;
+		END IF;
+		
+		SET Environment.Store.target = targObj;
+		SET Environment.Store.RequestDoc = CH_ReqFromURI;
+		
+		/*
+		 * Retrive the MetaData information from HTTPHeader.
+		 * Pass the MetaData information to data service flow 
+		*/
+		
+		-- Map the metadata field elements to the JSON message
+		
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.Properties;
+		
+		CREATE FIELD OutputRoot.JSON.Data;
+		SET OutputRoot.JSON.Data.Class = 'Metadata';
+        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+        
+        /*SET oRefProp.opco = InputRoot.HTTPInputHeader.Opco;
+        SET oRefProp.fullStoreCode = InputRoot.HTTPInputHeader.Fullstorecode;
+        SET oRefProp.userId = InputRoot.HTTPInputHeader.Userid;
+        SET oRefProp.deviceId = InputRoot.HTTPInputHeader.Deviceid;
+        SET oRefProp.deviceType = InputRoot.HTTPInputHeader.Devicetype;
+        SET oRefProp.clientIpAddress = InputRoot.HTTPInputHeader.Clientipaddress;
+        SET oRefProp.processName = InputRoot.HTTPInputHeader.Processname;
+        SET oRefProp.interfaceName = InputRoot.HTTPInputHeader.Interfacename;
+        SET oRefProp.sourceApplication = InputRoot.HTTPInputHeader.Sourceapplication;
+        SET oRefProp.requestDateTime = InputRoot.HTTPInputHeader.Requestdatetime;
+        SET oRefProp.messageKey = InputRoot.HTTPInputHeader.Messagekey;
+        SET oRefProp.requestUuid = InputRoot.HTTPInputHeader.Requestuuid; */
+        
+           SET oRefProp."opco" 					= InputRoot.HTTPInputHeader."Kits-Opco";
+        SET oRefProp."fullStoreCode"			= InputRoot.HTTPInputHeader."Kits-Store-Code";
+        SET oRefProp."userId"					= InputRoot.HTTPInputHeader."Kits-User-Id";
+        SET oRefProp."deviceId"				    = InputRoot.HTTPInputHeader."Kits-Device-Id";
+        SET oRefProp."deviceType"				= InputRoot.HTTPInputHeader."Kits-Device-Type";
+        SET oRefProp."clientIpAddress"		    = InputRoot.HTTPInputHeader."Kits-Client-Ip-Address";
+        SET oRefProp."processName" 			    = InputRoot.HTTPInputHeader."Kits-Process-Name";
+        SET oRefProp."interfaceName" 			= 'GoodsMovement';
+        SET oRefProp."sourceApplication" 		= InputRoot.HTTPInputHeader."Kits-Application-Name";
+        SET oRefProp."requestDateTime" 		    = InputRoot.HTTPInputHeader."Kits-Request-Date-Time";
+        SET oRefProp."messageKey"				= InputRoot.HTTPInputHeader."Kits-Message-Key";
+        SET oRefProp."requestUuid" 				= InputRoot.HTTPInputHeader."Kits-Request-Id";
+        SET oRefProp."globalTransactionId" 		= InputRoot.HTTPInputHeader."Kits-Global-Id";
+        
+		SET Environment.MetaData = OutputRoot.JSON.Data;
+		-- Removing the metadata json message
+		SET OutputRoot.JSON = NULL;
+						
+		-- checking if the user sends any additional parameter to process or not
+		
+		IF (EXISTS(InputLocalEnvironment.HTTP.Input.QueryString[])) THEN
+			SET Environment.Store.Material = InputLocalEnvironment.HTTP.Input.QueryString.productNumber;
+			SET Environment.Store.StoreCode = InputLocalEnvironment.HTTP.Input.QueryString.storeCode;
+			SET Environment.StartDate = InputLocalEnvironment.HTTP.Input.QueryString.startDate; 
+			SET Environment.EndDate = InputLocalEnvironment.HTTP.Input.QueryString.endDate; 
+		END IF;
+			
+		
+		/*
+		* Check the method coming from UI and throw exception if that does not equal to PUT/POST/GET/DELETE.		
+		* For GoodsMovement service only POST menthod is applicable as of now. So anything other than POST should be an exception.
+		*/	
+		
+		IF(COALESCE(Environment.Store.method) <> '' AND (UPPER(Environment.Store.method) = 'POST' OR UPPER(Environment.Store.method) = 'GET' OR UPPER(Environment.Store.method) = 'PUT' OR UPPER(Environment.Store.method) = 'DELETE')) THEN
+		IF(UPPER(Environment.Store.method) <> 'POST' AND UPPER(Environment.Store.method) <> 'GET') THEN
+				THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Method Not Allowed','405');
+		   		RETURN FALSE;
+		END IF;
+		ELSE
+	        	THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Not Implemented','501');
+		   		RETURN FALSE;
+		END IF;	 
+		
+		IF UPPER(Environment.Store.method) = 'GET' THEN
+		--IF UPPER(Environment.Store.method) <> 'POST' THEN
+			IF Environment.Store.RequestDoc = false AND EXISTS(InputLocalEnvironment.HTTP.Input.QueryString[]) = false THEN
+				THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Query string parameters required','400');
+			   	RETURN FALSE;
+			END IF;	
+			
+			IF Environment.Store.RequestDoc = true AND COALESCE(Environment.Store.target,'')='' THEN
+				THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Request URI required','400');
+			   	RETURN FALSE;
+			END IF;	
+
+		END IF;
+		
+		SET OutputRoot.BLOB.BLOB = InputRoot.BLOB.BLOB;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

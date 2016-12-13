@@ -1,0 +1,68 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Create_JSON_getRequest								 				*
+* Interface Id 				: 234.1																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.CreateJSON_get_Compute				*
+* Description 				: The module creates the JSON request message for GET operation.		*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE CreateJSON_get_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		-- Create the JSON canonical for data service flow
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO oRef.properties;
+		
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+		
+		CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'GoodsMovementRequest';
+	 	
+		CREATE FIELD oRef.properties AS oRefProp;
+		
+		IF Environment.Store.RequestDoc = true THEN
+			SET oRefProp.documentNumber = Environment.Store.target;
+--TODO: Sprint 16 changes
+--			SET oRefProp.documentYear = Environment.DocYear;
+			SET OutputLocalEnvironment = InputLocalEnvironment;
+			
+			PROPAGATE TO TERMINAL 'out1' DELETE NONE;
+		ELSE	
+			SET oRefProp.productNumber = Environment.Store.Material;
+			SET oRefProp.storeCode = Environment.Store.StoreCode;
+			SET oRefProp.startDate = Environment.StartDate;
+			SET oRefProp.endDate = Environment.EndDate;
+			SET OutputLocalEnvironment = InputLocalEnvironment;
+			
+			PROPAGATE TO TERMINAL 'out' DELETE NONE;
+		END IF;
+		
+		
+		RETURN FALSE;
+	END;
+
+END MODULE;

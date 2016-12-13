@@ -1,0 +1,133 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Lookup DB For Mov Code								 				*
+* Interface Id 				: 234.1																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.DBLookUp_Compute						*
+* Description 				: The module enriches the JSON request by looking up the MOVEMENT_KEY 	*
+							  from the database.													*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE DBLookUp_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputRoot.MQMD;
+		SET OutputRoot.MQRFH2 = InputRoot.MQRFH2;
+		
+		DECLARE iRef REFERENCE TO InputRoot.JSON.Data;
+		DECLARE iRef_prop REFERENCE TO InputRoot.JSON.Data.properties;		
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		DECLARE CH_MvtKey CHARACTER THE(SELECT ITEM M.MOVEMENT_KEY FROM Database.MBCNCSTKMVMT AS M WHERE M.CNC_MOVEMENT_KEY = iRef_prop.typeCode);
+		
+		-- Do a check if the Movement TypeCode is found in DB or not. If not throw a Bad Request exception.
+		IF (COALESCE(CH_MvtKey,'#') = '#') THEN
+		    THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Movement key not found','400');
+		   	RETURN FALSE;	
+		END IF;
+		
+		
+		DECLARE entityCount  INTEGER 1;  
+		DECLARE CH_To_Store CHARACTER '';
+		DECLARE CH_From_Store CHARACTER '';
+		DECLARE CH_SupplierNumber CHARACTER '';
+		DECLARE iRef_Entities REFERENCE TO iRef.entities;
+		
+		--CREATE FIELD oRef.entities AS oRefEntities IDENTITY (JSON.Array) entities;
+		FOR source AS iRef_Entities.Item[] DO
+					IF source.rel.Item[1]  = 'urn:x-kingfisher:name:to' AND source.Class.Item[1] = 'FulfilmentSite' THEN
+						SET CH_To_Store = source.properties.siteNumber; 
+					END IF;	
+					
+					IF source.rel.Item[1]  = 'urn:x-kingfisher:name:from' AND source.Class.Item[1] = 'FulfilmentSite' THEN
+						SET CH_From_Store = source.properties.siteNumber; 
+					END IF;
+					
+					IF source.rel.Item[1]  = 'urn:x-kingfisher:name:supplier' AND source.Class.Item[1] = 'Supplier' THEN
+						SET CH_SupplierNumber = source.properties.supplierNumber; 
+					END IF;
+		END FOR;		
+		
+		IF iRef_prop.typeCode = 'IBST_OUT' AND (COALESCE(CH_From_Store,'') = '' OR COALESCE(CH_To_Store,'') = '') THEN
+			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Source or destination store code missing in IBST_OUT','400');
+			RETURN FALSE;
+		END IF;
+		
+		-- Create the JSON canonical for data service flow
+		CREATE FIELD OutputRoot.JSON.Data AS oRef;
+        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+	 	CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'GoodsMovement';
+	 	
+        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+        
+		--SET oRefProp.typeCode = CH_MvtKey;
+		SET oRefProp.postingDate = iRef_prop.postingDate;
+		IF COALESCE(iRef_prop.referenceDocumentNumber,'')<>'' THEN
+			SET oRefProp.referenceDocumentNumber = iRef_prop.referenceDocumentNumber;
+		END IF;	
+		--SET oRefProp.storeCode = iRef_prop.storeCode;
+		SET oRefProp.storeCode = CH_From_Store;
+		
+		DECLARE iRefProd REFERENCE TO iRef_prop.movementItem;
+			
+		IF iRef_prop.typeCode = 'IBST_OUT' AND EXISTS(iRefProd.Item[]) = false THEN
+			THROW USER EXCEPTION CATALOG 'BIPmsgs' MESSAGE 2951 VALUES('Bad Request - Products does not exist for IBST_Out','400');
+			RETURN FALSE;
+		END IF;	
+		
+		DECLARE oRefProd REFERENCE TO oRefProp.movementItem;
+        CREATE FIELD oRefProp.product AS oRefProd IDENTITY (JSON.Array)movementItem;
+		DECLARE productCount INTEGER 1;	  
+		
+		FOR source AS iRef_prop.movementItem.Item[] DO
+			
+			SET oRefProd.Item[productCount].typeCode = CH_MvtKey;
+			
+			-- Code added as part of CSA-290 & 291 changes
+			IF COALESCE(source.lineItemId,'') <> '' THEN
+				SET oRefProd.Item[productCount].lineItemId = source.lineItemId;
+			END IF;
+			-- End of code added as part of CSA-290 & 291 changes
+						
+			SET oRefProd.Item[productCount].productNumber = source.productNumber;
+			SET oRefProd.Item[productCount].ean = source.ean;
+			SET oRefProd.Item[productCount].quantity = source.quantity;
+			SET oRefProd.Item[productCount].quantityUomCode = source.quantityUomCode;
+			
+			IF COALESCE(CH_SupplierNumber,'')<>'' THEN
+				SET oRefProd.Item[productCount].supplierNumber = CH_SupplierNumber;
+			END IF;	
+			
+			IF COALESCE(CH_To_Store,'')<>'' THEN
+				SET oRefProd.Item[productCount].toStoreCode = CH_To_Store;
+			END IF;
+			
+			SET productCount = productCount + 1;
+		END FOR;		
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

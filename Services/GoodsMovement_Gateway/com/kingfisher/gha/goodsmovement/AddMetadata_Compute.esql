@@ -1,0 +1,66 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Add metaData											 				*
+* Interface Id 				: 234.1																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_Gateway													*
+* Message Flow Description 	: The primary function of this message flow/service is to accept JSON 	*
+							  structured message from UI, route the message to different data 		*
+							  service flows with respect to different operations (currently for 	*
+							  this interface only GET and POST are used), get the SAP response back *
+							  from data service flows via MQ queue in a JSON structured way, return *
+							  the response to the UI. 												*
+* Module Name 				: com.kingfisher.gha.goodsmovement.AddMetadata_Compute					*
+* Description 				: The module extracts the input parameters from the request message 	*
+							  sent by UI.															*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE AddMetadata_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Set the service specific reply to queue based on REST Method
+		CASE(Environment.Store.method) 
+		
+		WHEN 'POST' THEN
+			SET OutputRoot.MQMD.ReplyToQ = 'GOODSMOVEMENTPOST.OUT.INTERNAL.WMB';		
+		WHEN 'GET' THEN
+			SET OutputRoot.MQMD.ReplyToQ = 'GOODSMOVEMENTGET.OUT.INTERNAL.WMB';
+		/*
+		WHEN 'PUT' THEN
+			SET OutputRoot.MQMD.ReplyToQ = 'GOODSMOVEMENTPUT.OUT.INTERNAL.WMB';
+		WHEN 'DELETE' THEN
+			SET OutputRoot.MQMD.ReplyToQ = 'GOODSMOVEMENTDELETE.OUT.INTERNAL.WMB';
+		*/
+		END CASE;
+		
+		-- Set the metadata information and request identifier to MQRFH2 header for passing those to data service flow
+		
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Version = 2;
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)Format = 'MQSTR';
+		SET OutputRoot.MQRFH2.(MQRFH2.Field)NameValueCCSID = 1208;
+		
+		SET OutputRoot.MQRFH2.usr.MetaData = Environment.MetaData;
+		SET OutputRoot.MQRFH2.usr.RequestDoc = Environment.Store.RequestDoc;
+		SET OutputRoot.MQRFH2.usr.requestID = Environment.Store.requestID;
+		
+		SET OutputRoot.BLOB.BLOB = InputRoot.BLOB.BLOB;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

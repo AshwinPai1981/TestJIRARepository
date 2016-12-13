@@ -1,0 +1,116 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Map Response										 					*
+* Interface Id 				: 234.3																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_get														*
+* Message Flow Description 	: The primary function of this message flow/service is to accept the 	*
+							  JSON canonical request from the gateway flow, create SOAP request for	* 
+							  SAP service call, receive the SAP response back, and send it back to	* 
+							  Gateway flow in a JSON structured way. 								*
+* Module Name 				: com.kingfisher.gha.goodsmovement.GoodsMovement_get_Map_Response		*
+* Description 				: The module creates the JSON response message from the SAP service		*
+							  response and sends it back to the gateway flow.						*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014 	Debraj Sengupta		The initial version. 								*
+* 1.01		10-Feb-2016 	Debashish Das		Changes made to the root tag of response message 	*
+												due to change in the SAP service for this operation.*
+												(CSA-1211)											*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_get_Map_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Restore the Msg ID, reply queue,metadata, request identifier etc from Enviroment and set it to MQRFH2 header for Gateway service.
+		
+		SET OutputRoot.MQMD = Environment.Store.MQMD;
+		SET OutputRoot.MQRFH2 = Environment.Store.MQRFH2;
+		
+		SET OutputRoot.MQMD.MsgId = Environment.Store.MsgID;
+        SET OutputRoot.MQMD.ReplyToQ = Environment.Store.ReplyToQ;
+	    SET OutputRoot.MQRFH2.usr.MetaData = Environment.Store.MetaData;
+        SET OutputRoot.MQRFH2.usr.requestID = Environment.Store.requestID;
+        
+        
+	    -- Create JSON output response
+	    
+		DECLARE iRef REFERENCE TO InputRoot.XMLNSC.NS_urn:ZbapiGoodsmvtGetitemsResponse;
+		--DECLARE iRef_Items REFERENCE TO InputRoot.XMLNSC.NS_urn:ZbapiGoodsmvtGetitemsResponse.GoodsmvtItems;
+		DECLARE iRef_Headers REFERENCE TO InputRoot.XMLNSC.NS_urn:ZbapiGoodsmvtGetitemsResponse.GoodsmvtHeader;
+		DECLARE oRef REFERENCE TO OutputRoot.JSON.Data;
+		
+		-- Check for any error returned by SAP 
+		IF EXISTS(iRef.Return.item[]) THEN
+			
+			 DECLARE oRefProp REFERENCE TO OutputRoot.JSON.Data.properties;
+		
+			 -- Map the JSON error response
+	
+			CREATE FIELD OutputRoot.JSON.Data AS oRef;
+	        CREATE FIELD oRef.Class IDENTITY (JSON.Array)Class;
+			CREATE LASTCHILD OF oRef.Class TYPE NameValue NAME 'Item' VALUE 'Response';
+				
+	        CREATE FIELD OutputRoot.JSON.Data.properties AS oRefProp;
+	        
+	        SET oRefProp.type = 'ERROR';
+			
+			DECLARE oRefInfo REFERENCE TO oRefProp.info;
+	        CREATE FIELD oRefProp.info AS oRefInfo IDENTITY (JSON.Array)info;
+	        
+	        		SET oRefInfo.Item[1].serviceName = MessageFlowLabel;
+	           		SET oRefInfo.Item[1].statusCode = '404';	
+			   		SET oRefInfo.Item[1].statusMessage = iRef.Return.item.Message;
+			   		
+		ELSE
+			-- Map the JSON success response
+			CREATE FIELD OutputRoot.JSON.Data AS oRef IDENTITY(JSON.Array)Data; -- 
+			
+			DECLARE count INTEGER 1;
+			
+			FOR source AS iRef_Headers.item[] DO
+			    	
+				CREATE FIELD oRef.Item[count].Class IDENTITY (JSON.Array)Class;
+				CREATE LASTCHILD OF oRef.Item[count].Class TYPE NameValue NAME 'Item' VALUE 'GoodsMovement';
+				
+				DECLARE oRefProp REFERENCE TO oRef.properties;
+				CREATE FIELD oRef.Item[count].properties AS oRefProp;
+				
+				
+				
+				DECLARE temp_Row ROW;
+				SET temp_Row.record[] = SELECT M.Material,M.Plant,M.StgeLoc,M.EntryQnt,M.EntryUomIso,M.MoveType FROM iRef.GoodsmvtItems."item"[] AS M WHERE M.MatDoc = source.MatDoc;
+		
+				SET oRefProp.postingDate = source.PstngDate;		
+				SET oRefProp.storeCode = temp_Row.record[1].Plant;
+				SET oRefProp.documentNumber = source.MatDoc;
+				
+				DECLARE oRefProduct REFERENCE TO oRefProp.product;
+         		
+         		CREATE FIELD oRefProp.product AS oRefProduct IDENTITY (JSON.Array)movementItem;
+				
+				SET oRefProduct.Item[1].productNumber = temp_Row.record[1].Material;				
+				SET oRefProduct.Item[1].quantity = CAST(temp_Row.record[1].EntryQnt AS DECIMAL);
+				SET oRefProduct.Item[1].quantityUomCode = temp_Row.record[1].EntryUomIso;
+				SET oRefProduct.Item[1].storageLocationId = temp_Row.record[1].StgeLoc;
+				SET oRefProduct.Item[1].typeCode = temp_Row.record[1].MoveType;
+				
+				SET count = count + 1;
+			END FOR;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

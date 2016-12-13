@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmWSInput.msgnode="ComIbmWSInput.msgnode" xmlns:com_kingfisher_gha_common_ErrorResponse.subflow="com/kingfisher/gha/common/ErrorResponse.subflow" xmlns:com_kingfisher_gha_goodsmovement_Response.subflow="com/kingfisher/gha/goodsmovement/Response.subflow" xmlns:com_kingfisher_gha_goodsmovement_RouteToMethod.subflow="com/kingfisher/gha/goodsmovement/RouteToMethod.subflow"
+    xmlns:com_kingfisher_ukbq_errorhandlers_HTTPFaultHandler.subflow="com/kingfisher/ukbq/errorhandlers/HTTPFaultHandler.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="com/kingfisher/gha/goodsmovement/GoodsMovement_Gateway.msgflow"
+    nsPrefix="com_kingfisher_gha_goodsmovement_GoodsMovement_Gateway.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="GoodsMovement_Gateway" bundleName="com/kingfisher/gha/goodsmovement/GoodsMovement_Gateway" pluginId="GoodsMovement_Gateway"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/GoodsMovement_Gateway/icons/full/obj16/GoodsMovement_Gateway.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/GoodsMovement_Gateway/icons/full/obj30/GoodsMovement_Gateway.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="179,363" URLSpecifier="/GoodsMovement*" setDestinationList="true" parseQueryString="true" messageDomainProperty="BLOB">
+        <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="HTTP Input.transaction.Start" eventIdentity="HTTP Input.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Global-Id" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Request-Id" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="HTTP Input.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Transaction end" eventSourceName="HTTP Input.transaction.End" eventIdentity="HTTP Input.TransactionEnd">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Global-Id" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Request-Id" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="HTTP Input.TransactionEnd"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="HTTP Input.terminal.out" eventIdentity="HTTP Input.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Global-Id" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Request-Id" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="HTTP Input.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Catch terminal" eventSourceName="HTTP Input.terminal.catch" eventIdentity="HTTP Input.CatchTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Global-Id" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Request-Id" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="HTTP Input.CatchTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="HTTP Input.terminal.failure" eventIdentity="HTTP Input.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Global-Id" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/HTTPInputHeader/Kits-Request-Id" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="HTTP Input.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="com_kingfisher_ukbq_errorhandlers_HTTPFaultHandler.subflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="362,255">
+        <translation xmi:type="utility:ConstantString" string="HTTPFaultHandler"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="400,359" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#GoodsMovement_Gateway_Initialise.Main">
+        <translation xmi:type="utility:ConstantString" string="Initialise"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="78,544" queueName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.transaction.Start" eventIdentity="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Transaction end" eventSourceName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.transaction.End" eventIdentity="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.TransactionEnd">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.TransactionEnd"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.terminal.failure" eventIdentity="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Catch terminal" eventSourceName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.terminal.catch" eventIdentity="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.CatchTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.CatchTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.terminal.out" eventIdentity="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTPOST.OUT.INTERNAL.WMB.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="com_kingfisher_gha_goodsmovement_RouteToMethod.subflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="590,360">
+        <translation xmi:type="utility:ConstantString" string="RouteToMethod"/>
+      </nodes>
+      <nodes xmi:type="com_kingfisher_gha_goodsmovement_Response.subflow:FCMComposite_1" xmi:id="FCMComposite_1_6" location="606,545">
+        <translation xmi:type="utility:ConstantString" string="Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="378,544" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#GoodsMovement_postResponse_Compute.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="CnC_postOutputMapping"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="78,624" queueName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB" messageDomainProperty="JSON">
+        <translation xmi:type="utility:ConstantString" string="GOODSMOVEMENTGET.OUT.INTERNAL.WMB"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.transaction.Start" eventIdentity="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Transaction end" eventSourceName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.transaction.End" eventIdentity="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.TransactionEnd">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.TransactionEnd"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Failure terminal" eventSourceName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.terminal.failure" eventIdentity="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.FailureTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.FailureTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Out terminal" eventSourceName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.terminal.out" eventIdentity="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.OutTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.OutTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+        <monitorEvents eventSourceDescription="Catch terminal" eventSourceName="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.terminal.catch" eventIdentity="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.CatchTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <globalTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/globalTransactionId" eventCorrelation="dataLocation"/>
+            <parentTransactionCorrelator dataLocation="$Root/MQRFH2/usr/MetaData/properties/requestUuid" eventCorrelation="dataLocation"/>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="base64Binary"/>
+            <eventName literal="GOODSMOVEMENTGET.OUT.INTERNAL.WMB.CatchTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true"/>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="386,624" dataSource="MBREPOS" computeExpression="esql://routine/com.kingfisher.gha.goodsmovement#Response_CnC_getMapping.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="CnC_getOutputMapping"/>
+      </nodes>
+      <nodes xmi:type="com_kingfisher_gha_common_ErrorResponse.subflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="413,449">
+        <translation xmi:type="utility:ConstantString" string="ErrorResponse"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="558,453" queueName="ERRORS.CNC.OUT.WMB" transactionMode="no" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Error_MQOutput_SourceMsg"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.WMB_Input_SOAPError"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.WMB_Input_SOAPError"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard>
+      <stickyNote location="42,54">
+        <body xmi:type="utility:ConstantString" string=" &#xA;Name           : GoodsMovement_Gateway                                                                                                                                                                                                                                                                                                                                                                                                                   &#xA;Author         : Debraj Sengupta&#xA;Date             : December 2014&#xA;&#xA;Description  : 1. Accept JSON structured message from UI.&#xA;                        2. Route the message to different data service flows with respect to different operations.Currently for this interface only POST and GET is used.&#xA;                        3. Get the SAP response back from message flow via MQ queue in a JSON structed way .&#xA;                        4. Return the response to the UI.&#xA;                "/>
+      </stickyNote>
+    </stickyBoard>
+  </eClassifiers>
+</ecore:EPackage>

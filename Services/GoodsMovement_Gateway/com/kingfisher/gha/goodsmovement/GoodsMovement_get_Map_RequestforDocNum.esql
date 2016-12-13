@@ -1,0 +1,104 @@
+BROKER SCHEMA com.kingfisher.gha.goodsmovement
+PATH com.kingfisher.gha.common;
+DECLARE NS_n1 NAMESPACE 'http://sap.com/xi/SAPGlobal20/Global';
+
+/****************************************************************************************************
+* COPYRIGHT. <KINGFISHER INFORMATION TECHNOLOGY SERVICES 2012> ALL RIGHTS RESERVED. NO PART OF THIS *
+* SOURCE CODE MAY BE REPRODUCED, STORED IN A RETRIEVAL SYSTEM, OR TRANSMITTED,IN ANY 				*
+* FORM BY ANY MEANS, ELECTRONIC, MECHANICAL, PHOTOCOPYING, RECORDING OR OTHERWISE, 					*
+* WITHOUT THE PRIOR WRITTEN PERMISSION OF <KINGFISHER INFORMATION TECHNOLOGY SERVICES>. 			*
+****************************************************************************************************/
+/****************************************************************************************************
+* Node Name 				: Map Request										 					*
+* Interface Id 				: 234.5																	*
+* Interface Name 			: GoodsMovement_Gateway	 												*
+* Message Flow 				: GoodsMovement_GetByDocNum												*
+* Message Flow Description 	: The primary function of this message flow/service is to accept the 	*
+							  JSON canonical request from the gateway flow, create SOAP request for	* 
+							  SAP service call, receive the SAP response back, and send it back to	* 
+							  Gateway flow in a JSON structured way. 								*
+* Module Name 			   : com.kingfisher.gha.goodsmovement.GoodsMovement_get_Map_RequestforDocNum*
+* Description 			    : The module creates the SOAP request message for invoking the SAP 		*
+							  service from the input JSON canonical message.						*
+*																									*
+* Version 	Date 			Author 				Description 										*
+* ======= 	========= 		========== 			=================== 								*
+* 1.00		December-2014 	Debraj Sengupta		The initial version. 								*
+****************************************************************************************************/
+
+CREATE COMPUTE MODULE GoodsMovement_get_Map_RequestforDocNum
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		-- Apply Security - This will probably be replaced so left as hardcoded for now.
+		SET OutputRoot.Properties.IdentityMappedType		=	'usernameAndPassword';
+		SET OutputRoot.Properties.IdentityMappedToken 		= 	getStoreUser(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));
+		SET OutputRoot.Properties.IdentityMappedPassword 	= 	getStorePassword(COALESCE(InputRoot.MQRFH2.usr.MetaData.properties.fullStoreCode,''));		
+
+		-- Store MsgID, Reply queue, metadata, request identifier etc.
+		SET Environment.Store.MQMD = InputRoot.MQMD;
+		SET Environment.Store.MQRFH2  = InputRoot.MQRFH2;
+		
+		SET Environment.Store.MsgID = InputRoot.MQMD.MsgId;
+		SET Environment.Store.ReplyToQ = InputRoot.MQMD.ReplyToQ;
+		SET Environment.Store.MetaData = InputRoot.MQRFH2.usr.MetaData;
+		SET Environment.Store.requestID = InputRoot.MQRFH2.usr.requestID;
+		
+		SET Environment.Store.RequestDoc = InputRoot.MQRFH2.usr.RequestDoc;
+		
+		-- Store Input Message 
+		SET Environment.Store.Input.JSON = InputRoot.JSON;
+		
+
+		-- Create request structure for SAP enterprise service call to get the stock count report
+		
+		DECLARE iRef_Prop 					REFERENCE TO InputRoot.JSON.Data.properties;
+		DECLARE oRef_Goodsmvn 				REFERENCE TO OutputRoot.XMLNSC.NS_n1:GoodsMovementERPByIDQuery_sync;
+		DECLARE oRef_Goodsmvnid 			REFERENCE TO oRef_Goodsmvn.GoodsMovementSelectionByID;
+		DECLARE oRef_Goodsmvnsel			REFERENCE TO oRef_Goodsmvnid.SelectionByGoodsMovementID;
+		DECLARE oRef_Goodsmvnyear			REFERENCE TO oRef_Goodsmvnsel.SelectionByYear;
+		DECLARE oRef_Processcond			REFERENCE TO oRef_Goodsmvn.ProcessingConditions;
+		
+--		DECLARE oRef_Goodsmvn_MaterialRa 	REFERENCE TO oRef_Goodsmvn.MaterialRa;
+--		DECLARE oRef_Goodsmvn_MoveTypeRa 	REFERENCE TO oRef_Goodsmvn.MoveTypeRa;
+--		DECLARE oRef_Goodsmvn_PlantRa 		REFERENCE TO oRef_Goodsmvn.PlantRa;
+--		DECLARE oRef_Goodsmvn_PstngDateRa	REFERENCE TO oRef_Goodsmvn.PstngDateRa;
+--		DECLARE oRef_Goodsmvn_Return		REFERENCE TO oRef_Goodsmvn.Return;
+		
+		
+		CREATE FIELD OutputRoot.XMLNSC.NS_n1:GoodsMovementERPByIDQuery_sync AS oRef_Goodsmvn NAMESPACE NS_n1 NAME 'GoodsMovementERPByIDQuery_sync';
+		SET oRef_Goodsmvn.(XMLNSC.NamespaceDecl)xmlns:n1 =  NS_n1;
+		
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Goodsmvnid NAME 'GoodsMovementSelectionByID'; 		
+		CREATE LASTCHILD OF oRef_Goodsmvnid AS  oRef_Goodsmvnsel NAME 'SelectionByGoodsMovementID'; 
+		
+		
+		SET oRef_Goodsmvnsel.InclusionExclusionCode = 'I';
+		SET oRef_Goodsmvnsel.IntervalBoundaryTypeCode = '1';
+		SET oRef_Goodsmvnsel.LowerBoundaryGoodsMovementID = iRef_Prop.documentNumber;
+		
+--TODO: Sprint 16 changes	
+--		CREATE LASTCHILD OF oRef_Goodsmvnsel AS oRef_Goodsmvnyear NAME 'SelectionByYear';
+--		SET oRef_Goodsmvnyear.InclusionExclusionCode = 'I';
+--		SET oRef_Goodsmvnyear.IntervalBoundaryTypeCode = '1';
+--		SET oRef_Goodsmvnyear.LowerBoundaryYear = iRef_Prop.documentYear;
+		
+		
+		CREATE LASTCHILD OF oRef_Goodsmvn AS oRef_Processcond NAME 'ProcessingConditions';
+		SET oRef_Processcond.QueryHitsMaximumNumberValue = '25';
+		SET oRef_Processcond.QueryHitsUnlimitedIndicator = 'true';
+		--SET oRef_Processcond.LastReturnedObjectID = 'Token 26';
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL 	= getConfigValue('SAP_ECC_GOODSMOVEMENTIDQR_URL');
+		SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.Timeout 			= getConfigValue('SAP_ES_TIMEOUT');
+--		PROPAGATE TO TERMINAL 'out' DELETE NONE;
+--		PROPAGATE TO TERMINAL 'out1';
+		
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;
